@@ -1,0 +1,42 @@
+/* Custom Stylesheet */
+
+img {
+
+  width: 35px;
+  height: 35px;
+}
+
+nav {
+  background-color: rgb(23, 97, 102);
+}
+
+.nav-wrapper {
+  margin-right: 2%;
+}
+
+.grid-row .s2 {
+  background-color: rgb(255, 253, 253);
+  position: sticky;
+
+  max-height: 70%;
+}
+
+.grid-row .s9 {
+  background-color: rgb(230, 223, 200);
+}
+
+
+
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
