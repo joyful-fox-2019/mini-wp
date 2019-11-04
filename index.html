@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Mini Wp</title>
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        .btn:hover {
+            background-color: orange;
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f1f2f6;">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #145474;">
+        <button class="navbar-brand btn" onclick="home();"><img src=" img/wordpress.png" alt="chatIcon" width="40"
+                height="35" class="mr-2 button">
+            </img>My Sites</button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link btn" href="#"><img src=" img/newspaper.png" alt="chatIcon" width="28" height="25"
+                            class="mr-2  button">
+                        </img>Reader <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+
+            <button class="btn btn-light mr-5" onclick="test();" style=" color:#145474; width: 100px;">
+                <i class="far fa-edit pr-2"></i>
+                Write
+            </button>
+
+            <a href="#" class="btn"><img src=" img/whiteChatIcon.png" alt="chatIcon" width="25" height="25"
+                    class="mr-2 button">
+                </img>
+            </a>
+
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-3 px-1 bg-white position-fixed pt-3" id="sticky-sidebar"
+                style="height: 100%; width: 200px;">
+
+                <a href="" class="nav-link"><i class="fas fa-desktop pr-3"></i>
+                    View Site</a>
+                <a href="" class="nav-link"><i class="fas fa-chart-bar pr-4"></i>Stats</a>
+                <a href="" class="nav-link"><i class="fas fa-history  pr-4"></i>Activity</a>
+                <h6 class="pt-4 text-secondary">Manage</h6>
+                <a href="" class="nav-link"><i class="fas fa-sticky-note  pr-4"></i>Site Pages</a>
+                <a href="" class="nav-link"><i class="fas fa-align-left  pr-4"></i>Blog Posts</a>
+                <a href="" class="nav-link"><i class="fas fa-photo-video  pr-4"></i>Media</a>
+                <a href="" class="nav-link"><i class="fas fa-cloud-download-alt pr-4"></i>Import</a>
+
+            </div>
+            <div class="col-9 offset-3 mt-5" style="height: 400px; " id="mainArea">
+                <!-- <h1>Main Area</h1>
+                ... -->
+
+
+                <div class="d-flex" style="height: 50px; width: 700px; background-color: white; ">
+                    <a href="" class="nav-link">
+                        <h6 class="pt-2 pl-5">Published</h6>
+                    </a>
+                    <a href="" class="nav-link">
+                        <h6 class="pt-2 pl-5">Drafts</h6>
+                    </a>
+                    <a href="" class="nav-link ml-auto pt-2"><i class="fas fa-search"></i></a>
+
+                </div>
+
+                <div class=" mt-5" style="height: 70px; width: 700px; background-color: white; ">
+                    <div class="d-flex">
+                        <h5 class="pt-3 pl-3 flex-row"><b>The Journey Begins</b>
+                            <small id="smallText" class="form-text text-muted">7 minutes ago</small></h5>
+                        <img src=" img/images.jpeg" alt="chatIcon" width="65px" height="50px" class="ml-auto mt-2 mr-2">
+
+                    </div>
+
+                    </img>
+                </div>
+
+
+                <div class="mt-5" style="width: 74%;">
+                    <div class=" " style="height: 200px;" id="editor">
+                        <h1>Edit Area</h1>
+                        <p>Hello World!</p>
+                        <p>Some initial <strong>bold</strong> text</p>
+                        <p><br></p>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js" id="quill"></script>
+    <script src="https://kit.fontawesome.com/9d7843219c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+    </script>
+</body>
+
+</html>
