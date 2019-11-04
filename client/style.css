@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 800;
+}
+
+.nav-link:hover {
+    background-color: cadetblue;
+}
+
+.menu-bar {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu {
+    margin: 0px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu:hover {
+    background-color: rgb(231, 231, 231);
+}
+
+.col-md-2 {
+    height: 90vh;
+    overflow: scroll;
+}
+
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+.containerBlog {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blogBar {
+    padding: 15px;
+    width: 70%;
+    background-color: white;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blogBar span {
+    margin-right: 20px;
+}
+
+.dot {
+    margin-bottom: -7px;
+    text-align: center;
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.blogPost {
+    padding: 15px;
+    width: 70%;
+    background-color: white;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sectionA span {
+    color: #bbb;
+}
+
+.active {
+    background-color: #bbb;
+}
+
+.ql-snow {
+    background-color: whitesmoke;
+}
+
+.ql-editor,
+#editor {
+    height: 75vh;
+}
