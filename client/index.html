@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel = "stylesheet" type = "text/css" href = "style.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/2901faba52.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.tiny.cloud/1/y8dcysbkw1z1bc2630inxahcjy0s0gacckrsj6kqxgh5gskb/tinymce/5/tinymce.min.js"></script> 
+        <script>tinymce.init({selector:'textarea'});</script> -->
+        <title>WordPress</title>
+
+    </head>
+    
+    <body>
+        <div id="app">
+                
+                <!-- use the modal component, pass in the prop -->
+                <modal v-if="showModal" @close="showModal = false">
+                    <h3 slot="header">custom header</h3>
+                </modal>
+            <header>
+                <nav class="nav">
+                    <nav class="navkiri">
+                        <nav class="navisi" @click="click('home')">
+                            <i class="fab fa-wordpress"></i> My Sites
+                        </nav>
+                        <nav class="navisi" @click="read()">
+                            <i class="fas fa-book-reader"></i> Reader
+                        </nav>
+                    </nav>
+                    <nav class="navkanan">
+                        <nav class="navisi">
+                            <i class="fas fa-bell"></i>
+                        </nav>
+                        <nav class="navisi">
+                            <i class="far fa-user-circle"></i>
+                        </nav>
+                        <nav class="navisi" @click="click('write')">
+                            <button><i class="far fa-plus-square"></i> Write</button>
+                        </nav>
+                    </nav>
+                </nav>
+            </header>
+            
+            <nav class="main">
+                <nav class="mainkiri">
+                    <div class="profile">
+                        <div class="foto">
+                            <i class="fas fa-columns"></i>
+                        </div>
+                        <div class="datadiri">
+                            <h5>Evans Karlin</h5>
+                            <h6 style="font-size:75%;">View evanskarlin.wordpress.com</h style="font-size:75%;">
+                            <button>private</button>
+                        </div>
+                    </div>
+                    <div class="menubar">
+                        <i class="fas fa-home"></i> My Home
+                    </div>
+                    <div class="menubar">
+                        <i class="fas fa-chart-bar"></i> Stats
+                    </div>
+                    <div class="menubar">
+                        <i class="fas fa-chart-bar"></i> Site
+                    </div>
+                    <div class="menubar">
+                            <i class="fas fa-location-arrow"></i> Plan
+                    </div>
+                    <div class="menubar">
+                        <div class="sidenav">
+                            <button class="dropdown-btn">Site
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-container">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menubar">
+                        <div class="sidenav">
+                            <button class="dropdown-btn">Design
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-container">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menubar">
+                        <div class="sidenav">
+                            <button class="dropdown-btn">Tools
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-container">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menubar">
+                        <div class="sidenav">
+                            <button class="dropdown-btn">Manage
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-container">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <nav class="mainkanan">
+                    <div class="home" v-if="home">
+                        <!-- <img src="./img/home.jpg" alt="..." > -->
+                    </div>
+                </nav>
+            </nav>
+        </div>
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="./node_modules/ckeditor/ckeditor.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="./main.js"></script>
+
+        <!-- 
+            
+         -->
+    </body>
+</html>
+
+

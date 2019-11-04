@@ -1,0 +1,243 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+i {
+    font-size:150%;
+}
+
+header {
+    height: 8%;
+}
+
+.nav {
+    display: flex;
+    background-color: #006088;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.navkiri {
+    display: flex;
+    align-items: stretch;
+}
+
+
+.navkanan {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: stretch;
+}
+
+.navisi {
+    text-align: center;
+    margin: 10px 25px;
+    color: white;
+}
+.navisi:hover {
+    color: black !important;
+}
+
+
+.main {
+    display: flex;
+    height: 92%;
+    width: 100%;
+    align-items: stretch;
+}
+
+.mainkiri {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 25%;
+    align-items: stretch;
+    border: 1px solid black;
+    overflow: scroll;
+}
+
+.mainkanan {
+    display: flex;
+    justify-content:space-around;
+    flex: 0 0 75%;
+    align-items: stretch;
+    border: 1px solid black;
+    overflow: scroll;
+    flex-wrap: wrap;
+}
+
+.profile {
+    display: flex;
+    flex: 0 0 15%;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.foto {
+    margin: 5% 0 5% 10%;
+    display: flex;
+    flex: 0 0 10%;
+    justify-content: center;
+}
+
+.datadiri {
+    margin: 5% 10% 5% 0;
+    display: flex;
+    flex: 0 0 70%;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.menubar {
+    padding: 5%;
+    margin: 0 5%;
+    border: 1px solid black;
+    display: block;
+}
+
+.home {
+    background-image: url("./img/home.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.listcard {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+
+.search {
+    width: 100%;
+}
+
+
+.write{
+    width: 100%;
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+ /* Fixed sidenav, full height */
+ .sidenav {
+    padding-top: 10px;
+  }
+
+  a {
+    color: black !important;
+  }
+  
+  
+  /* Style the sidenav links and the dropdown button */
+  .sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black !important;
+    display: block;
+    border: none;
+    background: none;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  /* On mouse-over */
+  .sidenav a:hover, .dropdown-btn:hover {
+    color: black !important;
+  }
+  
+  /* Main content */
+  
+  /* Add an active class to the active dropdown button */
+  .active {
+    background-color: gray;
+    color: white;
+  }
+  
+  /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+  .dropdown-container {
+    display: none;
+    padding-left: 8px;
+  }
+  
+  /* Optional: Style the caret down icon */
+  .fa-caret-down {
+    float: right;
+    padding-right: 8px;
+  }
+
+/* -------------------------------------------------------------- */
+
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+  }
+  
+  .modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .modal-container {
+    width: 80%;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  .modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
+  }
+  
+  .modal-body {
+    margin: 20px 0;
+  }
+  
+  .modal-default-button {
+    float: right;
+  }
+  
+  /*
+   * The following styles are auto-applied to elements with
+   * transition="modal" when their visibility is toggled
+   * by Vue.js.
+   *
+   * You can easily play with the modal transition by editing
+   * these styles.
+   */
+  
+  .modal-enter {
+    opacity: 0;
+  }
+  
+  .modal-leave-active {
+    opacity: 0;
+  }
+  
+  .modal-enter .modal-container,
+  .modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
