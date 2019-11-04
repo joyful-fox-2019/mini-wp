@@ -51,6 +51,7 @@
                                     <i class="far fa-file-alt" style="margin-right: 10px;color:rgb(148, 148, 148);"></i>
                                     <a href="#articles" style="color:rgb(148, 148, 148);">Articles</a>
                                     </div>
+                                    <button id = "add-article" type="button" class="btn btn-outline-light btn-sm" style="justify-content: flex-end;">add article</button>
                          </div>
                          <div class="side-board-child">
                                 <div class="icons-sidebar">
@@ -167,7 +168,6 @@
 
                           <div class="content-body-item">
                                 <button class="btn" style="padding: 0%;"><i class="fa fa-ellipsis-h" style="font-size:24px;color: white;"></i></button>
-                                
                           </div>
                     </div>
             </div>
@@ -227,7 +227,7 @@
 
                 <!-- ---------- logo ---------- -->
 
-                <div class="content-nav" style="background-color: transparent;">
+                <div class="content-nav" style="background-color: transparent; display: none;">
                         <div class="nav" style="display: flex;justify-content: center;align-items: center;">
                                 <hr style="width: 40%;background: rgb(81, 81, 81);">
                                 <i class="fab fa-wordpress-simple" style="font-size: 24px;color: rgb(165, 165, 165);"></i>
@@ -235,7 +235,7 @@
                         </div>
                 </div>
 
-            <div class="editor-page shadow-sm p-3" style="background-color: rgb(255, 255, 255);margin-bottom: 10%;">
+            <div class="editor-page shadow-sm p-3" style="background-color: rgb(225, 225, 225);margin-bottom: 10%; display: none;">
                 
                 <div class="quill-editor" id="editor" style="height: 50vh; background-color: rgb(225, 225, 225);">
                     
@@ -279,5 +279,11 @@
 
 
 </body>
+<script
+
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
 <script src="main.js"></script>
 </html>

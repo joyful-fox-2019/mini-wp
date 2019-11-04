@@ -2,4 +2,13 @@ var quill = new Quill('#editor', {
     theme: 'snow'
   });
 
-console.log('connect')
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $('.content-body')
+});
+
+$("#add-article").click(function(){
+    $(".editor-page").show();
+    $(".content-body").hide()
+    console.log('kepencet buttonnya')
+  });
