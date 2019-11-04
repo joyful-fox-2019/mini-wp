@@ -10,11 +10,8 @@
       <template slot="end">
         <b-navbar-item tag="div">
           <div class="buttons">
-            <a class="button is-warning">
-              <strong>Sign up</strong>
-            </a>
             <a class="button is-light">
-              Log in
+              Sign in
             </a>
           </div>
         </b-navbar-item>
