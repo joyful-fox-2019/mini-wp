@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="icon" href="images/favicon.ico" type="image/png">
+    <title>Mini Word Press</title>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <nav class="navbar navbar-expand-lg navbar-dark align-items-center p-0">
+                <div class="nav-logo link d-flex align-items-center p-2 active">
+                    <a class="navbar-brand" href="#">
+                        <i class="fab fa-wordpress mr-2"></i>
+                        My Sites
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item link d-flex align-items-center p-2">
+                                <i class="far fa-newspaper fa-2x mr-2"></i>
+                                <a class="nav-link" href="#">Readers <span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="d-flex ml-auto">
+                        <button class="btn btn-light mr-3" style=" color:#145474; width: 100px;">
+                            <i class="far fa-edit pr-2"></i>
+                            Write
+                        </button>
+                        <div class="profile-pic link d-flex align-items-center justify-content-center mr-2">
+                            <i class="far fa-user"></i>
+                        </div>
+                        <div class="notification link d-flex align-items-center justify-content-center mr-2">
+                            <i class="far fa-bell"></i>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 p-0" style="border-right: 1px solid whitesmoke; height: 100vh;">
+                    <h5 style="padding-top:20px; padding-left: 20px;">Streams</h5>
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <i class="far fa-check-circle mr-2"></i>
+                            Followed Sites
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <i class="far fa-comments mr-2"></i>
+                            Conversations
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <i class="fab fa-wordpress mr-2"></i>
+                            Discover
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <i class="fas fa-search mr-2"></i>
+                            Search
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <i class="far fa-star mr-2"></i>
+                            My Likes
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <i class="fas fa-tags mr-2"></i>
+                            Tags
+                        </button>
+                    </div>
+                </div>
+                <div class="col-9 flex-column" style="background-color: whitesmoke;">
+                    <div class="row">
+                        <div class="nav-page row justify-content-center align-items-center">
+                            <div class="col-2 d-flex justify-content-center align-items-center navlink"><a href="#" class="btn">Published</a></div>
+                            <div class="col-2 d-flex justify-content-center align-items-center navlink">Drafts</div>
+                            <div class="col-2 d-flex justify-content-center align-items-center navlink">Scheduled</div>
+                            <div class="col-2 d-flex justify-content-center align-items-center navlink">Trashed</div>
+                            <div class="col-2 ml-auto" style="text-align: right;">
+                                <i class="fas fa-search mr-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="page row">
+                            <div class="col d-flex mr-auto">
+                                <div class="row justify-content-between p-3" style="width:100%;">
+                                    <div>
+                                        <h5>Home Page</h5>
+                                        <small style="text-align: left;">Hello world!</small>
+                                    </div>
+                                    <div>
+                                        <img src="images/hello.jpeg" style="width: 50px;" alt="hello">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1 d-flex justify-content-center align-items-center" style="text-align: right;">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 90%; margin: 0px auto;">
+                        <div class="col" style="height: 200px;" id="editor">
+                            <p>Hello World!</p>
+                            <p><br></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer footer-copyright text-center py-2">© 2019 Copyright by
+            <a href="https://www.linkedin.com/in/edison-zhou-512aaa11b/"> Edison</a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/46d809be61.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

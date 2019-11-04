@@ -1,0 +1,53 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+.link:hover {
+    background-color: #1a5e7c;
+}
+.navlink:hover {
+    height: 100%;
+    background-color: #bbcfdd;
+}
+.nav-container {
+    background-color: #21759b;
+    color: white;
+    width: 100%;
+    padding: 0px;
+}
+.active {
+    background-color: #1f4d65;
+}
+.profile-pic {
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 45px;
+}
+.notification {
+    width: 45px;
+}
+.nav-page {
+    background-color: white;
+    border: 1px solid whitesmoke;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    margin: 30px;
+}
+.page {
+    background-color: white;
+    border: 1px solid whitesmoke;
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    margin: 30px;
+    margin-top: 0px;
+}
+.footer {
+    background-color: #21759b;
+    color: white;
+}
+.footer a {
+    color: white;
+    text-decoration: none;
+}
