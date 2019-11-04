@@ -1,0 +1,29 @@
+body {
+    background-color: #eafbea;
+}
+
+#right-navbar {
+    display: flex;
+    align-content: space-between;
+}
+
+.bg-custom {
+    background-color: #a7d7c5 !important;
+}
+
+#sideBar {
+    display: flex;
+    flex-direction: column;
+}
+
+#pageContent {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#article {
+    margin-top: 20px;
+    border: 1px;
+}
