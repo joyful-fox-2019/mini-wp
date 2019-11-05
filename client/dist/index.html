@@ -1,0 +1,227 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="548370348046-itof3f72mtaldfestbq25m2iga2sb7vh.apps.googleusercontent.com"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer="" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <title>Document</title>
+    <style>/* * {
+            border: 1px brown solid;
+            font-family: ;
+        } */</style>
+</head>
+
+<body>
+    <!-- START -->
+    <div id="app">
+        <header class="main-header" style="padding: 20px">
+            <!-- <nav class="navbar" type="is-dark">
+                <div class="navbar-brand">
+                    <div class="navbar-item" active>
+                        <i class="fab fa-wordpress"></i>&nbsp; My Site
+                    </div>
+                </div>
+                <div class="navbar-start">
+                    <div class="navbar-item">
+                        <i class="fas fa-newspaper"></i>&nbsp; Reader
+                    </div>
+                </div>
+                <div class="navbar-end">
+                    <b-navbar-item tag="div">
+                        <button class="button is-info is-inverted">
+                            <i class="far fa-edit"></i>&nbsp; Write
+                        </button>
+                    </b-navbar-item>
+                    <b-navbar-item tag="div">
+                        <b-dropdown aria-role="list" class="is-right">
+
+                            <div slot="trigger" role="button" style="font-size: 20px; margin-right: 15px;">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+
+                            <b-dropdown-item aria-role="listitem">Profile</b-dropdown-item>
+                            <b-dropdown-item aria-role="listitem">Sign Out</b-dropdown-item>
+                        </b-dropdown>
+                    </b-navbar-item>
+                </div>
+            </nav> -->
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="https://bulma.io">
+                        <i class="fab fa-wordpress" style="font-size: 30px;"></i>&nbsp; My Site
+                    </a>
+
+                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true" @click="changePage('home')"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start">
+                        <span>
+                            <i class="material-icons pr-2">chrome_reader_mode</i>Reader
+                        </span>
+
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link"> More</a>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item">About</a>
+                                <a class="navbar-item">Jobs</a>
+                                <a class="navbar-item">Contact</a>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">Report an issue</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <span><i class="material-icons pr-2">filter_none</i>Write</span>
+                            <span><i class="material-icons m-3">mood</i></span>
+                            <span><i class="material-icons m-3">notifications</i></span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="columns">
+            <!-- sidebar -->
+            <div class="column is-3" style="padding: 50px; padding-top:20;">
+                <aside class="menu">
+                    <ul>
+                        <li class="menu">
+                            <i class="material-icons">desktop_windows</i>
+                            <span>View Site</span>
+                        </li>
+                        <li class="menu">
+                            <i class="material-icons">bar_chart</i>
+                            Stats
+                        </li>
+                        <li class="menu">
+                            <i class="material-icons">restore</i>
+                            Activity
+                        </li>
+                        <li class="menu">
+                            <i class="material-icons">data_usage</i>
+                            Plan
+                        </li>
+                    </ul>
+                    <p class="menu-label">
+                        <strong>Manage</strong>
+                    </p>
+                    <ul class="menu-list">
+                        <li class="menu-list">
+                            <i class="material-icons">description</i>
+                            <span>Site Page</span>
+                        </li>
+                        <li class="menu-list">
+                            <i class="material-icons">subject</i>
+                            Blog Posts
+                        </li>
+                        <li class="menu-list">
+                            <i class="material-icons">perm_media</i>
+                            Media
+                        </li>
+                        <li class="menu-list">
+                            <i class="material-icons">insert_comment</i>
+                            Comments
+                        </li>
+                    </ul>
+                    <p class="menu-label"> <strong>personalize</strong></p>
+
+                </aside>
+            </div>
+            <!-- sidebar end -->
+
+            <!-- main -->
+            <div class="column is-9" style="padding: 0 100px 0 30px;">
+                <div class="tabs">
+                    <ul>
+                        <li class="is-active"><a>Published</a></li>
+                        <li><a>Draft</a></li>
+                    </ul>
+
+                    <div class="tabs-end">
+                        <div class="panel-block">
+                            <p class="control has-icons-right">
+                                <input class="input" type="text" placeholder="Search">
+                                <span class="icon is-right">
+                                    <i class="fas fa-search" aria-hidden="true"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ARTICLES -->
+                <div id="article" v-for="article in articles">
+                    <div class="box" style="border:none !important">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64">
+                                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>{{article.title}}</strong> <small>@username</small>
+                                        <small>{{article.created_at}}</small>
+                                        <br>
+                                        {{article.content}} .
+                                    </p>
+                                </div>
+                                <nav class="level is-mobile">
+                                    <div class="level-left">
+                                        <a class="level-item" aria-label="reply">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-reply" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                        <a class="level-item" aria-label="retweet">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-retweet" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                        <a class="level-item" aria-label="like">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-heart" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- end main -->
+
+    </div>
+    
+    <!-- END -->
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/main.1e43358e.js"> </script>
+</body>
+
+</html>
