@@ -1,0 +1,103 @@
+base url = http://localhost:3000
+
+ARTICLE 
+
+1. create 
+
+endpoint : {base url}/articles
+method : POST
+parameters : 
+  body :
+    type type string, required
+    content type string, required
+
+success :
+  status 201
+  content example
+{
+    "tags": [
+        "womanhood",
+        "pride",
+        "fighting"
+    ],
+    "_id": "5dc18ad74cf1c3399ad26087",
+    "title": "Proud to be a woman: Womanhood, old age, and emotions",
+    "content": "The study is based on narrative interviews with female members of the University of the Third Age (U3A). The main findings describe older women who actively engage with discourses of gender to embark on positive constructions of womanhood. They create their own spaces for women’s activism that are filled with positive emotions mobilized to support each other. This article discusses such findings and their relevance to the study of old age and gender.",
+    "imgSrc": "https://i.pinimg.com/564x/a0/d6/7d/a0d67dfed2d6225fb22ebbd74cf6dce8.jpg",
+    "created_at": "2019-11-05T14:44:39.958Z",
+    "updatedAt": "2019-11-05T14:44:39.958Z",
+    "__v": 0
+}
+
+error :
+  status 400
+  content example
+
+
+2. find all
+
+endpoint : {base url}/articles
+method : GET
+parameters : none
+
+success : 200
+
+content example 
+
+[
+    {
+        "tags": [
+            "womanhood",
+            "pride"
+        ],
+        "_id": "5dc18bcd4cf1c3399ad26088",
+        "title": "Body image, aging, and identity in women over 50: The Gender and Body Image (GABI) study",
+        "content": "We conducted a qualitative study of 1,849 women over age 50 to capture the thoughts, feelings, and attitudes that women at middle age have about their bodies and the experience of aging. Via an open-ended question online survey, four primary themes emerged: (a) the physical and psychological experience of aging; (b) the injustices, inequities, and challenges of aging; (c) the importance of self-care; and (d) a plea for recognition of the need to maintain a contributory role in society. Results highlight the complexities of women’s psychological and physical aspects of aging and point toward important topics worthy of further study in this growing population.",
+        "imgSrc": "https://i.pinimg.com/564x/8c/e3/10/8ce310c6204c039c8ae55a63102c961b.jpg",
+        "created_at": "2019-11-05T14:48:45.268Z",
+        "updatedAt": "2019-11-05T14:48:45.268Z",
+        "__v": 0
+    },
+    {
+        "tags": [
+            "womanhood",
+            "pride",
+            "fighting"
+        ],
+        "_id": "5dc18ad74cf1c3399ad26087",
+        "title": "Proud to be a woman: Womanhood, old age, and emotions",
+        "content": "The study is based on narrative interviews with female members of the University of the Third Age (U3A). The main findings describe older women who actively engage with discourses of gender to embark on positive constructions of womanhood. They create their own spaces for women’s activism that are filled with positive emotions mobilized to support each other. This article discusses such findings and their relevance to the study of old age and gender.",
+        "imgSrc": "https://i.pinimg.com/564x/a0/d6/7d/a0d67dfed2d6225fb22ebbd74cf6dce8.jpg",
+        "created_at": "2019-11-05T14:44:39.958Z",
+        "updatedAt": "2019-11-05T14:44:39.958Z",
+        "__v": 0
+    }
+]
+
+
+3. find one by article id
+
+endpoint : {base url}/articles/:id
+method : GET
+parameters : none
+
+success : 200
+
+content example 
+
+
+{
+    "article": {
+        "tags": [
+            "womanhood",
+            "pride"
+        ],
+        "_id": "5dc18bcd4cf1c3399ad26088",
+        "title": "Body image, aging, and identity in women over 50: The Gender and Body Image (GABI) study",
+        "content": "We conducted a qualitative study of 1,849 women over age 50 to capture the thoughts, feelings, and attitudes that women at middle age have about their bodies and the experience of aging. Via an open-ended question online survey, four primary themes emerged: (a) the physical and psychological experience of aging; (b) the injustices, inequities, and challenges of aging; (c) the importance of self-care; and (d) a plea for recognition of the need to maintain a contributory role in society. Results highlight the complexities of women’s psychological and physical aspects of aging and point toward important topics worthy of further study in this growing population.",
+        "imgSrc": "https://i.pinimg.com/564x/8c/e3/10/8ce310c6204c039c8ae55a63102c961b.jpg",
+        "created_at": "2019-11-05T14:48:45.268Z",
+        "updatedAt": "2019-11-05T14:48:45.268Z",
+        "__v": 0
+    }
+}
