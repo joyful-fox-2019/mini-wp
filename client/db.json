@@ -1,0 +1,7 @@
+{
+    "articles": [
+      { "id": 1, "title": "json-server", "content": "typicode" },
+      { "id": 2, "title": "vue-js", "content": "vuejs" },
+      { "id": 3, "title": "vue-directive", "content": "directive" }
+    ]
+}
