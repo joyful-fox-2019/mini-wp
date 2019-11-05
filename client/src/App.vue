@@ -14,7 +14,31 @@
             <h2 class="mt-2 mb-4"> <b></b> Post List ( Article List )</h2>
             <div>
 
-              <b-row no-gutters>
+                <b-row no-gutters>
+                  <b-col>
+                    <b-card class="mb-2 border-info" style="font-size:17px;">
+                      <b-row class="text-dark align-items-center">
+                        <b-col class="border-right text-center" cols="1" >
+                          <b>No.</b>
+                        </b-col>
+                        <b-col class="border-right text-center" cols="5" >
+                          <b>
+                            Article Title
+                          </b>
+                          
+                        </b-col>
+                        <b-col class="border-right text-center" cols="3" >
+                          <b>Date Published</b>
+                        </b-col>
+                        <b-col class="text-center" cols="3" >
+                          <b>Tag</b>
+                        </b-col>
+                      </b-row>
+                    </b-card>
+                  </b-col>
+                </b-row>
+
+              <!-- <b-row no-gutters>
 
                 <b-col cols="1">
                   <b-card class="mb-2 border-info">
@@ -48,7 +72,7 @@
                   </b-card>
                 </b-col>
 
-              </b-row>
+              </b-row> -->
 
               <b-row no-gutters>
                 <b-col>
@@ -61,14 +85,18 @@
                         <b>
                           Bagaimana cara pemanfaatan PWA dan pengunaannya di kehidupan nyata
                         </b>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
+                        
                       </b-col>
                       <b-col class="" cols="3" >
                         Wed, 20 January 2019
                       </b-col>
                       <b-col class="text-center" cols="3" >
-                        Dipadana
+                        <p class="m-0">
+                          <span>Ruby</span>
+                          <span>PHP</span>
+                          <span>Javascript</span>
+                          <span>Phyton</span>
+                        </p>
                       </b-col>
                     </b-row>
                   </b-card>
@@ -86,13 +114,17 @@
                         <b>
                           Bagaimana cara pemanfaatan PWA dan pengunaannya di kehidupan nyata
                         </b>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
+                        
                       </b-col>
                       <b-col class="" cols="3" >
-                        Wed, 20 January 2019
+                        Thurs, 21 January 2019
                       </b-col>
                       <b-col class="text-center" cols="3" >
-                        Dipadana
+                        <p class="m-0">
+                          <span>Ruby</span>
+                          <span>PHP</span>
+
+                        </p>
                       </b-col>
                     </b-row>
                   </b-card>
@@ -110,15 +142,18 @@
                         <b>
                           Bagaimana cara pemanfaatan PWA dan pengunaannya di kehidupan nyata
                         </b>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
+                        
                       </b-col>
                       <b-col class="" cols="3" >
                         Wed, 20 January 2019
                       </b-col>
                       <b-col class="text-center" cols="3" >
-                        Dipadana
+                        <p class="m-0">
+                          <span>Ruby</span>
+                          <span>PHP</span>
+                          <span>Javascript</span>
+                          <span>Phyton</span>
+                        </p>
                       </b-col>
                     </b-row>
                   </b-card>
@@ -136,42 +171,24 @@
                         <b>
                           Bagaimana cara pemanfaatan PWA dan pengunaannya di kehidupan nyata
                         </b>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
+                        
                       </b-col>
                       <b-col class="" cols="3" >
                         Wed, 20 January 2019
                       </b-col>
                       <b-col class="text-center" cols="3" >
-                        Dipadana
+                        <p class="m-0">
+                          <span>Ruby</span>
+                          <span>PHP</span>
+                          <span>Javascript</span>
+                          <span>Phyton</span>
+                        </p>
                       </b-col>
                     </b-row>
                   </b-card>
                 </b-col>
               </b-row>
-
-              <b-row no-gutters>
-                <b-col>
-                  <b-card class="mb-2 border-secondary">
-                    <b-row class="text-dark align-items-center">
-                      <b-col class="" cols="1" >
-                        <b>5.</b>
-                      </b-col>
-                      <b-col class="" cols="5" >
-                        <b>
-                          Bagaimana cara pemanfaatan PWA dan pengunaannya di kehidupan nyata
-                        </b>
-                        <b-badge pill variant="secondary" class="mt-1">Primary</b-badge>
-                      </b-col>
-                      <b-col class="" cols="3" >
-                        Wed, 20 January 2019
-                      </b-col>
-                      <b-col class="text-center" cols="3" >
-                        Dipadana
-                      </b-col>
-                    </b-row>
-                  </b-card>
-                </b-col>
-              </b-row>
+              
 
               
 

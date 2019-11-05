@@ -5,7 +5,7 @@ module.exports = function (err, req, res, next) {
   const status =  err.message || 500
 
   if(err.name === "ValidationError"){
-    const error = []
+    const errors = []
     for(key in err.errors){
       errors.push(err.errors[key].message)
     }

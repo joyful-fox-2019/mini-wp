@@ -27,6 +27,7 @@ userSchema.path('email').validate(function(value){
 
 userSchema.pre('save', function(next){
   this.password = generateHash(this.password)
+  next()
 })
 
 const User = mongoose.model('User', userSchema)

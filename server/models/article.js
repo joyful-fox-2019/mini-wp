@@ -1,11 +1,12 @@
 const { Schema, model } = require('mongoose')
-const ObjectId = Schema.Types.ObjectId;
+const ObjectId = Schema.Types.ObjectId
 
 const articleSchema = new Schema({
   UserId: {
-    type: ObjectId
+    type: ObjectId,
+    ref: 'User'
   },
-  imgURL: {
+  imgUrl: {
     type: String
   },
   title: {
