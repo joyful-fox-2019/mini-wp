@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Blabla",
+      "content": "lorem ipsum blablabla",
+      "tags": ["apa", "ya", "coba"],
+      "type": "public",
+      "read": 0
+    },
+    {
+      "id": 2,
+      "title": "fdjlafjlkafja",
+      "content": "dsjaflkjaljaljlajfasjflsa",
+      "tags": ["daf"],
+      "type": "draft",
+      "read": 0
+    }
+  ]
+}

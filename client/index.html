@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./tailwind.css">
+  <link rel="stylesheet" href="./style.css">
+  <title>WordRide</title>
+  <style>
+    body {
+      font-size: 70%;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <!-- LOGIN PAGE -->
+
+  <section id="login-page" class="flex justify-center items-center" style="display: none;">
+    <div class="flex m-10 w-2/5 p-4 flex-wrap">
+      <form id="login-form" class="flex flex-wrap bg-white shadow-2xl rounded p-10 justify-center">
+        <div class="w-full"><h1 style="text-align: center;">Login into WordRide</h1></div>
+        <div class="w-full"><h4 style="text-align: center;">Or <span class="hover:text-blue-500 cursor-pointer" style="text-decoration: underline;">create Account</span></h4></div>
+        <input type="email" class="p-2 mx-4 mt-10 w-3/4" placeholder="Email Address">
+        <input type="password" class="p-2 mx-4 my-4 w-3/4" placeholder="Password">
+        <div class="w-3/4 flex justify-center my-2">
+          <input id="login-btn" type="submit" class="p-2 rounded cursor-pointer hover:bg-gray-600 bg-gray-400 text-white w-full" value="Login">
+        </div>
+        <div class="flex flex-wrap justify-center w-3/4 m-4">
+          <h4 style="display: block; width: 100%; text-align: center; margin-bottom: 20px;">Or continue with</h4>
+          <button class="bg-gray-200 rounded cursor-pointer p-2 mx-2">Google</button>
+          <button class="bg-gray-200 rounded cursor-pointer p-2 mx-2">Github</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- REGISTER PAGE -->
+  <section id="register-page" style="display: none;">
+    <div class="flex m-10 w-2/5 p-4 flex-wrap">
+      <form id="register-form" class="flex flex-wrap bg-white shadow-2xl rounded p-10 justify-center">
+        <div class="w-full"><h1 style="text-align: center;">Register New Account</h1></div>
+        <div class="w-full"><h4 style="text-align: center;">Or <span class="hover:text-blue-500 cursor-pointer" style="text-decoration: underline;">Login Instead</span></h4></div>
+        <input type="text" class="p-2 mx-4 mt-10 w-3/4" placeholder="Name">        
+        <input type="email" class="p-2 mx-4 mt-4 w-3/4" placeholder="Email Address">
+        <input type="password" class="p-2 mx-4 my-4 w-3/4" placeholder="Password">
+        <div class="w-3/4 flex justify-center my-2">
+          <input id="register-btn" type="submit" class="p-2 rounded cursor-pointer hover:bg-gray-600 bg-gray-400 text-white w-full" value="Register">
+        </div>
+      </form>
+    </div>
+  </section>
+  <!-- MAIN PAGE -->
+  <section id="main-page" class="flex">
+    <aside id="sidebar" class="py-4 w-1/6 bg-gray-800 flex justify-center" style="height: 100vh;">
+      <div id="sidebar-container" class="flex-column w-full">
+        <div class="w-full p-2 my-4 text-white text-center">LOGO</div>
+          <div class="sidebar-menu p-2 bg-gray-800 hover:bg-gray-700 cursor-pointer text-center text-white font-bold">Home</div>
+          <div class="sidebar-menu p-2 bg-gray-800 hover:bg-gray-700 cursor-pointer text-center text-white font-bold"">Write New</div>
+          <div class="sidebar-menu p-2 bg-gray-800 hover:bg-gray-700 cursor-pointer text-center text-white font-bold"">My Account</div>
+      </div>
+    </aside>
+    <div class="page flex-column w-full">
+      <nav id="navbar" class="bg-gray-200 shadow-lg flex items-center justify-between w-full" style="height: 10vh;">
+        <div class="w-1/4 mx-10">
+          <input type="search" style="border: none; border-bottom: 0.6px rgb(165, 165, 165) solid; background: transparent; outline: none;" class="p-2 w-full" placeholder="Search...">
+        </div>
+        <div id="logout-btn" class="mx-10 flex justify-end">
+          <img src="./exit.svg" alt="logout" style="height: 30px;" class="cursor-pointer">
+        </div>
+      </nav>
+      <div class="main-content flex flex-wrap justify-center" style="overflow: auto; height: 90vh;">
+        <div class="article-card flex-column w-1/4 border border-black m-8 rounded shadow" style="min-height: 250px;">
+          <div class="h-32 flex border border-gray-500">
+            <img src="./stratos.jpg" alt="image" style="object-fit: cover;">
+          </div>
+          <div class="card-body flex-column p-2">
+            <h2>Article Title</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum placeat ex, modi qui nostrum pariatur eum laudantium nam suscipit reprehenderit nobis, repellendus rem consequuntur maxime ab minus deleniti, quasi maiores!</p>
+            <div><span style="text-decoration: underline; cursor: pointer;">See more</span></div>
+          </div>
+        </div>
+        <div class="article-card w-1/4  border border-black m-8 rounded" style="min-height: 250px;"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+        <div class="article-card w-1/4 h-64  border border-black m-8 rounded"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE SHOW PAGE -->
+  
+  
+  <!-- ARTICLE EDIT PAGE -->
+<script src="./src/main.js"></script>
+</body>
+</html>
