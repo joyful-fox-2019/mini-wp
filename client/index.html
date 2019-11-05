@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Mini Wp</title>
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        .btn:hover {
+            background-color: orange;
+            color: white;
+        }
+
+        #buttonArticle {
+            width: 80px;
+            height: 50px;
+        }
+
+        /* ini login */
+        @font-face {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Lato Regular'), local('Lato-Regular'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+        }
+
+        body {
+            background: #448ed3;
+            font-family: "Lato";
+        }
+
+        .wrap {
+            width: 250px;
+            height: auto;
+            margin: auto;
+            margin-top: 10%;
+        }
+
+        .avatar {
+            width: 100%;
+            margin: auto;
+            width: 65px;
+            border-radius: 100px;
+            height: 65px;
+            background: #448ed3;
+            position: relative;
+            bottom: -15px;
+        }
+
+        .avatar img {
+            width: 55px;
+            height: 55px;
+            border-radius: 100px;
+            margin: auto;
+            border: 3px solid #fff;
+            display: block;
+        }
+
+        .wrap input {
+            border: none;
+            background: #fff;
+            font-family: Lato;
+            font-weight: 700;
+            display: block;
+            height: 40px;
+            outline: none;
+            width: calc(100% - 24px);
+            margin: auto;
+            padding: 6px 12px 6px 12px;
+        }
+
+        .bar {
+            width: 100%;
+            height: 1px;
+            background: #fff;
+        }
+
+        .bar i {
+            width: 95%;
+            margin: auto;
+            height: 1px;
+            display: block;
+            background: #d1d1d1;
+        }
+
+        .wrap input[type="text"] {
+            border-radius: 7px 7px 0px 0px;
+        }
+
+        .wrap input[type="password"] {
+            border-radius: 0px 0px 7px 7px;
+        }
+
+        .forgot_link {
+            color: #83afdf;
+            color: #83afdf;
+            text-decoration: none;
+            font-size: 11px;
+            position: relative;
+            left: 193px;
+            top: -36px;
+        }
+
+        .wrap button {
+            width: 100%;
+            border-radius: 7px;
+            background: #b6ee65;
+            text-decoration: center;
+            border: none;
+            color: #51771a;
+            margin-top: -5px;
+            padding-top: 14px;
+            padding-bottom: 14px;
+            outline: none;
+            font-size: 13px;
+            border-bottom: 3px solid #307d63;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f1f2f6;">
+
+    <div id="app">
+        <div id="beforeLogin" v-if="!isLogin">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6" style=" height: 100vh;">
+                        <img src="./img/undraw2.svg" width="100%;" height="100%;">
+                    </div>
+                    <div class="col-md-6" style="background-color: #145474; height: 100vh;">
+                        <div class="wrap" style="margin-top: 200px;">
+                            <div class="avatar">
+                                <img src="./img/wordpress.png">
+                            </div>
+                            <input type="text" placeholder="username" v-model="username" required>
+                            <div class="bar">
+                                <i></i>
+                            </div>
+                            <input type="password" placeholder="password" v-model="password" required>
+                            <a href="" class="forgot_link">forgot ?</a>
+                            <button v-on:click.prevent="login">Sign in</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="afterLogin" v-else="islogin">
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #145474;">
+                <button class="navbar-brand btn" onclick="home();"><img src=" img/wordpress.png" alt="chatIcon"
+                        width="40" height="35" class="mr-2 button">
+                    </img>My Sites</button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link btn" href="#"><img src=" img/newspaper.png" alt="chatIcon" width="28"
+                                    height="25" class="mr-2  button">
+                                </img>Reader <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+
+                    <button class="btn btn-light mr-5" style=" color:#145474; width: 100px;" data-toggle="modal"
+                        data-target="#writeModalArticle">
+                        <i class="far fa-edit pr-2"></i>
+                        Write
+                    </button>
+
+
+                    <a href="#" class="btn"><img src=" img/whiteChatIcon.png" alt="chatIcon" width="25" height="25"
+                            class="mr-2 button">
+                        </img>
+                    </a>
+
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row mt-5">
+                    <div class="col-3 px-1 bg-white position-fixed pt-3" id="sticky-sidebar"
+                        style="height: 100%; width: 200px;">
+
+                        <a href="" class="nav-link"><i class="fas fa-desktop pr-3"></i>
+                            View Site</a>
+                        <a href="" class="nav-link"><i class="fas fa-chart-bar pr-4"></i>Stats</a>
+                        <a href="" class="nav-link"><i class="fas fa-history  pr-4"></i>Activity</a>
+                        <h6 class="pt-4 text-secondary">Manage</h6>
+                        <a href="" class="nav-link"><i class="fas fa-sticky-note  pr-4"></i>Site Pages</a>
+                        <a href="" class="nav-link"><i class="fas fa-align-left  pr-4"></i>Blog Posts</a>
+                        <a href="" class="nav-link"><i class="fas fa-photo-video  pr-4"></i>Media</a>
+                        <a href="" class="nav-link"><i class="fas fa-cloud-download-alt pr-4"></i>Import</a>
+                        <button class="btn btn-danger ml-5" v-on:click.prevent="signOut" style="margin-top: 100px;">
+                            Sign
+                            Out</button>
+
+                    </div>
+                    <div class="col-9 offset-3 mt-5" style="height: 400px; " id="mainArea">
+                        <!-- <h1>Main Area</h1>
+                                        ... -->
+
+
+                        <div class="d-flex" style="height: 50px; width: 700px; background-color: white; ">
+                            <a href="" class="nav-link">
+                                <h6 class="pt-2 pl-5">Published</h6>
+                            </a>
+                            <a href="" class="nav-link">
+                                <h6 class="pt-2 pl-5">Drafts</h6>
+                            </a>
+
+                            <input type="text" v-model="search" class="ml-auto mt-1 mr-1" placeholder="Search title.."
+                                style="height: 40px;">
+                            <!-- <a class="nav-link ml-auto pt-2"><i class="fas fa-search"></i></a> -->
+
+                        </div>
+
+                        <div class="articles">
+                            <div class="mt-5" style="height: 70px; width: 700px; background-color: white;"
+                                v-for="article in filteredList">
+                                <div class="d-flex">
+                                    <h5 class="pt-2 pl-3"><b>{{article.title}}</b>
+                                        <small id="smallText" class="form-text text-muted">{{article.createdAt}}</small>
+                                    </h5>
+
+                                    <div class="ml-auto mt-2 mr-2">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            :data-target="'#halu' + article._id" id="buttonArticle">Read</button>
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            :data-target="'#edit' + article._id" id="buttonArticle">Edit</button>
+                                        <button type="button" class="btn btn-danger"
+                                            v-on:click="deleteArticle(article._id)" id="buttonArticle">Delete</button>
+
+
+                                        <div class="modal fade" :id="'halu' + article._id" tabindex=" -1" role="dialog"
+                                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                                            {{article.title}}
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{article.content}}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="modal fade" :id="'edit' + article._id" tabindex=" -1" role="dialog"
+                                            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                                            Edit Article
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputTitle">title</label>
+                                                                <input type="text" class="form-control"
+                                                                    aria-describedby="emailHelp" v-model="editTitle"
+                                                                    placeholder="Enter Title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="exampleFormControlTextarea1"> Content
+                                                                </label>
+                                                                <textarea class="form-control"
+                                                                    id="exampleFormControlTextarea1" rows="3"
+                                                                    v-model="editContet"></textarea>
+                                                            </div>
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-dismiss="modal"
+                                                                v-on:click.prevent="updateArticle">Update
+                                                                Article</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="writeModalArticle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Write Article</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class=" " style="width: 100%;">
+                            <!-- <div class="" style="height: 350px;" id="editor">
+                                <h1>Edit Area</h1>
+                                <p>Hello World!</p>
+                                <p>Some initial <strong>bold</strong> text</p>
+                                <p><br></p>
+                            </div> -->
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputTitle">title</label>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        v-model="inputTitle" placeholder="Enter Title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1"> Content </label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                        v-model="inputContent"></textarea>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    v-on:click.prevent="addArticle">add
+                                    Article</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js" id="quill"></script>
+    <script src="https://kit.fontawesome.com/9d7843219c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
