@@ -1,0 +1,22 @@
+{
+    "articles": [
+        {
+            "id" : 1,
+            "title": "Top 10 Indonesia Destinations",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis eleifend quam adipiscing vitae proin. Mattis enim ut tellus elementum sagittis. Elementum eu facilisis sed odio morbi quis commodo odio aenean. Nibh praesent tristique magna sit amet purus gravida. Imperdiet sed euismod nisi porta lorem mollis aliquam. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Ut aliquam purus sit amet luctus venenatis lectus magna. Interdum velit laoreet id donec. Porta nibh venenatis cras sed felis eget velit aliquet sagittis. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. At tempor commodo ullamcorper a lacus vestibulum sed arcu non. Urna cursus eget nunc scelerisque viverra. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Congue quisque egestas diam in arcu cursus euismod quis. Pellentesque adipiscing commodo elit at imperdiet. Vulputate mi sit amet mauris. Ut pharetra sit amet aliquam id. Placerat duis ultricies lacus sed turpis tincidunt.",
+            "created_at": "2019-11-04T18:00:08.362+00:00"                        
+        },
+        {
+            "id" : 2,
+            "title": "Top 10 Coding Bootcamps",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis eleifend quam adipiscing vitae proin. Mattis enim ut tellus elementum sagittis. Elementum eu facilisis sed odio morbi quis commodo odio aenean. Nibh praesent tristique magna sit amet purus gravida. Imperdiet sed euismod nisi porta lorem mollis aliquam. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Ut aliquam purus sit amet luctus venenatis lectus magna. Interdum velit laoreet id donec. Porta nibh venenatis cras sed felis eget velit aliquet sagittis. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. At tempor commodo ullamcorper a lacus vestibulum sed arcu non. Urna cursus eget nunc scelerisque viverra. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Congue quisque egestas diam in arcu cursus euismod quis. Pellentesque adipiscing commodo elit at imperdiet. Vulputate mi sit amet mauris. Ut pharetra sit amet aliquam id. Placerat duis ultricies lacus sed turpis tincidunt.",
+            "created_at": "2019-11-03T18:00:08.362+00:00" 
+        },
+        {
+            "id" : 3,
+            "title": "How to lose weight in 10 seconds!",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis eleifend quam adipiscing vitae proin. Mattis enim ut tellus elementum sagittis. Elementum eu facilisis sed odio morbi quis commodo odio aenean. Nibh praesent tristique magna sit amet purus gravida. Imperdiet sed euismod nisi porta lorem mollis aliquam. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Ut aliquam purus sit amet luctus venenatis lectus magna. Interdum velit laoreet id donec. Porta nibh venenatis cras sed felis eget velit aliquet sagittis. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. At tempor commodo ullamcorper a lacus vestibulum sed arcu non. Urna cursus eget nunc scelerisque viverra. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Congue quisque egestas diam in arcu cursus euismod quis. Pellentesque adipiscing commodo elit at imperdiet. Vulputate mi sit amet mauris. Ut pharetra sit amet aliquam id. Placerat duis ultricies lacus sed turpis tincidunt.",
+            "created_at": "2019-11-03T18:00:08.362+00:00" 
+        }
+    ]
+}
