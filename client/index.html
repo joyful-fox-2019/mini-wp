@@ -12,134 +12,92 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    
-    <div class="jumbotron mb-0 py-3">
-        <h1 class="" >Royhan's Wordpress</h1>
-        <p>The best place to explore new world out there, with the most updated informations we have gather</p>
+    <div class="" id="app">        
+        <div class="jumbotron mb-0 py-3">
+            <h1 class="" >Royhan's Wordpress</h1>
+            <p>The best place to explore new world out there, with the most updated informations we have gather</p>
+        </div>
+        
+        <!-- gunakan sticky-top untuk navbar -->
+        <nav class=" navbar navbar-expand-md navbar-dark bg-dark sticky-top d-flex justify-content-between h1 p-0">       
+                    <div class="nav navbar d-flex justify-content-start">
+                        <div class="">
+                            <img style="cursor: pointer; width : 50px" src="./img/logo.png" alt="">
+                            <span class="navbar-text">My Press</span>
+                        </div>
+                    <!-- Ul itu tempat untuk taruh tulisan list -->          
+                        <img class="cursor: pointer ml-4" style="cursor: pointer; width : 60px" src="./img/new.png" alt="">          
+                    </div> 
+                    <ul class="nav justify-content-end  navbar-light">
+                        <li class="nav-item">
+                            <a class="nav-link active" href=""><i class="fa fa-pencil"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=""><i class="fa fa-user-circle"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=""><i class="fa fa-whatsapp"></i></a>
+                        </li>                              
+                    </ul>
+            <!-- </div> -->
+        </nav>
+        <!-- sekarang kita bisa tambahkan backgrond pada gambar jika mau -->
+        
+        <section class="front-page">            
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3  pl-0">
+                        <a class="list-group-item bg-light"><i class="fa fa-thumbs-o-up fa-2x mr-3"></i>Followed Sites</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-envelope-o fa-2x mr-3"></i>Conversations</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-wikipedia-w fa-2x mr-3"></i>Discover</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-search fa-2x mr-3"></i>Search</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-star-o fa-2x mr-3"></i>My Likes</a> 
+                        <h3 class="list-group-item bg-light text-center">Manage</h3>   
+                        <a class="list-group-item bg-light"><i class="fa fa-file-text fa-2x mr-3"></i>Site Pages</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-list-alt fa-2x mr-3"></i>Blog Posts</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-camera-retro fa-2x mr-3"></i></i>Media</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-comment fa-2x mr-3"></i>Comments</a>
+                        <a class="list-group-item bg-light"><i class="fa fa-archive fa-2x mr-3"></i>Feedback</a>  
+                        <a class="list-group-item bg-light"><i class="fa fa-plug fa-2x mr-3"></i>Plugins</a>                     
+                        <a class="list-group-item bg-light"><i class="fa fa-cloud-download fa-2x mr-3"></i>Imports</a>  
+                        <h3 class="list-group-item bg-light text-center">Personalize</h3> 
+                        <a class="list-group-item bg-light"><i class="fa fa-cog fa-2x mr-3"></i>Imports</a>                    
+                    
+                    </div>
+                    <div  class="col-md-9">
+                        <!-- ini filter-->
+                        <form class="form-inline md-form form-sm mt-2 d-flex" v-on:submit.prevent='searchArticle'>
+                            <i class="fa fa-search"></i>
+                            <input class="form-control form-control-sm ml-3" style="width:90%" type="text" placeholder="Search"
+                                aria-label="Search" v-model='search'> 
+                                <!-- ini v-model yang menghubungkan -->
+                        </form>
+                        <div class="contener d-flex" >
+                            <div class="row">
+                                <!-- ini looping untuk articles -->
+                                <div class="col-sm-4 pt-4" v-for="article in fiteredArticle" :key="article.id">
+                                    <div  class="card" >
+                                        <img src="./img/1.jpeg" class="card-img-top" alt="ini gambar article" >
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{article.title}}</h5>
+                                        <p  class="card-text">{{article.content}}</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between">
+                                        <a @click.prevent="updateArticle(article.id)" href=""><i class="fa fa-pencil pr-1"></i>Edit</a>
+                                        <a @click.prevent="deleteArticle(article.id)" href=""><i class="fa fa-trash pr-1" ></i>Delete</a>
+                                        </div>
+                                    </div>                            
+                                </div>
+                            </div>
+                        </div>       
+                    </div>
+                </div>
+            </div>               
+        </section>
     </div>
-    <!-- gunakan sticky-top untuk navbar -->
-    <nav class=" navbar navbar-expand-md navbar-dark bg-dark sticky-top display-4 d-flex justify-content-between">       
-                <div class="nav navbar d-flex justify-content-start">
-                    <div class="">
-                        <img style="cursor: pointer; width : 70px" src="./img/logo.png" alt="">
-                        <span class="navbar-text">My Press</span>
-                    </div>
-                <!-- Ul itu tempat untuk taruh tulisan list -->          
-                    <img class="cursor: pointer ml-5" style="cursor: pointer; width : 90px" src="./img/new.png" alt="">          
-                </div>               
-            
-                <ul class="nav justify-content-end  navbar-light">
-                    <li class="nav-item">
-                        <a class="nav-link active" href=""><i class="fa fa-pencil"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=""><i class="fa fa-user-circle"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=""><i class="fa fa-whatsapp"></i></a>
-                    </li>            
-                </ul>
-            </div>        
-        <!-- </div> -->
-    </nav>
-    <!-- sekarang kita bisa tambahkan backgrond pada gambar jika mau -->
-    <section class="front-page">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3  pl-0">
-                    <a class="list-group-item bg-light"><i class="fa fa-thumbs-o-up fa-2x mr-3"></i>Followed Sites</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-envelope-o fa-2x mr-3"></i>Conversations</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-wikipedia-w fa-2x mr-3"></i>Discover</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-search fa-2x mr-3"></i>Search</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-star-o fa-2x mr-3"></i>My Likes</a> 
-                    <h3 class="list-group-item bg-light text-center">Manage</h3>   
-                    <a class="list-group-item bg-light"><i class="fa fa-file-text fa-2x mr-3"></i>Site Pages</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-list-alt fa-2x mr-3"></i>Blog Posts</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-camera-retro fa-2x mr-3"></i></i>Media</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-comment fa-2x mr-3"></i>Comments</a>
-                    <a class="list-group-item bg-light"><i class="fa fa-archive fa-2x mr-3"></i>Feedback</a>  
-                    <a class="list-group-item bg-light"><i class="fa fa-plug fa-2x mr-3"></i>Plugins</a>                     
-                    <a class="list-group-item bg-light"><i class="fa fa-cloud-download fa-2x mr-3"></i>Imports</a>  
-                    <h3 class="list-group-item bg-light text-center">Personalize</h3> 
-                    <a class="list-group-item bg-light"><i class="fa fa-cog fa-2x mr-3"></i>Imports</a>                    
-                   
-                </div>
-                <div class="col-md-9">
-                    <div class="card-deck pt-3">
-                        <div class="card">
-                            <img src="./img/1.jpeg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                            <a href=""><i class="fa fa-pencil pr-1"></i>Edit</a>
-                            <a href=""><i class="fa fa-trash pr-1" ></i>Delete</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="./img/2.jpeg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                            <a href=""><i class="fa fa-pencil pr-1"></i>Edit</a>
-                            <a href=""><i class="fa fa-trash pr-1" ></i>Delete</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="./img/3.jpeg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                            <a href=""><i class="fa fa-pencil pr-1"></i>Edit</a>
-                            <a href=""><i class="fa fa-trash pr-1" ></i>Delete</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-deck pt-3">
-                        <div class="card">
-                            <img src="./img/1.jpeg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                            <a href=""><i class="fa fa-pencil pr-1"></i>Edit</a>
-                            <a href=""><i class="fa fa-trash pr-1" ></i>Delete</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="./img/2.jpeg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                            <a href=""><i class="fa fa-pencil pr-1"></i>Edit</a>
-                            <a href=""><i class="fa fa-trash pr-1" ></i>Delete</a>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="./img/3.jpeg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            </div>
-                            <div class="card-footer d-flex justify-content-between">
-                            <a href=""><i class="fa fa-pencil pr-1"></i>Edit</a>
-                            <a href=""><i class="fa fa-trash pr-1" ></i>Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </section>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="./script.js"></script>
 </html>
