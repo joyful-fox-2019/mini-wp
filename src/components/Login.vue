@@ -2,7 +2,9 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-half">
-        <img src="../../assets/login.png">
+        <div class="centered-item">
+          <img src="../../assets/login.png" style="margin:">
+        </div>
         <form>
           <b-field>
             <b-input v-model="email" placeholder="Email">
@@ -10,7 +12,13 @@
           <b-field>
             <b-input v-model="password" placeholder="Password">
           </b-field>
-          <button class="button is-warning" type="submit">
+          <span>Don't have an account?</span>
+          <router-link to="/register">
+          <span class="text-dark-yellow">
+            <b>Sign Up</b>
+          </span>
+          </router-link>
+          <button class="button yellow-gradient float-right" type="submit">
             Log in
           </button>
         </form>
@@ -37,9 +45,8 @@ export default {
   .button {
     font-family: 'Yeseva One', cursive;
     font-weight: bold;
-    float: right;
   }
   img {
-    max-height: 400px;
+    max-height: 300px;
   }
 </style>
