@@ -5,7 +5,7 @@
         <div class="centered-item">
           <img src="../../assets/login.png" style="margin:">
         </div>
-        <form>
+        <form @submit.prevent="login">
           <b-field>
             <b-input v-model="email" placeholder="Email">
           </b-field>
@@ -28,11 +28,32 @@
 </template>
 
 <script>
+import axios from '../../helpers/axios'
+
 export default {
+  name: 'Login',
   data () {
     return {
       email: '',
       password: ''
+    }
+  },
+  methods: {
+    login() {
+      axios.post('/users/login', {
+        email: this.email,
+        password: this.password
+      })
+        .then(({ data }) => {
+          localStorage.setItem('_id', data._id)
+          localStorage.setItem('email', data.email)
+          localStorage.setItem('access_token', data.access_token)
+          this.$router.push('/')
+          this.$emit('login')
+        })
+        .catch(err => {
+          this.$emit('alert', err)
+        })
     }
   }
 }

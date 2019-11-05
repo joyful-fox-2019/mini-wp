@@ -10,11 +10,14 @@
       <template slot="end">
         <b-navbar-item tag="div">
           <div class="buttons">
-            <router-link to="/login">
+            <router-link v-if="!isLogin" to="/login">
               <a class="button is-light">
                 Sign in
               </a>
             </router-link>
+              <a v-if="isLogin" @click="logout" class="button is-light">
+                Sign out
+              </a>
           </div>
         </b-navbar-item>
       </template>
@@ -24,21 +27,21 @@
 
 <script>
 export default {
+  props: ['isLogin'],
+  methods: {
+    logout() {
+      this.$emit('logout')
+    }
+  }
 }
 </script>
 
 <style scoped>
 .container {
-  width: 70% !important;
   font-family: 'Yeseva One', cursive;
 }
 .logo {
   margin-top: 3px;
   font-size: 28px;
-}
-@media only screen and (max-width: 600px) {
-  .container {
-    width: 90% !important;
-  }
 }
 </style>

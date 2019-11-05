@@ -6,6 +6,10 @@ module.exports = (err, req, res, next) => {
     for(let field in err.errors) {
       messages.push(err.errors[field].message)
     }
+  } if(err.code === 11000) {
+    err.status = 400
+    let field = Object.keys(err.keyPattern)[0]
+    messages.push(`${field.substring(0, 1).toUpperCase()}${field.substring(1)} is already exist`)
   } else if(err.msg) {
     messages.push(err.msg)
   } else {

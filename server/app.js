@@ -5,6 +5,7 @@ if(process.env.NODE_ENV === 'development') {
 const express = require('express')
 const mongoose = require('mongoose')
 const routes = require('./routes')
+const cors = require('cors')
 const errorHandler = require('./middlewares/errorHandler')
 const app = express()
 const PORT = process.env.PORT
@@ -24,6 +25,7 @@ mongoose.connect(process.env.MONGOOSE_URI,
   }
 )
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/', routes)

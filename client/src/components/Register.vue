@@ -5,12 +5,12 @@
         <div class="centered-item">
           <img src="../../assets/register.png">
         </div>
-        <form>
+        <form @submit.prevent="register">
           <b-field>
             <b-input v-model="email" placeholder="Email">
           </b-field>
           <b-field>
-            <b-input v-model="password" placeholder="Password">
+            <b-input v-model="password" placeholder="Password" type="password">
           </b-field>
           <button class="button yellow-gradient" type="submit">
             Sign Up
@@ -30,11 +30,33 @@
 </template>
 
 <script>
+import axios from '../../helpers/axios'
+
 export default {
+  name: 'Register',
   data () {
     return {
       email: '',
       password: ''
+    }
+  },
+  methods: {
+    register() {
+      console.log('gas')
+      axios.post('/users/register', {
+        email: this.email,
+        password: this.password
+      })
+        .then(({ data }) => {
+          localStorage.setItem('_id', data._id)
+          localStorage.setItem('email', data.email)
+          localStorage.setItem('access_token', data.access_token)
+          this.$router.push('/')
+          this.$emit('login')
+        })
+        .catch(err => {
+          this.$emit('alert', err)
+        })
     }
   }
 }
