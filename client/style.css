@@ -10,6 +10,14 @@
     padding: 50px;
     width: 50%;
 }
+#register-form {
+    background-color: whitesmoke;
+    border : 1px solid whitesmoke;
+    border-radius: 10px;
+    margin: 150px auto;
+    padding: 50px;
+    width: 50%;
+}
 .link:hover {
     background-color: #1a5e7c;
     cursor: pointer;

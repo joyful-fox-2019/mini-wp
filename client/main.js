@@ -9,14 +9,19 @@ const app = new Vue ({
         password: "",
         isLogin: false,
         isError: false,
+        emailRegis: "",
+        passwordRegis: "",
+        isErrorRegis: false,
         page: "show",
         articles: [],
         search: "",
         titleAdd: "",
         contentAdd: "",
+        isErrorAdd: false,
         idEdit: "",
         titleEdit: "",
-        contentEdit: ""
+        contentEdit: "",
+        isErrorEdit: false,
     },
     methods: {
         login() {
@@ -56,6 +61,47 @@ const app = new Vue ({
                 icon: "success",
                 buttons: false,
                 timer: 1500
+            });
+        },
+        showRegister() {
+            this.page = "register";
+            this.emailRegis = "";
+            this.passwordRegis = "";
+            this.isErrorRegis = false;
+        },
+        showLogin() {
+            this.page = "login";
+            this.email = "";
+            this.password = "";
+            this.isError = false;
+        },
+        register() {
+            axios({
+                method: "POST",
+                url: "http://localhost:3000/users/signup",
+                data: {
+                    email: this.emailRegis,
+                    password: this.passwordRegis
+                }
+            })
+            .then((response) => {
+                localStorage.setItem("jwt_token", response.data.jwt_token);
+                this.getArticles();
+                this.isLogin = true;
+                this.page = "show";
+                this.emailRegis = "";
+                this.passwordRegis = "";
+                this.isErrorRegis = false;
+                swal({
+                    title: "Success!",
+                    icon: "success",
+                    buttons: false,
+                    timer: 1500
+                });
+            })
+            .catch((err) => {
+                this.isErrorRegis = true;
+                this.error = err.response.data.messages.join(" ");
             });
         },
         getArticles() {
@@ -110,7 +156,7 @@ const app = new Vue ({
             })
             .catch((err) => {
                 this.isErrorAdd = true;
-                this.errorAdd = err.response.data.messages;
+                this.errorAdd = err.response.data.messages.join(" ");
             });
         },
         edit() {
@@ -140,7 +186,7 @@ const app = new Vue ({
             })
             .catch((err) => {
                 this.isErrorEdit = true;
-                this.errorEdit = err.response.data.messages;
+                this.errorEdit = err.response.data.messages.join(" ");
             });
         },
         remove(id) {
@@ -180,7 +226,7 @@ const app = new Vue ({
                     })
                     .catch((err) => {
                         this.isErrorEdit = true;
-                        this.errorEdit = err.response.data.messages;
+                        this.errorEdit = err.response.data.messages.join(" ");
                     });
                 } 
             });

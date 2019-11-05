@@ -13,8 +13,9 @@
 <body>
     <div id="app">
         <!-- Login Page -->
-        <div v-if="isLogin === false" id="login-page">
+        <div v-if="isLogin === false && page !== 'register'" id="login-page">
             <div id="login-form">
+                <h1 style="text-align: center;"> Login </h1>
                 <form v-on:submit.prevent="login()" method="POST">
                     <div v-if="isError === true" class="alert alert-danger" role="alert">
                         {{error}}
@@ -28,6 +29,28 @@
                         <input type="password" class="form-control" v-model="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary" id="login-btn">Login</button>
+                    <button v-on:click="showRegister()" type="button" class="btn btn-primary" id="register-btn" style="float: right;">Register</button>
+                </form>
+            </div>
+        </div>
+        <!-- Register Page -->
+        <div v-if="page === 'register'" id="register-page">
+            <div id="register-form">
+                <h1 style="text-align: center;"> Register </h1>
+                <form v-on:submit.prevent="register()" method="POST">
+                    <div v-if="isErrorRegis === true" class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    <div class="form-group">
+                        <label for="emailRegis">Email address</label>
+                        <input type="email" class="form-control" v-model="emailRegis" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordRegis">Password</label>
+                        <input type="password" class="form-control" v-model="passwordRegis" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="register-btn">Register</button>
+                    <button v-on:click="showLogin()" type="button" class="btn btn-primary" id="back-login-btn" style="float: right;">Back to Login</button>
                 </form>
             </div>
         </div>
