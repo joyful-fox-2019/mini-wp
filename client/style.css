@@ -35,22 +35,29 @@ body {
     overflow: scroll;
 }
 
+.blogcontent {
+    background-color: rgb(231, 231, 231);
+    height: calc(100vh - 40px);
+    overflow: scroll;
+}
+
+.containerBlog {
+    padding-left: 210px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
 }
 
-.containerBlog {
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .blogBar {
+    width: 85%;
     padding: 15px;
-    width: 70%;
     background-color: white;
     margin-bottom: 20px;
     display: flex;
@@ -73,7 +80,7 @@ body {
 
 .blogPost {
     padding: 15px;
-    width: 70%;
+    width: 85%;
     background-color: white;
     margin-bottom: 20px;
     display: flex;
@@ -94,5 +101,9 @@ body {
 
 .ql-editor,
 #editor {
-    height: 75vh;
+    height: 40vh;
 }
+
+/* .col-md-10 .blogBar {
+    width: 900px;
+} */
