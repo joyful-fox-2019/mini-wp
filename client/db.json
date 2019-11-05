@@ -1,0 +1,22 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Javascript",
+      "content": "lorem ipsum 1",
+      "createdAt": "2019-11-11"
+    },
+    {
+      "id": 2,
+      "title": "jQuery",
+      "content": "lorem ipsum 2",
+      "createdAt": "2019-11-11"
+    },
+    {
+      "id": 3,
+      "title": "Vue JS",
+      "content": "lorem ipsum 3",
+      "createdAt": "2019-11-11"
+    }
+  ]
+}
