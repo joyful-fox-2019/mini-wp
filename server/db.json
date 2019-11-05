@@ -1,0 +1,28 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "title": "Learn Vue",
+            "content": "learn vue here lmaolmaolmaolmao",
+            "created_at": "2019-11-5"
+        },
+        {
+            "id": 2,
+            "title": "Learn Vju",
+            "content": "Master ur vju here lmaolmaolmaolmao",
+            "created_at": "2019-11-5"
+        },
+        {
+            "id": 3,
+            "title": "Learn Vu",
+            "content": "uuuuhhhhh vu here lmaolmaolmaolmao",
+            "created_at": "2019-11-5"
+        },
+        {
+            "id": 3,
+            "title": "Afifah's getting out of control :o",
+            "content": "learn how to tame her..",
+            "created_at": "2019-11-5"
+        }
+    ]
+}
