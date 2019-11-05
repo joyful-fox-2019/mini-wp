@@ -15,7 +15,7 @@
                 Sign in
               </a>
             </router-link>
-              <a v-if="isLogin" @click="logout" class="button is-light">
+              <a @click="logout" class="button is-light">
                 Sign out
               </a>
           </div>

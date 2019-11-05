@@ -5,10 +5,12 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import wysiwyg from "vue-wysiwyg"
 import "../node_modules/vue-wysiwyg/dist/vueWysiwyg.css"
+import GSignInButton from 'vue-google-signin-button'
 
 Vue.use(Buefy)
 Vue.use(wysiwyg, {});
 Vue.use(VueRouter)
+Vue.use(GSignInButton)
 
 const routes = [
   {

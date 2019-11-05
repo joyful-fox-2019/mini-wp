@@ -22,6 +22,7 @@
             Log in
           </button>
         </form>
+        <GSignIn></GSignIn>
       </div>
     </div>
   </div>
@@ -29,9 +30,13 @@
 
 <script>
 import axios from '../../helpers/axios'
+import GSignIn from './GSignIn'
 
 export default {
   name: 'Login',
+  components: {
+    GSignIn
+  },
   data () {
     return {
       email: '',

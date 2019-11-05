@@ -26,5 +26,38 @@ module.exports = {
         }
       })
       .catch(next)
+  },
+  googleSignIn: (req, res, next) => {
+    User.findOne({
+      email: req.googleEmail
+    })
+    .then(user => {
+      if(!user) {
+        return User.create({
+          email: req.googleEmail,
+          isGoogle: true
+        })
+      } else {
+        return user
+      }
+    })
+    .then(user => {
+      const access_token = generateToken({
+        id: user._id,
+        email: user.email
+      })
+      const _id = user._id
+      const email = user.email
+      const password = user.password
+      res.status(200).json({ _id, email, password, access_token })
+    })
+    .catch(next)
+  },
+  find: (req, res, next) => {
+    User.find()
+      .then(user => {
+        res.status(200).json(user)
+      })
+      .catch(next)
   }
 }
