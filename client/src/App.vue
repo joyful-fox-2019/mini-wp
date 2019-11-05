@@ -1,17 +1,25 @@
 <template>
     <div>
-        <Navbar></Navbar>
-        <div>
-            <div class="columns is-gapless">
-                <div class="column is-one-fifth left-menu">
-                    <SideMenu><SideMenu/>
-                </div>
-                <div class="column right-menu">
-                    <div class="container">
-                        <!-- <div class="posting-content">
-                            kotak buat konten
-                        </div> -->
-                        <ProjectContent></ProjectContent>
+        <!-- BEFORE LOGIN -->
+        <div class="loginPage" v-if="!isLogin">
+            <Login @changeLogin="changeLogin" @userData="userData"><Login/>
+        </div>
+        <!-- END BEFORE LOGIN -->
+        <div v-if="isLogin">
+            <Navbar @changePage="changePage"></Navbar>
+            <div>
+                <div class="columns is-gapless" style="background-color: #fff;">
+                    <div class="column is-one-fifth left-menu">
+                        <SideMenu @changePage="changePage" @changeLogin="changeLogin" :user="user"><SideMenu/>
+                    </div>
+                    <div class="column right-menu">
+                        <div class="container">
+                            <!-- <div class="posting-content">
+                                kotak buat konten
+                            </div> -->
+                            <Home v-if="isHome"></Home>
+                            <ReadPublic v-if="isPublic"></ReadPublic>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -22,16 +30,101 @@
 <script>
 import Navbar from './components/Navbar'
 import SideMenu from './components/SideMenu'
-import ProjectContent from './components/ProjectContent'
+import Home from './components/Home'
+import Login from './components/Login'
+import ReadPublic from './components/ReadPublic'
 
 export default {
     name: 'App',
     components : {
-        Navbar,SideMenu,ProjectContent
+        Navbar,SideMenu,Home,Login,ReadPublic
+    },
+    data() {
+        return {
+            isLogin : false,
+            isHome : true,
+            isPublic : false,
+            user : {
+                name : '',
+                email : ''
+            }
+        } 
+    },
+    methods : {
+        changeLogin(status) {
+            this.isLogin = status
+        },
+        userData(name,email) {
+            this.user.name = name
+            this.user.email = email
+        },
+        changePage(homePage,publicPage) {
+            this.isHome = homePage
+            this.isPublic = publicPage
+        }
+    },
+    created () {
+        if(localStorage.getItem('token')) {
+            this.isLogin = true
+        } else {
+            this.isLogin = false
+        }
     }
 }
 </script>
 
 <style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-main{
+    border-right: 1px solid white;
+}
+/* .navbar-menu {
+    background-color: #2d3436;
+} */
+
+.sidemenu {
+    display: flex;
+    padding: 20px;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: #fff;
+}
+.left-menu {
+    border-right: 1px solid #b2bec3 !important;
+}
+
+.right-menu {
+    background-color: #f6f7f7;
+    /* margin: 25px !important; */
+}
+
+.right-menu .container {
+    margin: 25px !important;
+}
+
+.sidemenu-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidemenu-content p {
+    font-size: 12px;
+}
+
+.menu-logo {
+    background-color: #c3c4c7;
+    color: white;
+    padding: 5px 8px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.columns {
+    height: 100vh !important;
+}
 
 </style>

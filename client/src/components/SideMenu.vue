@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="custom">
         <div class="sidemenu">
             <div class="menu-logo"><i class="fas fa-columns"></i></div>
             <div class="sidemenu-content">
                 <div>
-                    <p>Arnold Therigan</p>
+                    <p>{{user.name}}</p>
                 </div>
                 <div>
-                    <p>arnoldtherigan@mail.com</p>
+                    <p>{{user.email}}</p>
                 </div>
             </div>
         </div>
@@ -36,16 +36,53 @@
                 <li><a>Cloud Storage Environment Settings</a></li>
                 <li><a>Authentication</a></li> -->
             </ul>
-        </aside>
+            <p class="menu-label">
+                Actions
+            </p>
+            <ul class="menu-list">
+                <li @click="logout()"><a>Logout</a></li>
+            </ul>
+        </aside> 
   </div>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
-    name : 'SideMenu'
+    name : 'SideMenu',
+    props: [
+        'user'
+    ],
+    data() {
+        return {
+            isActive: true
+        }
+    },
+    methods : {
+        logout() {        
+            // var auth2 = gapi.auth2.getAuthInstance();
+            // auth2.signOut().then(()=> {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                this.$emit('changeLogin',false)
+                this.$emit('changePage',true,false)
+                localStorage.clear()
+                Toast.fire({
+                    icon: 'success',
+                    title: 'See you again'
+                })
+            // }); 
+        }
+    }
 }
 </script>
 
-<style>
-
+<style scoped>
+.custom {
+    background-color: #fff !important;
+}
 </style>
