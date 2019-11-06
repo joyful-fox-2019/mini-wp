@@ -5,6 +5,7 @@ if (process.env.NODE_ENV === 'development'){
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT;
+const mongoURI = process.env.MONGO_URI;
 const mongoose = require('mongoose');
 const cors = require('cors');
 const routes = require('./routes');
@@ -16,7 +17,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors());
 
 mongoose
-    .connect('mongodb://localhost:27017/miniwp', {
+    .connect(mongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
