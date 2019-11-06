@@ -2,8 +2,8 @@ const Article = require('../models/article')
 
 class ArticleController {
   static findAll(req, res, next) {
-    
-    Article.find().sort({ created_at: "desc"  })
+    let title = req.query.title || ''
+    Article.find({title : {$regex:title}}).sort({ created_at: "desc"  })
     .then(article => {
       res.status(200).json(article)
     })
@@ -39,10 +39,12 @@ class ArticleController {
 
   static update(req, res, next) {
     let id = req.params.id
-    let { title, content } = req.body
-    Article.findByIdAndRemove(id, { $set : {title, content}}, { omitUndefined: true, new: true, runValidators: true})
+    let { title, content, tags, imgSrc } = req.body
+    console.log(req.body)
+    Article.findByIdAndUpdate(id, { $set : {title, content, tags, imgSrc}}, { omitUndefined: true, new: true, runValidators: true})
     .then(article => {
-      res.status(200).json({ article })
+      console.log(article)
+      res.status(200).json( {data: article, msg: 'ok'} )
     })
     .catch(next)
   }

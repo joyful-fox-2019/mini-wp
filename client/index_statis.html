@@ -17,10 +17,22 @@
   </head>
   <body>
 
+    <!-- quill editor  -->
+    <div id="editor">
+        <p>Hello World!</p>
+        <p>Some initial <strong>bold</strong> text</p>
+        <p><br></p>
+      </div>
+    <!-- end quill editor  -->
   
     <!-- wrap vue app  -->
     <div id="app">
-    
+      {{message}}
+
+      <button v-on:click="changeMessage">
+        Click me!
+      </button>
+   
 
     <!-- navbar section -->
       <section class="navbar-section">
@@ -228,9 +240,9 @@
                     <div class="tabs-end">
                         <div class="panel-block">
                             <p class="control has-icons-right">
-                              <input v-on:keyup.enter="selectedArticle" v-model="searchTitle" class="input" type="text" placeholder="Search"  >
+                              <input class="input" type="text" placeholder="Search">
                               <span class="icon is-right">
-                                <i class="fas fa-search" aria-hidden="true" ></i>
+                                <i class="fas fa-search" aria-hidden="true"></i>
                               </span>
                             </p>
                           </div>
@@ -243,24 +255,29 @@
                 <section>
                   <div class="container">
 
-                    
                     <!-- one storyline -->
-                  <div v-for="article in filteredArticles" class="columns story-list"> 
+                  <div class="columns story-list">
                       <div class="column is-10">
-                        <p style="font-size: 22px;">  
+                        <p style="font-size: 22px;">
                             <br>
-                          <B><i> {{article.title}} </i></B>
+                          <B><i> The Gender Pay Gap for Women </i></B>
                         </p>
                         <p>
-                          {{article.content}}
+                          The gender pay gap or gender wage gap is the average difference between the remuneration for men and women who are working. Women are generally considered to be paid less than men. There are two distinct numbers regarding the pay gap: unadjusted versus adjusted pay gap.
                           </p>
                           <br>
                                   <!-- group tags -->
-                        <div  class="field is-grouped is-grouped-multiline">
-                            <div v-for="tag in article.tags" class="control">
+                        <div class="field is-grouped is-grouped-multiline">
+                            <div class="control">
                               <div class="tags has-addons">
-                                <span class="tag">on</span>
-                                <span class="tag is-primary" style="background-color: rgba(9, 87, 90, 0.514);">{{tag}}</span>
+                                <span class="tag">chat</span>
+                                <span class="tag is-primary" style="background-color: rgb(219, 200, 215);">on gitter</span>
+                              </div>
+                            </div>
+                            <div class="control">
+                              <div class="tags has-addons">
+                                <span class="tag">npm</span>
+                                <span class="tag is-info" style="background-color: rgb(196, 180, 174);">0.7.0</span>
                               </div>
                             </div>
                           </div>
@@ -268,13 +285,101 @@
                       </div>
                     <div class="column is-2">
                         <figure class="image is-square"> 
-                            <img class="is-rounded" :src="article.imgSrc">
+                            <img class="is-rounded" src="https://i.pinimg.com/564x/97/72/6d/97726d0e1039b5840282de6fb8fc1978.jpg">
                           </figure>
                     </div>
                   </div>
                   <!-- end one story line  -->
 
-                 
+                  <div class="columns story-list">
+                      <div class="column is-10">
+                        <p style="font-size: 22px;">
+                          <br>
+                        <B> <i> Women Empowerment : Wind of Change </i> </B> 
+                        </p>
+
+                        <p>
+                            Women empowerment has become the buzzword today with women working alongside men in all spheres. They profess an independent outlook, whether they are living inside their home or working outside. They are increasingly gaining control over their lives and taking their own decisions about their education, career, profession and lifestyle.
+
+
+                        </p>
+
+                        <br>
+
+                        <!-- group tags -->
+                        <div class="field is-grouped is-grouped-multiline">
+                          <div class="control">
+                            <div class="tags has-addons">
+                              <span class="tag">chat</span>
+                              <span class="tag is-primary" style="background-color: rgb(219, 200, 215);">on gitter</span>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end goup tags -->
+
+                      
+                      </div>
+                    <div class="column is-2">
+                      
+
+                      <figure class="image is-square">
+                          <img class="is-rounded" src="https://i.pinimg.com/564x/f1/2e/f4/f12ef4f01a9281b222b438b191efd6fd.jpg">
+                        </figure>
+
+                    </div>
+                  </div>
+
+                  <div class="columns story-list">
+                      <div class="column is-10">
+                        <p style="font-size: 22px;">
+                            <br>
+                        <B><i> Power and Priviledge : Millennials Hate Phone Calls, And They Have A Point </i></B> 
+                        </p>
+
+                        <p>
+                            Millennials are the generation that grew up bridging the digital age. They’re the very last ones who will ever remember what it is like to grow up without the Internet, and are also the ones who have actively participated in making it such an integral part of everyday life.
+                        </p>
+
+                        <br>
+
+                        <!-- add on  -->
+                        <div class="addOns">
+
+                            <div class="field is-grouped is-grouped-multiline">
+                                <div class="control">
+                                  <div class="tags has-addons">
+                                    <span class="tag">npm</span>
+                                    <span class="tag is-info" style="background-color: rgb(196, 180, 174);">0.7.0</span>
+                                  </div>
+                                </div>
+                              
+                                <div class="control">
+                                  <div class="tags has-addons">
+                                    <span class="tag">build</span>
+                                    <span class="tag is-success" style="background-color: rgb(180, 204, 219);">passing</span>
+                                  </div>
+                                </div>
+                              
+                                <div class="control">
+                                  <div class="tags has-addons">
+                                    <span class="tag">chat</span>
+                                    <span class="tag is-primary" style="background-color: rgb(219, 200, 215);">on gitter</span>
+                                  </div>
+                                </div>
+                              </div>
+
+                      </div>
+                      <!-- end add on -->
+
+                        
+                      </div>
+                    <div class="column is-2">
+                      <figure class="image is-256x256">
+                        <img class="is-rounded" src="https://i.pinimg.com/564x/22/5f/5f/225f5ff4d2a09e28cbbc3814a1b2f3a4.jpg">
+                      </figure>
+                    </div>
+                  </div>
+
               
                   </div>
                   <!-- end container story list  -->
@@ -300,7 +405,6 @@
     <!-- import script  -->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
     <!-- end import script  -->
 

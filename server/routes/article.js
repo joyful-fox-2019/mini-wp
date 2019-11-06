@@ -7,6 +7,6 @@ router.post('/', articleController.create)
 
 router.get('/:id', articleController.findOne)
 router.delete('/:id', articleController.delete)
-router.patch('./:id', articleController.update)
+router.patch('/:id', articleController.update)
 
 module.exports = router

@@ -10,7 +10,7 @@ const mongoose = require('mongoose')
 // const errorHandler = require('./middlewares/errorHandler')
 
 const PORT = process.env.PORT 
-mongoose.connect('mongodb://localhost:27017/mini-wp', { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect('mongodb://localhost:27017/mini-wp', { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
 .then(() => {
   console.log(`Server connected`);  
 })
