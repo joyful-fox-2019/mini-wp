@@ -13,16 +13,18 @@
         @ready="onEditorReady($event)"
         >
       </quill-editor>
+      <b-form-input required v-model="tags" class="mt-3" placeholder="Tags"></b-form-input>
       <b-form-file
         class="mt-3"
         v-model="file"
         :state="Boolean(file)"
-        placeholder="Choose a image or drop it here..."
+        placeholder="Choose a image or drop for edit article here..."
         drop-placeholder="Drop image here..."
       ></b-form-file>
-      <img :src="imgUrl" alt="" srcset="">
+      <img :src="imgUrl" class="mt-3" width="50%">
       
-    <b-button variant="info" class="mt-3">Edit Article</b-button>
+      <b-button variant="info" class="mt-3">Edit Article</b-button>
+      <b-button @click="goBack" variant="secondary" class="mt-3">Back</b-button>
     </form>
   </div>
 </template>
@@ -38,11 +40,12 @@ export default {
     return{
       text:'',
       content: '',
+      tags: '',
       editorOption: {
         // some quill options
       },
       file:null,
-      imgUrl: 'http://placekitten.com/g/200/300'
+      imgUrl: 'http://placekitten.com/500/500'
     }
   },
   components: {
@@ -61,6 +64,9 @@ export default {
       onEditorChange({ quill, html, text }) {
         console.log('editor change!', quill, html, text)
         this.content = html
+      },
+      goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
       }
     },
     computed: {

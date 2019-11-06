@@ -20,6 +20,7 @@
         @ready="onEditorReady($event)"
         >
     </quill-editor>
+    <b-form-input required v-model="tags" class="mt-3" placeholder="Tags"></b-form-input>
     <b-button variant="info" class="mt-3">Post Article</b-button>
     </form>
   </div>
@@ -36,6 +37,7 @@ export default {
     return{
       text:'',
       content: '',
+      tags: '',
       editorOption: {
         // some quill options
       },
