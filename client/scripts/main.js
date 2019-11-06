@@ -1,5 +1,5 @@
 const instance = axios.create({
-    baseURL: 'http://miniwpserver.angelavanessa.com/'
+    baseURL: 'http://miniwpserver.angelavanessa.com'
 });
 
 new Vue({
