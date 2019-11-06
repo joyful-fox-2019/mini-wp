@@ -17,11 +17,16 @@ module.exports = {
     const {_id} = req.params // ArticleId
     try{
       const articleData = await Article.findOne({ _id })
-      if(articleData.UserId == req.loggedUser._id){
-        next()
+      if(articleData){
+        if(articleData.UserId == req.loggedUser._id){
+          next()
+        }
+        else{
+          throw { message:"Invalid Authentication",status:401 }
+        }
       }
       else{
-        throw { message:"Invalid Authentication",status:401 }
+        throw { message:"Data not found",status:404 }
       }
     }
     catch(err){

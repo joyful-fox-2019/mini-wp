@@ -4,6 +4,7 @@ const { decodeHash } = require('../helpers/bcrypt')
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID_GOOGLE);
 
+
 class UserController {
 
   static async login (req,res,next) {

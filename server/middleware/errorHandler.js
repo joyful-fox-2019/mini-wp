@@ -1,8 +1,8 @@
 module.exports = function (err, req, res, next) {
-  console.log(err)
+  console.log(err,"from error handler")
 
   const message = err.message || 'Internal Server Error'
-  const status =  err.message || 500
+  const status =  err.status || 500
 
   if(err.name === "ValidationError"){
     const errors = []
