@@ -3,7 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 const DB_URI = 'mongodb://localhost/mini-wp-luky'
 const routes = require('./routes')
 
@@ -22,6 +22,10 @@ mongoose.connect(DB_URI, {
   .catch(err => {
     console.log('could not connect to mongodb')
   })
+
+app.get('/hello', (req, res) => {
+  res.send('Hello World')
+})
 
 app.use('/', routes)
 app.listen(PORT, () => {
