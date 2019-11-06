@@ -1,14 +1,54 @@
 <template>
-  <h1>{{message}}</h1>
+<div>
+  <LandingPage v-if="!isLogin" @loggedIn="loggedIn"></LandingPage>
+  <HomePage v-else @logout="loggedOut" ></HomePage>
+</div>
 </template>
 
 <script>
+import LandingPage from './views/LandingPage'
+import HomePage from './views/HomePage'
+import axios from './config/axios'
 export default {
+  components: {
+    LandingPage, HomePage
+  },
   data() {
+    name: 'App'
     return {
-      message: 'MASUK'
+      isLogin: true
     }
   },
+  methods: {
+    loggedIn () {
+      this.isLogin = true
+      this.$router.push('/articles')
+    },
+    loggedOut () {
+      this.isLogin = false
+    },
+    verifyToken () {
+      axios({
+        method: 'GET',
+        url: '/users/verify',
+        headers: {
+          token : localStorage.getItem('token')
+        }
+      })
+      .then(({ data }) => {
+        console.log(data.message)
+        this.isLogin = true
+      })
+      .catch(({ response }) => {
+        console.log(response.data)
+      })
+    }
+  },
+  created () {
+    if(localStorage.getItem('token')){
+      this.verifyToken()
+    }
+  }
 }
 </script>
 

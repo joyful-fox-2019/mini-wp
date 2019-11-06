@@ -1,0 +1,35 @@
+<template>
+  <nav id="navbar" class="bg-gray-200 shadow-lg flex items-center justify-between w-full" style="height: 10vh;">
+    <div class="w-1/4 mx-10">
+    <form @submit.prevent="search">
+      <input v-model="keyword" type="search" style="border: none; border-bottom: 0.6px rgb(165, 165, 165) solid; background: transparent; outline: none;" class="p-2 w-full" placeholder="Search...">
+    </form>
+    </div>
+    <div id="logout-btn" class="mx-10 flex justify-end">
+      <img src="./exit.svg" alt="logout" style="height: 30px;" class="cursor-pointer" @click="logout">
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: 'Navbar',
+  data() {
+    return {
+      keyword: ''
+    }
+  },
+  methods: {
+    logout () {
+      this.$emit('logout')
+    },
+    search () {
+      this.$emit('search', { keyword: this.keyword })
+    }
+  },
+}
+</script>
+
+<style>
+
+</style>

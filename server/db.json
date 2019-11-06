@@ -3,18 +3,42 @@
     {
       "id": 1,
       "title": "Blabla",
-      "content": "lorem ipsum blablabla",
+      "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
       "tags": ["apa", "ya", "coba"],
       "type": "public",
-      "read": 0
+      "read": 0,
+      "author": {"name": "John Doe"},
+      "createdAt": "30/10/2019"
     },
     {
       "id": 2,
-      "title": "fdjlafjlkafja",
-      "content": "dsjaflkjaljaljlajfasjflsa",
+      "title": "Title titlean",
+      "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
       "tags": ["daf"],
       "type": "draft",
-      "read": 0
+      "read": 0,
+      "author": {"name": "John Doe"},
+      "createdAt": "30/10/2019"
+    },
+    {
+      "id": 4,
+      "title": "Ini title nomor 4",
+      "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
+      "tags": ["apa", "ya", "coba"],
+      "type": "public",
+      "read": 0,
+      "author": {"name": "John Doe"},
+      "createdAt": "30/10/2019"
+    },
+    {
+      "id": 3,
+      "title": "Ini title nomor 55555",
+      "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
+      "tags": ["daf"],
+      "type": "draft",
+      "read": 0,
+      "author": {"name": "John Doe"},
+      "createdAt": "30/10/2019"
     }
   ]
 }
