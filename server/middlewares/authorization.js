@@ -2,10 +2,9 @@ const Article = require("../models/article.js");
 
 function authorization(req, res, next) {
     Article.findById(req.params.id)
-        .populate("UserId")
         .then((found) => {
             if (found) {
-                if (found.UserId._id == req.user._id) {
+                if (found.userId == req.user.id) {
                     next();
                 } else {
                     let err = {

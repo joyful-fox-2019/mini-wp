@@ -134,12 +134,13 @@ let app = new Vue({
                 })
         },
         updateArticle(id) {
+            console.log(id);
             axios({
                 method: "put",
                 url: `http://localhost:3000/article/${id}`,
                 data: {
-                    title: editTitle,
-                    content: editContent
+                    title: this.editTitle,
+                    content: this.editContent
                 },
                 headers: {
                     token: localStorage.getItem("token")
