@@ -1,3 +1,7 @@
+const instance = axios.create({
+    baseURL: 'http://localhost:3000'
+});
+
 new Vue({
     el: '#app',
     data: {
@@ -9,20 +13,24 @@ new Vue({
       showMainPage: true,
       showBlogPage: false,
       publishButton: true,
-      articleId: null
+      articleId: null,
+      isLoggedIn: null,
+      registerName: '',
+      registerEmail: '',
+      registerPassword: '',
+      loginEmail: '',
+      loginPassword: ''
     },
     methods: {
         getData() {
-            axios({
-                method: 'GET',
-                url: 'http://localhost:3000/articles'
-            })
-            .then( ({data}) => {
-                this.articles = data;
-            })
-            .catch( error => {
-                console.log(error);
-            })
+            instance
+                .get('articles')
+                .then( ({data}) => {
+                    this.articles = data;
+                })
+                .catch( error => {
+                    console.log(error);
+                })
         },
         getArticleCreatedAt(article) {
             let today = Date.now();
@@ -66,34 +74,32 @@ new Vue({
             this.quillForm = quillForm;
         },
         createArticle() {
-            axios({
-                method: 'post',
-                url: 'http://localhost:3000/articles',
-                data: {
-                    title: this.articleTitleEditor,
-                    content: this.articleContentEditor
-                    // content: this.quillForm.getText()
-                }
-            })
-            .then( () => {
-                this.toggleMainPage();
-            })
-            .catch( error => {
-                console.log(error);
-            })
+            let data = {
+                title: this.articleTitleEditor,
+                content: this.articleContentEditor
+                // content: this.quillForm.getText()
+            }
+
+            instance
+                .post('articles', data)
+                .then( ({data}) => {
+                    this.articles.unshift(data);
+                    this.toggleMainPage();
+                })
+                .catch( error => {
+                    console.log(error);
+                })
         },
         deleteArticle(article) {
-            axios({
-                method: 'delete',
-                url: `http://localhost:3000/articles/${article._id}`
-            })
-            .then( () => {
-                alert('deleted')
-                // this.toggleMainPage();
-            })
-            .catch( error => {
-                console.log(error)
-            })
+            instance
+                .delete(`articles/${article._id}`)
+                .then( () => {
+                    alert('deleted')
+                    // this.toggleMainPage();
+                })
+                .catch( error => {
+                    console.log(error)
+                })
         },
         renderUpdateArticle(article) {
             this.articleTitleEditor = article.title;
@@ -103,21 +109,19 @@ new Vue({
             this.toggleBlogPage();
         },
         updateArticle(){
-            axios({
-                method: 'PUT',
-                url: `http://localhost:3000/articles/${this.articleId}`,
-                data: {
-                    title: this.articleTitleEditor,
-                    content: this.articleContentEditor
-                }
-            })
-            .then( () => {
-                alert('uda')
-                this.toggleMainPage();
-            })
-            .catch( error => {
-                console.log(error);
-            })
+            let data = {
+                title: this.articleTitleEditor,
+                content: this.articleContentEditor
+            }
+            instance
+                .put(`articles/${this.articleId}`)
+                .then( () => {
+                    alert('uda')
+                    this.toggleMainPage();
+                })
+                .catch( error => {
+                    console.log(error);
+                })
         },
         toggleBlogPage(){
             this.showMainPage = false;
@@ -130,11 +134,56 @@ new Vue({
             this.articleContentEditor = '';
             this.articleId = null;
             this.publishButton = true;
+        },
+        checkSession() {
+            let token = localStorage.getItem('jwt_token');
+            this.isLoggedIn = token ? true : false;
+        },
+        registerUser() {
+            let data = {
+                name: this.registerName,
+                email: this.registerEmail,
+                password: this.registerPassword
+            }
+
+            instance
+                .post('register', data)
+                .then( () => {
+                    this.registerName = '';
+                    this.registerEmail = '';
+                    this.registerPassword = '';
+                    alert('registered');
+                })
+                .catch( err => {
+                    console.log(err)
+                })
+        },
+        loginUser() {
+            let data = {
+                email: this.loginEmail,
+                password: this.loginPassword
+            }
+            
+            instance
+                .post('login', data)
+                .then( ({data}) => {
+                    localStorage.setItem('jwt_token', data)
+                    this.loginEmail = '';
+                    this.loginPassword = '';
+                    this.isLoggedIn = true;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        logOut() {
+            localStorage.removeItem('jwt_token');
+            this.isLoggedIn = false;
         }
     },
-    mounted() {
+    created() {
         this.getData();
-        // this.quill();
+        this.checkSession();
     },
     computed: {
         filteredArticles: function() {
@@ -147,7 +196,6 @@ new Vue({
         }
     }
   })
-
 
 $( document ).ready(function() {
     let dropdown = document.getElementsByClassName("dropdown-btn");
