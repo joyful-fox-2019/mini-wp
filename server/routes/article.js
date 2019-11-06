@@ -1,10 +1,14 @@
 const routes = require("express").Router();
 const ArticleController = require("../controllers/article");
+const authenticate = require("../middlewares/authenticate");
+const authorization = require("../middlewares/authorization");
 
-
-routes.post("/", ArticleController.find);
-routes.post("/create", ArticleController.create);
-routes.delete("/delete/:id", ArticleController.delete);
+// routes.use(authenticate);
+routes.use(authenticate)
+routes.get("/", ArticleController.find);
+routes.post("/", ArticleController.create);
+routes.delete("/:id", authorization, ArticleController.delete);
+routes.put("/:id", authorization, ArticleController.update);
 
 
 module.exports = routes;

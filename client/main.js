@@ -34,10 +34,10 @@ let app = new Vue({
                     icon: 'success'
                 })
                 this.usernameLogin = response.data.name
-                this.getData();
                 localStorage.setItem("username", response.data.name);
                 localStorage.setItem("token", response.data.token);
                 this.isLogin = localStorage.getItem("token");
+                this.getData();
             }).catch((err) => {
                 Swal.fire({
                     type: 'error',
@@ -63,13 +63,12 @@ let app = new Vue({
         },
         getData() {
             axios({
-                method: 'post',
+                method: 'get',
                 url: 'http://localhost:3000/article',
-                data: {
-                    username: this.usernameLogin
+                headers: {
+                    token: localStorage.getItem("token")
                 }
             }).then((response) => {
-                console.log(response.data);
                 for (let i = 0; i < response.data.length; i++) {
                     let date = new Date(response.data[i].createdAt);
                     let formated = date.toString().slice(0, 15);
@@ -83,12 +82,14 @@ let app = new Vue({
         addArticle() {
             axios({
                 method: "post",
-                url: "http://localhost:3000/article/create",
+                url: "http://localhost:3000/article/",
                 data: {
                     title: this.inputTitle,
-                    username: this.usernameLogin,
                     content: this.inputContent,
 
+                },
+                headers: {
+                    token: localStorage.getItem("token")
                 }
             }).then((response) => {
                 this.articles.push(response.data);
@@ -97,6 +98,7 @@ let app = new Vue({
                     text: 'add article Success',
                     icon: 'success'
                 })
+                this.getData();
             }).catch(err => {
                 console.log(err);
             })
@@ -113,7 +115,10 @@ let app = new Vue({
                     if (result.value) {
                         return axios({
                             method: "delete",
-                            url: `http://localhost:3000/article/delete/${id}`
+                            url: `http://localhost:3000/article/${id}`,
+                            headers: {
+                                token: localStorage.getItem("token")
+                            }
                         })
                     }
                 })
@@ -127,6 +132,28 @@ let app = new Vue({
                 }).catch((err) => {
                     console.log(err);
                 })
+        },
+        updateArticle(id) {
+            axios({
+                method: "put",
+                url: `http://localhost:3000/article/${id}`,
+                data: {
+                    title: editTitle,
+                    content: editContent
+                },
+                headers: {
+                    token: localStorage.getItem("token")
+                }
+            }).then((response) => {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Article Updated',
+                    icon: 'success'
+                });
+                this.getData();
+            }).catch((err) => {
+                console.log(err);
+            })
         }
     },
     computed: {

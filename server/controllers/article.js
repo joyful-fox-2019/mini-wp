@@ -4,7 +4,7 @@ const Article = require("../models/article");
 class ArticleController {
     static find(req, res, next) {
         Article.find({
-            username: req.body.username
+            userId: req.user.id
         }).then((result) => {
             res.status(200).json(result)
         }).catch(next);
@@ -14,7 +14,7 @@ class ArticleController {
         Article.create({
             title: req.body.title,
             content: req.body.content,
-            username: req.body.username
+            userId: req.user.id
         }).then((result) => {
             res.status(201).json(result)
         }).catch(next);
@@ -25,6 +25,17 @@ class ArticleController {
             _id: req.params.id
         }).then((result) => {
             res.status(200).json(result);
+        }).catch(next);
+    }
+
+    static update(req, res, next) {
+        Article.updateOne({
+            _id: req.params.id
+        }, {
+            title: req.body.title,
+            content: req.body.content
+        }).then((result) => {
+            res.status(200).json(result)
         }).catch(next);
     }
 }

@@ -6,7 +6,10 @@ const Schema = mongoose.Schema;
 const articleShcema = new Schema({
     title: String,
     content: String,
-    username: String
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 
 }, {
     timestamps: true
