@@ -82,18 +82,23 @@ class ArticleController {
       // Find old link and get the img name
       const findData = await Article.findOne({ _id })
       const { imgUrl } = findData
-      let myfile = imgUrl.split('/')
 
-      // after have the img name, then peform the delete img in gcs
-      const file = myBucket.file(myfile[4])
-      const deleteImgDataInGCS = await file.delete()
+      if(imgUrl){
+        let myfile = imgUrl.split('/')
+        
+        // after have the img name, then peform the delete img in gcs
+        const file = myBucket.file(myfile[4])
+        const deleteImgDataInGCS = await file.delete()
+      }
       
       // if delete img in storange is done, then update the imgUrl in database
-      if(deleteImgDataInGCS){
-        const { imgUrl } = req.body
-        const data = await Article.updateOne({ imgUrl })
-        res.status(200).json(data)
+      const { title,description,tags } = req.body
+      let arrayTags = []
+      if(tags){
+        arrayTags = tags.split(',')
       }
+      const data = await Article.updateOne({ imgUrl:req.body.imgUrl,title,description,tags:arrayTags })
+      res.status(200).json(data)
     }
     catch(err){
       next(err)
