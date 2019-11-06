@@ -163,6 +163,7 @@ new Vue({
                 email: this.loginEmail,
                 password: this.loginPassword
             }
+            console.log(data)
             
             instance
                 .post('login', data)

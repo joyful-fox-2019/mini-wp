@@ -234,7 +234,7 @@
                     <label>Password</label>
                     <input v-model="registerPassword" type="password" class="form-control" placeholder="Password">
                 </div>
-                <button @click="registerUser()" class="btn btn-primary">Submit</button>
+                <button @click.prevent="registerUser()" class="btn btn-primary">Submit</button>
             </form>
 
             <form class="p-5 m-3">
@@ -247,7 +247,7 @@
                     <label>Password</label>
                     <input v-model="loginPassword" type="password" class="form-control" placeholder="Password">
                 </div>
-                <button @click="loginUser()" class="btn btn-primary">Submit</button>
+                <button @click.prevent="loginUser()" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
