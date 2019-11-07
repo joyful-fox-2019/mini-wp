@@ -6,7 +6,7 @@
     </form>
     </div>
     <div id="logout-btn" class="mx-10 flex justify-end">
-      <img src="./exit.svg" alt="logout" style="height: 30px;" class="cursor-pointer" @click="logout">
+      <i class="fas fa-door-open cursor-pointer hover:text-red-500 text-lg" @click="logout"></i>
     </div>
   </nav>
 </template>

@@ -11312,13 +11312,9 @@ exports.default = _default;
         "div",
         { staticClass: "mx-10 flex justify-end", attrs: { id: "logout-btn" } },
         [
-          _c("img", {
-            staticClass: "cursor-pointer",
-            staticStyle: { height: "30px" },
-            attrs: {
-              src: "/exit.3bc873a7.svg",
-              alt: "logout"
-            },
+          _c("i", {
+            staticClass:
+              "fas fa-door-open cursor-pointer hover:text-red-500 text-lg",
             on: { click: _vm.logout }
           })
         ]
@@ -11359,7 +11355,7 @@ render._withStripped = true
       
       }
     })();
-},{"./exit.svg":[["exit.3bc873a7.svg","src/components/exit.svg"],"src/components/exit.svg"],"_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/Sidebar.vue":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/Sidebar.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11406,7 +11402,7 @@ exports.default = _default;
   return _c(
     "aside",
     {
-      staticClass: "py-4 w-1/6 bg-gray-800 flex justify-center",
+      staticClass: "py-4 w-1/6 bg-gray-800 flex justify-center shadow-2xl",
       staticStyle: { height: "100vh" },
       attrs: { id: "sidebar" }
     },
@@ -11544,6 +11540,11 @@ var _default = {
     logout: function logout() {
       this.$emit('logout');
     }
+  },
+  watch: {
+    keyword: function keyword() {
+      this.myArticles();
+    }
   }
 };
 exports.default = _default;
@@ -11577,7 +11578,10 @@ exports.default = _default;
         [
           _c("Navbar", { on: { logout: _vm.logout, search: _vm.search } }),
           _vm._v(" "),
-          _c("router-view", { attrs: { keyword: _vm.keyword } })
+          _c("router-view", {
+            attrs: { keyword: _vm.keyword },
+            on: { searchTag: _vm.search }
+          })
         ],
         1
       )
@@ -11743,6 +11747,11 @@ render._withStripped = true
       }
     })();
 },{"./views/LandingPage":"src/views/LandingPage.vue","./views/HomePage":"src/views/HomePage.vue","./config/axios":"src/config/axios.js","_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"tailwind.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js"}],"style.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -14549,6 +14558,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
 var _default = {
   name: 'ArticleList',
   data: function data() {
@@ -14580,6 +14593,13 @@ var _default = {
     },
     showArticle: function showArticle(id) {
       this.$router.push("articles/".concat(id));
+    },
+    summary: function summary(content) {
+      if (content.length > 200) {
+        return content.slice(0, 200) + '...';
+      } else {
+        return content;
+      }
     }
   },
   created: function created() {
@@ -14620,57 +14640,89 @@ exports.default = _default;
         "div",
         {
           key: article.id,
-          staticClass: "article-card flex-column w-1/4 m-8 rounded shadow-2xl",
+          staticClass:
+            "article-card flex-column sm:w-4/5 md:w-2/5 m-8 rounded shadow-2xl",
           staticStyle: { "min-height": "250px" }
         },
         [
           _vm._m(0, true),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body flex-column p-2" }, [
-            _c("h2", [_vm._v(_vm._s(article.title))]),
+          _c("div", { staticClass: "card-body flex flex-wrap p-2" }, [
+            _c(
+              "h2",
+              {
+                staticClass:
+                  "hover:text-blue-800 cursor-pointer w-full font-bold",
+                on: {
+                  click: function($event) {
+                    return _vm.showArticle(article.id)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(article.title))]
+            ),
             _vm._v(" "),
             _c("small", [_vm._v(_vm._s(article.author.name))]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(article.content))]),
-            _vm._v(" "),
-            _c("div", [
-              _c(
-                "span",
-                {
-                  staticStyle: {
-                    "text-decoration": "underline",
-                    cursor: "pointer"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.showArticle(article.id)
-                    }
-                  }
-                },
-                [_vm._v("See more")]
-              )
+            _c("small", { staticClass: "w-full" }, [
+              _vm._v(_vm._s(article.createdAt))
             ]),
+            _vm._v(" "),
+            _c("hr"),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "display flex" },
-              _vm._l(article.tags, function(tag, index) {
-                return _c(
-                  "div",
-                  {
-                    key: index,
-                    staticClass:
-                      " rounded p-1 m-1 bg-blue-200 text-gray-800 hover:bg-blue-300 cursor-pointer",
-                    on: {
-                      click: function($event) {
-                        return _vm.getArticles(tag)
+              {
+                staticClass: "flex p-1 flex-wrap items-end",
+                staticStyle: { height: "180px" }
+              },
+              [
+                _c("div", {
+                  staticClass: "my-2 w-full",
+                  staticStyle: { height: "50%" },
+                  domProps: { innerHTML: _vm._s(_vm.summary(article.content)) }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c(
+                    "span",
+                    {
+                      staticStyle: {
+                        "text-decoration": "underline",
+                        cursor: "pointer"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.showArticle(article.id)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v(_vm._s(tag))]
+                    },
+                    [_vm._v("See more")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "display flex w-full" },
+                  _vm._l(article.tags, function(tag, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass:
+                          " rounded p-1 m-1 bg-blue-200 text-gray-800 hover:bg-blue-300 cursor-pointer",
+                        on: {
+                          click: function($event) {
+                            return _vm.getArticles(tag)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(tag))]
+                    )
+                  }),
+                  0
                 )
-              }),
-              0
+              ]
             )
           ])
         ]
@@ -28609,8 +28661,27 @@ exports.default = void 0;
 
 var _vueQuillEditor = _interopRequireDefault(require("vue-quill-editor"));
 
+var _axios = _interopRequireDefault(require("../config/axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28623,8 +28694,67 @@ var _default = {
   name: 'EditArticle',
   data: function data() {
     return {
-      content: ''
+      article: {
+        content: '',
+        title: '',
+        tags: [],
+        tag: ''
+      }
     };
+  },
+  methods: {
+    addTag: function addTag() {
+      if (!this.article.tags.includes(this.article.tag)) {
+        this.article.tags.push(this.article.tag);
+      }
+
+      this.article.tag = '';
+    },
+    deleteTag: function deleteTag(tag) {
+      var result = this.tags.filter(function (el) {
+        return el !== tag;
+      });
+      this.tags = result;
+    },
+    updateArticle: function updateArticle() {
+      var _this$article = this.article,
+          content = _this$article.content,
+          title = _this$article.title,
+          tags = _this$article.tags;
+      (0, _axios.default)({
+        method: 'PATCH',
+        url: "/articles/".concat(this.$route.params.id),
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          content: content,
+          title: title,
+          tags: tags
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log('success');
+        console.log(data);
+      }).catch(function (_ref2) {
+        var response = _ref2.response;
+        console.log(response.data);
+      });
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    (0, _axios.default)({
+      method: 'GET',
+      url: "/articles/".concat(this.$route.params.id),
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    }).then(function (_ref3) {
+      var data = _ref3.data;
+      _this.article = data;
+    });
   }
 };
 exports.default = _default;
@@ -28643,24 +28773,142 @@ exports.default = _default;
   return _c(
     "div",
     {
-      staticClass: "main-content flex flex-wrap justify-center",
-      staticStyle: { overflow: "auto", height: "90vh" }
+      staticClass: "main-content flex-column items-center",
+      staticStyle: { height: "90vh" }
     },
     [
-      _c("h1", [_vm._v("ini edit article")]),
-      _vm._v(" "),
-      _c("quill-editor", {
-        ref: "myQuillEditor",
-        model: {
-          value: _vm.content,
-          callback: function($$v) {
-            _vm.content = $$v
+      _c("div", { staticClass: "m-4" }, [
+        _c(
+          "div",
+          {
+            staticClass: " mx-4 my-2 mt-4 h-10",
+            staticStyle: { border: "none", "border-bottom": "1-x solid gray" }
           },
-          expression: "content"
-        }
-      })
-    ],
-    1
+          [
+            _c("h1", { staticClass: "text-center" }, [
+              _vm._v(_vm._s(_vm.article.title))
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          { staticClass: "flex-column items-center" },
+          [
+            _c("div", { staticClass: "flex justify-center my-4" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.article.title,
+                    expression: "article.title"
+                  }
+                ],
+                staticClass: "p-2",
+                staticStyle: {
+                  border: "none",
+                  "border-bottom": "1px gray solid"
+                },
+                attrs: { type: "text", placeholder: "title" },
+                domProps: { value: _vm.article.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.article, "title", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("quill-editor", {
+              ref: "myQuillEditor",
+              model: {
+                value: _vm.article.content,
+                callback: function($$v) {
+                  _vm.$set(_vm.article, "content", $$v)
+                },
+                expression: "article.content"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.addTag($event)
+              }
+            }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.article.tag,
+                  expression: "article.tag"
+                }
+              ],
+              staticClass: "p-2 border border-gray-700 my-4",
+              attrs: { type: "text", placeholder: "tag" },
+              domProps: { value: _vm.article.tag },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.article, "tag", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "p-2 rounded mx-2",
+              attrs: { type: "submit", value: "add" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "flex flex-wrap" },
+          _vm._l(_vm.article.tags, function(tag, index) {
+            return _c("div", { key: index }, [
+              _c("span", { staticClass: "p-1 bg-blue-200 mx-1" }, [
+                _vm._v(_vm._s(tag) + " "),
+                _c("i", {
+                  staticClass: "fas fa-times",
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteTag(tag)
+                    }
+                  }
+                })
+              ])
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "p-2 my-4 bg-blue-500 hover:bg-blue-600 text-white",
+            attrs: { type: "button" },
+            on: { click: _vm.updateArticle }
+          },
+          [_vm._v("Save")]
+        )
+      ])
+    ]
   )
 }
 var staticRenderFns = []
@@ -28696,7 +28944,7 @@ render._withStripped = true
       
       }
     })();
-},{"vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/ShowArticle.vue":[function(require,module,exports) {
+},{"vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","../config/axios":"src/config/axios.js","_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/ShowArticle.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28742,6 +28990,11 @@ var _default = {
     };
   },
   methods: {
+    searchTag: function searchTag(tag) {
+      this.$emit('searchTag', {
+        keyword: tag
+      });
+    },
     editArticle: function editArticle() {
       var id = this.$route.params.id;
       this.$router.push("/edit/".concat(id));
@@ -28783,13 +29036,13 @@ exports.default = _default;
       staticStyle: { height: "90vh" }
     },
     [
-      _c("div", { staticClass: " mx-4 my-2 mt-4" }, [
+      _c("div", { staticClass: " mx-16 my-2 mt-4" }, [
         _c("h1", { staticClass: "text-center" }, [
           _vm._v(_vm._s(_vm.article.title))
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: " mx-4 my-2 flex justify-end items-center" }, [
+      _c("div", { staticClass: " mx-16 my-2 flex justify-end items-center" }, [
         _c(
           "div",
           {
@@ -28811,7 +29064,7 @@ exports.default = _default;
         "div",
         {
           staticClass:
-            "show-article-content flex-column m-4 border border-gray-700 p-2"
+            "show-article-content flex-column mx-16 my-4 border border-gray-700 p-2"
         },
         [
           _c("div", { staticClass: "show-article-info" }, [
@@ -28822,7 +29075,19 @@ exports.default = _default;
               [
                 _vm._v("tags: "),
                 _vm._l(_vm.article.tags, function(tag, index) {
-                  return _c("span", { key: index }, [_vm._v(_vm._s(tag) + " ")])
+                  return _c(
+                    "span",
+                    {
+                      key: index,
+                      staticClass: "underline mx-1 cursor-pointer",
+                      on: {
+                        click: function($event) {
+                          return _vm.searchTag(tag)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(tag) + " ")]
+                  )
                 })
               ],
               2
@@ -28852,7 +29117,8 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "h-40 border border-gray-700 flex justify-center mx-4 my-2"
+        staticClass:
+          "h-40 border border-gray-700 flex justify-center mx-16 my-2"
       },
       [
         _c("img", {
@@ -28902,6 +29168,32 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _vueQuillEditor = _interopRequireDefault(require("vue-quill-editor"));
+
+var _axios = _interopRequireDefault(require("../config/axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28909,7 +29201,58 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: 'NewArticle'
+  name: 'NewArticle',
+  data: function data() {
+    return {
+      article: {
+        content: '',
+        title: '',
+        tags: [],
+        tag: ''
+      }
+    };
+  },
+  methods: {
+    addTag: function addTag() {
+      if (!this.article.tags.includes(this.article.tag)) {
+        this.article.tags.push(this.article.tag);
+      }
+
+      this.article.tag = '';
+    },
+    deleteTag: function deleteTag(tag) {
+      var result = this.tags.filter(function (el) {
+        return el !== tag;
+      });
+      this.tags = result;
+    },
+    createArticle: function createArticle() {
+      var _this$article = this.article,
+          content = _this$article.content,
+          title = _this$article.title,
+          tags = _this$article.tags;
+      (0, _axios.default)({
+        method: 'POST',
+        url: "/articles",
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          content: content,
+          title: title,
+          tags: tags
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log('success');
+        console.log(data);
+      }).catch(function (_ref2) {
+        var response = _ref2.response;
+        console.log(response.data);
+      });
+    }
+  },
+  created: function created() {}
 };
 exports.default = _default;
         var $4c75ff = exports.default || module.exports;
@@ -28924,23 +29267,148 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "main-content flex-column items-center",
+      staticStyle: { height: "90vh" }
+    },
+    [
+      _c("div", { staticClass: "m-4" }, [
+        _c(
+          "div",
+          {
+            staticClass: " mx-4 my-2 mt-4 h-10",
+            staticStyle: { border: "none", "border-bottom": "1-x solid gray" }
+          },
+          [
+            _c("h1", { staticClass: "text-center" }, [
+              _vm._v(_vm._s(_vm.article.title))
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          { staticClass: "flex-column items-center" },
+          [
+            _c("div", { staticClass: "flex justify-center my-4" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.article.title,
+                    expression: "article.title"
+                  }
+                ],
+                staticClass: "p-2",
+                staticStyle: {
+                  border: "none",
+                  "border-bottom": "1px gray solid"
+                },
+                attrs: { type: "text", placeholder: "title" },
+                domProps: { value: _vm.article.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.article, "title", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("quill-editor", {
+              ref: "myQuillEditor",
+              model: {
+                value: _vm.article.content,
+                callback: function($$v) {
+                  _vm.$set(_vm.article, "content", $$v)
+                },
+                expression: "article.content"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.addTag($event)
+              }
+            }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.article.tag,
+                  expression: "article.tag"
+                }
+              ],
+              staticClass: "p-2 border border-gray-700 my-4",
+              attrs: { type: "text", placeholder: "tag" },
+              domProps: { value: _vm.article.tag },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.article, "tag", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "p-2 rounded mx-2",
+              attrs: { type: "submit", value: "add" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "flex flex-wrap" },
+          _vm._l(_vm.article.tags, function(tag, index) {
+            return _c("div", { key: index }, [
+              _c("span", { staticClass: "p-1 bg-blue-200 mx-1" }, [
+                _vm._v(_vm._s(tag) + " "),
+                _c("i", {
+                  staticClass: "fas fa-times",
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteTag(tag)
+                    }
+                  }
+                })
+              ])
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "p-2 my-4 bg-blue-500 hover:bg-blue-600 text-white",
+            attrs: { type: "button" },
+            on: { click: _vm.createArticle }
+          },
+          [_vm._v("Save")]
+        )
+      ])
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "main-content flex flex-wrap justify-center",
-        staticStyle: { overflow: "auto", height: "90vh" }
-      },
-      [_c("h1", [_vm._v("ini new article")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -28973,7 +29441,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/Drafts.vue":[function(require,module,exports) {
+},{"vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","../config/axios":"src/config/axios.js","_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/Drafts.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29131,6 +29599,8 @@ var _App = _interopRequireDefault(require("./App.vue"));
 
 require("../tailwind.css");
 
+require("../style.css");
+
 var _router = _interopRequireDefault(require("./router"));
 
 var _vueQuillEditor = _interopRequireDefault(require("vue-quill-editor"));
@@ -29151,7 +29621,7 @@ new _vue.default({
     return h(_App.default);
   }
 }).$mount('#app');
-},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue","../tailwind.css":"tailwind.css","./router":"src/router.js","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css"}],"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue","../tailwind.css":"tailwind.css","../style.css":"style.css","./router":"src/router.js","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css"}],"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29179,7 +29649,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44745" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39203" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

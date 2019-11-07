@@ -4,41 +4,75 @@
       "id": 1,
       "title": "Blabla",
       "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
-      "tags": ["apa", "ya", "coba"],
+      "tags": [
+        "apa",
+        "ya",
+        "coba"
+      ],
       "type": "public",
       "read": 0,
-      "author": {"name": "John Doe"},
+      "author": {
+        "name": "John Doe"
+      },
       "createdAt": "30/10/2019"
     },
     {
       "id": 2,
-      "title": "Title titlean",
-      "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
-      "tags": ["daf"],
+      "title": "Title titlean Jos",
+      "content": "<p><strong>lablabadalfalf</strong></p><p><br></p><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!</p>",
+      "tags": [
+        "daf",
+        "balbal",
+        "tambah"
+      ],
       "type": "draft",
       "read": 0,
-      "author": {"name": "John Doe"},
+      "author": {
+        "name": "John Doe"
+      },
       "createdAt": "30/10/2019"
     },
     {
       "id": 4,
       "title": "Ini title nomor 4",
       "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
-      "tags": ["apa", "ya", "coba"],
+      "tags": [
+        "apa",
+        "ya",
+        "coba"
+      ],
       "type": "public",
       "read": 0,
-      "author": {"name": "John Doe"},
+      "author": {
+        "name": "John Doe"
+      },
       "createdAt": "30/10/2019"
     },
     {
       "id": 3,
       "title": "Ini title nomor 55555",
       "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
-      "tags": ["daf"],
+      "tags": [
+        "daf"
+      ],
       "type": "draft",
       "read": 0,
-      "author": {"name": "John Doe"},
+      "author": {
+        "name": "John Doe"
+      },
       "createdAt": "30/10/2019"
+    },
+    {
+      "content": "<p><strong>ini lah yang terbaru</strong></p>",
+      "title": "Nyoba bikin lagi",
+      "tags": [
+        "coba coba",
+        "coba"
+      ],
+      "author": {
+        "name": "John Doe"
+      },
+      "id": 5
     }
   ]
 }

@@ -1,5 +1,5 @@
 <template>
-  <aside id="sidebar" class="py-4 w-1/6 bg-gray-800 flex justify-center" style="height: 100vh;">
+  <aside id="sidebar" class="py-4 w-1/6 bg-gray-800 flex justify-center shadow-2xl" style="height: 100vh;">
       <div id="sidebar-container" class="flex-column w-full">
         <div class="w-full p-2 my-4 text-white text-center">LOGO</div>
           <div class="sidebar-menu p-2 bg-gray-800 hover:bg-gray-700 cursor-pointer text-center text-white font-bold" @click="myArticles">Home</div>

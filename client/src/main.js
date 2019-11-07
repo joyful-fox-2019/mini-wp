@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import '../tailwind.css'
+import '../style.css'
 import router from './router'
 import VueQuillEditor from 'vue-quill-editor'
 

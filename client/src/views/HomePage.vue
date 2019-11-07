@@ -3,7 +3,7 @@
     <Sidebar @myArticles="myArticles" @newArticle="newArticle" @myDrafts="myDrafts"></Sidebar>
     <div class="page flex-column w-full">
       <Navbar @logout="logout" @search="search"></Navbar>
-      <router-view :keyword="keyword"></router-view>
+      <router-view :keyword="keyword" @searchTag="search"></router-view>
     </div>
   </section>
 </template>
@@ -41,7 +41,12 @@ export default {
     logout () {
       this.$emit('logout')
     }
-  }
+  },
+  watch: {
+    keyword () {
+      this.myArticles()
+    }
+  },
 }
 </script>
 
