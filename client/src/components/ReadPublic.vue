@@ -1,90 +1,59 @@
 <template>
     <div class="public">
-        <!-- -- -->
-        <div class="preloader loading" v-if="isLoading">
-            <span class="slice"></span>
-            <span class="slice"></span>
-            <span class="slice"></span>
-            <span class="slice"></span>
-            <span class="slice"></span>
-            <span class="slice"></span>
-        </div>
-        <!-- -- -->
-        <div class="blog-card" v-for="(article) in publicArticle" :key="article._id">
-            <div class="meta">
-                <div class="photo"> <img :src="article.featured_image" alt="" style="height:100%;"></div>
-                <ul class="details">
-                    <li class="author">
-                        <i class="fas fa-user"></i> <a href="#"> {{article.author.name}}</a>
-                    </li>
-                    <li class="date"><i class="fas fa-clock"></i> {{article.createdAt}}</li>
-                    <li class="tags">
-                        <ul>
-                            <li><i class="fas fa-tags"></i></li>
-                            <li>
-                                <a href="#">Learn</a>
-                            </li>
-                            <li>
-                                <a href="#">Code</a>
-                            </li>
-                            <li>
-                                <a href="#">HTML</a>
-                            </li>
-                            <li>
-                                <a href="#">CSS</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="description">
-                <h1>{{article.title}}</h1>
-                <hr>
-                <p>{{article.content}}</p>
-                <p class="read-more">
-                    <a href="#">Read More</a>
-                </p>
-            </div>
-        </div>
-        <!-- card 2 -->
-        <!-- <div class="blog-card alt">
-            <div class="meta">
-                <div
-                    class="photo"
-                    style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)"></div>
-                <ul class="details">
-                    <li class="author">
-                        <i class="fas fa-user"></i> <a href="#">Jane Doe</a>
-                    </li>
-                    <li class="date"><i class="fas fa-clock"></i> July. 15, 2015</li>
-                    <li class="tags">
-                        <ul>
-                            <li><i class="fas fa-tags"></i></li>
-                            <li>
-                                <a href="#">Learn</a>
-                            </li>
-                            <li>
-                                <a href="#">Code</a>
-                            </li>
-                            <li>
-                                <a href="#">JavaScript</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="description">
-                <h1>Mastering the Language</h1>
-                <h2>Java is not the same as JavaScript</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum
-                    architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam
-                    facilis numquam. Veritatis, sit.</p>
-                <p class="read-more">
-                    <a href="#">Read More</a>
-                </p>
-            </div>
-        </div> -->
+    <div class="preloader loading" v-if="isLoading">
+        <span class="slice"></span>
+        <span class="slice"></span>
+        <span class="slice"></span>
+        <span class="slice"></span>
+        <span class="slice"></span>
+        <span class="slice"></span>
     </div>
+    <div v-for="(article,index) in publicArticle" :key="article._id">
+        <div :class="{ 'blog-card alt': (index % 2 === 0), 'blog-card': (index % 2 !== 0) }">
+            <div class="meta">
+                <div class="photo">
+                    <img :src="article.featured_image" alt="" style="height:100%;"></div>
+                    <ul class="details">
+                        <li class="author">
+                            <i class="fas fa-user"></i>
+                            <a href="#">
+                                {{article.author.name}}</a>
+                        </li>
+                        <li class="date">
+                            <i class="fas fa-clock"></i>
+                            {{article.createdAt}}</li>
+                        <li class="tags">
+                            <ul>
+                                <li>
+                                    <i class="fas fa-tags"></i>
+                                </li>
+                                <li>
+                                    <a href="#">Learn</a>
+                                </li>
+                                <li>
+                                    <a href="#">Code</a>
+                                </li>
+                                <li>
+                                    <a href="#">HTML</a>
+                                </li>
+                                <li>
+                                    <a href="#">CSS</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <h1>{{article.title}}</h1>
+                    <hr>
+                        <p style="width:400px; height : 150px; white-space: wrap; overflow: hidden; text-overflow: ellipsis;" v-html="article.content"></p>
+                        <p class="read-more">
+                            <a href="" @click.prevent="fetchPublicDetail(article._id)">Read More</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 </template>
 
 <script>
@@ -113,9 +82,29 @@ export default {
                     this.isLoading = false
                 })
                 .catch(err=>{
-                    console.log(err);
                     Swal.fire('error','internal server error','error')
                 })
+        },
+        toDetail() {
+            this.$emit('changePage',false,false,true)
+        },
+        fetchPublicDetail(id) {
+            axios({
+              method: 'get',
+              url: `/articles/public/${id}`,
+              headers: {
+                token : localStorage.getItem('token')
+              }
+            })
+              .then(({data})=>{
+                this.$emit('addPublicData',data.data[0])
+                this.$emit('changePage',false,false,true)
+                  // console.log(data.data[0],'ininininin');
+                  // Swal.fire('success','detaillll','success')
+              })
+              .catch(err=>{
+                  Swal.fire('error','internal server error','error')
+              })
         }
     },
     created () {

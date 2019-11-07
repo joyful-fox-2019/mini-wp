@@ -9,6 +9,15 @@ class ArticleController {
         })
         .catch(next)
     }
+    static readPublicDetail(req,res,next) {
+        let { id } = req.params
+        Article.find({_id:id})
+        .populate('author')
+        .then(data=>{
+            res.status(200).json(({data}))
+        })
+        .catch(next)
+    }
     static readPrivate(req,res,next) {
         Article.find({author:req.loggedUser._id})
         .populate('author')

@@ -7,6 +7,7 @@ const {authentication, authorization} = require('../middlewares/auth')
 router.use(authentication)
 router.get('/',ArticleController.readPrivate)
 router.get('/public',ArticleController.readPublic)
+router.get('/public/:id',ArticleController.readPublicDetail)
 // router.post('/',ArticleController.create)
 router.post('/',images.multer.single('image'),images.sendUploadToGCS,ArticleController.create)
 

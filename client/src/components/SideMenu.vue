@@ -48,20 +48,23 @@
 
 <script>
 import Swal from 'sweetalert2'
+
 export default {
-    name : 'SideMenu',
-    props: [
-        'user'
-    ],
-    data() {
+    name : 'SideMenu'
+    ,data() {
         return {
-            isActive: true
+            isActive: true,
+            user : {
+                email : localStorage.getItem('email'),
+                name : localStorage.getItem('name')
+            }
         }
     },
     methods : {
-        logout() {        
-            // var auth2 = gapi.auth2.getAuthInstance();
-            // auth2.signOut().then(()=> {
+        logout() {
+            // console.log(gapi.auth2)
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(() => {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -75,7 +78,7 @@ export default {
                     icon: 'success',
                     title: 'See you again'
                 })
-            // }); 
+            }); 
         }
     }
 }

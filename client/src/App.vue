@@ -18,7 +18,9 @@
                                 kotak buat konten
                             </div> -->
                             <Home v-if="isHome"></Home>
-                            <ReadPublic v-if="isPublic"></ReadPublic>
+                            <ReadPublic v-if="isPublic" @changePage="changePage" @addPublicData="addPublicData"></ReadPublic>
+                            <PublicDetail v-if="isPublicDetail" @changePage="changePage" :publicDetailData="publicDetailData"></PublicDetail>
+                            <WriteArticle v-if="isWrite"  @changePage="changePage"></WriteArticle>
                         </div>
                     </div>
                 </div>
@@ -33,24 +35,32 @@ import SideMenu from './components/SideMenu'
 import Home from './components/Home'
 import Login from './components/Login'
 import ReadPublic from './components/ReadPublic'
+import PublicDetail from './components/PublicDetail'
+import WriteArticle from './components/WriteArticle'
 
 export default {
     name: 'App',
     components : {
-        Navbar,SideMenu,Home,Login,ReadPublic
+        Navbar,SideMenu,Home,Login,ReadPublic,PublicDetail,WriteArticle
     },
     data() {
         return {
             isLogin : false,
             isHome : true,
             isPublic : false,
+            isPublicDetail : false,
+            isWrite : false,
             user : {
                 name : '',
                 email : ''
-            }
+            },
+            publicDetailData : ''
         } 
     },
     methods : {
+        addPublicData(data){
+            this.publicDetailData = data
+        },
         changeLogin(status) {
             this.isLogin = status
         },
@@ -58,9 +68,11 @@ export default {
             this.user.name = name
             this.user.email = email
         },
-        changePage(homePage,publicPage) {
+        changePage(homePage,publicPage,publicDetail,write) {
             this.isHome = homePage
             this.isPublic = publicPage
+            this.isPublicDetail = publicDetail
+            this.isWrite = write
         }
     },
     created () {

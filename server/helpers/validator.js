@@ -11,9 +11,9 @@ let passwordValidation = [
     validate({
         validator: 'matches',
         arguments: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/,
-        message: 'password shold contain at least one digit, one lower case , one upper case , minumum 6 char'
+        message: 'password shold contain at least one digit, one lower case , one upper case , minumum 5 char'
     })
 ]
 
 
-module.exports = { isEmailValidation,passwordValidation, }
+module.exports = { isEmailValidation,passwordValidation }

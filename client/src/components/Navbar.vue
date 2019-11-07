@@ -2,7 +2,7 @@
   <div>
       <b-navbar class="is-black">
         <template slot="brand">
-            <b-navbar-item tag="router-link" :to="{ path: '/' }" class="navbar-main">
+            <b-navbar-item class="navbar-main">
                 <img src="../../assets/logo.png" alt="">
                 <a href="" style="color:white;" @click.prevent="toHome()">Mini Wordpress</a>
             </b-navbar-item>
@@ -17,7 +17,7 @@
             <b-navbar-item tag="div">
                 <div class="buttons">
                     <!-- before login -->
-                    <b-button type="is-light" outlined>
+                    <b-button @click.prevent="toWrite()" type="is-light" outlined>
                         <i class="far fa-file"></i>
                         Write
                     </b-button>
@@ -33,10 +33,13 @@ export default {
     name: 'Navbar',
     methods : {
         toRead() {
-            this.$emit('changePage',false,true)
+            this.$emit('changePage',false,true,false,false)
         },
         toHome() {
-            this.$emit('changePage',true,false)
+            this.$emit('changePage',true,false,false,false)
+        },
+        toWrite() {
+            this.$emit('changePage',false,false,false,true)
         }
     }
 }

@@ -13,7 +13,14 @@
                     </div>
                     <button type="submit" class="btn-login">LOGIN</button>
                     <div style="display:flex; justify-content:center; padding-top:10px;">
-                        <div id="google-signin-button"></div>
+                        <!-- <div id="google-signin-button"></div> -->
+                        <!-- <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin> -->
+                        <g-signin-button
+                            :params="googleSignInParams"
+                            @success="onSignInSuccess"
+                            @error="onSignInError">
+                            <i class="fab fa-google"></i>
+                        </g-signin-button>
                     </div>
                 </form>
 
@@ -44,6 +51,7 @@
 <script>
 import axios from '../apis/server'
 import Swal from 'sweetalert2'
+// import GoogleLogin from 'vue-google-login';
 
 export default {
     name : 'Login',
@@ -58,7 +66,10 @@ export default {
             nameReg : '',
             passwordReg : '',
             isError : false,
-            errMsg : ''
+            errMsg : '',
+             googleSignInParams: {
+        client_id: '472366340893-1d0sajo3etaeietgu9c3f7t28iq6a4cb.apps.googleusercontent.com'
+      }
         }
     },
     methods : {
@@ -74,6 +85,8 @@ export default {
                 .then(({data})=>{
                     this.emailLogin = ''
                     this.passwordLogin = ''
+                    localStorage.setItem('name',data.name)
+                    localStorage.setItem('email',data.email)
                     this.$emit('userData',data.name,data.email)
                     this.$emit('changeLogin',true)
                     localStorage.setItem('token',data.token)
@@ -129,7 +142,7 @@ export default {
                     this.errMsg = err.response.data.message.join('\n')
                 })
         },
-        onSignIn(googleUser) {
+        onSignInSuccess(googleUser) {
             const profile = googleUser.getBasicProfile();
             // console.log('Name: ' + profile.getName());
             // console.log('Image URL: ' + profile.getImageUrl());
@@ -156,23 +169,30 @@ export default {
                         icon: 'success',
                         title: 'Signed in successfully'
                     })
+                    console.log(data,'................');
+                    
                     localStorage.setItem('token',data.token)
                     localStorage.setItem('name',data.name)
+                    localStorage.setItem('email',data.email)
                     localStorage.setItem('_id',data._id)
                 })
                 .catch(err=>{
                     Swal.fire('error','error','error')
                 })
+        },
+        onSignInError() {
+            Swal.fire('error','internal server eroror','error')
         }
 
-    },
-    mounted() {
+    }
+    // ,
+    // mounted() {
         // $(document).ready(function () {
-            gapi.signin2.render('google-signin-button', {
-              onsuccess: this.onSignIn
-            })
+            // gapi.signin2.render('google-signin-button', {
+            //   onsuccess: this.onSignIn
+            // })
         // })
-  }
+//   }
 }
 
 
@@ -180,6 +200,17 @@ export default {
 </script>
 
 <style scoped>
+
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #000;
+  color: #fff;
+  box-shadow: 3px 3px 0 #fff;
+  cursor: -webkit-grabbing; cursor: grabbing;
+}
  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #fff;
   opacity: .7; /* Firefox */
