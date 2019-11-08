@@ -17,5 +17,6 @@ mongoose
 	.catch(err => console.log('mongodb connection failed', err));
 
 app.use('/', require('./routes'));
+app.use(require('./middlewares/errorHandler'));
 
 app.listen(PORT, () => console.log('app listening to port', PORT));

@@ -38,7 +38,7 @@ const userSchema = new Schema({
 	password: {
 		type: String,
 		required: [
-			() => {
+			function() {
 				return this.username;
 			},
 			'Password required'
