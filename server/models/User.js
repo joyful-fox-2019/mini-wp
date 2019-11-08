@@ -1,4 +1,5 @@
 import { Schema, model, models } from 'mongoose';
+const { hash } = require('../helpers/passwordHandler');
 
 const userSchema = new Schema({
 	username: {
@@ -51,7 +52,7 @@ const userSchema = new Schema({
 
 userSchema.post('validate', function(user, next) {
 	if (user.password) {
-		user.password = passwordHandler.hash(user.password);
+		user.password = hash(user.password);
 	}
 	next();
 });
