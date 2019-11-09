@@ -23,6 +23,6 @@ userSchema.pre('save', function(next) {
 
 userSchema.plugin(uniqueValidator)
 
-const user = model(`User`, userSchema)
+const User = model(`User`, userSchema)
 
-module.exports = userSchema
+module.exports = User
