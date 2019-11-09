@@ -81,5 +81,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#mainPage {
+  position: absolute;
+  right: 0.5rem;
+  top: 3.5rem;
+  width: calc(100vw - 18rem);
+  overflow-x: hidden;
+}
 </style>
