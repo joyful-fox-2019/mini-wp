@@ -29,10 +29,14 @@ export default {
       // `googleUser` is the GoogleUser object that represents the just-signed-in user.
       // See https://developers.google.com/identity/sign-in/web/reference#users
       const profile = googleUser.getBasicProfile() // etc etc
+      const firstName = profile.ofa
+      const lastName = profile.wea
       var id_token = googleUser.getAuthResponse().id_token;
       console.log(id_token)
       axios.post('users/g-signin', {
-        id_token
+        id_token,
+        firstName,
+        lastName
       })
         .then(({data}) => {
           console.log(data)

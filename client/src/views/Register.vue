@@ -7,6 +7,12 @@
         </div>
         <form @submit.prevent="register">
           <b-field>
+            <b-input v-model="firstName" placeholder="First Name">
+          </b-field>
+          <b-field>
+            <b-input v-model="lastName" placeholder="Last Name">
+          </b-field>
+          <b-field>
             <b-input v-model="email" placeholder="Email">
           </b-field>
           <b-field>
@@ -43,6 +49,8 @@ export default {
   },
   data () {
     return {
+      firstName: '',
+      lastName: '',
       email: '',
       password: ''
     }
@@ -51,6 +59,8 @@ export default {
     register() {
       console.log('gas')
       axios.post('/users/register', {
+        firstName: this.firstName,
+        lastName: this.lastName,
         email: this.email,
         password: this.password
       })

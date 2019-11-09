@@ -4,8 +4,9 @@ const { comparePassword } = require('../helpers/bcryptjs')
 
 module.exports = {
   register: (req, res, next) => {
-    const { email, password } = req.body
-    User.create({ email, password} )
+    console.log(req.body)
+    const { firstName, lastName, email, password } = req.body
+    User.create({ firstName, lastName, email, password} )
       .then(user => {
         const { _id } = user
         const access_token = generateToken({ _id, email })
@@ -28,6 +29,7 @@ module.exports = {
       .catch(next)
   },
   googleSignIn: (req, res, next) => {
+    const { firstName, lastName } = req.body
     User.findOne({
       email: req.googleEmail
     })
@@ -35,6 +37,8 @@ module.exports = {
       if(!user) {
         return User.create({
           email: req.googleEmail,
+          firstName,
+          lastName,
           isGoogle: true
         })
       } else {

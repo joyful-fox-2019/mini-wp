@@ -6,9 +6,13 @@ const articleSchema = new Schema({
     type: String,
     required: [true, 'Title cannot be empty']
   },
+  subtitle: {
+    type: String,
+    required: [true, 'Subtitle cannot be empty']
+  },
   description: {
     type: String,
-    required: [true, 'Description cannot be empty']
+    required: [true, 'Please write something for the article']
   },
   tags: [{
     type: String,
@@ -17,7 +21,10 @@ const articleSchema = new Schema({
   image: {
     type: String
   },
-  user: Schema.Types.ObjectId
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 },
 {
   versionKey: false,

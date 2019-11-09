@@ -3,6 +3,14 @@ const { Schema } = mongoose
 const { hashPassword } = require('../helpers/bcryptjs')
 
 const userSchema = new Schema({
+  firstName: {
+    type: String,
+    require: [true, 'First name cannot be empty']
+  },
+  lastName: {
+    type: String,
+    require: [true, 'Last name cannot be empty']
+  },
   email: {
     type: String,
     required: [true, 'Email cannot be empty'],

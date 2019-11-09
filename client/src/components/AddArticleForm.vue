@@ -4,6 +4,9 @@
       <b-field>
         <b-input v-model="title" placeholder="Title"></b-input>
       </b-field>
+      <b-field>
+        <b-input v-model="subtitle" placeholder="Subtitle"></b-input>
+      </b-field>
       <b-field class="file">
           <b-upload v-model="file">
               <a class="button bg-surface t-standard">
@@ -54,6 +57,7 @@ export default {
   data() {
     return {
       title: '',
+      subtitle: '',
       file: null,
       description: '',
       tags: [],
@@ -72,6 +76,7 @@ export default {
     addArticle() {
       let body = new FormData()
       body.append('title', this.title)
+      body.append('subtitle', this.subtitle)
       body.append('file', this.file)
       body.append('description', this.description)
       body.append('tags', this.tags)

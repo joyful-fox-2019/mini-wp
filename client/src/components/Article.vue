@@ -1,0 +1,65 @@
+<template>
+  <div class="columns">
+    <div  class="column is-three-quarters">
+      <div class="rows">
+        <div class="row t-lighten">
+          <small><i>{{ topics }}</i></small>
+        </div>
+        <div class="row">
+          <strong class="title t-standard">{{ article.title }}</strong>
+        </div>
+        <div class="row t-lighten">
+          <small>
+            {{ article.subtitle }}
+          </small>
+        </div>
+        <br>
+        <div class="row">
+          <small>
+            {{ fullName }}
+          </small>
+        </div>
+        <div class="row t-lighten">
+          <small>
+            {{ publishedDate }}
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <figure class="image is-square">
+        <img :src="article.image">
+      </figure>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Article',
+  props: {
+    article: Object
+  },
+  computed: {
+    publishedDate () {
+      const date = new Date(this.article.createdAt);  // 2009-11-10
+      const month = date.toLocaleString('default', { month: 'long' });
+      return `${month.substring(0, 3)}, ${date.getDate()}`
+    },
+    fullName () {
+      return `${this.article.user.firstName} ${this.article.user.lastName}`
+    },
+    topics () {
+      let result = ''
+      this.article.tags.forEach(tag => {
+        result += tag + ' '
+      })
+      return result.toUpperCase()
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
