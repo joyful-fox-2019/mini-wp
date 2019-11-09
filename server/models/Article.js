@@ -14,7 +14,7 @@ const articleSchema = new Schema({
 	},
 	status: {
 		type: String,
-		enum: ['draft, posted, deleted'],
+		enum: ['draft', 'posted', 'deleted'],
 		default: 'draft'
 	},
 	created_at: {

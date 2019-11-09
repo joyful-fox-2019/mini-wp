@@ -2,14 +2,18 @@
   <div>
     <SigningPage @signed-in="signedIn = true" v-if="!signedIn"></SigningPage>
     <main v-else>
-      <DashboardPage></DashboardPage>
+      <Navbar :page="page" @switch-page="switchPage" @signed-out="signedIn = false"></Navbar>
+      <DashboardPage v-if="page === 'dashboard'"></DashboardPage>
+      <WritePage v-if="page === 'write'"></WritePage>
     </main>
   </div>
 </template>
 
 <script>
-import SigningPage from "./pages/SigningPage";
-import DashboardPage from "./pages/DashboardPage";
+import SigningPage from "./components/SigningPage";
+import Navbar from "./components/Navbar";
+import DashboardPage from "./components/DashboardPage";
+import WritePage from "./components/WritePage";
 
 import axios from "axios";
 const http = axios.create({
@@ -19,19 +23,27 @@ const http = axios.create({
 export default {
   components: {
     SigningPage,
-    DashboardPage
+    Navbar,
+    DashboardPage,
+    WritePage
   },
   data() {
     return {
-      signedIn: false
+      signedIn: false,
+      page: "dashboard"
     };
+  },
+  methods: {
+    switchPage(val) {
+      this.page = val;
+    }
   },
   created() {
     const access_token = localStorage.getItem("access_token");
     if (access_token) {
       http({
         method: "get",
-        url: "user/status",
+        url: "users/status",
         headers: {
           access_token
         }

@@ -22,7 +22,7 @@ nav {
 	background-color: #006088;
 }
 
-nav a {
+nav .nav-item {
 	color: #fff !important;
 }
 
@@ -55,7 +55,6 @@ nav.navbar {
 /* Sinin Section */
 
 /* Sidebar Section */
-
 
 /* mainPage Section */
 
