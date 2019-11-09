@@ -1,20 +1,20 @@
 function errorHandler(err, req, res, next) {
     console.log(err);
     let status = err.status || 500;
-    let messages = err.messages || `Internal Server Error`;
+    let message = err.message || `Internal Server Error`;
     switch (err.name) {
         case "JsonWebTokenError":
             status = 400;
             break;
         case "ValidationError":
             status = 400;
-            messages = [];
+            message = [];
             for (let key in err.errors) {
-                messages.push(err.errors[key].message);
+                message.push(err.errors[key].message);
             }
             break;
     }
-    res.status(status).json({ messages: messages });
+    res.status(status).json({ message: message });
 }
 
 module.exports = errorHandler;

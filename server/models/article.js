@@ -6,11 +6,24 @@ const articleSchema = new Schema({
     title: {
         type: String,
         required: [true, `Title is required.`],
-        minlength: [3, `Minimal title length is 3.`]
+        minlength: [3, `Minimum title length is 3.`]
     },
     content: {
         type: String,
         required: [true, `Content is required.`]
+    },
+    author: {
+        type: String,
+        required: [true, `Author is required.`]
+    },
+    featured_image: {
+        type: String,
+        default: null
+    },
+    tags: [String],
+    status: {
+        type: Boolean,
+        default: true
     },
     UserId: {
         type: Schema.Types.ObjectId,
