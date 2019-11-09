@@ -1,16 +1,16 @@
 <template>
   <div id="main">
     <!-- <AddArticle></AddArticle> -->
-    <Navbar :isLogin="isLogin" @logout="logout"></Navbar>
+    <Navbar :isLogin="isLogin" @logout="logout" @setDark="setDark"></Navbar>
     <Articles v-if="$router.history.current.path === '/'"></Articles>
-    <router-view @alert="alert" @login="login"></router-view>
+    <router-view @alert="alert" @login="login" :is-dark="isDark"></router-view>
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar'
-import Articles from './components/Articles'
-import AddArticle from './components/AddArticle'
+import Articles from './views/Articles'
+import AddArticle from './views/AddArticle'
 
 export default {
   name: 'App',
@@ -21,7 +21,8 @@ export default {
   },
   data() {
     return {
-      isLogin: false
+      isLogin: false,
+      isDark: false
     };
   },
   methods: {
@@ -50,26 +51,81 @@ export default {
       this.isLogin = true
     },
     logout() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
       localStorage.removeItem('_id')
       localStorage.removeItem('email')
       localStorage.removeItem('access_token')
       this.isLogin = false
       this.$router.push('/')
+    },
+    setDark(status) {
+      this.isDark = status
     }
   },
   created() {
     if(localStorage.getItem('access_token')) {
       this.isLogin = true
     }
+  },
+  watch: {
+    isDark() {
+      if(this.isDark) {
+        document.documentElement.style.setProperty('--background-color', '#121212');
+        document.documentElement.style.setProperty('--surface-color', '#1E1E1E');
+        document.documentElement.style.setProperty('--primary-color', '#C390FF');
+        document.documentElement.style.setProperty('--primary-color-gradient', 'linear-gradient(90deg, rgba(168,94,255,1) 0%, rgba(195,144,255,1) 35%, rgba(213,176,255,1) 100%)');
+        document.documentElement.style.setProperty('--text-color', '#E1E1E1');
+        document.documentElement.style.setProperty('--text-color-lighten', '#A5A5A5');
+        document.documentElement.style.setProperty('--text-color-primary', '#C390FF');
+      } else {
+        document.documentElement.style.setProperty('--background-color', '#FFFFFF');
+        document.documentElement.style.setProperty('--surface-color', '#F5F5F5');
+        document.documentElement.style.setProperty('--primary-color', '#FFDD56');
+        document.documentElement.style.setProperty('--primary-color-gradient', 'linear-gradient(90deg, rgba(255,204,4,1) 0%, rgba(255,221,86,1) 35%, rgba(255,231,134,1) 100%)');
+        document.documentElement.style.setProperty('--text-color', '#363636');
+        document.documentElement.style.setProperty('--text-color-lighten', '#B5B5B5');
+        document.documentElement.style.setProperty('--text-color-primary', '#D4B848');
+      }
+    }
   }
 };
 </script>
 
 <style>
+:root {
+  --background-color: #FFFFFF;
+  --surface-color: #F5F5F5;
+  --primary-color: #FFDD56;
+  --primary-color-gradient: linear-gradient(90deg, rgba(255,204,4,1) 0%, rgba(255,221,86,1) 35%, rgba(255,231,134,1) 100%);
+  --text-color: #363636;
+  --text-color-lighten: #B5B5B5;
+  --text-color-primary: #D4B848;
+}
+html, body {
+  background: var(--background-color) !important;
+  color: var(--text-color) !important;
+}
+.t-standard {
+  color: var(--text-color) !important;
+}
+.t-lighten {
+  color: var(--text-color-lighten) !important;
+}
+.t-primary {
+  color: var(--text-color-primary) !important;
+}
+.bg-standard {
+  background: var(--background-color) !important;
+}
+.bg-surface {
+  background: var(--surface-color) !important;
+}
+.bg-primary {
+  background: var(--primary-color) !important;
+}
+.bg-primary-gradient {
+  background: var(--primary-color) !important;
+  background: var(--primary-color-gradient) !important;
+}
 #main {
   font-family: 'Signika', sans-serif;
 }
@@ -81,14 +137,10 @@ export default {
     width: 90% !important;
   }
 }
-.text-dark-yellow {
-  color: rgb(255,190,0);
-}
-.yellow-gradient {
-  background: rgb(255,190,0);
-  background: linear-gradient(90deg, rgba(255,190,0,1) 0%, rgba(255,216,0,1) 35%, rgba(255,250,0,1) 100%);
-}
 button {
+  border: none !important;
+}
+a {
   border: none !important;
 }
 .float-right {

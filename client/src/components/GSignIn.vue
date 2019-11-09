@@ -36,6 +36,11 @@ export default {
       })
         .then(({data}) => {
           console.log(data)
+          localStorage.setItem('_id', data._id)
+          localStorage.setItem('email', data.email)
+          localStorage.setItem('access_token', data.access_token)
+          this.$router.push('/')
+          this.$emit('login')
         })
         .catch(err => {
           this.$emit('alert', err)
@@ -55,8 +60,8 @@ export default {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
-  background-color: #3c82f7;
-  color: #fff;
-  box-shadow: 0 3px 0 #0f69ff;
+  background-color: #2F2D41;
+  color: var(--primary-color);
+  box-shadow: 0 3px 0 #525360;
 }
 </style> 

@@ -2,11 +2,11 @@
   <div class="container">
     <form>
       <b-field>
-        <b-input placeholder="Title"></b-input>
+        <b-input v-model="title" placeholder="Title"></b-input>
       </b-field>
       <b-field class="file">
           <b-upload v-model="file">
-              <a class="button is-light">
+              <a class="button bg-surface t-standard">
                   <b-icon icon="upload"></b-icon>
                   <span>Upload Image</span>
               </a>
@@ -16,9 +16,9 @@
           </span>
       </b-field>
       <div>
-      <wysiwyg v-model="addDescription" />
+      <wysiwyg v-model="description" />
       </div>
-      <button class="button is-warning post-button" type="submit">
+      <button class="button bg-primary-gradient post-button" type="submit">
         <b-icon icon="plus-circle"></b-icon>
         <span>POST ARTICLE</span>
       </button>
@@ -30,8 +30,9 @@
 export default {
   data() {
     return {
+      title: '',
       file: null,
-      addDescription: ''
+      description: ''
     }
   }
 }

@@ -13,6 +13,9 @@ const articleSchema = new Schema({
   tags: [{
     type: String
   }],
+  image: {
+    type: String
+  },
   user: Schema.Types.ObjectId
 },
 {

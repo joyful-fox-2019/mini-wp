@@ -3,26 +3,30 @@
     <div class="columns is-centered">
       <div class="column is-half">
         <div class="centered-item">
-          <img src="../../assets/login.png" style="margin:">
+          <img src="../../assets/register.png">
         </div>
-        <form @submit.prevent="login">
+        <form @submit.prevent="register">
           <b-field>
             <b-input v-model="email" placeholder="Email">
           </b-field>
           <b-field>
-            <b-input v-model="password" placeholder="Password">
+            <b-input v-model="password" placeholder="Password" type="password">
           </b-field>
-          <span>Don't have an account?</span>
-          <router-link to="/register">
-          <span class="text-dark-yellow">
-            <b>Sign Up</b>
-          </span>
-          </router-link>
-          <button class="button yellow-gradient float-right" type="submit">
-            Log in
+          <button class="button bg-primary-gradient" type="submit">
+            Sign Up
           </button>
+          <span class="float-right">
+            Already have an account?
+            <router-link to="/login">
+              <span class="t-primary">
+                <b>Sign in</b>
+              </span>
+            </router-link>
+          </span>
         </form>
-        <GSignIn></GSignIn>
+        <div class="g-sign-container">
+          <GSignIn @login="gLogin"></GSignIn>
+        </div>
       </div>
     </div>
   </div>
@@ -30,10 +34,10 @@
 
 <script>
 import axios from '../../helpers/axios'
-import GSignIn from './GSignIn'
+import GSignIn from '../components/GSignIn'
 
 export default {
-  name: 'Login',
+  name: 'Register',
   components: {
     GSignIn
   },
@@ -44,8 +48,9 @@ export default {
     }
   },
   methods: {
-    login() {
-      axios.post('/users/login', {
+    register() {
+      console.log('gas')
+      axios.post('/users/register', {
         email: this.email,
         password: this.password
       })
@@ -59,6 +64,9 @@ export default {
         .catch(err => {
           this.$emit('alert', err)
         })
+    },
+    gLogin() {
+      this.$emit('login')
     }
   }
 }
@@ -74,5 +82,10 @@ export default {
   }
   img {
     max-height: 300px;
+  }
+  .g-sign-container {
+    margin: auto;
+    width: 180px;
+    margin-top: 25px;
   }
 </style>

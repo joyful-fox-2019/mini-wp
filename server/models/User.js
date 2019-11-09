@@ -13,6 +13,17 @@ const userSchema = new Schema({
         return re.test(String(email).toLowerCase());
       },
       message: props => `${props.value} is not a valid email format!`
+    },
+    validate: {
+      validator: function(email) {
+        if(!this.isGoogle) {
+          if(!this.password || this.password.length < 6) {
+            return false
+          }
+        }
+        return true
+      },
+      message: props => `Password have to be at least 6 characters`
     }
   },
   password: {
@@ -21,10 +32,23 @@ const userSchema = new Schema({
   isGoogle: {
     type: Boolean
   }
+}, {
+  versionKey: false
 })
 
 userSchema.pre('save', function() {
-  this.password = hashPassword(this.password)
+  try {
+    if(!this.isGoogle) {
+      this.password = hashPassword(this.password)
+    } else {
+      if(this.password || this.password === '') {
+        throw {status: 400, msg: 'Cannot set password when using google sign in'}
+      }
+    }
+    next()
+  } catch (err) {
+    next(err)
+  }
 })
 
 module.exports = mongoose.model('User', userSchema)

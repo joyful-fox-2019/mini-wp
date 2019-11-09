@@ -16,16 +16,5 @@ module.exports = {
         res.status(201).json(article)
       })
       .catch(next)
-  },
-  update: (req, res, next) => {
-    const { title, content } = req.body
-    Article.findByIdAndUpdate(
-      req.params.id,
-      
-    )
-      .then(article => {
-        res.status(200).json(article)
-      })
-      .catch(next)
   }
 }
