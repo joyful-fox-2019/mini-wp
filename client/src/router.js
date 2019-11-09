@@ -6,6 +6,7 @@ import Articlelist from './views/Articlelist'
 import Createarticle from './views/Createarticle'
 import Editarticle from './views/Editarticle'
 import Article from './views/Article'
+import Login from './views/Login'
 import Swal from 'sweetalert2'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ export default new Router({
       path:'/article/:id',
       name: 'article',
       component: Article
+    },
+    {
+      path:'/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/admin',
