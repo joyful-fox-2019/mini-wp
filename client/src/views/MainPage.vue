@@ -1,25 +1,37 @@
 <template>
-    <div class="container-fluid">
-        <div class="w-25">
+    <div class="container-fluid d-flex">
+        <div class="side-bar d-flex flex-column">
             <sidebar></sidebar>
         </div>
-        <div class="container w-75">
+        <div class="content-page">
+            <contentpage></contentpage>
         </div>
     </div>
 </template>
 <script>
 
 import sidebar from '../components/SideBar'
+import contentpage from '../components/Content'
 
 export default {
     components:{
-        sidebar
+        sidebar,
+        contentpage
     },
     data(){
         return {}
     }
 }
 </script>
-<style>
+<style scope>
+.side-bar{
+    height: calc(100vh - 56px);
+    width: 20%;
+}
 
+.content-page{
+    height: calc(100vh - 56px);
+    width: 80%;
+    background-color: whitesmoke;
+}
 </style>

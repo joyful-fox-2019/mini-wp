@@ -1,6 +1,6 @@
 <template>
     <div>
-        <navbar @sign-out="signout" :isLogin="isLogin"></navbar>
+        <navbar class="nav-bar" @sign-out="signout" :isLogin="isLogin"></navbar>
         <login v-if="loginShow === true" @show-signup="showSignUp" @show-mainpage="showMainPage"></login>
         <signup v-if="registerShow === true" @show-signin="showSignin"></signup>
         <mainpage v-if="isLogin !== '' "></mainpage>
@@ -60,4 +60,7 @@ export default {
 }
 </script>
 <style>
+.nav-bar{
+    background-color: #1A237E;
+}
 </style>

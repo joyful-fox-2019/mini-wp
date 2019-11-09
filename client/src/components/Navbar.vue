@@ -12,7 +12,7 @@
               <a class="nav-link" href="https://www.froala.com">Home</a>
             </li> -->
           </ul>
-          <a v-if="isLogin !== '' " class="btn btn-outline-primary ml-md-3" href="" v-on:click.prevent="signout">Sign Out</a>
+          <a v-if="isLogin !== '' " class="btn btn-outline-warning ml-md-3" href="" v-on:click.prevent="signout">Sign Out</a>
         </div>
       </nav>
     </div>
@@ -36,6 +36,6 @@ export default {
 <style scoped>
 .navbar-brand{
   font-size: 20px;
-  color: blue;
+  color: white;
 }
 </style>

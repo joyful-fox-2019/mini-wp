@@ -1,6 +1,23 @@
 <template>
-    <div class="container-fluid border">
-        <h1>Ini sidebar</h1>
+    <div class="container-fluid h-100">
+        <div class="h-40 d-flex flex-column">
+            <div class="card" style="width: 14rem; margin: 10px 0px;">
+                <img src="../img/homepage.jpg" class="card-img-top" alt="Picture Profile">
+                <div class="card-body">
+                    <h5 class="card-title">Welcome, Username</h5>
+                    <p class="card-text">Some quote</p>
+                    <a href="#" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="h-50 d-flex mt-4">
+            <nav class="nav flex-column">
+                <a class="nav-link" href="#"><i class="fas fa-home"></i>Home Page</a>
+                <a class="nav-link" href="#"><i class="fas fa-user-circle"></i>Profile</a>
+                <a class="nav-link" href="#"><i class="fas fa-upload"></i>Post Article</a>
+                <a class="nav-link" href="#"><i class="fas fa-trash"></i>Trash</a>
+            </nav>
+        </div>
     </div>
 </template>
 <script>
@@ -9,5 +26,12 @@ export default {
 }
 </script>
 <style>
+.btn{
+    width: 10rem;
+}
 
+i{
+    width: 30px;
+    height: 30px;
+}
 </style>
