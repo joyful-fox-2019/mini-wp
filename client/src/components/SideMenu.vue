@@ -18,40 +18,57 @@
             <ul class="menu-list">
                 <li><a>Dashboard</a></li>
                 <li><a>Profile</a></li>
+                <b-dropdown aria-role="list">
+                    <button class="button is-black" type="button" slot="trigger">
+                        <template>
+                            <b-icon icon="account-multiple"></b-icon>
+                            <span>Theme</span>
+                        </template>
+                        <b-icon icon="menu-down"></b-icon>
+                    </button>
+
+                    <b-dropdown-item :value="true" aria-role="listitem">
+                        <div class="media">
+                            <b-icon class="media-left" icon="earth"></b-icon>
+                            <div @click="toDark()" class="media-content">
+                                <h3>Dark Theme</h3>
+                            </div>
+                        </div>
+                    </b-dropdown-item>
+                    
+                    <b-dropdown-item :value="true" aria-role="listitem">
+                        <div class="media">
+                            <b-icon class="media-left" icon="earth"></b-icon>
+                            <div @click="toLight()" class="media-content">
+                                <h3>Light Theme</h3>
+                            </div>
+                        </div>
+                    </b-dropdown-item>
+                </b-dropdown>
             </ul>
             <p class="menu-label">
                 General
             </p>
             <ul class="menu-list">
-                <li><a>Posting</a></li>
-                <!-- <li> -->
-                <!-- <a class="is-active">Manage Your Team</a>
-                <ul>
-                    <li><a>Members</a></li>
-                    <li><a>Plugins</a></li>
-                    <li><a>Add a member</a></li>
+                <li @click="myArticle()"><a>My Post</a></li>
+            </ul>
+                <p class="menu-label">
+                    Actions
+                </p>
+                <ul class="menu-list">
+                    <li @click="logout()"><a>Logout</a></li>
                 </ul>
-                </li>
-                <li><a>Invitations</a></li>
-                <li><a>Cloud Storage Environment Settings</a></li>
-                <li><a>Authentication</a></li> -->
-            </ul>
-            <p class="menu-label">
-                Actions
-            </p>
-            <ul class="menu-list">
-                <li @click="logout()"><a>Logout</a></li>
-            </ul>
         </aside> 
   </div>
 </template>
 
 <script>
 import Swal from 'sweetalert2'
+// import adminButton from './adminButton'
 
 export default {
-    name : 'SideMenu'
-    ,data() {
+    name : 'SideMenu',
+    data() {
         return {
             isActive: true,
             user : {
@@ -61,6 +78,12 @@ export default {
         }
     },
     methods : {
+        toDark() {
+            this.$emit('changeTheme',true,false)
+        },
+        toLight() {
+            this.$emit('changeTheme',false,true)
+        },
         logout() {
             // console.log(gapi.auth2)
             var auth2 = gapi.auth2.getAuthInstance();
@@ -80,12 +103,16 @@ export default {
                 })
             }); 
         }
+        ,
+        myArticle() {            
+            this.$emit('changePage',false,false,false,false,true,false,false)
+        }
     }
 }
 </script>
 
 <style scoped>
-.custom {
+/* .custom {
     background-color: #fff !important;
-}
+} */
 </style>

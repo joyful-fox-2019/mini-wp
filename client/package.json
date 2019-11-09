@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/vue-fontawesome": "^0.1.8",
     "axios": "^0.19.0",
     "buefy": "^0.8.6",
     "moment": "^2.24.0",
@@ -18,7 +21,8 @@
     "vue-google-login": "^2.0.2",
     "vue-google-signin-button": "^1.0.4",
     "vue-hot-reload-api": "^2.3.4",
-    "vue-quill": "^1.5.1"
+    "vue-quill": "^1.5.1",
+    "vue-social-sharing": "^2.4.6"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.0",

@@ -1,8 +1,23 @@
 const Article = require('../models/Article')
+const { deleteFile } = require('../helpers/images')
 
 class ArticleController {
+    static readPrivateDetail(req,res,next) {
+        let { id } = req.params
+        Article.find({_id:id})
+        .populate('author')
+        .then(data=>{
+            res.status(200).json(({data}))
+        })
+        .catch(next)
+    }
     static readPublic(req,res,next) {
-        Article.find()
+        let { tag } = req.query
+        let objParams = {}
+        if (tag) {
+            objParams.tags = tag
+        }
+        Article.find(objParams)
         .populate('author')
         .then(data=>{
             res.status(200).json(({data}))
@@ -28,15 +43,26 @@ class ArticleController {
     }
     static create(req, res, next){
         let {title,content} = req.body
+        let tags = req.body.tags.split(',')
         let image = req.file
         if(image) {
-            Article.create({title,content,author:req.loggedUser._id,featured_image:image.cloudStoragePublicUrl})
+            Article.create({
+                title,
+                content,
+                author:req.loggedUser._id,
+                featured_image:image.cloudStoragePublicUrl,
+                tags
+            })
             .then(data=>{
                 res.status(201).json(({data}))
             })
             .catch(next)
         } else {
-            Article.create({title,content,author:req.loggedUser._id})
+            Article.create({title,
+                content,
+                author:req.loggedUser._id,
+                tags
+            })
             .then(data=>{
                 res.status(201).json(({data}))
             })
@@ -54,12 +80,15 @@ class ArticleController {
         .catch(next)
     }
     static delete(req,res,next) {
-        let {id} = req.params
-        Article.deleteOne({_id:id})
-        .then(_=>{
-            res.status(201).json({message:'article deleted'})
+        let id = req.params.id
+        Article.findByIdAndDelete(id)
+        .then(data=>{
+            deleteFile(data.featured_image)
+            res.status(204).json()
         })
-        .catch(next)
+        .catch(err=>{
+            next(err)
+        })
     }
 }
 

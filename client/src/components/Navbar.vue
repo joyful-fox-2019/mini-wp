@@ -2,7 +2,7 @@
   <div>
       <b-navbar class="is-black">
         <template slot="brand">
-            <b-navbar-item class="navbar-main">
+            <b-navbar-item class="navbar-main" style="width:20vw;">
                 <img src="../../assets/logo.png" alt="">
                 <a href="" style="color:white;" @click.prevent="toHome()">Mini Wordpress</a>
             </b-navbar-item>
@@ -33,13 +33,13 @@ export default {
     name: 'Navbar',
     methods : {
         toRead() {
-            this.$emit('changePage',false,true,false,false)
+            this.$emit('changePage',false,true,false,false,false,false,false)
         },
         toHome() {
-            this.$emit('changePage',true,false,false,false)
+            this.$emit('changePage',true,false,false,false,false,false,false)
         },
         toWrite() {
-            this.$emit('changePage',false,false,false,true)
+            this.$emit('changePage',false,false,false,true,false,false,false)
         }
     }
 }

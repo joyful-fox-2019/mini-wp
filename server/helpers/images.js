@@ -2,6 +2,7 @@
 require('dotenv').config()
 
 const {Storage} = require('@google-cloud/storage')
+const urlToFileName = require("../helpers/urlToFilename");
 
 const CLOUD_BUCKET = process.env.CLOUD_BUCKET
 
@@ -54,11 +55,19 @@ const Multer = require('multer'),
         // dest: '../images'
       })
 
-
+  const deleteFile = url => {
+    let filename = urlToFileName(url);
+    storage
+      .bucket(CLOUD_BUCKET)
+      .file(filename)
+      .delete();
+  };
+      
 
 
 module.exports = {
   getPublicUrl,
   sendUploadToGCS,
-  multer
+  multer,
+  deleteFile
 }

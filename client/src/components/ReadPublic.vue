@@ -1,4 +1,9 @@
 <template>
+<div>
+    <form @submit.prevent="fetchPublic()">
+      <input v-model="tag" class="input" type="text" placeholder="Filter By Tag">
+    </form>
+    <br>
     <div class="public">
     <div class="preloader loading" v-if="isLoading">
         <span class="slice"></span>
@@ -8,7 +13,7 @@
         <span class="slice"></span>
         <span class="slice"></span>
     </div>
-    <div v-for="(article,index) in publicArticle" :key="article._id">
+    <div v-for="(article,index) in publicArticle.slice().reverse()" :key="article._id">
         <div :class="{ 'blog-card alt': (index % 2 === 0), 'blog-card': (index % 2 !== 0) }">
             <div class="meta">
                 <div class="photo">
@@ -21,23 +26,14 @@
                         </li>
                         <li class="date">
                             <i class="fas fa-clock"></i>
-                            {{article.createdAt}}</li>
+                            {{formatDate(article.createdAt)}}</li>
                         <li class="tags">
                             <ul>
                                 <li>
                                     <i class="fas fa-tags"></i>
                                 </li>
-                                <li>
-                                    <a href="#">Learn</a>
-                                </li>
-                                <li>
-                                    <a href="#">Code</a>
-                                </li>
-                                <li>
-                                    <a href="#">HTML</a>
-                                </li>
-                                <li>
-                                    <a href="#">CSS</a>
+                                <li v-for="(tag,index) in article.tags" :key="index">
+                                    <a href="" @click.prevent="filterTag(tag)">{{ tag }}&nbsp;</a>
                                 </li>
                             </ul>
                         </li>
@@ -46,7 +42,25 @@
                 <div class="description">
                     <h1>{{article.title}}</h1>
                     <hr>
-                        <p style="width:400px; height : 150px; white-space: wrap; overflow: hidden; text-overflow: ellipsis;" v-html="article.content"></p>
+                        <p style="width:400px; height : 155px; white-space: wrap; overflow: hidden; text-overflow: ellipsis;" v-html="article.content"></p>
+                        <br>
+                        <social-sharing :url="article.featured_image"
+                                              :title="article.title"
+                                              :description="article.content"
+                                              hashtags="javascript,framework"
+                                              :quote="article.content"
+                                              inline-template>
+                          <div>
+                              <network network="facebook" style="cursor: -webkit-grab; cursor: grab;">
+                                <i class="fab fa-facebook-square"></i> Facebook
+                              </network>
+                              <network network="twitter" style="cursor: -webkit-grab; cursor: grab;">
+                              <i class="fab fa-twitter-square"></i> Twitter
+                              </network>
+                          </div>
+                        </social-sharing>
+
+                          <!-- shate -->
                         <p class="read-more">
                             <a href="" @click.prevent="fetchPublicDetail(article._id)">Read More</a>
                         </p>
@@ -54,25 +68,34 @@
                 </div>
             </div>
         </div>
+        </div>
 </template>
 
 <script>
 import axios from '../apis/server'
 import Swal from 'sweetalert2'
+import moment from 'moment'
 
 export default {
     name: 'ReadPublic',
     data() {
         return {
             publicArticle: [],
-            isLoading : true
+            isLoading : true,
+            tag : ''
         }
     },
     methods : {
-        fetchPublic() {
+      tes() {
+        Swal.fire('success','masuk','success')
+      },
+        formatDate(date) {
+            return moment(date).fromNow()
+        },
+        filterTag(tag) {
             axios({
                 method: 'get',
-                url : '/articles/public',
+                url : '/articles/public?tag=' + tag,
                 headers : {
                     token : localStorage.getItem('token')
                 }
@@ -82,11 +105,29 @@ export default {
                     this.isLoading = false
                 })
                 .catch(err=>{
+                  this.isLoading = false
+                    Swal.fire('error','internal server error','error')
+                })
+        },
+        fetchPublic() {
+            axios({
+                method: 'get',
+                url : '/articles/public?tag=' + this.tag,
+                headers : {
+                    token : localStorage.getItem('token')
+                }
+            })
+                .then(({data})=>{
+                    this.publicArticle = data.data
+                    this.isLoading = false
+                })
+                .catch(err=>{
+                  this.isLoading = false
                     Swal.fire('error','internal server error','error')
                 })
         },
         toDetail() {
-            this.$emit('changePage',false,false,true)
+            this.$emit('changePage',false,false,true,false,false,false,false)
         },
         fetchPublicDetail(id) {
             axios({
@@ -99,8 +140,6 @@ export default {
               .then(({data})=>{
                 this.$emit('addPublicData',data.data[0])
                 this.$emit('changePage',false,false,true)
-                  // console.log(data.data[0],'ininininin');
-                  // Swal.fire('success','detaillll','success')
               })
               .catch(err=>{
                   Swal.fire('error','internal server error','error')
@@ -365,7 +404,7 @@ img {
 
 .public {
     overflow: scroll;
-    height: 90vh;
+    height: 80vh;
 }
 
 
