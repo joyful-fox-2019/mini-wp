@@ -2,9 +2,13 @@
   <div>
     <SigningPage @signed-in="signedIn = true" v-if="!signedIn"></SigningPage>
     <main v-else>
-      <Navbar :page="page" @switch-page="switchPage" @signed-out="signedIn = false"></Navbar>
+      <Navbar
+        :page="page"
+        @switch-page="switchPage"
+        @signed-out="signedIn = false; page = 'dashboard'"
+      ></Navbar>
       <DashboardPage v-if="page === 'dashboard'"></DashboardPage>
-      <WritePage v-if="page === 'write'"></WritePage>
+      <WritePage v-if="page === 'write'" @switch-page="switchPage"></WritePage>
     </main>
   </div>
 </template>
