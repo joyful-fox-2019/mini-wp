@@ -1,4 +1,4 @@
-const errorHandler = (req,res,next)=> {
+const errorHandler = (err,req,res,next)=> {
     if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'testing') console.log(err)
     let status;
     let message;
