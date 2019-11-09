@@ -2,8 +2,8 @@
   <section id="main-page" class="flex">
     <Sidebar @myArticles="myArticles" @newArticle="newArticle" @myDrafts="myDrafts"></Sidebar>
     <div class="page flex-column w-full">
-      <Navbar @logout="logout" @search="search"></Navbar>
-      <router-view :keyword="keyword" @searchTag="search"></router-view>
+      <Navbar ref="navbar" @logout="logout" @search="search"></Navbar>
+      <router-view ref="articleList" :keyword="keyword" @searchTag="search"></router-view>
     </div>
   </section>
 </template>
@@ -23,17 +23,25 @@ export default {
   },
   methods: {
     search (payload) {
-      console.log(payload.keyword);
       this.keyword = payload.keyword
     },
     myArticles () {
-      this.$router.push('/articles')
+      if(this.$route.path !== '/articles') {
+        this.$router.push('/articles')
+      } else {
+        this.$refs.articleList.getArticles()
+        this.$refs.navbar.emptyInput()
+      }
     },
     newArticle () {
-      this.$router.push('/new')
+      if(this.$route.path !== '/new') {
+        this.$router.push('/new')
+      }
     },
     myDrafts () {
-      this.$router.push('/drafts')
+      if(this.$route.path !== '/drafts') {
+        this.$router.push('/drafts')
+      }
     },
     editArticle (id) {
       this.$router.push(`/articles/${id}`)

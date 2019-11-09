@@ -1,5 +1,5 @@
 <template>
-  <form id="login-form" class="flex flex-wrap bg-white shadow-2xl rounded p-10 justify-center">
+  <form @submit.prevent="login" id="login-form" class="flex flex-wrap bg-white shadow-2xl rounded p-10 justify-center">
     <div class="w-full"><h1 style="text-align: center;">Login into WordRide</h1></div>
     <div class="w-full"><h4 style="text-align: center;">Or <span class="hover:text-blue-500 cursor-pointer" style="text-decoration: underline;" @click="goRegister">create Account</span></h4></div>
     <input v-model="email" type="email" class="p-2 mx-4 mt-10 w-3/4" placeholder="Email Address">
@@ -38,10 +38,14 @@ export default {
         data: { email, password }
       })
       .then(({ data }) => {
+        this.$noty.success(data.message)
         localStorage.setItem('token', data.token)
-        this.$emit('loggedIn')
+          this.$emit('loggedIn')
+        console.log(data.message);
       })
-      .catch(console.log)
+      .catch(({ response }) => {
+        this.$noty.error(response.data.message)
+      })
     }
   },
 }

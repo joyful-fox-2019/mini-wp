@@ -14,12 +14,17 @@ module.exports = {
   },
   authorize (req, res, next) {
     const { id } = req.params
-    Article.findById(id)
+    const { mode } = req.query
+    Article.findById(id).populate('owner')
       .then(article => {
-        if(article && article.owner.toString === req.loggedUser.id){
+        if( mode === 'read') {
           next()
         } else {
-          next({ status: 403, message: 'Authorization failed'})
+          if(article && article.owner._id.toString() === req.loggedUser.id){
+            next()
+          } else {
+            next({ status: 403, message: 'Authorization failed'})
+          }
         }
       })
       .catch(next)

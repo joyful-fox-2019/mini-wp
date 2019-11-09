@@ -1,8 +1,8 @@
 module.exports =  (err, req, res, next) => {
     // console.log(err)
 
-    const status = err.status || 500
-    const message = err.message || 'Internal Server Error'
+    let status = err.status || 500
+    let message = err.message || 'Internal Server Error'
 
     if(err.name === 'ValidationError') {
       const errors = []
@@ -13,8 +13,10 @@ module.exports =  (err, req, res, next) => {
         message: 'validation error',
         errors
       })
-    } else if(err.message.name === 'JsonWebTokenError') {
-      res.status(status).json({ message: err.message.message })
+    } else if(err.name === 'JsonWebTokenError') {
+      status = 403
+      message = 'You must login first'
+      res.status(status).json({ message })
     } else {
       res.status(status).json({ message })
     }

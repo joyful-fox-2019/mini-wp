@@ -1,26 +1,30 @@
 const Article = require('../models/article')
+const { Storage } = require('@google-cloud/storage')
 
 class ArticleController {
   static find (req, res, next) {
-    const { keyword , mode, type } = req.query
-    let objParams = { type } //type = draft/public
-    if(mode === 'mine') objParams.owner = req.loggedUser.id
-    if(keyword) { objParams.$or = { 
-      title: { $regex: keyword, $options: 'i'},
-      content: {$regex: keyword, $options: 'i'},
-      tags: keyword
-      }
+    const { keyword , whose, status, sort } = req.query
+    let objParams = { status } //type = draft/public
+    let sortParams = { createdAt: -1}
+    if(sort === 'popular') sortParams = [['reads', 'desc']]
+    if(whose === 'mine') objParams.owner = req.loggedUser.id
+    if(status === 'draft') objParams.owner = req.loggedUser.id
+    if(keyword) { objParams.$or = [ {
+      title: { $regex: keyword, $options: 'i'}},
+      {content: {$regex: keyword, $options: 'i'}},
+      {tags: keyword}
+    ]
     }
-    Article.find(objParams)
+    Article.find(objParams).populate('owner').sort(sortParams)
       .then(articles => {
         res.status(200).json(articles)
       })
       .catch(next)
   }
   static create (req, res, next) {
-    const { title, content, image, tags, mode } = req.body
+    const { title, content, image, tags, status } = req.body
     const { id } = req.loggedUser
-    Article.create({ title, content, image, tags, mode, owner: id })
+    Article.create({ title, content, image, tags, status, owner: id })
       .then(article => {
         res.status(201).json({ article, message: 'Succesfully created article'})
       })
@@ -29,12 +33,11 @@ class ArticleController {
   static findById (req, res, next) {
     const { id } = req.params
     const { mode } = req.query
-    Article.findById(id)
+    Article.findById(id).populate('owner')
       .then(article => {
-        if(mode === 'read') {
+        if(mode === 'read' && article.status === 'published') {
           article.reads ++
         } 
-          
         return article.save()
       })
       .then(article => {
@@ -44,10 +47,28 @@ class ArticleController {
   }
   static update (req, res, next) {
     const { id } = req.params
-    const { title, content, image, tags, mode } = req.body
-    Article.findByIdAndUpdate(id, { title, content, image, tags, mode }, { omitUndefined: true })
-      .then(article=> {
-        res.status(200).json({ message: `Successfully updated article ${article.title}`})
+    const { title, content, image, tags, status } = req.body
+    Article.findById(id)
+      .then(article => {
+        if(image !== article.image) {
+          const bucket = process.env.BUCKET_NAME
+          const storage = new Storage({
+            keyFilename: process.env.KEYFILE_PATH,
+            projectId: process.env.PROJECT_ID
+          })
+          let picture = article.image
+          let filename = picture.replace(/(https:\/\/storage.googleapis.com\/wordride-image\/)/, '')
+          storage.bucket(bucket).file(filename).delete()
+        }
+        article.title = title
+        article.content = content
+        if(image) article.image = image
+        article.tags = tags
+        article.status = status
+        return article.save()
+      })
+      .then(article => {
+        res.status(200).json({ message: 'Successfully updated article', article})
       })
       .catch(next)
   }
@@ -55,6 +76,16 @@ class ArticleController {
     const { id } = req.params
     Article.findByIdAndRemove(id)
       .then(article => {
+        if(article.image){
+          const bucket = process.env.BUCKET_NAME
+          const storage = new Storage({
+            keyFilename: process.env.KEYFILE_PATH,
+            projectId: process.env.PROJECT_ID
+          })
+          let picture = article.image
+          let filename = picture.replace(/(https:\/\/storage.googleapis.com\/wordride-image\/)/, '')
+          storage.bucket(bucket).file(filename).delete()
+        }
         res.status(200).json({ message: `Successfully deleted article ${article.title}`})
       })
       .catch(next)

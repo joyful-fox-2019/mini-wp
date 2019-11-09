@@ -16,7 +16,7 @@ export default {
   data() {
     name: 'App'
     return {
-      isLogin: true
+      isLogin: false
     }
   },
   methods: {
@@ -25,6 +25,7 @@ export default {
       this.$router.push('/articles')
     },
     loggedOut () {
+      localStorage.removeItem('token')
       this.isLogin = false
     },
     verifyToken () {

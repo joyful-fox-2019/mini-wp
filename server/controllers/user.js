@@ -17,7 +17,7 @@ class UserController {
       .then(user => {
         if(user && comparePass(password, user.password)){
           const token = sign({ id: user._id })
-          res.status(200).json({ token, message: 'Successfully login, welcome back!'})
+          res.status(200).json({ token, message: 'welcome back!'})
         } else {
           next({ status: 400, message: 'Wrong email or password'})
         }

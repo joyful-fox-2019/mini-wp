@@ -18,7 +18,7 @@ const articleSchema = new Schema({
     type: Number,
     default: 0
   },
-  mode: {
+  status: {
     type: String
   },
   owner: {

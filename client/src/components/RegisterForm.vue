@@ -38,11 +38,13 @@ export default {
         }
       })
       .then(({ data }) =>{
-        //alert success registration
+        this.$noty.success(data.message)
         this.goLogin()
+        
       })
       .catch(({ response }) => {
-        console.log(response.data)
+        this.$noty.error(response.data)
+        if(response.data.errors) this.$noty.error(response.data.errors.join('/n'))
       })
     }  
   }

@@ -2,8 +2,8 @@
   "articles": [
     {
       "id": 1,
-      "title": "Blabla",
-      "content": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!",
+      "title": "Blablabla",
+      "content": "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt libero, saepe dolor nam quae iusto cum aspernatur aliquid ipsa dignissimos molestias quod quam nulla corrupti, tempore, deleniti quos exercitationem? Nam!</p>",
       "tags": [
         "apa",
         "ya",

@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Navbar',
+  name: 'navbar',
   data() {
     return {
       keyword: ''
@@ -25,8 +25,16 @@ export default {
     },
     search () {
       this.$emit('search', { keyword: this.keyword })
+    },
+    emptyInput () {
+      this.keyword = ''
     }
   },
+  watch: {
+    // keyword () {
+    //   this.search()
+    // } 
+  }
 }
 </script>
 
