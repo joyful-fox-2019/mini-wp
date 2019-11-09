@@ -4,8 +4,8 @@ class ArticleController {
     static create(req, res, next) {
         let { title, content} = req.body
         let created_at = new Date
-        let user_id = req.loggedUser.id
-        Article.create(title, content, created_at, user_id)
+        let author = req.loggedUser.id
+        Article.create({ title, content, created_at, author })
             .then(result => {
                 res.status(201).json(result)
             })
@@ -14,8 +14,9 @@ class ArticleController {
 
     static readAll(req, res, next) {
         const { id } = req.loggedUser
-        Article.find({ user_id: id })
-            .populate('User')
+        // console.log(req.loggedUser.id);
+        Article.find({ author: id })
+            .populate('author')
             .then(articles => {
                 res.status(200).json(articles)
             })
@@ -50,6 +51,16 @@ class ArticleController {
             })
             .catch(next)
     }
+
+    // static search(req, res, next) {
+    //     let { title } = req.query
+    //     // console.log(keyword);
+    //     Article.find({title: { $regex: title }})
+    //         .then(articles => {
+    //             res.status(200).json(articles)
+    //         })
+    //         .catch(next)
+    // }
 }
 
 module.exports = ArticleController

@@ -10,7 +10,6 @@ class UserController {
         }
         User.create(objUser)
             .then(result => {
-                console.log(result)
                 res.status(201).json(result)
             })
             .catch(next)
@@ -21,6 +20,7 @@ class UserController {
             email: req.body.email
         })
         .then(user => {
+            console.log(user);
             if(user && comparePassword(req.body.password, user.password)) {
                 let payload = {
                     id: user._id,
@@ -33,6 +33,40 @@ class UserController {
             }
         })
         .catch(next)
+    }
+
+    static googleSignIn(req, res, next) {
+        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+        let payload = null
+        client.verifyIdToken({
+            idToken: req.body.token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        })
+            .then(ticket => {
+                console.log(ticket);
+                payload = ticket.getPayload()
+                let email = payload.email
+
+                return User.findOne({ email })
+            })
+            .then(user => {
+                if(user) {
+                    return user
+                } else {
+                    return User.create({
+                        email: payload.email,
+                        password: process.env.DEFAULT_PASSWORD
+                    })
+                }
+            })
+            .then(user => {
+                const token = generateToken({
+                    id: user._id,
+                    email: user.email
+                })
+                res.status(200).json({ token })
+            })
+            .catch(next)
     }
 }
 

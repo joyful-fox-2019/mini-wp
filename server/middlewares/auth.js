@@ -1,4 +1,4 @@
-const verifyToken = require('../helpers/passwordEncryptor').decodeToken
+const verifyToken = require('../helpers/tokenMaker').decodeToken
 const User = require('../models/user')
 const Article = require('../models/article')
 
@@ -25,7 +25,7 @@ function authorization(req, res, next) {
     let { id } = req.params
     Article.findById(id)
         .then(article => {
-            if(artice && article.user_id === req.loggedUser.id) {
+            if(article && article.user_id === req.loggedUser.id) {
                 next()
             } else if(!article) {
                 next({ status: 404, message: "Data not found" })

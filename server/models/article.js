@@ -11,7 +11,11 @@ const articleSchema = new Schema (
             required: [true, 'Content is required']
         },
         created_at: Date,
-        user_id: String
+        author: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        featured_image: String
     }
 )
 
