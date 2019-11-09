@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mini WP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <div v-if="isLoggedIn">
+            <section class="mainpage" v-if="showMainPage">
+                <nav class="navbar cyan">
+                    <div class="d-flex flex-row">
+                        <div class="navbar-logo">
+                            <a class="navbar-brand d-flex align-items-center">
+                                <img class="logo" src="https://s.w.org/style/images/about/WordPress-logotype-wmark-white.png" alt="wordpress logo">
+                                <span>My Sites</span>   
+                            </a>
+                        </div>
+                        
+                        <span class="d-flex align-items-center pl-4">
+                            <i class="material-icons pr-2">chrome_reader_mode</i>Reader
+                        </span>
+                    </div>
+                    
+                    <div class="form-inline my-2 my-lg-0 pr-3">
+                        <button @click="toggleBlogPage" type="button" class="btn btn-light m-2 d-flex align-self-center">
+                            <i class="material-icons pr-2">filter_none</i>
+                            Write
+                        </button>
+                        <div class="btn-group">
+                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons m-3">mood</i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" @click="logOut()">Log Out</button>
+                            </div>
+                        </div>
+                        <span><i class="material-icons m-3">notifications_active</i></span>
+                    </div>
+                </nav>
+                <div class="row">
+                    <div class="col-md-3 sidebar">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <i class="material-icons">desktop_windows</i>
+                                <span>View Site</span>   
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">bar_chart</i>
+                                Stats
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">restore</i>
+                                Activity
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">data_usage</i>
+                                Plan
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Manage</strong>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">description</i>
+                                <span>Site Page</span>   
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">subject</i>
+                                Blog Posts
+                                <button type="button" class="btn btn-light" @click="toggleBlogPage">
+                                    Add
+                                </button>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">perm_media</i>
+                                Media
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">insert_comment</i>
+                                Comments
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">description</i>
+                                <span>Site Page</span>   
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">subject</i>
+                                Blog Posts
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">perm_media</i>
+                                Media
+                            </li>
+                            <li class="list-group-item">
+                                <i class="material-icons">insert_comment</i>
+                                Comments
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9 main-area">
+                        <div class="row d-flex align-items-center p-3 border mb-4 mini-nav">
+                            <div class="col-md-4">
+                                <a class="mr-2">Published</a>
+                                <a>Drafts</a>
+                            </div>
+                            <div class="col-md-8">
+                                <form class="form-inline my-2 my-lg-0 float-right">
+                                    <input v-model="filterTitle" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                </form>
+                            </div>
+                        </div>
+                    
+                        <div class="row p-3 border mb-4" v-for="article in filteredArticles">
+                            <div class="col-md-9 align-self-center article">
+                                <p class="font-weight-bolder">{{ article.title }}</p>
+                                <p class="font-weight-lighter time">{{ article.createdAt }}</p> 
+                            </div>
+                            <div class="col-md-2 align-self-center">
+                                <img class="img-responsive" src="https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Santorini, Greece" srcset="">
+                            </div>
+                            <div class="col-md-1 align-self-center">
+                                <div class="btn-group dropleft">
+                                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_horiz</i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" @click="renderUpdateArticle(article)">Edit</a>
+                                        <a class="dropdown-item" @click="deleteArticle(article)">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+            <section class="add-blog-page" v-if="showBlogPage">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white border">
+                    <a class="p-3 cyan-text font-weight-bolder border-right" href="#" @click="toggleMainPage">Close</a>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item border-right p-2">
+                                <a class="nav-link font-weight-bolder" href="#">Link</a>
+                            </li>
+                            <li class="nav-item p-2">
+                                <a class="nav-link font-weight-lighter" href="#">Saved</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <button class="btn settings d-flex align-self-center">
+                                <i class="material-icons">settings_applications</i>
+                            </button>
+                            <button type="button" class="btn btn-outline-info">Preview</button>
+                            <button v-if="publishButton" v-on:click=createArticle class="btn publish" type="button">Publish...</button>
+                            <button v-else class="btn publish" @click="updateArticle()" type="button">Update</button>
+                        </form>
+                    </div>
+                </nav>
+        
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 text-editor">
+                            <input v-model="articleTitleEditor" class="p-2 mb-4" type="text" placeholder="Title...">
+                            <br>
+                            <textarea v-model="articleContentEditor" cols="50" rows="20"></textarea>
+                        
+                            <!-- <div id="editor"></div> -->
+                        </div>    
+                        <div class="col-md-3">
+                            <div class="sidenav border">
+                                <a class="border" id="post-setting">Post Settings</a>
+                                <a class="border">Status</a>
+                                <a class="border">Categories & Tags</a>
+                                <a class="border">Featured Image</a>
+                                <a class="dropdown-btn border d-flex justify-content-between">Sharing
+                                    <i class="material-icons">keyboard_arrow_down</i>
+                                </a>
+                                <div class="dropdown-container">
+                                    <a href="#">Link 1</a>
+                                    <a href="#">Link 2</a>
+                                    <a href="#">Link 3</a>
+                                </div>
+                                <a class="border">More Options</a>
+                                <a class="border trash">
+                                    <i class="material-icons pr-2">restore_from_trash</i>
+                                    Move to trash
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div v-else>
+            <nav class="navbar cyan">
+                <div class="d-flex flex-row">
+                    <div class="navbar-logo">
+                        <a class="navbar-brand d-flex align-items-center">
+                            <img class="logo" src="https://s.w.org/style/images/about/WordPress-logotype-wmark-white.png" alt="wordpress logo">
+                            <span>Mini WP</span>   
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="form-inline my-2 my-lg-0 pr-3">
+                    <button type="button" class="btn btn-light m-2 d-flex align-self-center">
+                        Register
+                    </button>
+                    <button type="button" class="btn btn-light m-2 d-flex align-self-center">
+                        Login
+                    </button>
+                </div>
+            </nav>
+
+            <form class="p-5 m-3">
+                <h1>Register</h1>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input v-model="registerName" type="text" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input v-model="registerEmail" type="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input v-model="registerPassword" type="password" class="form-control" placeholder="Password">
+                </div>
+                <button @click.prevent="registerUser()" class="btn btn-primary">Submit</button>
+            </form>
+
+            <form class="p-5 m-3">
+                <h1>Login</h1>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input v-model="loginEmail" type="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input v-model="loginPassword" type="password" class="form-control" placeholder="Password">
+                </div>
+                <button @click.prevent="loginUser()" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

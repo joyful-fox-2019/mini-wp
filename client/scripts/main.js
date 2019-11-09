@@ -1,5 +1,6 @@
 const instance = axios.create({
-    baseURL: 'http://miniwpserver.angelavanessa.com'
+    // baseURL: 'http://miniwpserver.angelavanessa.com'
+    baseURL: 'http://localhost:3000'
 });
 
 new Vue({
@@ -10,8 +11,8 @@ new Vue({
       quillForm : null,
       articleTitleEditor: '',
       articleContentEditor: '',
-      showMainPage: true,
-      showBlogPage: false,
+      showMainPage: false,
+      showBlogPage: true,
       publishButton: true,
       articleId: null,
       isLoggedIn: null,

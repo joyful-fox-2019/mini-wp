@@ -4,6 +4,7 @@ const session = require('../helpers/session');
 
 class UserController {
     static register(req, res, next) {
+        console.log(req.body)
         const { name, email, password } = req.body;
         User.findOne({
             email
