@@ -12,7 +12,7 @@ const userSchema = new Shcema({
         required: [true, 'email cannot empty'],
         validate:{
             validator(value){
-                let isEmail = /^[0-9a-zA-Z]+@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                let isEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
                 let valid = isEmail.test(value);
                 return valid
             },

@@ -14,9 +14,9 @@ function sendEmail(user){
        const mailOptions = {
         from: `${process.env.GMAIL_ACCOUNT}`,
         to: `${email}`,
-        subject: 'Registration at Danang Mini-WP',
+        subject: 'Registration at Danang Mini-WordPress',
         html: `
-        <h1>Thanks for become our members</h1>
+        <h1>Thanks for become our member</h1>
         <p>This is your account information</p>
         <p>username : ${username}</p>
         <p>email : ${email}</p>
