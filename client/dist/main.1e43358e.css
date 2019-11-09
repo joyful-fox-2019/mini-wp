@@ -1,0 +1,37 @@
+#signinPage {
+  position: fixed;
+  width: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#signupPage {
+  position: fixed;
+  width: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#sidebar[data-v-fef31e] {
+  height: 100vh;
+  width: 17rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  top: 0;
+  padding: 0;
+}
+#sidebar .nav-item[data-v-fef31e] {
+  padding-left: 1rem;
+  margin: 0;
+}
+#sidebar .nav-item.active[data-v-fef31e] {
+  background-color: #c5d9ed;
+}
+#sidebar .nav-item[data-v-fef31e]:hover:not(.active) {
+  background-color: #cccccc;
+}
+#show-web[data-v-fef31e] {
+  margin-top: 4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
