@@ -43,7 +43,7 @@ module.exports = {
     })
     .then(user => {
       const access_token = generateToken({
-        id: user._id,
+        _id: user._id,
         email: user.email
       })
       const _id = user._id

@@ -69,4 +69,7 @@ button {
   margin-top: 3px;
   font-size: 25px;
 }
+a {
+  font-family: 'Yeseva One', cursive;
+}
 </style>

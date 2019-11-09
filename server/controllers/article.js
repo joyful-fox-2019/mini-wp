@@ -10,8 +10,8 @@ module.exports = {
   },
   add: (req, res, next) => {
     console.log(req.body)
-    const { title, content, tags } = req.body
-    Article.create({ title, content, tags, user: req.loggedUser._id })
+    const { title, description, tags } = req.body
+    Article.create({ title, description, tags, user: req.loggedUser._id })
       .then(article => {
         res.status(201).json(article)
       })

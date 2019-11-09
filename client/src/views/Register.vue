@@ -3,7 +3,7 @@
     <div class="columns is-centered">
       <div class="column is-half">
         <div class="centered-item">
-          <img src="../../assets/register.png">
+          <!-- <img src="../../assets/register.png"> -->
         </div>
         <form @submit.prevent="register">
           <b-field>

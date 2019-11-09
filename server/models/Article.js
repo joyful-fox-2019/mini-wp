@@ -6,12 +6,13 @@ const articleSchema = new Schema({
     type: String,
     required: [true, 'Title cannot be empty']
   },
-  content: {
+  description: {
     type: String,
-    required: [true, 'Content cannot be empty']
+    required: [true, 'Description cannot be empty']
   },
   tags: [{
-    type: String
+    type: String,
+    required: [true, 'You must add at least one topic']
   }],
   image: {
     type: String

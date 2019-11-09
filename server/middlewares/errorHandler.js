@@ -1,5 +1,5 @@
 module.exports = (err, req, res, next) => {
-  console.log(err)
+  console.log(err.message)
   let messages = []
   if(err.name === 'ValidationError') {
     err.status = 400
@@ -13,6 +13,9 @@ module.exports = (err, req, res, next) => {
   } else if(err.name === 'JsonWebTokenError') {
     err.status = 401
     messages.push(`You have to login first`)
+  } else if(err.message === `Cannot read property 'originalname' of undefined`) {
+    err.status = 400
+    messages.push(`You have to upload an image`)
   } else if(err.msg) {
     messages.push(err.msg)
   } else {
