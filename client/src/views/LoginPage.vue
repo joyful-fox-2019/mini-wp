@@ -17,7 +17,7 @@
           <div class="col-md-6">
             <div class="row">
               <div class="col-md-3"></div>
-              <div class="col-md-6 pt-5 mt-5">
+              <div class="col-md-6 pt-5">
                 <!-- LOGIN -->
                 <LoginForm :loginForm="loginForm" @user-login="userLogin"></LoginForm>
                 <!-- LOGIN -->
@@ -47,7 +47,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const server = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: "http://35.197.134.160"
 });
 
 export default {
@@ -136,7 +136,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login-page {
   background-color: #245a72;
   padding-top: 0;

@@ -91,7 +91,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const server = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: "http://35.197.134.160"
 });
 
 export default {

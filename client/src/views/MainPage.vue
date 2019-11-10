@@ -9,7 +9,7 @@
           <div class="col-md-2 sidebar-div">
             <Sidebar @show-all-articles="showAllArticles"></Sidebar>
           </div>
-          <div class="col-md-10 mt-5 miniwp-content" style="margin-left: 15vw;">
+          <div class="col-md-10 mt-2 miniwp-content" style="margin-left: 15vw;">
             <Dashboard
               @show-published-articles="showPublishedArticles"
               @show-draft-articles="showDraftArticles"
@@ -107,7 +107,7 @@ import moment from "moment";
 import Swal from "sweetalert2";
 
 const server = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: "http://35.197.134.160"
 });
 
 export default {
@@ -269,7 +269,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .main-page {
   background-color: #dde7ee;
 }

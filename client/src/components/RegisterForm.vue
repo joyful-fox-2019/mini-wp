@@ -80,7 +80,7 @@ export default {
     return {
       googleSignInParams: {
         client_id:
-          "1078628271395-d3820433486ltb3kth110ohp95qn0hsh.apps.googleusercontent.com"
+          "384105640106-lbc4qa1jd56r4hgtcfblmt50cijg33qe.apps.googleusercontent.com"
       },
       name: '',
       email: '',
