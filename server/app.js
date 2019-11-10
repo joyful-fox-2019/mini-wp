@@ -1,21 +1,31 @@
-require('dotenv').config()
-const express = require('express')
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config()
+}
+
 const mongoose = require('mongoose')
+const express = require('express')
+const logger = require('morgan')
 const cors = require('cors')
 
-const PORT = process.env.PORT || 3000
-const DB_URI = 'mongodb://localhost/mini-wp-luky'
+const PORT = process.env.PORT
+const DB_URI = process.env.MONGODB_URL
+
 const routes = require('./routes')
+const errorHandler = require('./middlewares/errorHandler')
 
 const app = express()
-app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(logger('dev'))
+app.use(cors())
 
-mongoose.connect(DB_URI, {
-  useNewUrlParser: true, useUnifiedTopology: true,
-  useCreateIndex: true, useFindAndModify: false
-})
+mongoose
+  .connect(DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
   .then(() => {
     console.log('connected to mongodb')
   })
@@ -23,12 +33,9 @@ mongoose.connect(DB_URI, {
     console.log('could not connect to mongodb')
   })
 
-app.get('/hello', (req, res) => {
-  res.send('Hello World')
-})
-
 app.use('/', routes)
+app.use(errorHandler)
+
 app.listen(PORT, () => {
   console.log('listening to port ' + PORT)
 })
-

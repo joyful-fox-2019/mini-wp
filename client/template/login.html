@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-signin-client_id"
+    content="1078628271395-d3820433486ltb3kth110ohp95qn0hsh.apps.googleusercontent.com">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body style="background-color: #245a72;">
+  <div>
+    <header>
+      <nav class="menubar">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-md-2 d-flex">
+            </div>
+            <div class="col-md-10 text-right">
+              <a type="button" class="navbar-brand navbar-head py-2 px-3" style="color: white">
+                <i class="fas fa-user-plus"></i>
+                <span class="text-link"> Sign Up</span>
+              </a>
+              <a type="button" class="navbar-brand navbar-head py-2 px-3" style="color: white">
+                <i class="fas fa-door-open"></i>
+                <span class="text-link"> Login</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container-fluid" style="margin-top: 6vh">
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-3">
+              </div>
+              <div class="col-md-6 pt-5">
+                <!-- LOGIN -->
+
+                <div class="container" id="login-content" style="display: none">
+                  <div class="row justify-content-center mb-2">
+                    <h2 style="color: white"><i class="fas fa-bacon"></i>&nbsp; Hacktiv WP</h2>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <h4 style="color: white">Log into your account</h4>
+                  </div>
+                  <div class="row justify-content-center">
+                    <form id="register-form"
+                      style="background-color: white; color: black; width: 20vw; padding: 3rem; border-radius: 0.5rem;">
+                      <div class="form-group">
+                        <label for="email">Your email address</label>
+                        <input type="email" class="form-control" id="register-email" placeholder="Email">
+                      </div>
+                      <div class="form-group">
+                        <label for="password">Your password</label>
+                        <input type="password" class="form-control" id="register-password" placeholder="Password">
+                      </div>
+                      <button type="submit" class="btn btn-light mt-3"
+                        style="width: 100%; background-color: #fc5a8d; color: white; border-radius: 0.5rem;">Login</button>
+                    </form>
+                  </div>
+                </div>
+                <!-- LOGIN -->
+                <!-- REGISTER -->
+                <div class="container" id="register-content">
+                  <div class="row justify-content-center mb-2">
+                    <h2 style="color: white"><i class="fas fa-bacon"></i>&nbsp; Hacktiv WP</h2>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <h4 style="color: white">Let's Get Started</h4>
+                  </div>
+                  <div class="row justify-content-center">
+                    <form id="register-form"
+                      style="background-color: white; color: black; width: 20vw; padding: 3rem; border-radius: 0.5rem;">
+                      <div class="form-group">
+                        <label for="name">Your name</label>
+                        <input type="text" class="form-control" id="register-name" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Your email address</label>
+                        <input type="email" class="form-control" id="register-email" placeholder="Email">
+                      </div>
+                      <div class="form-group">
+                        <label for="password">Your password</label>
+                        <input type="password" class="form-control" id="register-password" placeholder="Password">
+                      </div>
+                      <button type="submit" class="btn btn-light mt-3"
+                        style="width: 100%; background-color: #fc5a8d; color: white; border-radius: 0.5rem;">Register</button>
+                    </form>
+                  </div>
+                  <div class="row justify-content-center">
+                    <span class="nav-link active" style="color: white">Or, create account using</span>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="g-signin2 pb-5" data-onsuccess="onSignIn" data-width="300" data-longtitle="true"></div>
+                  </div>
+                </div>
+                <!-- REGISTER -->
+              </div>
+              <div class="col-md-3">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+
+</html>

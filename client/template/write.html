@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400, 600, 800, 900' rel='stylesheet' type='text/css'>
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body style="background-color: white">
+  <div>
+    <header>
+      <nav class="menubar">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-md-2 d-flex">
+              <a type="button" class="navbar-brand py-2 px-3" style="color: white; margin-left: -1rem">
+                <i class="fas fa-bacon"></i>
+                <span>&nbsp; Hacktiv WP</span>
+              </a>
+            </div>
+            <div class="col-md-10 text-right">
+              <a type="button" class="navbar-brand navbar-head py-1 px-2 mr-3"
+                style="background-color: white; color: #245a72; border-radius: 5px">
+                <i class="far fa-edit"></i>
+                <span class="text-link">&nbsp; Write</span>
+              </a>
+              <a type="button" class="navbar-brand navbar-head py-2 px-3" style="color: white">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="text-link">&nbsp; Sign Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2 sidebar-div">
+            <nav class="sidebar">
+              <div class="btn-group-vertical text-left" style="width: 100%">
+                <div class="card container" style="border: none">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size: 1.2rem">lukywinata.hacktivwp.com</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 1.2rem">Luky Winata</h6>
+                  </div>
+                </div>
+                <a type="button" class="btn-side btn btn-light" style="font-size: 1.2rem"><i
+                    class="fas fa-history mr-2"></i>Activity</a>
+              </div>
+            </nav>
+          </div>
+          <div class="col-md-10 mt-0 miniwp-content" style="margin-left: 18vw; color: black;">
+            <div class="content-list ml-5" style="margin-top: 10vh; width: 80%;">
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputPassword" placeholder="Title">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Tags</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputPassword" placeholder="Tags">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Content</label>
+                <div class="col-sm-10" style="height: 50vh;">
+                  <div id="editor">
+                    <p>Hello World!</p>
+                    <p><br></p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row" style="margin-top: 6vh">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Featured Image</label>
+                <div class="col-sm-10">
+                  <div class="addphoto">
+                    <img
+                      src="https://i2.wp.com/www.scribblesandcrumbs.com/wp-content/plugins/penci-portfolio//images/no-thumbnail.jpg?w=1170"
+                      alt="" width="200">
+                    <div class="fileUpload white-btn btn width100 ml-3" style="margin-top: -5.5rem">
+                      <span>Upload Your Featured Image</span>
+                      <input type="file" class="uploadlogo" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row flex-row-reverse mb-5 mt-0 mr-5">
+                <button type="button" class="btn btn-outline-dark">Submit to Draft</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <!-- Include the Quill library -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <!-- Initialize Quill editor -->
+  <script>
+    var quill = new Quill('#editor', {
+      theme: 'snow'
+    });
+  </script>
+</body>
+
+</html>
