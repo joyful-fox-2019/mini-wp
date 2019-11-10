@@ -1,7 +1,7 @@
 <template>
   <section class="container-fluid" id="mainPage">
     <section class="col-12 container section">
-      <div class="d-flex flex-column w-75 mx-auto mt-5">
+      <div class="d-flex flex-column w-75 mx-auto my-5">
         <div id="title">
           <h3>{{ siteName }}</h3>
           <p>My site description</p>
@@ -17,14 +17,16 @@
         <div class="dropdown-divider"></div>
         <div class="card my-3" v-for="article in filteredArticles" :key="article.id">
           <div class="card-body">
-            <div class="card-title">
+            <div class="card-title d-flex justify-content-between my-0">
               <h3>
-                {{ article.title }}
-                <small>{{ article.status }}</small>
+                <a href>{{ article.title }}</a>
               </h3>
+              <small class="text-right">{{ article.status }}</small>
             </div>
-            <small class="text-muted">{{ article.updated_at }}</small>
-            <div v-html="article.content"></div>
+            <small class="text-muted d-block mb-4">Last updated: {{ article.updated_at }}</small>
+            <div
+              v-html="article.content.slice(0, Math.min(article.content.indexOf('</p>'), article.content.indexOf('<img')))"
+            ></div>
           </div>
         </div>
       </div>
@@ -34,6 +36,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 const http = axios.create({
   baseURL: "http://localhost:3000"
 });
@@ -74,7 +77,10 @@ export default {
       }
     })
       .then(({ data }) => {
-        this.articles = data.articles;
+        this.articles = data.articles.map(article => {
+          article.updated_at = moment(article.updated_at).fromNow();
+          return article;
+        });
       })
       .catch(err => console.log(err));
   }

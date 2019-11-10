@@ -1,0 +1,12 @@
+{
+	"type": "service_account",
+	"project_id": "hacktiv8-projects-258605",
+	"private_key_id": "82fbf106aee9b6215192970eeedd3e5c5690efd9",
+	"private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCu9zc0/+abNsK9\n15MWAxxIbqM7RijKoB4eQQ2ZQDIBqyIHeC2XslB2gtRq+Ke/X3W/3G+uRb1xARDY\njL10lgtMhIkEo4potyKbgXgLkOXs9ziu2Uigqyiry7f/EIAISqiHlJJA94vcZhMq\nAZoEeMTWcjWqj/DdADh3svecIei+QgXvNEp2809+LlSRPwE+eM9p46GSnB7XHU82\nvsz4iOprEX1kcg/EXHHWjY5D5ygq56FFBQ9FPZp4NgBHRrjXbH68xIb/dI20uAdd\nahuUkxiBojYWpafm8pW095rnkCE39/X3sV7M7PBB6Kc7u+KjoaTo7GSuud5Yv7ho\ncHAig5vXAgMBAAECggEAEo2he4vFQuFALkxdSwDCb4XX5lGuwqnO98tTK1SM2PNy\nNNOQFh1w/dgquTsr4pW3UUSJTTQU/hYsWKI39tRwV0lYlDbZVvhQgafteGCBmSqw\nBo6A7pSnx+ve03vG79om29Wr2prFaHYkgxhPYjkCOnE68p633l+HHV5LdnF8EiyW\nOtUXFmUhIFeKDxDFQFXvEd3h/XY1a82DuC090Zq8fT8ViysKFZhyVGZvbnNkC064\nmcw+kkb7kue85ZQeJ/v28hL7dTBOU+Z27An8vCky+o0JJSDfqke9z7vsEqti2Uf8\n1Ot1QQLSV7mG5arP0hzyatUsgoavf+iAbVTc9pA7wQKBgQDXxe1LDRAR0n3zoIi9\neaiJIlEnwqXWK/iJv0Ol/6j9ZmUwCWr6NJpJAX0cuJSgjWMlT8Ys4dZKvQWPNvhG\nG1YYqcEueI5IScogs2QM2TUOAE3FYCm737yYWrQZ3PlsHrldSax6KMNqxe5q16aj\nYLnFkhgdPA25fbAhE2im1EypwQKBgQDPlbIfiUPTw8r12cmAH2Oul2ZsgF40s82A\n1P5ihnAfHhHQlCi5xtjownhZWK2EjO5W2AVi5N2oCLhSqU8jsmBe0N/ji09sG4jO\n1JLuZt2CzmSH6gl5+X4Tnx9IJJjmB9hQVb8d+r7FzOByBMvB44ZAtT1TfIAyPhj9\nneI4USw7lwKBgQDHX6+fRXavwRt4XcF7sko0TG1Im+a4OvDv9rb/T3hKjK668DjU\n8H4PLzz3qOZMY9hUxZ2MIzDq5jWY22YVAXVQXKqP0f1Gdkg6Zwfvh1Qql8VEt1JY\nsqeE72qy6yfc65bDyCuCxN+sbS+bsZ/cHqgJErENckwMNULljRWJ8WjVAQKBgFqV\n8agPZ3jmzQ/iHSt7By3uRbT9g56uA/S/fc8S6aS6o32I2gjP/GH+UzRyHS5lrbBa\nDmeshgnI3F6+IZnrQmC996W9akg778SKQSAl5W4qkPY6rC39MQZw/t6lkc94Bu5v\nrLnxbQS2Ng+rhhszJafhL0TaZLsIHDG4jzqSOaI7AoGAeBR6RN17YQmo0131xjUq\nKJm0u/sJaTV0MN1MIc/B+qWf0EDULlDy/OVx5ubt1j9GRRoWTCWVkAAowjE8xV2/\nWVLH6SzPZ78uyXHKnSfZlMdt5uH/uvLtBT+28WibE0FqA8/Xl8n7ZfrEarvIDt1J\ndzcmxUKTXYZSxG/x7sR6duY=\n-----END PRIVATE KEY-----\n",
+	"client_email": "mini-wp-bucket@hacktiv8-projects-258605.iam.gserviceaccount.com",
+	"client_id": "111128422386309925773",
+	"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+	"token_uri": "https://oauth2.googleapis.com/token",
+	"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+	"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mini-wp-bucket%40hacktiv8-projects-258605.iam.gserviceaccount.com"
+}

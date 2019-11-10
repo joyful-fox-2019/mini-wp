@@ -29,15 +29,13 @@
 // import QuillEditor from "./QuillEditor";
 import Quill from "quill";
 import axios from "axios";
+// import FormData from "form-data";
 
 const http = axios.create({
   baseURL: "http://localhost:3000"
 });
 
 export default {
-  components: {
-    QuillEditor
-  },
   data() {
     return {
       titleFocused: false,
@@ -48,26 +46,79 @@ export default {
   },
   methods: {
     post() {
-      http({
-        method: "post",
-        url: "articles",
-        data: {
-          title: this.title,
-          content: this.content,
-          status: "posted"
-        },
-        headers: {
-          access_token: localStorage.getItem("access_token")
-        }
-      }).then(({ data }) => {
-        console.log(data.message);
-        this.$emit("switch-page", "dashboard");
-      });
+      if (!this.title) {
+        swal.fire("Warning", "Article title cannot empty!", "warning");
+      } else {
+        http({
+          method: "post",
+          url: "articles",
+          data: {
+            title: this.title,
+            content: this.content,
+            status: "posted"
+          },
+          headers: {
+            access_token: localStorage.getItem("access_token")
+          }
+        }).then(({ data }) => {
+          console.log(data.message);
+          this.$emit("switch-page", "dashboard");
+        });
+      }
     },
-    save() {},
-    cancel() {},
+    save() {
+      if (!this.title) {
+        swal.fire("Warning", "Article title cannot empty!", "warning");
+      } else {
+        http({
+          method: "post",
+          url: "articles",
+          data: {
+            title: this.title,
+            content: this.content,
+            status: "draft"
+          },
+          headers: {
+            access_token: localStorage.getItem("access_token")
+          }
+        }).then(({ data }) => {
+          console.log(data.message);
+          this.$emit("switch-page", "dashboard");
+        });
+      }
+    },
+    cancel() {
+      swal.fire("are you sure?");
+    },
     update() {
       this.content = this.editor.getText() ? this.editor.root.innerHTML : "";
+    },
+    imgHandler() {
+      const input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*");
+      input.click();
+      input.onchange = () => {
+        const file = input.files[0];
+        console.log("User trying to uplaod this:", file);
+        const data = new FormData();
+        data.append("image", file);
+
+        http({
+          method: "post",
+          url: "upload",
+          data
+        })
+          .then(({ data }) => {
+            const range = this.editor.getSelection();
+            const link = `${data.link}`;
+            this.editor.insertEmbed(range.index, "image", link);
+          })
+          .catch(err => console.log(err));
+
+        // this part the image is inserted
+        // by 'image' option below, you just have to put src(link) of img here.
+      };
     }
   },
   // computed: {
@@ -83,11 +134,16 @@ export default {
   mounted() {
     this.editor = new Quill("#quill-container", {
       modules: {
-        toolbar: [
-          [{ header: [1, 2, false] }],
-          ["bold", "italic", "underline"],
-          ["image", "code-block"]
-        ]
+        toolbar: {
+          container: [
+            [{ header: [1, 2, false] }],
+            ["bold", "italic", "underline"],
+            ["image", "code-block"]
+          ],
+          handlers: {
+            image: this.imgHandler
+          }
+        }
       },
       scrollingContainer: "#quill-container",
       placeholder: "Start your writing journey...",

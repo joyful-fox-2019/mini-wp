@@ -6,9 +6,9 @@ class UserController {
 	static signIn(req, res, next) {
 		User.findOne({ $or: [{ username: req.body.emailUsername }, { email: req.body.emailUsername }] })
 			.then(user => {
+				if (!user.password) throw { status: 401, message: 'Email registered by third party' };
 				try {
 					if (user && verify(req.body.password, user.password)) {
-						console.log('benar');
 						const access_token = encode(user);
 						res.status(200).json({
 							message: 'Signed in',

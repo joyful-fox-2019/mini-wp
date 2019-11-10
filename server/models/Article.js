@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const moment = require('moment');
 
 const articleSchema = new Schema({
 	title: {
@@ -20,12 +21,12 @@ const articleSchema = new Schema({
 	created_at: {
 		type: Date,
 		required: true,
-		default: new Date()
+		default: moment()
 	},
 	updated_at: {
 		type: Date,
 		required: true,
-		default: new Date()
+		default: moment()
 	}
 });
 

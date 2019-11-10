@@ -1,4 +1,5 @@
 module.exports = {
 	UserController: require('./user'),
-	ArticleController: require('./article')
+	ArticleController: require('./article'),
+	ImageController: require('./image')
 };
