@@ -101,6 +101,14 @@ Features:
     }
     ```
 
+### **Google Login/Sign Up**
+
+- **URL:** `/users/googleSignIn`
+
+- **Method:** `POST`
+
+- Just click the Google Sign In button and let the ✨magic✨happen, auto-generate a token to let you use the web app instantly ✨
+
 # ARTICLE
 These endpoints require user authentication
 

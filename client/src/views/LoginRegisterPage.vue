@@ -1,14 +1,19 @@
 <template>
+  <div>
     <LoginRegisterForm @set-login="setLogin"></LoginRegisterForm>
+    <GoogleSignInButton @set-login="setLogin"></GoogleSignInButton>
+  </div>
 </template>
 
 <script>
 import LoginRegisterForm from "../components/LoginRegisterForm"
+import GoogleSignInButton from "../components/GoogleSignIn";
 
 export default {
     name: "LoginRegisterPage",
     components: {
-        LoginRegisterForm
+        LoginRegisterForm,
+        GoogleSignInButton
     },
     methods: {
         setLogin() {
