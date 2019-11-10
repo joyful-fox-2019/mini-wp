@@ -1,3 +1,13 @@
+# DEPLOY LINK
+
+
+## API-DOCUMENTATION (use apiary)
+https://miniwordpress1.docs.apiary.io/
+
+
+---------------------------------------------------------
+
+
 FORMAT: 1A
 HOST: http://localhost:3000/
 
