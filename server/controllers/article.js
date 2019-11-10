@@ -6,6 +6,7 @@ class ArticleController {
         Article.find({
             status: true
         })
+        .populate("UserId", "-password")
         .sort({
             createdAt: "DESC"
         })
@@ -20,6 +21,7 @@ class ArticleController {
         Article.find({
             UserId: req.user._id
         })
+        .populate("UserId", "-password")
         .sort({
             createdAt: "DESC"
         })
@@ -32,6 +34,7 @@ class ArticleController {
     }
     static findOne (req, res, next) {
         Article.findById(req.params.id)
+        .populate("UserId", "-password")
         .then((article) => {
             res.status(200).json(article);
         })
@@ -59,6 +62,7 @@ class ArticleController {
                 res.status(201).json(article);
             })
             .catch((err) => {
+                gcsDelete(req.file.cloudStoragePublicUrl);
                 next(err);
             });
         } 

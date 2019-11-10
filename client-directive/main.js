@@ -31,6 +31,9 @@ const app = new Vue ({
                 data: {
                     email: this.email,
                     password: this.password
+                },
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
                 }
             })
             .then((response) => {
