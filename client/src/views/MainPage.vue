@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid d-flex">
         <div class="side-bar d-flex flex-column">
-            <sidebar></sidebar>
+            <sidebar @create-article="createArticle" @home-page="homePage"></sidebar>
         </div>
         <div class="content-page">
-            <contentpage></contentpage>
+            <contentpage v-bind:article="this.isArticle"></contentpage>
         </div>
     </div>
 </template>
@@ -13,6 +13,7 @@
 import sidebar from '../components/SideBar'
 import contentpage from '../components/Content'
 import createarticle from '../components/CreateArticle'
+import axios from 'axios'
 
 export default {
     components:{
@@ -21,6 +22,15 @@ export default {
     },
     data(){
         return {
+            isArticle: false,
+        }
+    },
+    methods:{
+        createArticle(){
+            this.isArticle = true
+        },
+        homePage(){
+            this.isArticle = false
         }
     }
 }

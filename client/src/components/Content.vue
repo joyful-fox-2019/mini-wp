@@ -13,18 +13,18 @@
                 </div>
             </nav>
         </div>
-        <div class="w-100 container main-content d-flex flex-column align-items-center">
+        <div class="w-100 container main-content d-flex flex-column align-items-center" v-for="(data, index) in articles" :key="index">
             <!-- Card For Article -->
             <div v-if="!article">
                 <div class="card m-3">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="../img/homepage.jpg" class="card-img" alt="article">
+                            <img src="https://image.freepik.com/free-photo/education-concept-student-studying-brainstorming-campus-concept-close-up-students-discussing-their-subject-books-textbooks-selective-focus_1418-626.jpg" class="card-img" alt="article">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title">{{ data.title }}</h5>
+                                <p class="card-text">{{ data.content }}</p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                             <div class="container">
@@ -45,15 +45,38 @@
 <script>
 
 import createarticle from './CreateArticle'
+import axios from 'axios'
 
 export default {
     components:{
         createarticle
     },
+    props : ['article'],
     data(){
         return {
-            article: true
+            baseUrl: `http://localhost:3000`,
+            articles: []
         }
+    },
+    methods:{
+        fetchingDataArticle(){
+            axios({
+                url: `${this.baseUrl}/articles`,
+                method: 'GET',
+                headers:{
+                    access_token: localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                this.articles = response.data
+                console.log(this.articles)
+            })
+            .catch(err => {
+            })
+        }
+    },
+    created(){
+        this.fetchingDataArticle()
     }
 }
 </script>
