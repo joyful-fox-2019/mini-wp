@@ -1,10 +1,14 @@
 # myMiniWordpress
 
 ------
+**Deploy URL:**
+
+https://myminiwp.nadhiljanitra.xyz
 
 **Base URL:**
 
 https://myminiwp-server.nadhiljanitra.xyz
+
 
 **User routes:**
 
