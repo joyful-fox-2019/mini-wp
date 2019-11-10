@@ -43,7 +43,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://venus.sufrendo.com:3000/articles/",
+        url: "http://venus.sufrendo.com/articles/",
         data: formData,
         headers: {
           token: localStorage.getItem("token")

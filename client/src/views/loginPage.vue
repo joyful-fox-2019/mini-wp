@@ -41,7 +41,7 @@ export default {
     login() {
       axios({
         method: "post",
-        url: "http://venus.sufrendo.com:3000/login",
+        url: "http://venus.sufrendo.com/login",
         data: {
           email: this.user_email,
           password: this.user_password
@@ -61,7 +61,7 @@ export default {
     register() {
       axios({
         method: "post",
-        url: "http://venus.sufrendo.com:3000/register",
+        url: "http://venus.sufrendo.com/register",
         data: {
           email: this.user_email,
           password: this.user_password

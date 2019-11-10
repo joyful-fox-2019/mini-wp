@@ -72,7 +72,7 @@ export default {
     getArticles() {
       axios({
         method: "get",
-        url: `http://venus.sufrendo.com:3000/articles`,
+        url: `http://venus.sufrendo.com/articles`,
         headers:{
           token: localStorage.getItem('token')
         }
@@ -95,7 +95,7 @@ export default {
     deleteArticle(id){
       axios({
         method:"delete",
-        url:`http://venus.sufrendo.com:3000/articles/${id}`,
+        url:`http://venus.sufrendo.com/articles/${id}`,
         headers:{
           token: localStorage.getItem('token')
         }
