@@ -35,7 +35,8 @@
             :description="data.description"
             :date="data.createdAt"
             :title="data.title"
-            v-on:click.native="toArticle(data._id)"
+            :id="data._id"
+            v-on:click.native="toArticle(data.slug)"
           ></Articleitem>
         </b-col>
         <b-col class="d-none d-sm-block" md="4">
@@ -45,6 +46,17 @@
           ></Taglist>
         </b-col>
       </b-row>
+      <b-row>
+      <b-col md="6" class="my-1">
+        <b-pagination
+          @change="onPageChanged"
+          :total-rows="totalRows"
+          :per-page="perPage"
+          v-model="currentPage"
+          class="my-0"
+        />
+      </b-col>
+    </b-row>
     </b-container>
     <b-container fluid class="p-0 mt-1 mt-md-4">
       <Footeritem
@@ -70,13 +82,31 @@ export default {
   data(){
     return{
       articleData: [],
-      tagData: []
+      tagData: [],
+      currentPage: 1,
+      perPage: 8,
+      totalRows: 1,
+      items: []
     }
   },
+  mounted() {
+    this.paginate(this.perPage, 0);
+  },
   methods:{
-    toArticle(id){
+    paginate(page_size, page_number) {
+      let itemsToParse = this.items;
+      this.articleData = itemsToParse.slice(
+        page_number * page_size,
+        (page_number + 1) * page_size
+      );
+    },
+    onPageChanged(page) {
+      console.log(this.articleData)
+      this.paginate(this.perPage, page - 1);
+    },
+    toArticle(slug){
       console.log("masuk")
-      this.$router.push({path:`/article/${id}`})
+      this.$router.push({path:`/article/${slug}`})
     },
     fetchDataArticle(){
       axios({
@@ -85,7 +115,10 @@ export default {
       })
       .then(({ data }) => {
         console.log(data)
+        this.items = data
         this.articleData = data
+        this.totalRows = data.length
+        this.paginate(this.perPage, 0);
       })
       .catch(err => {
         console.log(err.response.data)

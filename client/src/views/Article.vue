@@ -21,7 +21,10 @@
       </b-col>
     </b-row>
   </b-container>
-  <Footeritem class="mt-4 mt-md-4 footerX"></Footeritem>
+  <b-container fluid class="p-0 mt-1 mt-md-4">
+      <Footeritem
+      ></Footeritem>
+    </b-container>
   </div>
 </template>
 
@@ -49,8 +52,9 @@ export default {
   },
   methods:{
     fetchArticle(){
+      console.log("masuk ke slug",this.$route.params.slug)
       axios({
-        url: `/articles/findArticle/${this.$route.params.id}`,
+        url: `/articles/findArticle/${this.$route.params.slug}`,
         method: 'get'
       })
       .then(({ data }) => {
@@ -97,8 +101,5 @@ export default {
     width: 100%;
     height: auto;
   }
-  .footerX {
-    position:fixed;
-    bottom:0;
-  }
+  
 </style>

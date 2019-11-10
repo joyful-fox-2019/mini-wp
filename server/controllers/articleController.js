@@ -52,9 +52,9 @@ class ArticleController {
   }
 
   static async findArticle (req,res,next) {
-    const { _id } = req.params //ArticleId
+    const { slug } = req.params //ArticleId
     try{
-      const articleData = await Article.findOne({ _id }).populate('UserId')
+      const articleData = await Article.findOne({ slug }).populate('UserId')
       res.status(200).json(articleData)
     }
     catch(err){
@@ -72,9 +72,13 @@ class ArticleController {
         finalTags.push(arrayTags[i].trim())
       }
     }
+    let nDate = new Date()
+    let slugDate = String(nDate.toLocaleDateString())
+    let tempTitle = title.split(' ')
+    let slug = slugDate.split('/').join('') + '-' + tempTitle.join('-') + ''
     try{
       const { _id } = req.loggedUser
-      const data = await Article.create({ UserId:_id,title,description,tags:finalTags,imgUrl })
+      const data = await Article.create({ UserId:_id,title,description,tags:finalTags,imgUrl,slug })
       res.status(201).json(data)
     }
     catch(err){
@@ -127,7 +131,11 @@ class ArticleController {
           finalTags.push(arrayTags[i].trim())
         }
       }
-      const data = await Article.updateOne({ _id },{ imgUrl,title,description,tags:finalTags })
+      let nDate = new Date()
+      let slugDate = String(nDate.toLocaleDateString())
+      let tempTitle = title.split(' ')
+      let slug = slugDate.split('/').join('') + '-' + tempTitle.join('-') + ''
+      const data = await Article.updateOne({ _id },{ imgUrl,title,description,tags:finalTags,slug })
       res.status(200).json(data)
     }
     catch(err){

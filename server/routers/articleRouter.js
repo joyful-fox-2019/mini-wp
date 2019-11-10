@@ -14,7 +14,8 @@ const upload = gcsUpload({
 })
 
 router.get('/', ArticleController.allArticle)
-router.get('/findArticle/:_id', ArticleController.findArticle)
+router.get('/findArticle/:slug', ArticleController.findArticle)
+
 router.get('/tagCounter', ArticleController.tagsCounter)
 router.get('/tagSearch/:tag', ArticleController.searchByTag)
 

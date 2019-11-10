@@ -19,7 +19,7 @@
             :description="data.description"
             :date="data.createdAt"
             :title="data.title"
-            v-on:click.native="toArticle(data._id)"
+            v-on:click.native="toArticle(data.slug)"
           ></Articleitem>
         </b-col>
         <b-col class="d-none d-sm-block" md="4">
@@ -56,9 +56,9 @@ export default {
     }
   },
   methods:{
-    toArticle(id){
+    toArticle(slug){
       console.log("masuk")
-      this.$router.push({path:`/article/${id}`})
+      this.$router.push({path:`/article/${slug}`})
     },
     searchArticleByTag(tag){
       axios({
