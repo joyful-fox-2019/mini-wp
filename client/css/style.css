@@ -1,0 +1,315 @@
+@charset "UTF-8";
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.loginForm {
+	padding: 0;
+	margin: 0;
+	font-family: "Raleway", "Arial", "sans-serif";
+    background-color: #b1acac;
+}
+
+.section-login {
+    height: 100%;
+    margin: 0;
+    padding: 0 30px 25px;
+}
+
+.header-login {
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 120px;
+} 
+
+.logo {
+    display: block;
+    max-width: 12%;
+    max-height: 12%;
+    min-height: 67.28px;
+    min-width: 133.8px;
+    margin: 0 auto;
+    padding: 20px 0 20px 0;
+}
+
+/* Tri-color border*/
+
+.border {
+    width: 100%;
+    height: 3px;
+    position: relative;
+    text-align: center;
+}
+
+.border:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, /*blue*/#3c7bbe, #3c7bbe 33.3%, /*orange*/#f5a623 33.3%, #f5a623 66.9%, /*green*/#7ac54d 33.3%);
+}
+
+/* Sign up / Registration Form */
+
+.form .register {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 8px;
+    box-shadow: 4px 3px 3px #b4b4b4;
+}
+
+.register p {
+    margin: 0;
+    text-align: center;
+    line-height: 1.8em;
+    font-size: 1em;
+    color: #8e8e8e;
+}
+
+.register p a {
+    color: #3c7bbe;
+}
+
+.register p a:hover {
+    color: #7ac54d;
+}
+
+.register p a:visited {
+    color: #8e8e8e;
+}
+
+#password {
+    margin-bottom: 20px;
+}
+
+#confirm-password {
+    margin-bottom: 25px;
+}
+
+/* Button */
+
+.reg-btn {
+    width: 100%;
+    padding: 10px 8px;
+    border-radius: 4px;
+    background-color: #7ac54d;
+    border: none;
+    color: #fff;
+    font-size: 1.05em;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.reg-btn:hover {
+    background-color: #8fda62;
+}
+
+.reg-btn:active {
+    vertical-align: top;
+    padding: 11px 8px 9px;
+}
+
+/* Sign in Form */
+
+.signin {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
+    display: block;
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 8px;
+    box-shadow: 4px 3px 3px #b4b4b4;
+}
+
+.h1-login {
+    margin: 0;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.2em;
+    /*text-transform: uppercase;*/
+    color: #3c7bbe;
+    letter-spacing: .5px;
+}
+
+.signin p {
+    margin: 0;
+    text-align: center;
+    line-height: 1.8em;
+    font-size: 1em;
+    color: #8e8e8e;
+}
+
+.signin p a {
+    color: #3c7bbe;
+}
+
+.signin p a:hover {
+    color: #7ac54d;
+}
+
+.signin p a:visited {
+    color: #8e8e8e;
+}
+
+/* Styles input fields */
+
+.field {
+    display: inline-block;
+    width: 100%;
+    margin: 5px 0 20px;
+    padding: 10px 8px;
+    border: 1px solid #b4b4b4;
+    border-radius: 4px;
+    font-size: 1em;
+    font-family: 'Raleway', 'Arial', 'sans-serif';
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+input[type=password] {
+    margin-bottom: 10px
+}
+
+
+label[for=input] {
+    display: block;
+    text-transform: uppercase;
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #8e8e8e;
+}
+
+::-webkit-input-placeholder {
+  font-size: 1em;
+    color: #e5e5e5;
+    font-family: 'Raleway', 'Arial', 'sans-serif';
+    letter-spacing: 1px;
+}
+
+form .form-item:first-child {
+    margin-top: 30px;
+}
+
+/* Styles checkbox */
+
+#cbox1 {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #b4b4b4;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+label[for=cbox1] {
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: #8e8e8e;
+}
+
+/* Button */
+
+.signin-btn {
+    width: 100%;
+    padding: 10px 8px;
+    border-radius: 4px;
+    background-color: #3c7bbe;
+    border: none;
+    color: #fff;
+    font-size: 1.05em;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.signin-btn:hover {
+    background-color: #4c8fd7;
+}
+
+.signin-btn:active {
+    vertical-align: top;
+    padding: 11px 8px 9px;
+}
+
+/* Reset password link */
+
+.forgot {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 12px;
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: #3c7bbe;
+}
+
+.forgot:hover {
+    color: #7ac54d;
+}
+
+.forgot:visited {
+    color: #8e8e8e;
+}
+
+/* After form legal stuffs */
+
+.legal-container {
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0 auto;
+    padding-top: 250px
+}
+
+.privacy {
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: #8e8e8e;
+    letter-spacing: 1px;
+}
+
+.terms {
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: #8e8e8e;
+    letter-spacing: 1px;
+    float: right;
+}
+
+/* Copyright */
+
+h2 {
+    margin: 0;
+    padding-top: 35px;
+    text-align: center;
+    font-size: .8em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #8e8e8e;
+}
+
+/* Little added repsonsiveness to form title */
+
+@media only screen and (max-width : 500px) and (min-width : 320px) {
+    h1 {
+        font-size: 1.05em;
+    }
+    
+    .signin p {
+        font-size: .9em;
+    }
+    
+    .register p {
+        font-size: .9em;
+    }
+}
