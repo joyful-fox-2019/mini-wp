@@ -1,10 +1,12 @@
 <template>
   <div class="main-content flex flex-wrap justify-center" style="overflow: auto; height: 90vh;">
     <div class="w-full flex justify-center" style="height: 50px">
-      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="sort ? 'bg-green-500' : 'bg-green-300'" @click="topArticles">Top</button>
-      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="!sort ? 'bg-green-500' : 'bg-green-300'" @click="newestArticles">Newest</button>      
+      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="!sort && !mine? 'bg-green-500' : 'bg-green-300'" @click="newestArticles">Newest</button>      
+      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="sort && !mine? 'bg-green-500' : 'bg-green-300'" @click="topArticles">Top</button>
+      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="mine? 'bg-green-500' : 'bg-green-300'" @click="myArticles">Mine</button>      
     </div>
-    <div v-for="article in articles" :key="article._id" class="article-card flex-column w-4/5 md:w-1/3 m-8 rounded shadow-2xl" style="height: 70vh;">
+    <div v-show="articles.length === 0">No data found</div>
+    <div v-for="article in articles" :key="article._id" class="article-card flex-column w-4/5 md:w-1/3 m-8 rounded shadow-2xl" style="max-height: 80vh;">
       <div class="flex border border-gray-500 pic-frame" style="height: 50%;">
         <img :src="article.image ? article.image : defaultPic " alt="image" style="object-fit: contain; margin: 0 auto; height: 100%;">
       </div>
@@ -32,15 +34,18 @@ export default {
     return {
       defaultPic: 'https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png',
       articles : [],
-      sort: null
+      sort: null,
+      mine: false
     }
   },
   props: ['keyword'],
   methods: {
     topArticles () {
+      this.mine = false
       this.sort = '&sort=popular'
     },
     newestArticles () {
+      this.mine = false
       this.sort = null
       if(this.keyword){
         this.getArticles(this.keyword)
@@ -50,6 +55,10 @@ export default {
     },
     setTag(tag) {
       this.keyword = tag
+    },
+    myArticles () {
+      this.mine = true
+      this.getArticles()
     },
     getArticles (query) {
       let keyword = ''
@@ -62,6 +71,7 @@ export default {
       }
 
       if(this.sort) url += `${this.sort}`
+      if(this.mine) url += '&whose=mine'
       console.log(url);
       axios({
         method: 'GET',
@@ -71,13 +81,7 @@ export default {
         }
       })
       .then(({ data }) => {
-        if(data.length>0){
-          // this.$noty.success('loading..', {timeout: 1000})
           this.articles = data
-        } else {
-          this.articles = []
-          this.$noty.warning('no data found')
-        }
       })
       .catch(({ response }) => {
         // error alert

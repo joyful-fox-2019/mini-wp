@@ -24,16 +24,12 @@ export default {
       this.$emit('logout')
     },
     search () {
-      this.$emit('search', { keyword: this.keyword })
+      if(this.keyword.length>0) this.$emit('search', { keyword: this.keyword })
     },
     emptyInput () {
+      console.log('ngosongin input');
       this.keyword = ''
     }
-  },
-  watch: {
-    // keyword () {
-    //   this.search()
-    // } 
   }
 }
 </script>

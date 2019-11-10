@@ -9,7 +9,7 @@
     </div>
     <div class="flex flex-wrap justify-center w-3/4 m-4">
       <h4 style="display: block; width: 100%; text-align: center; margin-bottom: 20px;">Or continue with</h4>
-      <button class="bg-gray-200 rounded cursor-pointer p-2 mx-2">Google</button>
+      <button type="button" class="bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2" data-onsuccess="onSignIn">Google</button>
       <button class="bg-gray-200 rounded cursor-pointer p-2 mx-2">Github</button>
     </div>
   </form>
@@ -40,12 +40,27 @@ export default {
       .then(({ data }) => {
         this.$noty.success(data.message)
         localStorage.setItem('token', data.token)
-          this.$emit('loggedIn')
-        console.log(data.message);
+        this.$emit('loggedIn')
       })
       .catch(({ response }) => {
         this.$noty.error(response.data.message)
       })
+    },
+    onSignIn (googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+    axios({
+      method: 'POST',
+      url: `/users/glogin`,
+      data: {
+        id_token
+      }
+      .then(({ data }) => {
+        this.$noty.success(data.message)
+        localStorage.setItem('token', data.token)
+        this.$emit('loggedIn')
+        
+      })
+    })
     }
   },
 }

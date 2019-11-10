@@ -10679,12 +10679,30 @@ var _default = {
         localStorage.setItem('token', data.token);
 
         _this.$emit('loggedIn');
-
-        console.log(data.message);
       }).catch(function (_ref2) {
         var response = _ref2.response;
 
         _this.$noty.error(response.data.message);
+      });
+    },
+    onSignIn: function onSignIn(googleUser) {
+      var _this2 = this;
+
+      var id_token = googleUser.getAuthResponse().id_token;
+      (0, _axios.default)({
+        method: 'POST',
+        url: "/users/glogin",
+        data: {
+          id_token: id_token
+        }.then(function (_ref3) {
+          var data = _ref3.data;
+
+          _this2.$noty.success(data.message);
+
+          localStorage.setItem('token', data.token);
+
+          _this2.$emit('loggedIn');
+        })
       });
     }
   }
@@ -10829,7 +10847,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "bg-gray-200 rounded cursor-pointer p-2 mx-2" },
+          {
+            staticClass:
+              "bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2",
+            attrs: { type: "button", "data-onsuccess": "onSignIn" }
+          },
           [_vm._v("Google")]
         ),
         _vm._v(" "),
@@ -11256,17 +11278,14 @@ var _default = {
       this.$emit('logout');
     },
     search: function search() {
-      this.$emit('search', {
+      if (this.keyword.length > 0) this.$emit('search', {
         keyword: this.keyword
       });
     },
     emptyInput: function emptyInput() {
+      console.log('ngosongin input');
       this.keyword = '';
     }
-  },
-  watch: {// keyword () {
-    //   this.search()
-    // } 
   }
 };
 exports.default = _default;
@@ -11440,9 +11459,20 @@ exports.default = _default;
           attrs: { id: "sidebar-container" }
         },
         [
-          _c("div", { staticClass: "w-full p-2 my-4 text-white text-center" }, [
-            _vm._v("LOGO")
-          ]),
+          _c(
+            "div",
+            { staticClass: "w-full p-2 my-4 text-white flex justify-center" },
+            [
+              _c("img", {
+                staticStyle: { height: "80px", cursor: "pointer" },
+                attrs: {
+                  src: "/wordride.d871bd58.png",
+                  alt: "logo"
+                },
+                on: { click: _vm.myArticles }
+              })
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -11519,7 +11549,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/HomePage.vue":[function(require,module,exports) {
+},{"./../wordride.png":[["wordride.d871bd58.png","src/wordride.png"],"src/wordride.png"],"_css_loader":"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/views/HomePage.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11561,9 +11591,10 @@ var _default = {
     myArticles: function myArticles() {
       if (this.$route.path !== '/articles') {
         this.$router.push('/articles');
-      } else {
-        this.$refs.articleList.getArticles();
         this.$refs.navbar.emptyInput();
+      } else {
+        this.$refs.navbar.emptyInput();
+        this.$refs.articleList.getArticles();
       }
     },
     newArticle: function newArticle() {
@@ -14614,21 +14645,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   name: 'articleList',
   data: function data() {
     return {
       defaultPic: 'https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png',
       articles: [],
-      sort: null
+      sort: null,
+      mine: false
     };
   },
   props: ['keyword'],
   methods: {
     topArticles: function topArticles() {
+      this.mine = false;
       this.sort = '&sort=popular';
     },
     newestArticles: function newestArticles() {
+      this.mine = false;
       this.sort = null;
 
       if (this.keyword) {
@@ -14639,6 +14675,10 @@ var _default = {
     },
     setTag: function setTag(tag) {
       this.keyword = tag;
+    },
+    myArticles: function myArticles() {
+      this.mine = true;
+      this.getArticles();
     },
     getArticles: function getArticles(query) {
       var _this = this;
@@ -14654,6 +14694,7 @@ var _default = {
       }
 
       if (this.sort) url += "".concat(this.sort);
+      if (this.mine) url += '&whose=mine';
       console.log(url);
       (0, _axios.default)({
         method: 'GET',
@@ -14663,15 +14704,7 @@ var _default = {
         }
       }).then(function (_ref) {
         var data = _ref.data;
-
-        if (data.length > 0) {
-          // this.$noty.success('loading..', {timeout: 1000})
-          _this.articles = data;
-        } else {
-          _this.articles = [];
-
-          _this.$noty.warning('no data found');
-        }
+        _this.articles = data;
       }).catch(function (_ref2) {
         var response = _ref2.response;
         // error alert
@@ -14744,7 +14777,17 @@ exports.default = _default;
             "button",
             {
               staticClass: "hover:bg-green-400 text-gray-200 rounded p-2 my-2",
-              class: _vm.sort ? "bg-green-500" : "bg-green-300",
+              class: !_vm.sort && !_vm.mine ? "bg-green-500" : "bg-green-300",
+              on: { click: _vm.newestArticles }
+            },
+            [_vm._v("Newest")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "hover:bg-green-400 text-gray-200 rounded p-2 my-2",
+              class: _vm.sort && !_vm.mine ? "bg-green-500" : "bg-green-300",
               on: { click: _vm.topArticles }
             },
             [_vm._v("Top")]
@@ -14754,12 +14797,27 @@ exports.default = _default;
             "button",
             {
               staticClass: "hover:bg-green-400 text-gray-200 rounded p-2 my-2",
-              class: !_vm.sort ? "bg-green-500" : "bg-green-300",
-              on: { click: _vm.newestArticles }
+              class: _vm.mine ? "bg-green-500" : "bg-green-300",
+              on: { click: _vm.myArticles }
             },
-            [_vm._v("Newest")]
+            [_vm._v("Mine")]
           )
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.articles.length === 0,
+              expression: "articles.length === 0"
+            }
+          ]
+        },
+        [_vm._v("No data found")]
       ),
       _vm._v(" "),
       _vm._l(_vm.articles, function(article) {
@@ -14769,7 +14827,7 @@ exports.default = _default;
             key: article._id,
             staticClass:
               "article-card flex-column w-4/5 md:w-1/3 m-8 rounded shadow-2xl",
-            staticStyle: { height: "70vh" }
+            staticStyle: { "max-height": "80vh" }
           },
           [
             _c(
@@ -31809,7 +31867,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43363" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41293" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

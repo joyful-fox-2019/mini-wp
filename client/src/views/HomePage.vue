@@ -28,9 +28,10 @@ export default {
     myArticles () {
       if(this.$route.path !== '/articles') {
         this.$router.push('/articles')
-      } else {
-        this.$refs.articleList.getArticles()
         this.$refs.navbar.emptyInput()
+      } else {
+        this.$refs.navbar.emptyInput()
+        this.$refs.articleList.getArticles()
       }
     },
     newArticle () {
