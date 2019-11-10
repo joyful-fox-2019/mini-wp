@@ -22,6 +22,7 @@
               </div>
             </form>
           <div class="row">
+
             <div class="col-md-8">
               <h3 class="pb-4 mb-4 font-italic border-bottom">
                 Users Blog's
@@ -39,6 +40,7 @@
               </nav>
 
               <div id="usersBlog" v-for="article in articleNow" :key="article._id" class="border-bottom p-3 my-3 rounded" style="background-color: rgb(226, 226, 226);">
+                
                 <div class="border-bottom border-secondary mb-4">
                     <h2>{{article.title}}</h2>
                     <p>created at {{article.createdAt}}, by {{article.author}}</p>
@@ -49,12 +51,11 @@
                   <div class="imgContainer mb-4  d-flex justify-content-center">
                     <img :src="article.featured_image" class="w-75" style="object-fit: contain;" height="300">
                   </div>
-
                   <div class="px-5 d-flex justify-content-center" style="max-height:200px; overflow:hidden">
                     {{article.content | truncate(300, '...')}}
-
                   </div>
                 </div>
+
               </div>
 
               <nav v-if="notSearch" aria-label="Page navigation example">
@@ -86,11 +87,10 @@
                   <li class="linkText"><a @click="searchTag('Foods')">Foods</a></li>
                 </ul>
               </div>
-          
+
             </aside>
-        
+
           </div>
-      
         </main>
     </div>
             
@@ -110,7 +110,6 @@ export default {
       maxPage : 1,
       notSearch : true,
       changePage : 0
-      
     }
   },
   methods : {
@@ -122,16 +121,13 @@ export default {
           element.createdAt = this.date(element.createdAt)
           this.allArticles.unshift(element)
         })
-        console.log(data.length)
         this.maxPage = Math.floor((data.length-1)/4)
-        console.log(this.maxPage)  
       })
       .catch(err=>{
         console.log(err.response.data.message)
       })
     },
     fetchPagination(page){
-      console.log('CHANGED', page)
       this.articleNow = []
       this.page = page
       this.inactive = false
@@ -196,7 +192,6 @@ export default {
           }
         })
         .then(({data})=>{
-          console.log(this.search)
           this.notSearch = false
           this.articleNow= []
           data.forEach(element=>{
@@ -208,9 +203,6 @@ export default {
           console.log(err.response.data.message)
         })
       }
-
-
-
     },
     searchTag(tag){
       this.allArticles.forEach(element=>{
@@ -221,12 +213,7 @@ export default {
       this.$emit('taggedData', {tag, data:this.tagged})
       this.$emit('switchContent', 'tag')
     },
-    
   },
-  computed :{
-
-  },
-  
   created(){
     this.fetchAllBlog()
     this.fetchPagination(this.page)

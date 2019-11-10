@@ -1,5 +1,6 @@
 <template>
   <div>
+      <slot></slot>
       <div class="pb-2 my-2">
         <h2 class="font-weight-bold">{{articleParent.title}}</h2>
         <p>Created at {{date}}</p>

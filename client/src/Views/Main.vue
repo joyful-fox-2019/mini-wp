@@ -18,7 +18,9 @@
     :subContent="subContent"
     :editData="editData"
     @selectedArticleData="selectedData"
+    @switchSubContent="switchSubContent"
     @switchContent="switchContent"
+    @editBlog="editBlog"
     ></UserPage>
     <SelectedArticle
     v-if="content==='selected'"
@@ -82,6 +84,9 @@ export default {
             this.selectedArticle = payload
         },
         editPayload(payload){
+            this.editData = payload
+        },
+        editBlog(payload){
             this.editData = payload
         },
         taggedData(payload){
