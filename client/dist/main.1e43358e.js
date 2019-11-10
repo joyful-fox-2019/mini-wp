@@ -51624,8 +51624,87 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
-  name: 'ProjectContent'
+  name: 'ProjectContent',
+  data: function data() {
+    return {
+      time: '',
+      date: ''
+    };
+  },
+  methods: {
+    updateTime: function updateTime() {
+      var date = new Date();
+      var day = date.getDay();
+
+      if (day === 0) {
+        day = 'Minggu';
+      } else if (day === 1) {
+        day = 'Senin';
+      } else if (day === 2) {
+        day = 'Selasa';
+      } else if (day === 3) {
+        day = 'Rabu';
+      } else if (day === 4) {
+        day = 'Kamis';
+      } else if (day === 5) {
+        day = 'Jumat';
+      } else if (day === 6) {
+        day = 'Sabtu';
+      }
+
+      var month = date.getMonth() + 1;
+      var dateNumber = date.getDate();
+
+      if (dateNumber < 10) {
+        dateNumber = '0' + dateNumber.toString();
+      }
+
+      if (month === 1) {
+        month = 'Januari';
+      } else if (month === 2) {
+        month = 'Februari';
+      } else if (month === 3) {
+        month = 'Maret';
+      } else if (month === 4) {
+        month = 'April';
+      } else if (month === 5) {
+        month = 'Mei';
+      } else if (month === 6) {
+        month = 'Juni';
+      } else if (month === 7) {
+        month = 'Juli';
+      } else if (month === 8) {
+        month = 'Agustus';
+      } else if (month === 9) {
+        month = 'September';
+      } else if (month === 10) {
+        month = 'Oktober';
+      } else if (month === 11) {
+        month = 'November';
+      } else if (month === 12) {
+        month = 'Desember';
+      }
+
+      this.date = "".concat(day, " ").concat(dateNumber, " ").concat(month);
+    }
+  },
+  created: function created() {
+    this.updateTime();
+  }
 };
 exports.default = _default;
         var $0b6f1f = exports.default || module.exports;
@@ -51640,58 +51719,21 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tabs is-centered is-boxed" }, [
-      _c("ul", [
-        _c("li", [
-          _c("a", [
-            _c("span", { staticClass: "icon is-small" }, [
-              _c("i", { staticClass: "fas fa-upload" })
-            ]),
-            _vm._v(" "),
-            _c("span", [_vm._v("Published")])
-          ])
-        ]),
+  return _c("div", { staticClass: "tabs is-centered is-boxed" }, [
+    _c("div", { staticClass: "datepicker" }, [
+      _c("div", { staticClass: "datepicker-header" }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "clock" } }, [
+        _c("p", { staticClass: "date" }, [_vm._v(_vm._s(_vm.date))]),
         _vm._v(" "),
-        _c("li", { staticClass: "is-active" }, [
-          _c("a", [
-            _c("span", { staticClass: "icon is-small" }, [
-              _c("i", { staticClass: "fas fa-drafting-compass" })
-            ]),
-            _vm._v(" "),
-            _c("span", [_vm._v("Drafts")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", [
-            _c("span", { staticClass: "icon is-small" }, [
-              _c("i", { staticClass: "fas fa-calendar-alt" })
-            ]),
-            _vm._v(" "),
-            _c("span", [_vm._v("Scheduled")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("a", [
-            _c("span", { staticClass: "icon is-small" }, [
-              _c("i", { staticClass: "fas fa-trash" })
-            ]),
-            _vm._v(" "),
-            _c("span", [_vm._v("Trash")])
-          ])
-        ])
+        _c("p", { staticClass: "time" }, [_vm._v(_vm._s(_vm.time))])
       ])
-    ])
-  }
-]
+    ]),
+    _vm._v(" "),
+    _c("div")
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -59775,7 +59817,7 @@ exports.default = _default;
                 _c("p", {
                   staticStyle: {
                     width: "400px",
-                    height: "150px",
+                    height: "155px",
                     "white-space": "wrap",
                     overflow: "hidden",
                     "text-overflow": "ellipsis"
@@ -77445,7 +77487,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42013" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41311" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

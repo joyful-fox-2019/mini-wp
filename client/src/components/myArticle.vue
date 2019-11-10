@@ -37,7 +37,7 @@
                 <div class="description">
                     <h1>{{article.title}}</h1>
                     <hr>
-                    <p style="width:400px; height : 150px; white-space: wrap; overflow: hidden; text-overflow: ellipsis;" v-html="article.content"></p>
+                    <p style="width:400px; height : 155px; white-space: wrap; overflow: hidden; text-overflow: ellipsis;" v-html="article.content"></p>
                     <p class="read-more">
                         <a href="" @click.prevent="fetchDataDetail(article._id)">Read More</a>
                     </p>

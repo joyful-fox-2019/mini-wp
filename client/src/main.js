@@ -10,7 +10,7 @@ import App from './App.vue';
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import SocialSharing from 'vue-social-sharing'
- 
+
 
 Vue.use(SocialSharing);
 Vue.use(Buefy)

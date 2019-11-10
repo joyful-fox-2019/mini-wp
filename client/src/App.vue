@@ -179,4 +179,31 @@ export default {
     height: 100vh !important;
 }
 
+/* -clock- */
+#clock {
+	 font-family: 'Share Tech Mono', monospace;
+	 
+	 text-align: center;
+	 /* position: absolute;
+	 left: 50%;
+	 top: 50%; */
+	 /* transform: translate(-50%, -50%); */
+	 color: #000;
+     font-weight: bold;
+	 text-shadow: 0 0 5px white, 0 0 20px rgba(10, 175, 230, 0);
+}
+ #clock .time {
+	 letter-spacing: 0.05em;
+	 font-size: 80px;
+	 padding: 5px 0;
+}
+ #clock .date {
+	 letter-spacing: 0.1em;
+	 font-size: 24px;
+}
+ #clock .text {
+	 letter-spacing: 0.1em;
+	 font-size: 12px;
+	 padding: 20px 0 0;
+}
 </style>
