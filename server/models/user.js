@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const {hashPassword} = require('../helpers/hash')
+const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = new Schema({
     username : {type : String, required : [true, 'username is required'], unique : true},
@@ -8,6 +9,8 @@ const UserSchema = new Schema({
     password : {type : String, required : [ true, 'password is required'], minlength: [6 , 'less than 6 characters']},
     articlesId : [{ type: Schema.Types.ObjectId, ref: 'Article' }]
 })
+
+UserSchema.plugin(uniqueValidator)
 
 UserSchema.pre('save', function(next){
     this.password = hashPassword(this.password)
