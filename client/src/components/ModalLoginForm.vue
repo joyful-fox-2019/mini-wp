@@ -73,18 +73,17 @@
             <button class="button is-primary" type="submit">Sign Up</button>
           </form>
         </div> 
-        <br>
+        <!-- <br> -->
           or
           <br>
         <b-button icon-left="google"  class="square" @click="oauthGoogle">
-            using Google
+            Sign in using Google
         </b-button>
        <b-button icon-left="github-box"  class="square">
             <a href="https://github.com/login/oauth/authorize?client_id=9c5162d6a0cb6566526e&scope=user">
             Sign in using Github
             </a>
         </b-button>
-        <a href="#" @click="logout">Sign out</a>
       </section>
     </div>
   </div>
@@ -97,6 +96,7 @@ import axios from '../../config/axios'
 
 export default {
   name : "ModalLoginForm",
+  props : ['tab'],
   data(){
     return {
       email : '',
@@ -131,6 +131,10 @@ export default {
           localStorage.setItem('token',data.token)
           this.$emit('gotuser')
           this.$parent.close()
+          this.$buefy.toast.open({
+                    message: 'Welcome Back!',
+                    type: 'is-success'
+                })
         })
         .catch((error)=>{
           this.isActive = true
@@ -151,6 +155,10 @@ export default {
           localStorage.setItem('token',data.token)
           this.$emit('gotuser')
           this.$parent.close()
+          this.$buefy.toast.open({
+                    message: 'Welcome!',
+                    type: 'is-success'
+                })
         })
         .catch((error)=>{
           this.isActive = true
@@ -183,6 +191,18 @@ export default {
           localStorage.setItem('token',data.token)
            this.$emit('gotuser')
           this.$parent.close()
+          this.$buefy.toast.open({
+                    message: 'Welcome!',
+                    type: 'is-success'
+                })
+        })
+        .catch(err=>{
+        console.log(err.response.data.message)
+        this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response.data.message}`,
+                    type: 'is-danger'
+                })
         })
       })
       .catch(err=>{
@@ -199,6 +219,17 @@ export default {
           console.log(error);
           // things to do when sign-out fails
         })
+    }
+  },
+  watch : {
+    tab(val){
+      console.log(val)
+      if(val === 'login'){
+        console.log(val)
+        this.loginForm = true
+      } else {
+        this.loginForm = false
+      }
     }
   }
 

@@ -60,6 +60,10 @@ components:{
           const token = query.split('token=')[1].split('&')[0]
           localStorage.setItem('token',token)
           window.location = 'http://localhost:1234'
+          this.$buefy.toast.open({
+                    message: 'Welcome!',
+                    type: 'is-success'
+                })
         } else {
           const msg = query.split('msg=')[1].split('%27')[1].split('%20').join(' ')
           window.location = 'http://localhost:1234'

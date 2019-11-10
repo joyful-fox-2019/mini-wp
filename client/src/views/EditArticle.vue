@@ -25,10 +25,13 @@
           </b-taginput>
         </b-field>
 
+          <div>
+            <b-field label="Previous Image">
+            </b-field>
+            <img :src="currentImage" style="width: 100px; height: 100px">
+          </div>
         <b-field label="Upload image header">
           <br>
-          <p>Previous Image</p>
-          <img :src="currentImage" style="width: 50px; height: 50px">
           <div style="margin: 0px auto; width: 60%">
             <b-upload v-model="dropFiles"
                 multiple
@@ -60,7 +63,7 @@
             </span>
         </div>
 
-        <button class="button is-primary" type="submit">Create Article</button>
+        <button class="button" type="submit" id="submitButton">Create Article</button>
       <form>
     </div>
     </div>
@@ -96,12 +99,14 @@ export default {
     },
     getArticleDetail(){
       let {articleId} = this.$route.params
+      const loadingComponent = this.$buefy.loading.open()
       console.log(articleId)
       axios({
         url : `/articles/${articleId}`,
         method : 'get'
       })
         .then(({data})=>{
+          loadingComponent.close()
           this.title = data.title
           this.content = data.content
           this.tags = data.tags
@@ -109,6 +114,7 @@ export default {
           console.log(data.image)
         })
         .catch((err)=>{
+          loadingComponent.close()
           console.log(err)
         })
     },
@@ -125,6 +131,7 @@ export default {
       formData.append('content',this.content)
       formData.append('tags',this.tags)
       console.log(formData);
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         method : 'patch',
         url : `/articles/${articleId}`,
@@ -135,9 +142,23 @@ export default {
         }
       })
         .then(({data})=>{
+          loadingComponent.close()
           console.log(data);
+          this.$buefy.toast.open({
+                    message: 'Article Created!, redirecting back to home',
+                    type: 'is-success'
+                })
+          setTimeout(()=>{
+            this.$router.push({path:'/'})
+          },2000)
         })
         .catch((err)=>{
+          loadingComponent.close()
+          this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${msg}`,
+                    type: 'is-danger'
+                })
           console.log(err);
         })
     }
@@ -150,5 +171,7 @@ export default {
 </script>
 
 <style>
-
+#submitButton{
+  margin: 10px auto;
+}
 </style>

@@ -6,12 +6,12 @@
                 <div v-if="creator">
                   <div>
                     <a class="action" @click="editArticle">edit</a> ||
-                    <a class="action" @click="deleteArticle">delete</a>
+                    <a class="action" @click="conDelArticle">delete</a>
                   </div>
                 </div>
                 <div v-if="bookmark">
                   <div>
-                    <a class="action" @click="removeBookmark">Remove from bookmark</a>
+                    <a class="action" @click="conRemBookmark">Remove from bookmark</a>
                   </div>
                 </div>
             <div id="head"  style="cursor:pointer" @click="goToArticle">
@@ -25,7 +25,7 @@
             </div>
             <div id="footer">
               <p id="author">{{article.userId.username}}</p>
-              <p id="moment">{{article.createdAt}} - 2 mins read</p>
+              <p id="moment">{{convertMoment}} - {{reading}}</p>
               <div v-for="(tag,i) in article.tags" :key="i" style="display: inline">
                 <span class="tagCard">{{ tag }}</span>
               </div>
@@ -41,11 +41,10 @@
                     </b-icon>
                   </div>
               </b-tooltip>
-              <!-- <b-button type="is-info">Info</b-button> -->
             </div>
             
           </div>
-          <div class="column" style="cursor:pointer" @click="goToArticle">
+          <div class="column image" style="cursor:pointer" @click="goToArticle">
             <div class="card-image">
               <figure class="image is-4by3">
                 <img :src="article.image">
@@ -60,6 +59,8 @@
 <script>
 import truncate from 'truncate-html'
 import axios from '../../config/axios'
+import moment from 'moment'
+import readingTime from 'reading-time'
 
 export default {
   name: 'card',
@@ -77,6 +78,7 @@ export default {
     deleteArticle(){
       console.log(this.article._id)
       let articleId = this.article._id
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         method : 'delete',
         url : `/articles/remove/${articleId}`,
@@ -86,9 +88,12 @@ export default {
       })
         .then(({data})=>{
           console.log(data);
+          loadingComponent.close()
+          this.$buefy.toast.open('Article deleted!')
           this.$emit('fetchDraft')
         })
         .catch((err)=>{
+          loadingComponent.close()
           console.log(err)
         })
       console.log('masuk delete')
@@ -104,13 +109,21 @@ export default {
       })
         .then(({data})=>{
           console.log(data)
+          this.$buefy.toast.open({
+                    message: 'Bookmarked!',
+                    type: 'is-success'
+                })
         })
         .catch((err)=>{
           console.log(err.response.data)
+          this.$buefy.toast.open({
+                    duration: 3000,
+                    message: `${err.response.data.message}`,
+                    type: 'is-danger'
+                })
         })
     },
     removeBookmark(){
-      console.log('masuk')
       let articleId = this.article._id
       axios({
         url : `/articles/removebookmark/${articleId}`,
@@ -120,18 +133,46 @@ export default {
         }
       })
         .then(({data})=>{
-          console.log(data)
+          this.$buefy.toast.open('Bookmark removed!')
           this.$emit('fetchBookmark')
         })
         .catch((err)=>{
           console.log(err.response.data)
         })
+    },
+    conRemBookmark(){
+      this.$buefy.dialog.confirm({
+        title: 'Remove bookmark',
+        message: 'Are you sure you want to <b>remove</b> this bookmark?',
+        confirmText: 'Remove',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.removeBookmark()
+      })
+    },
+    conDelArticle(){
+      this.$buefy.dialog.confirm({
+        title: 'Delete article',
+        message: 'Are you sure you want to <b>delete</b> this article?',
+        confirmText: 'Delete',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.deleteArticle()
+      })
     }
   },
   computed : {
     truncatePreview(){
       truncate.setup({ stripTags: true, length: 130 })
       return truncate(this.article.content)
+    },
+    convertMoment(){
+      return moment(this.article.createdAt).from(new Date())
+    },
+    reading(){
+        truncate.setup({ stripTags: true, length: 10000})
+        let text = truncate(this.article.content)
+        return readingTime(text).text
     }
   }
 
@@ -181,5 +222,8 @@ export default {
   padding: 2px;
   border-radius: 3px;
   color: white;
+}
+.column.image{
+  margin: auto 0
 }
 </style>

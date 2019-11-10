@@ -1,8 +1,8 @@
 <template>
  <div id="writePage">
 <navbar :userLogin="userLogin" @loggedIn="isLogin"></navbar>
-    <!-- <Sidebar id="test" :userLogin="userLogin" @logout="userLogout"></Sidebar> -->
     <div id="formArticle">
+      <h1 id="title">Create new article</h1>
       <form @submit.prevent="createArticle">
         <b-field label="Title">
             <b-input type="text" v-model="title"></b-input>
@@ -27,7 +27,7 @@
         </b-field>
 
         <b-field label="Upload image header">
-          <div style="margin: 0px auto; width: 60%">
+          <div  id="uploadContent">
             <b-upload v-model="dropFiles"
                 multiple
                 drag-drop>
@@ -49,7 +49,7 @@
         <div class="tags" >
             <span v-for="(file, index) in dropFiles"
                 :key="index"
-                class="tag is-primary" >
+                class="tag is-link" >
                 {{file.name}}
                 <button class="delete is-small"
                     type="button"
@@ -57,9 +57,10 @@
                 </button>
             </span>
         </div>
-
-        <button class="button is-primary" type="submit">Create Article</button>
-        <a @click="saveToDraft">Save to draft</a>
+        <div id="action">
+          <button class="button" type="submit" id="submitButton">Submit article</button>
+          <a @click="saveToDraft" id="draftButton">Save to draft</a>
+        </div>
       <form>
     </div>
  </div>
@@ -102,6 +103,7 @@ export default {
       formData.append('content',this.content)
       formData.append('tags',this.tags)
       console.log(formData);
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         method : 'post',
         url : '/articles/add',
@@ -113,9 +115,26 @@ export default {
       })
         .then(({data})=>{
           console.log(data);
+          loadingComponent.close()
+          this.$buefy.toast.open({
+                    message: 'Article Created!, redirecting back to home',
+                    type: 'is-success'
+                })
+          setTimeout(()=>{
+            this.$router.push({path:'/'})
+          },2000)
         })
         .catch((err)=>{
-          console.log(err);
+          console.log(err.response.data);
+          loadingComponent.close()
+          let msg = err.response.data.arr.join('  -  ')
+          console.log(msg)
+           this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${msg}`,
+                    type: 'is-danger'
+                })
+                
         })
     },
     deleteDropFile(index){
@@ -145,6 +164,7 @@ export default {
       formData.append('content',this.content)
       formData.append('tags',this.tags)
       console.log(formData);
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         method : 'post',
         url : '/articles/addDraft',
@@ -156,9 +176,25 @@ export default {
       })
         .then(({data})=>{
           console.log(data);
+          loadingComponent.close()
+           this.$buefy.toast.open({
+                    message: 'Article saved, redirecting back to home',
+                    type: 'is-success'
+                })
+          setTimeout(()=>{
+            this.$router.push({path:'/'})
+          },2000)
         })
         .catch((err)=>{
-          console.log(err);
+            console.log(err.response.data);
+            loadingComponent.close()
+          let msg = err.response.data.arr.join('  -  ')
+          console.log(msg)
+           this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${msg}`,
+                    type: 'is-danger'
+                })
         })
     },
   }
@@ -167,15 +203,44 @@ export default {
 
 <style>
 #formArticle{
-width: 100%;
-margin : 10px auto;
+width: 70%;
+margin : 0 auto;
 height: 92vh;
-overflow: scroll;
+/* overflow: scroll; */
 padding: 20px;
 
 }
 #writePage{
   display: flex;
   flex-direction: row
+}
+#title{
+  font-size: 30px;
+  color: black;
+  margin-bottom: 10px
+}
+#action{
+  width: 40%;
+  margin: 10px auto;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center
+}
+#draftButton{
+  background-color: gray;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 2px;
+  /* margin-left: 8px; */
+  margin-top: 10px;
+  max-height: 35px
+}
+#submitButton{
+  background-color:#3C4ADC;
+  color: white
+}
+#uploadContent{
+ margin: 0px 10% 0px 30%; 
+ width: 60%;
 }
 </style>

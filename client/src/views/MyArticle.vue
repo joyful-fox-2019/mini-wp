@@ -2,14 +2,18 @@
   <div>
     <Navbar :userLogin="userLogin"></Navbar>
     <div id="mainContent">
-      <!-- <Sidebar id="test" :userLogin="userLogin" @logout="userLogout" @tag="articleByTag"></Sidebar> -->
       <Sidebar :userLogin="userLogin"></Sidebar>
-      <!-- <Content :tag="tags" @removeTagSearch="removeTag" :query="query"></Content> -->
       <div id="content">
-        {{profile.username}}
-        {{profile.email}}
+        <div v-if="!empty">
+        <h1 id="title">{{profile.username}}</h1>
+        </div>
+        <div v-if="empty">
+          <h1 id="title">{{profile.username}}</h1>
+          You haven't post anything
+        </div>
+
         <div id="myArticles" v-for="(article,i) in profile.articles" :key="i">
-          <card :article="article" :creator="creator"></card> 
+          <card :article="article" :creator="creator" @fetchDraft="whoAmI"></card> 
         </div>
       </div>
     </div>
@@ -32,7 +36,8 @@ export default {
     return {
       userLogin: false,
       profile: {},
-      creator: true
+      creator: true,
+      empty : false
     };
   },
   methods: {
@@ -45,6 +50,7 @@ export default {
     },
     whoAmI() {
       let token = localStorage.getItem("token");
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         url: `/users/myprofile`,
         methods: "get",
@@ -53,11 +59,23 @@ export default {
         }
       })
         .then(({ data }) => {
+          loadingComponent.close()
           this.profile = data;
+          if(data.articles.length < 1){
+            this.empty = true
+          }
           console.log(data);
         })
         .catch(err => {
+          loadingComponent.close()
           console.log(err);
+          // let msg = err.response.data.arr.join('  -  ')
+          console.log(msg)
+           this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response}`,
+                    type: 'is-danger'
+                })
         });
     }
   },
@@ -87,5 +105,17 @@ export default {
 }
 #eachCard{
   width: 100% !important
+}
+#title{
+  font-size: 30px
+}
+#content{
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 92vh;
+  overflow: scroll;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap 
 }
 </style>

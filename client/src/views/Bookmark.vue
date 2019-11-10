@@ -4,10 +4,13 @@
     <div id="mainContent">
       <Sidebar :userLogin="userLogin"></Sidebar>
       <div id="content">
-        <h1 id="titlePage">Bookmarks</h1>
-        <div v-if="empty">
-          You haven't bookmarked any articles
+        <div v-if="!empty">
+          <h1 id="titlePage">Bookmarks</h1>
         </div>
+        <div v-if="empty">
+          <h1 id="titlePage">Bookmarks</h1>
+            You haven't bookmarked any articles
+          </div>
         <div id="myArticles" v-for="(article,i) in articles" :key="i">
           <card :article="article" :bookmark=true @fetchBookmark="getBookmark"></card> 
         </div>
@@ -98,5 +101,14 @@ export default {
 #titlePage{
   font-size: 30px;
   color: black
+}
+#content{
+  /* border: 1px solid black; */
+  width: 100%;
+  height: 92vh;
+  overflow: scroll;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap 
 }
 </style>

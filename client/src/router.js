@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Register from './views/CreateArticle.vue'
 import Article from './views/Article.vue'
-import MyProfile from './views/MyProfile.vue'
+import MyArticle from './views/MyArticle.vue'
 import EditArticle from './views/EditArticle.vue'
 import Draft from './views/Draft.vue'
 import Bookmark from './views/Bookmark.vue'
@@ -25,9 +25,9 @@ export default new Router({
       component : Register
     },  
     {
-      path : '/myProfile',
-      name : 'myProfile',
-      component : MyProfile
+      path : '/myarticle',
+      name : 'myarticle',
+      component : MyArticle
     },
     {
       path : '/draft',

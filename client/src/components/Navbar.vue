@@ -7,7 +7,6 @@
         <!-- <slot></slot> -->
         <b-icon
             icon="home"
-            size="is-small" 
             >
         </b-icon>
       </b-navbar-item>

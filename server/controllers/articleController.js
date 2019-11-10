@@ -61,6 +61,7 @@ class ArticleController {
       let updateUser = await User.updateOne({_id : userId},{$push : {articles : createArticle._id}})
       res.status(200).json(createArticle)
     } catch (error) {
+      console.log(error);
       next(error)
     } 
   }
@@ -92,7 +93,10 @@ class ArticleController {
       let userId = req.loggedUser._id
       let updated = await User.updateOne({_id : userId},{$pull:{articles : articleId }})
       let image = await Article.findOne({_id:articleId})
-      let test = await removeFromGCS(image.image)
+      console.log(image)
+      if(image.image !== "https://hacktiv8.com/img/ogdefault.jpg"){
+        let test = await removeFromGCS(image.image)
+      }
       let deleted = await Article.deleteOne({_id : articleId})
       res.status(200).json({updated,deleted})
     } catch (error) {

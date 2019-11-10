@@ -5,7 +5,7 @@
         <div v-if="userLogin">
           <b-icon icon="account" size="is-small"></b-icon>Profile
           <!-- <b-menu-item label="My Profile"></b-menu-item> -->
-          <b-menu-item label="My Profile" @click="myProfile"></b-menu-item>
+          <b-menu-item label="My Articles" @click="myProfile"></b-menu-item>
           <b-menu-item label="Drafts" @click="myDrafts"></b-menu-item>
           <b-menu-item label="Bookmarks " @click="myBookmark"></b-menu-item>
         </div>
@@ -20,7 +20,7 @@
       </b-menu-list>
     </b-menu-list>
     <b-menu-list label="Actions">
-      <b-menu-item label="Logout" v-if="userLogin" @click="userLeave"></b-menu-item>
+      <b-menu-item label="Logout" v-if="userLogin" @click="conLogout"></b-menu-item>
     </b-menu-list>
   </b-menu>
 </template>
@@ -75,8 +75,8 @@ export default {
       this.$emit("tag", tag);
     },
     myProfile() {
-      if (this.$router.currentRoute.name !== "myProfile") {
-        this.$router.push({ path: "/myProfile" });
+      if (this.$router.currentRoute.name !== "myarticle") {
+        this.$router.push({ path: "/myarticle" });
       }
     },
     myDrafts() {
@@ -88,17 +88,28 @@ export default {
       if (this.$router.currentRoute.name !== "bookmark") {
         this.$router.push({ path: "/bookmark" });
       }
+    },
+    conLogout(){
+      this.$buefy.dialog.confirm({
+        title: 'Logout',
+        message: 'Are you sure?',
+        confirmText: 'Yes',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.userLeave()
+      })
     }
   },
   created() {
-    this.getTags();
+    if (this.$router.currentRoute.name === "home") {
+      this.getTags();
+      }
   }
 };
 </script>
 
 <style scoped>
 #sidebar {
-  /* border: 1px solid black; */
   /* position: fixed */
   height: 92vh;
   overflow: hidden;

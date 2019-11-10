@@ -93,7 +93,7 @@ class UserController {
       if(emailFind.loginBy === 'web'){
         next({status : 403, message : 'You have been sign in using email, please login using email'})
       } else if (emailFind.loginBy === 'github') {
-        next({status : 403, message : 'You have been sign in using google, please login using google'})
+        next({status : 403, message : 'You have been sign in using github, please login using github'})
       } else if (emailFind.loginBy === 'google') {
         let { _id } = emailFind._id
         payloadJWT = { _id }
