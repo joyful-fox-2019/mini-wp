@@ -4,7 +4,7 @@ function authorization(req, res, next) {
     Article.findById(req.params.id)
         .then((found) => {
             if (found) {
-                if (found.userId == req.user.id) {
+                if (found.author == req.user.id) {
                     next();
                 } else {
                     let err = {

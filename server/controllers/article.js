@@ -5,7 +5,7 @@ class ArticleController {
         Article.create({
             title: req.body.title,
             content: req.body.content,
-            created_at: req.body.created,
+            // created_at: req.body.created,
             author: req.user.id,
             featured_image: req.body.imageUrl
         })
@@ -60,12 +60,12 @@ class ArticleController {
                 _id: article._id
             },
             {
-                title: req.body.title,
-                content: req.body.title,
+                title: req.body.title || article.title,
+                content: req.body.content || article.content,
                 created_at: article.created_at,
                 author: article.author,
-                updated_at: Date.now,
-                featured_image: req.body.imageUrl
+                updated_at: new Date(),
+                featured_image: req.body.imageUrl || article.imageUrl
             })
         })
         .then(response => {
