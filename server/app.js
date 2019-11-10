@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'development') {
 const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT 
 const router = require('./routes')
 const errorHandler = require('./middlewares/errorHandler')
 const cors = require('cors')
@@ -19,7 +19,7 @@ app.use(errorHandler)
 mongoose.connect(
     'mongodb://localhost:27017/mini-wp',
     // process.env.ATLAS_URL,
-    {useNewUrlParser: true, useUnifiedTopology: true}
+    {useNewUrlParser: true, useUnifiedTopology: true }
      
     )
 
