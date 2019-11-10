@@ -18,7 +18,9 @@ class ArticleController {
 			title: req.body.title,
 			content: req.body.content,
 			author: req.payload.id,
-			status: req.body.status
+			status: req.body.status,
+			created_at: moment(),
+			updated_at: moment()
 		})
 			.then(article => {
 				res.status(200).json({

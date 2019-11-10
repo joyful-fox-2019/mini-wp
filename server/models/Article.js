@@ -20,13 +20,11 @@ const articleSchema = new Schema({
 	},
 	created_at: {
 		type: Date,
-		required: true,
-		default: moment()
+		required: true
 	},
 	updated_at: {
 		type: Date,
-		required: true,
-		default: moment()
+		required: true
 	}
 });
 
