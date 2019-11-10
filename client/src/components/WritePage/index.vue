@@ -21,22 +21,29 @@
       </div>
     </div>
     <div id="quill-container"></div>
+    <!-- <QuillEditor v-model="content" id="quill-container"></QuillEditor> -->
   </section>
 </template>
 
 <script>
+// import QuillEditor from "./QuillEditor";
 import Quill from "quill";
 import axios from "axios";
+
 const http = axios.create({
   baseURL: "http://localhost:3000"
 });
 
 export default {
+  components: {
+    QuillEditor
+  },
   data() {
     return {
+      titleFocused: false,
       title: "",
       content: "",
-      titleFocused: false
+      editor: null
     };
   },
   methods: {
@@ -58,10 +65,23 @@ export default {
       });
     },
     save() {},
-    cancel() {}
+    cancel() {},
+    update() {
+      this.content = this.editor.getText() ? this.editor.root.innerHTML : "";
+    }
   },
+  // computed: {
+  //   computedContent: {
+  //     get() {
+  //       return this.content;
+  //     },
+  //     set(val) {
+  //       this.content = val;
+  //     }
+  //   }
+  // },
   mounted() {
-    var quill = new Quill("#quill-container", {
+    this.editor = new Quill("#quill-container", {
       modules: {
         toolbar: [
           [{ header: [1, 2, false] }],
@@ -73,6 +93,7 @@ export default {
       placeholder: "Start your writing journey...",
       theme: "snow"
     });
+    this.editor.on("text-change", () => this.update());
   }
 };
 </script>

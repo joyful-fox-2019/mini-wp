@@ -24,7 +24,7 @@
               </h3>
             </div>
             <small class="text-muted">{{ article.updated_at }}</small>
-            <p>{{ article.content }}</p>
+            <div v-html="article.content"></div>
           </div>
         </div>
       </div>
