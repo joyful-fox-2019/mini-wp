@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="container article-container">
-      <DetailArticleContent v-if="article" :article="article"></DetailArticleContent>
+      <router-view v-if="article" :article="article" @alert="alert"></router-view>
     </div>
   </div>
 </template>
@@ -32,6 +32,9 @@ export default {
         .catch(err => {
           this.$emit('alert', err)
         })
+    },
+    alert (err) {
+      this.$emit('alert', err)
     }
   },
   created () {

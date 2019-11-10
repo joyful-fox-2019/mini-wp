@@ -23,5 +23,18 @@ module.exports = {
         res.status(201).json(article)
       })
       .catch(next)
+  },
+  update: (req, res, next) => {
+    console.log(req.body)
+    const { title, subtitle, description, file } = req.body
+    let tags = req.body.tags.split(', ')
+    console.log(tags)
+    Article.findByIdAndUpdate(req.params.id,
+      { title, subtitle, description, tags, image: file },
+      { omitUndefined: true, new: true })
+      .then(article => {
+        res.status(200).json(article)
+      })
+      .catch(next)
   }
 }

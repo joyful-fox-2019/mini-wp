@@ -18,6 +18,20 @@
         <div class="column">
           {{ fullName }}
         </div>
+        <div class="column is-narrow">
+          <button @click="toUpdate" class="button bg-primary-gradient font-content">
+            <span class="icon">
+              <i class="fas fa-pen"></i>
+            </span>
+          </button>
+        </div>
+        <div class="column is-narrow">
+          <button class="button bg-surface font-content">
+            <span class="icon">
+              <i class="fas fa-trash"></i>
+            </span>
+          </button>
+        </div>
       </div>  
     </div>
     <div class="has-margin-t-2">
@@ -36,6 +50,11 @@ export default {
   name: 'DetailArticleContent',
   props: {
     article: Object
+  },
+  methods: {
+    toUpdate () {
+      this.$router.push(`${this.$route.fullPath}/update`)
+    }
   },
   computed: {
     userInitial () {

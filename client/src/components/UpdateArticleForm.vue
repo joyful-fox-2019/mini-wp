@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="addArticle" class="has-margin-t">
+    <form @submit.prevent="updateArticle" class="has-margin-t">
       <b-field>
         <b-input v-model="title" placeholder="Title"></b-input>
       </b-field>
@@ -11,7 +11,7 @@
           <b-upload v-model="file">
               <a class="button bg-surface t-standard">
                   <b-icon icon="upload"></b-icon>
-                  <span>Upload Image</span>
+                  <span>Change Image</span>
               </a>
           </b-upload>
           <span class="file-name" v-if="file">
@@ -55,7 +55,10 @@ const tagOptions = ['Art', 'Beauty', 'Books', 'Comics', 'Culture', 'Fiction', 'F
 import axios from '../../helpers/axios'
 
 export default {
-  name: 'AddArticleForm',
+  name: 'UpdateArticleForm',
+  props: {
+    article: Object
+  },
   data() {
     return {
       title: '',
@@ -75,7 +78,7 @@ export default {
           .indexOf(text.toLowerCase()) >= 0
       })
     },
-    addArticle() {
+    updateArticle() {
       let body = new FormData()
       body.append('title', this.title)
       body.append('subtitle', this.subtitle)
@@ -83,7 +86,7 @@ export default {
       body.append('description', this.description)
       body.append('tags', this.tags)
       const loadingComponent = this.$buefy.loading.open()
-      axios.post('/articles', body, {
+      axios.patch(`/articles/${this.article._id}`, body, {
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -97,6 +100,13 @@ export default {
           this.$emit('alert', err)
         })
     }
+  },
+  created () {
+    const { title, subtitle, description, tags } = this.article
+    this.title = title
+    this.subtitle = subtitle
+    this.description = description
+    this.tags = tags
   }
 }
 </script>

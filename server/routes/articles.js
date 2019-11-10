@@ -7,5 +7,6 @@ router.get('/', ArticleController.find)
 router.get('/:id', ArticleController.findOne)
 router.use(authentication)
 router.post('/', upload.single('file'), ArticleController.add)
+router.patch('/:id', upload.single('file'), ArticleController.update)
 
 module.exports = router

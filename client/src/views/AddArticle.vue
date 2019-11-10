@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <AddArticleForm @alert="alert"></AddArticleForm>
+    <div class="container">
+      <AddArticleForm @alert="alert"></AddArticleForm>
+    </div>
   </div>
 </template>
 

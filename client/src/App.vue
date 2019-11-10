@@ -80,6 +80,7 @@ export default {
         document.documentElement.style.setProperty('--text-color', '#E1E1E1');
         document.documentElement.style.setProperty('--text-color-lighten', '#A5A5A5');
         document.documentElement.style.setProperty('--text-color-primary', '#C390FF');
+        document.documentElement.style.setProperty('--text-color-on-primary', '#000000');
       } else {
         document.documentElement.style.setProperty('--background-color', '#FFFFFF');
         document.documentElement.style.setProperty('--surface-color', '#F5F5F5');
@@ -88,6 +89,7 @@ export default {
         document.documentElement.style.setProperty('--text-color', '#363636');
         document.documentElement.style.setProperty('--text-color-lighten', '#B5B5B5');
         document.documentElement.style.setProperty('--text-color-primary', '#D4B848');
+        document.documentElement.style.setProperty('--text-color-on-primary', '#363636');
       }
     }
   }
@@ -103,6 +105,7 @@ export default {
   --text-color: #363636;
   --text-color-lighten: #B5B5B5;
   --text-color-primary: #D4B848;
+  --text-color-on-primary: #363636;
 }
 html, body {
   background: var(--background-color) !important;
@@ -122,13 +125,16 @@ html, body {
 }
 .bg-surface {
   background: var(--surface-color) !important;
+  color: var(--text-color) !important;
 }
 .bg-primary {
   background: var(--primary-color) !important;
+  color: var(--text-color-on-primary) !important;
 }
 .bg-primary-gradient {
   background: var(--primary-color) !important;
   background: var(--primary-color-gradient) !important;
+  color: var(--text-color-on-primary) !important;
 }
 .font-article {
   font-family: 'Jomolhari', serif;
@@ -173,5 +179,12 @@ a {
 }
 .has-margin-b {
   margin-bottom: 10px;
+}
+img {
+  object-fit: cover;
+}
+.align-right-container {
+  width: 100%;
+  text-align: right;
 }
 </style>

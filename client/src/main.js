@@ -29,9 +29,21 @@ const routes = [
     component: () => import('./views/AddArticle.vue')
   },
   {
-    path: '/article/:slug',
+    path: '/article',
     name: 'article',
-    component: () => import('./views/DetailArticle.vue')
+    component: () => import('./views/DetailArticle.vue'),
+    children: [
+      {
+        path: ':slug',
+        name: 'detail-article',
+        component: () => import('./components/DetailArticleContent.vue')
+      },
+      {
+        path: ':slug/update',
+        name: 'update-article',
+        component: () => import('./components/UpdateArticleForm.vue')
+      }
+    ]
   }
 ]
 
