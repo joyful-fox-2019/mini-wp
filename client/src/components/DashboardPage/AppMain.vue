@@ -31,6 +31,12 @@
               v-html="article.content.slice(0, Math.min(article.content.indexOf('</p>'), article.content.indexOf('<img')))"
             ></div>
           </div>
+          <div class="card-footer text-right">
+            <button
+              class="btn btn-danger btn-sm"
+              @click="deleteArticle(article._id, article.status)"
+            >{{article.status === 'deleted' ? 'Permanent Delete' : 'Delete'}}</button>
+          </div>
         </div>
       </div>
     </section>
@@ -54,20 +60,106 @@ export default {
     };
   },
   methods: {
+    fetchData() {
+      http({
+        method: "get",
+        url: "articles/user",
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      })
+        .then(({ data }) => {
+          this.articles = data.articles
+            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+            .map(article => {
+              article.updated_at = moment(article.updated_at).fromNow();
+              return article;
+            });
+        })
+        .catch(err => console.log(err));
+    },
     viewArticle(id, status) {
       const selectedArticle = this.articles.find(article => {
         return article._id === id;
       });
       this.$emit("view-article", selectedArticle);
+    },
+    deleteArticle(id, status) {
+      if (status === "deleted") {
+        swal
+          .fire({
+            title: "Permanent Deletion!",
+            text: "This deletion is permanent and cannot be reverted!",
+            icon: "error",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Leave"
+          })
+          .then(result => {
+            if (result.value) {
+              http({
+                method: "delete",
+                url: `articles/${id}`,
+                headers: {
+                  access_token: localStorage.getItem("access_token")
+                }
+              })
+                .then(({ data }) => {
+                  console.log(data.message);
+                  swal.fire(
+                    "Deleted",
+                    "Your article has been permanently deleted."
+                  );
+                  this.fetchData();
+                })
+                .catch(err => console.log(err));
+            }
+          });
+      } else {
+        swal
+          .fire({
+            title: "Delete Article?",
+            text:
+              "This deletion is temporary. You can access this article or get it back from trash.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Leave"
+          })
+          .then(result => {
+            if (result.value) {
+              http({
+                method: "patch",
+                url: `articles/${id}`,
+                headers: {
+                  access_token: localStorage.getItem("access_token")
+                }
+              })
+                .then(({ data }) => {
+                  console.log(data.message);
+                  this.articles.find(article => article._id === id).status =
+                    "deleted";
+                })
+                .catch(err => console.log(err));
+            }
+          });
+      }
     }
   },
   computed: {
     filteredArticles() {
       let filteredArticles;
-      if (this.section === "all") filteredArticles = this.articles;
+      if (this.section === "all")
+        filteredArticles = this.articles.filter(
+          article => article.status !== "deleted"
+        );
       else
         filteredArticles = this.articles.filter(
-          article => article.status === this.section
+          article =>
+            article.status ===
+            (this.section === "trash" ? "deleted" : this.section)
         );
       const pattern = this.searchQuery
         .split("")
@@ -80,20 +172,7 @@ export default {
     }
   },
   created() {
-    http({
-      method: "get",
-      url: "articles/user",
-      headers: {
-        access_token: localStorage.getItem("access_token")
-      }
-    })
-      .then(({ data }) => {
-        this.articles = data.articles.map(article => {
-          article.updated_at = moment(article.updated_at).fromNow();
-          return article;
-        });
-      })
-      .catch(err => console.log(err));
+    this.fetchData();
   }
 };
 </script>

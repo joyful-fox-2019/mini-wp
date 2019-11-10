@@ -38,10 +38,45 @@ class ArticleController {
 			status: req.body.status,
 			updated_at: moment()
 		})
-			.then(() => {
-				res.status(200).json({
-					message: 'Update article success'
-				});
+			.then(article => {
+				if (article) {
+					res.status(200).json({
+						message: 'Update article success'
+					});
+				} else {
+					throw { status: 404, message: 'Article not found' };
+				}
+			})
+			.catch(next);
+	}
+
+	static deleteArticle(req, res, next) {
+		Article.findByIdAndUpdate(req.params.id, {
+			status: 'deleted'
+		})
+			.then(article => {
+				console.log(article);
+				if (article) {
+					res.status(200).json({
+						message: 'Article status patched to "deleted"'
+					});
+				} else {
+					throw { status: 404, message: 'Article not found' };
+				}
+			})
+			.catch(next);
+	}
+
+	static permanentDeleteArticle(req, res, next) {
+		Article.findByIdAndDelete(req.params.id)
+			.then(article => {
+				if (article) {
+					res.status(200).json({
+						message: 'Article permanently deleted'
+					});
+				} else {
+					throw { status: 404, message: 'Article not found' };
+				}
 			})
 			.catch(next);
 	}

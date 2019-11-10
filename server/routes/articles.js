@@ -7,5 +7,7 @@ articles.post('/', ArticleController.postArticle);
 articles.get('/user', ArticleController.getUserArticles);
 articles.use('/:id', authorize);
 articles.put('/:id', ArticleController.updateArticle);
+articles.patch('/:id', ArticleController.deleteArticle);
+articles.delete('/:id', ArticleController.permanentDeleteArticle);
 
 module.exports = articles;
