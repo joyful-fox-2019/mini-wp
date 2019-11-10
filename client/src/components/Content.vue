@@ -39,8 +39,10 @@
             </div>
         </div>
         <div class="container-fluid form-article" v-if="article">
-            <createarticle @show-article="showArticle"></createarticle>
-            <editform :article-id="this.articleId"></editform>
+            <createarticle @show-article="showArticle" v-if="!isEdit"></createarticle>
+            <div v-if="isEdit">
+            <editform :edit-article="newEditArticle"></editform>
+            </div>
         </div>
     </div>
 </template>
@@ -54,14 +56,15 @@ import editform from './EditForm'
 export default {
     components:{
         createarticle,
-        editform,
-        articleId
+        editform
     },
-    props : ['article', 'isEdit'],
+    props : ['article'],
     data(){
         return {
             baseUrl: `http://localhost:3000`,
-            articles: []
+            articles: [],
+            newEditArticle: {},
+            isEdit: false
         }
     },
     methods:{
@@ -117,7 +120,24 @@ export default {
             })
         },
         editArticle(id){
-            this.articleId = id
+            Swal.showLoading()
+            axios({
+                url: `${this.baseUrl}/articles/user/${id}`,
+                method: "GET",
+                headers:{
+                    access_token: localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                Swal.close()
+                let article = response.data;
+                this.newEditArticle = article
+                this.isEdit = true
+                console.log(this.newEditArticle)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
     },
     created(){
