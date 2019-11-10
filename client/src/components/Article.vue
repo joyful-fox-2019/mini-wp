@@ -17,7 +17,7 @@
         </router-link>
         <br>
         <div class="row">
-          <small>
+          <small class="t-standard">
             {{ fullName }}
           </small>
         </div>

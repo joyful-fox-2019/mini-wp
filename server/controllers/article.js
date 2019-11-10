@@ -2,7 +2,14 @@ const Article = require('../models/Article')
 
 module.exports = {
   find: (req, res, next) => {
-    Article.find().populate('user').sort({ createdAt: 'desc' })
+    let filter = {}
+    if(req.query.user) {
+      filter.user = req.query.user
+    }
+    if(req.query.keyword) {
+      filter.keyword = req.query.keyword
+    }
+    Article.find(filter).populate('user').sort({ createdAt: 'desc' })
       .then(articles => {
         res.status(200).json(articles)
       })

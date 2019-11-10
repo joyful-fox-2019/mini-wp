@@ -43,7 +43,7 @@
       <div class="align-right-container">
         <button class="button bg-primary-gradient post-button" type="submit">
           <b-icon icon="plus-circle"></b-icon>
-          <span>POST ARTICLE</span>
+          <span>UPDATE ARTICLE</span>
         </button>
       </div>
     </form>

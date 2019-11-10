@@ -44,7 +44,12 @@ const routes = [
         component: () => import('./components/UpdateArticleForm.vue')
       }
     ]
-  }
+  },
+  {
+    path: '/my-articles',
+    name: 'my-articles',
+    component: () => import('./views/MyArticles.vue')
+  },
 ]
 
 const router = new VueRouter({

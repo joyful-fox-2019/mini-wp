@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="t-standard">
     <form @submit.prevent="addArticle" class="has-margin-t">
       <b-field>
         <b-input v-model="title" placeholder="Title"></b-input>
@@ -19,7 +19,7 @@
           </span>
       </b-field>
       <div>
-      <wysiwyg v-model="description" />
+      <wysiwyg class="font-article" v-model="description" />
       </div>
       <div class="has-margin-t">
         <b-field>

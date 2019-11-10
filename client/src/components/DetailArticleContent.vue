@@ -6,7 +6,7 @@
     <div class="subtitle t-lighten has-margin-t">
       {{ article.subtitle }}
     </div>
-    <div class="has-margin-t">
+    <div class="has-margin-t t-standard">
       <div class="columns is-vcentered">
         <div class="column is-narrow">
           <button class="button is-rounded bg-primary-gradient font-content">
@@ -19,14 +19,14 @@
           {{ fullName }}
         </div>
         <div class="column is-narrow">
-          <button @click="toUpdate" class="button bg-primary-gradient font-content">
+          <button v-if="String(article.user._id) === String(userId)" @click="toUpdate" class="button bg-primary-gradient font-content">
             <span class="icon">
               <i class="fas fa-pen"></i>
             </span>
           </button>
         </div>
         <div class="column is-narrow">
-          <button @click="deleteArticle" class="button bg-surface font-content">
+          <button v-if="String(article.user._id) === String(userId)" @click="deleteArticle" class="button bg-surface font-content">
             <span class="icon">
               <i class="fas fa-trash"></i>
             </span>
@@ -39,7 +39,7 @@
         <img :src="article.image">
       </figure>
     </div>
-    <div class="has-margin-t">
+    <div class="has-margin-t t-standard">
       {{ article.description }}
     </div>
   </div>
@@ -52,6 +52,11 @@ export default {
   name: 'DetailArticleContent',
   props: {
     article: Object
+  },
+  data () {
+    return {
+      userId: localStorage.getItem('_id')
+    }
   },
   methods: {
     toUpdate () {

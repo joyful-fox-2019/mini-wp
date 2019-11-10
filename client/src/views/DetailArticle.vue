@@ -46,5 +46,6 @@ export default {
 <style scoped>
 .article-container {
   margin-top: 30px;
+  margin-bottom: 200px;
 }
 </style>

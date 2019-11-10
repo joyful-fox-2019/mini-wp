@@ -1,13 +1,7 @@
 <template>
   <div class="container">
-    <FeaturedArticle v-if="articles.length >= 3" :articles="articles.slice(0, 3)"></FeaturedArticle>
     <div class="container">
-      <div v-if="articles.length >= 3">
-        <Article v-for="article in articles.slice(3)" :key="article._id" class="columns" :article="article"></Article>
-      </div>
-      <div v-else>
-        <Article v-for="article in articles" :key="article._id" class="columns" :article="article"></Article>
-      </div>
+      <Article v-for="article in articles" :key="article._id" class="columns" :article="article"></Article>
     </div>
   </div>
 </template>
@@ -32,7 +26,7 @@ export default {
     getArticles () {
       console.log('get articles')
       const loadingComponent = this.$buefy.loading.open()
-      axios.get('/articles', {
+      axios.get(`/articles?user=${localStorage.getItem('_id')}`, {
         headers: {
           access_token: localStorage.getItem('access_token')
         }

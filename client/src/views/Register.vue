@@ -21,7 +21,7 @@
           <button class="button bg-primary-gradient" type="submit">
             Sign Up
           </button>
-          <span class="float-right">
+          <span class="float-right t-standard">
             Already have an account?
             <router-link to="/login">
               <span class="t-primary">

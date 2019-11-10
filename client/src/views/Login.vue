@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container t-standard">
     <div class="columns is-centered">
       <div class="column is-half">
         <div class="centered-item">

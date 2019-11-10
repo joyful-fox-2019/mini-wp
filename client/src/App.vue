@@ -4,7 +4,7 @@
     <Navbar :isLogin="isLogin" @logout="logout" @setDark="setDark"></Navbar>
     <Articles @alert="alert" v-if="$router.history.current.path === '/'"></Articles>
     <router-view @alert="alert" @login="login" :is-dark="isDark"></router-view>
-    <Footer></Footer>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 
@@ -109,7 +109,8 @@ export default {
 }
 html, body {
   background: var(--background-color) !important;
-  color: var(--text-color) !important;
+  /* color: var(--text-color) !important; */
+  height: 100%;
 }
 .t-standard {
   color: var(--text-color) !important;
@@ -147,6 +148,7 @@ html, body {
 }
 #main {
   font-family: 'Signika', sans-serif;
+  height: 100%;
 }
 .container {
   width: 70% !important;
