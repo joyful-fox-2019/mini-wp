@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const miniwp = axios.create({
-    baseURL: `http://localhost:3000`,
+    baseURL: `http://miniwp.server.edirates.xyz`,
     headers: {
       "jwt_token": localStorage.getItem("token")
     }
