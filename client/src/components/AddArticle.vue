@@ -75,6 +75,7 @@
     import { quillEditor } from "vue-quill-editor";
 
     export default {
+        name: "AddArticle",
         data: function() {
             return {
                 title: "",
@@ -98,11 +99,14 @@
                 axios({
                     method: "POST",
                     url: "/articles/",
-                    data: formData
+                    data: formData,
+                    headers: {
+                        "jwt_token": localStorage.getItem("token")
+                    }
                 })
                 .then((response) => {
                     this.changeMainPage("home");
-                    this.success("Article posted.");
+                    this.success("Post successfully");
                 })
                 .catch((err) => {
                     if (Array.isArray(err.response.data.message)) {

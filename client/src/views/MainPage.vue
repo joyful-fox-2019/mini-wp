@@ -27,6 +27,12 @@
                     :modified="modified" 
                     @change-main-page="changeMainPage">
                 </EditArticle>
+                <SearchTag v-if="mainpage === 'tag'" 
+                    :mainpage="mainpage" 
+                    :modified="modified" 
+                    @change-main-page="changeMainPage"
+                    @modify-page="modifyPage">
+                </SearchTag>
             </div>
         </div>
     </div>
@@ -40,6 +46,7 @@ import NewsFeed from "../components/NewsFeed.vue";
 import UserFeed from "../components/UserFeed.vue";
 import AddArticle from "../components/AddArticle.vue";
 import EditArticle from "../components/EditArticle.vue";
+import SearchTag from "../components/SearchTag.vue";
 
 export default {
     name: "MainPage",
@@ -53,7 +60,10 @@ export default {
         getArticle(page) {
             axios({
                 method: "GET",
-                url: `/articles/${this.modified}`
+                url: `/articles/${this.modified}`,
+                headers: {
+                    "jwt_token": localStorage.getItem("token")
+                }
             })
             .then((response) => {
                 this.mainpage = page;
@@ -95,7 +105,8 @@ export default {
         NewsFeed,
         UserFeed,
         AddArticle,
-        EditArticle
+        EditArticle,
+        SearchTag
     }
 }
 </script>

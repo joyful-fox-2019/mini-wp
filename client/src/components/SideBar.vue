@@ -30,13 +30,14 @@
             </b-menu-item>
         </b-menu-list>
         <b-menu-list label="Search">
-            <b-menu-item label="Tags"></b-menu-item>
+            <b-menu-item @click="changeMainPage('tag')" label="Tags"></b-menu-item>
         </b-menu-list>
     </b-menu>
 </template>
 
 <script>
     export default {
+        name: "SideBar",
         data: function() {
             return {
                 isActiveNews: true,

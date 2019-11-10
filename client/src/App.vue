@@ -36,19 +36,19 @@ export default {
             var auth2 = gapi.auth2.getAuthInstance();
             if (auth2){
                 auth2.signOut().then(function () {
-                    console.log("User signed out.");
+                    // console.log("User signed out.");
                 });
             }
             localStorage.removeItem("token");
             this.isLogin = false;
             this.page = "login";
             this.success("Successfully sign out.");
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Success!',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // });
         },
         success(message) {
             this.$buefy.toast.open({

@@ -39,7 +39,7 @@ class ArticleController {
             res.status(200).json(article);
         })
         .catch((err) => {
-            err = { status: 404, message: `Article not found.` }
+            err = { status: 404, message: `Article not found` }
             next(err);
         });
     }
@@ -67,7 +67,7 @@ class ArticleController {
             });
         } 
         else {
-            let err = { status: 400, message: `Feature image is required.` }
+            let err = { status: 400, message: `Feature image is required` }
             next(err);
         }
     }

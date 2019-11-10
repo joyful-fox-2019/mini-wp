@@ -74,7 +74,7 @@ export default {
                 this.name = "";
                 this.email = "";
                 this.password = "";
-                this.success("Successfully registered.");
+                this.success("Register successfully");
                 // Swal.fire({
                 //     icon: 'success',
                 //     title: 'Success!',

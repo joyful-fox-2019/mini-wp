@@ -17,7 +17,7 @@ function authenticate (req, res, next) {
         });
     }
     catch (err) {
-        err = { status: 403, message: `You must log in first.` }
+        err = { status: 403, message: `You must log in first` }
         next(err);
     }
 }

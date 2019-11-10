@@ -70,6 +70,7 @@
     import Swal from "sweetalert2";
 
     export default {
+        name: "UserFeed",
         data: function() {
             return {
                 articles: []
@@ -83,7 +84,10 @@
             getUserArticles() {
                 axios({
                     method: "GET",
-                    url: "/articles/"
+                    url: "/articles/",
+                    headers: {
+                        "jwt_token": localStorage.getItem("token")
+                    }
                 })
                 .then((responses) => {
                     this.articles = responses.data;
@@ -112,12 +116,15 @@
                     if (result.value) {
                         axios({
                             method: "DELETE",
-                            url: `/articles/${articleId}`
+                            url: `/articles/${articleId}`,
+                            headers: {
+                                "jwt_token": localStorage.getItem("token")
+                            }
                         })
                         .then((response) => {
                             if (response.data.n === 1) {
-                                this.getAllArticles();
-                                this.success("Successfully deleted");
+                                this.getUserArticles();
+                                this.success("Delete successfully");
                             } else {
                                 this.danger("Failed to delete");
                             }

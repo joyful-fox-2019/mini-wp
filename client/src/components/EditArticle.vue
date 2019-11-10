@@ -80,6 +80,7 @@
     import { quillEditor } from "vue-quill-editor";
 
     export default {
+        name: "EditArticle",
         data: function() {
             return {
                 title: "",
@@ -98,7 +99,10 @@
             getArticle() {
                 axios({
                     method: "GET",
-                    url: `/articles/${this.modified}`
+                    url: `/articles/${this.modified}`,
+                    headers: {
+                        "jwt_token": localStorage.getItem("token")
+                    }
                 })
                 .then((response) => {
                     this.title = response.data.title;
@@ -125,11 +129,14 @@
                 axios({
                     method: "PUT",
                     url: `/articles/${this.modified}`,
-                    data: formData
+                    data: formData,
+                    headers: {
+                        "jwt_token": localStorage.getItem("token")
+                    }
                 })
                 .then((response) => {
                     this.changeMainPage("home");
-                    this.success("Article updated.");
+                    this.success("Update successfully");
                 })
                 .catch((err) => {
                     if (Array.isArray(err.response.data.message)) {

@@ -27,11 +27,11 @@ class UserController {
                     const jwt_token = jwt.generate({ _id: user._id, name: user.name, email: user.email });
                     res.status(200).json({ jwt_token: jwt_token });
                 } else {
-                    let err = { status: 400, message: `Password not match.` };
+                    let err = { status: 400, message: `Password not match` };
                     next(err);
                 }
             } else {
-                let err = { status: 404, message: `User not found.` };
+                let err = { status: 404, message: `User not found` };
                 next(err);
             }
         })

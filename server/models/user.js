@@ -6,12 +6,12 @@ const model = mongoose.model;
 const userSchema = new Schema ({
     name: {
         type: String,
-        required: [true, `Name is required.`]
+        required: [true, `Name is required`]
     },
     email: {
         type: String,
-        required: [true, `Email is required.`],
-        match: [/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, `Invalid email format.`],
+        required: [true, `Email is required`],
+        match: [/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, `Invalid email format`],
         validate: {
             validator: function (v) {
                 return User.findOne({
@@ -22,13 +22,13 @@ const userSchema = new Schema ({
                     else    return true;
                 });
             },
-            message: `Email must be unique.`
+            message: `Email must be unique`
         }
     },
     password: {
         type: String,
-        required: [true, `Password is required.`],
-        minlength: [8, `Password length at least 8 characters.`]
+        required: [true, `Password is required`],
+        minlength: [8, `Password length at least 8 characters`]
     }
 }, {
     timestamps: true

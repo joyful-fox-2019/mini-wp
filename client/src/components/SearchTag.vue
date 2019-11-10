@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div v-for="article in articles" :key="article._id" class="card" style="display:flex;">
+        <div style="display:flex; align-items:center; margin-bottom:20px;">
+            <b-field label="Search by tag name : " style="padding-top:10px; margin-right:10px;"></b-field>
+            <b-input v-model="search" placeholder="Tag name" type="search" rounded></b-input>
+        </div>
+        <div v-for="article in filteredList" :key="article._id" class="card" style="display:flex;">
             <div class="card-image">
                 <figure class="image is-4by3">
                 <img :src="article.featured_image" alt="featured">
@@ -70,10 +74,11 @@
     import Swal from "sweetalert2";
 
     export default {
-        name: "NewsFeed",
+        name: "SearchTag",
         data: function() {
             return {
-                articles: []
+                articles: [],
+                search: ""
             };
         },
         props: {
@@ -154,6 +159,13 @@
         },
         created() {
             this.getAllArticles();
+        },
+        computed: {
+            filteredList() {
+                return this.articles.filter(article => {
+                    return article.tags.join().toLowerCase().includes(this.search.toLowerCase());
+                });
+            },
         }
     }
 </script>

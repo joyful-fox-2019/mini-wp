@@ -5,16 +5,16 @@ const model = mongoose.model;
 const articleSchema = new Schema({
     title: {
         type: String,
-        required: [true, `Title is required.`],
-        minlength: [3, `Minimum title length is 3.`]
+        required: [true, `Title is required`],
+        minlength: [3, `Minimum title length is 3`]
     },
     content: {
         type: String,
-        required: [true, `Content is required.`]
+        required: [true, `Content is required`]
     },
     author: {
         type: String,
-        required: [true, `Author is required.`]
+        required: [true, `Author is required`]
     },
     featured_image: {
         type: String,

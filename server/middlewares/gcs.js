@@ -25,7 +25,7 @@ module.exports = (req, res, next) => {
   else if (!req.file.mimetype.includes('image/jpeg')){
     return next({
       status: 400,
-      message: `File not supported.`
+      message: `File not supported`
     });
   }
 

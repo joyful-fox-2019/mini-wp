@@ -75,13 +75,13 @@ export default {
                 localStorage.setItem("token", response.data.jwt_token);
                 this.$emit("set-login", true);
                 this.$emit("set-page", "main");
-                this.success("Successfully sign in.");
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                this.success("Sign in successfully");
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Success!',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
             })
             .catch(err => {
                 this.danger(err.response.data.message);
@@ -107,23 +107,23 @@ export default {
                 this.$emit("set-page", "main");
                 this.email = "";
                 this.password = "";
-                this.success("Successfully sign in.");
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                this.success("Sign in successfully");
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Success!',
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
             })
             .catch((err) => {
                 this.danger(err.response.data.message);
-                Swal.fire({
-                    icon: 'errror',
-                    title: 'Error!',
-                    text: err.response.data.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                // Swal.fire({
+                //     icon: 'errror',
+                //     title: 'Error!',
+                //     text: err.response.data.message,
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
             });
         },
         register() {

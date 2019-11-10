@@ -8,12 +8,12 @@ function authorization (req, res, next) {
                 next();
             }
             else {
-                let err = { status: 401, message: `You are not authorized.` }
+                let err = { status: 401, message: `You are not authorized` }
                 next(err);
             }
         }
         else {
-            let err = { status: 404, message: `Article not found.` }
+            let err = { status: 404, message: `Article not found` }
             next(err);
         }
     })
