@@ -14,7 +14,7 @@ router.get('/', Authenticate, ArticleController.getArticles);
 router.get('/user', Authenticate, ArticleController.findUserArticle);
 
 // get One Article
-router.get('/user/:id', Authenticate, ArticleController.getOneArticle);
+router.get('/user/:id', Authenticate, Authorization , ArticleController.getOneArticle);
 
 // edit article
 router.put('/:id', Authenticate, Authorization, ArticleController.editArticle);

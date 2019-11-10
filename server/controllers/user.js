@@ -34,7 +34,7 @@ class UserController {
         })
         .then(user => {
             if(!user){
-                throw new Error("your email is not registered")
+                throw { status: 500, message: "your email is not registered"}
             }else{
                 let valid = password.compare(req.body.password, user.password);
                 if(valid){
@@ -46,11 +46,12 @@ class UserController {
                         image: user.imageUrl
                     })
                 }else{
-                    throw new Error("your password is incorrect")
+                    throw { status: 500, message: "your password is incorrect"}
                 }
             }
         })
         .catch(err => {
+            console.log(err)
             next(err)
         })
     }

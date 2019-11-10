@@ -16,8 +16,7 @@ const articleSchema = new Schema({
         type: String
     },
     featured_image:{
-        type: String,
-        default: "https://image.freepik.com/free-photo/education-concept-student-studying-brainstorming-campus-concept-close-up-students-discussing-their-subject-books-textbooks-selective-focus_1418-626.jpg"
+        type: String
     },
     updated_at:{
         type: Date,

@@ -13,32 +13,34 @@
                 </div>
             </nav>
         </div>
-        <div class="w-100 container main-content d-flex flex-column align-items-center" v-for="(data, index) in articles" :key="index">
+        <div class="w-100 container main-content d-flex flex-column" v-if="!article">
             <!-- Card For Article -->
-            <div v-if="!article">
-                <div class="card m-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://image.freepik.com/free-photo/education-concept-student-studying-brainstorming-campus-concept-close-up-students-discussing-their-subject-books-textbooks-selective-focus_1418-626.jpg" class="card-img" alt="article">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ data.title }}</h5>
-                                <p class="card-text">{{ data.content }}</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div v-for="(data, index) in articles" :key="index">
+                <div>
+                    <div class="card m-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img :src="data.featured_image" class="card-img" alt="article">
                             </div>
-                            <div class="container">
-                                <button class="btn btn-primary">Read</button>
-                                <button class="btn btn-success">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ data.title }}</h5>
+                                    <p class="card-text">{{ data.content }}</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                                <div class="container">
+                                    <button v-on:click="editArticle(data._id)" class="btn btn-success">Edit</button>
+                                    <button v-on:click="deleteArticle(data._id)" class="btn btn-danger">Delete</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid form-article" v-if="article">
-                <createarticle></createarticle>
-            </div>
+        </div>
+        <div class="container-fluid form-article" v-if="article">
+            <createarticle @show-article="showArticle"></createarticle>
+            <editform :article-id="this.articleId"></editform>
         </div>
     </div>
 </template>
@@ -46,12 +48,16 @@
 
 import createarticle from './CreateArticle'
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import editform from './EditForm'
 
 export default {
     components:{
-        createarticle
+        createarticle,
+        editform,
+        articleId
     },
-    props : ['article'],
+    props : ['article', 'isEdit'],
     data(){
         return {
             baseUrl: `http://localhost:3000`,
@@ -73,6 +79,45 @@ export default {
             })
             .catch(err => {
             })
+        },
+        showArticle(){
+            this.$emit('show-article')
+            this.fetchingDataArticle()
+        },
+        deleteArticle(id){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                })
+            .then((result) => {
+                axios({
+                    url: `${this.baseUrl}/articles/${id}`,
+                    method: "DELETE",
+                    headers:{
+                        access_token: localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    this.fetchingDataArticle()
+                    console.log(response)
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            })
+        },
+        editArticle(id){
+            this.articleId = id
         }
     },
     created(){
@@ -93,5 +138,8 @@ export default {
 }
 .form-article{
     margin-top: 2%;
+}
+.card-img{
+    max-height: 195px;
 }
 </style>

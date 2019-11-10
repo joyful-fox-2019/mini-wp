@@ -4,7 +4,7 @@
             <sidebar @create-article="createArticle" @home-page="homePage"></sidebar>
         </div>
         <div class="content-page">
-            <contentpage v-bind:article="this.isArticle"></contentpage>
+            <contentpage v-bind:article="this.isArticle" @show-article="homePage"></contentpage>
         </div>
     </div>
 </template>

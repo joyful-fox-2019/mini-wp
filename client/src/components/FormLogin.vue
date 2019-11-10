@@ -26,6 +26,7 @@
 <script>
 
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
     data(){
@@ -37,6 +38,7 @@ export default {
     },
     methods:{
       login(){
+          Swal.showLoading()
           axios({
             url: `${this.baseURL}/users/login`,
             method: 'POST',
@@ -50,13 +52,25 @@ export default {
             localStorage.setItem('token', data.token);
             localStorage.setItem('name', data.name);
             localStorage.setItem('email', data.email);
-            localStorage.setItem('image', data.image)
+            localStorage.setItem('image', data.image);
+            Swal.close()
+            Swal.fire({
+              icon: "success",
+              title: "Success",
+              text: "User logged in!"
+            });
             this.showMainPage()
             this.emailLog = ""
             this.passwordLog = ""
           })
           .catch(err => {
-            console.log(err)
+            Swal.fire({
+              icon: "error",
+              title: "Login Failed",
+              text: `${err.response.data.message}`
+            });
+            this.emailLog = ""
+            this.passwordLog = ""
           })
       },
       showSignup(){

@@ -7,7 +7,7 @@ class ArticleController {
           let name = req.file.originalname
           let location = req.file.cloudStoragePublicUrl
           let data = {name,location}
-          res.status(201).json({data})
+          res.status(201).json(data)
         } catch (error) {
           next(error)
         }
@@ -17,7 +17,6 @@ class ArticleController {
         Article.create({
             title: req.body.title,
             content: req.body.content,
-            created_at: req.body.created,
             author: req.user.id,
             featured_image: req.body.imageUrl
         })

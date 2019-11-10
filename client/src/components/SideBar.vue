@@ -13,7 +13,7 @@
         <div class="h-50 d-flex mt-4">
             <nav class="nav flex-column">
                 <a class="nav-link" href="#" v-on:click="backToHome"><i class="fas fa-home"></i>Home Page</a>
-                <a class="nav-link" href="#"><i class="fas fa-user-circle"></i>Profile</a>
+                <a class="nav-link" href="#"><i class="fas fa-user-circle"></i>My Article</a>
                 <a class="nav-link" href="#" v-on:click="createArticle"><i class="fas fa-upload"></i>Create Article</a>
                 <a class="nav-link" href="#"><i class="fas fa-trash"></i>Trash</a>
             </nav>
