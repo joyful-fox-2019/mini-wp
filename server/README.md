@@ -232,15 +232,15 @@ Error Response :
   }
   ```
 
-**3. Show One Article**
+**3. Show Detail of One Article**
 ----
-Show a specific article of logged in user :
-| Syntax                        | Description       |
-| ----------------------------- | ----------------- |
-| **URL**                       | `/articles/:id`   |
-| **Method**                    | `GET`             |
-| **Authentication Required**   | YES               |
-| **Authorization Required**    | NO                |
+Show a specific article of users :
+| Syntax                        | Description             |
+| ----------------------------- | ----------------------- |
+| **URL**                       | `/articles/detail:id`   |
+| **Method**                    | `GET`                   |
+| **Authentication Required**   | YES                     |
+| **Authorization Required**    | NO                      |
 
 Request Headers :
 | Field Name                    | Value                |
@@ -282,7 +282,57 @@ Error Response :
   }
   ```
 
-**4. Create An Article**
+**4. Find One Corresponding Article**
+----
+Show a specific article of logged in user :
+| Syntax                        | Description       |
+| ----------------------------- | ----------------- |
+| **URL**                       | `/articles/:id`   |
+| **Method**                    | `GET`             |
+| **Authentication Required**   | YES               |
+| **Authorization Required**    | YES               |
+
+Request Headers :
+| Field Name                    | Value                |
+| ----------------------------- | -------------------- |
+| **jwt_token**                 | `<your JWT Token>`   |
+
+Request Params :
+| Field Name                    | Value                 |
+| ----------------------------- | --------------------- |
+| **id**                        | `<article ID>`        |
+
+Success Response :
+  * **HTTP Code :** 200 (OK)
+  * **JSON Response :**
+  ```html
+  {
+    "featured_image": "https://storage.googleapis.com/miniwp.images.edirates.xyz/1573261878160IMG_0001.jpg",
+    "tags": [
+        "winter",
+        " snow"
+    ],
+    "status": true,
+    "_id": "5dc61236bfcbac05f0a44bad",
+    "title": "Winter is Coming",
+    "content": "You know nothing",
+    "author": "Jon Snow",
+    "UserId": "5dc60f57bfcbac05f0a44bac",
+    "createdAt": "2019-11-09T01:11:18.648Z",
+    "updatedAt": "2019-11-09T01:11:18.648Z",
+    "__v": 0
+  }
+  ```
+Error Response : 
+  * **HTTP Code :** 401 (Unauthorized)
+  * **JSON Response :**
+  ```html
+  {
+    "message": "You are not authorized."
+  }
+  ```
+
+**5. Create An Article**
 ----
 Post a new article :
 | Syntax                        | Description   |
@@ -336,7 +386,7 @@ Error Response :
   }
   ```
 
-**5. Update An Article**
+**6. Update An Article**
 ----
 Update a specific article :
 | Syntax                        | Description       |
@@ -380,7 +430,7 @@ Error Response :
   }
   ```
 
-**6. Delete An Article**
+**7. Delete An Article**
 ----
 Delete a specific article :
 | Syntax                        | Description          |
