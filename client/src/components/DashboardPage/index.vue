@@ -1,7 +1,7 @@
 <template>
   <section>
     <AppSidebar @switch-section="switchSection"></AppSidebar>
-    <AppMain :section="section"></AppMain>
+    <AppMain :section="section" @view-article="viewArticle"></AppMain>
   </section>
 </template>
 
@@ -14,7 +14,6 @@ export default {
     AppSidebar,
     AppMain
   },
-  props: ["page"],
   data() {
     return {
       registered: true,
@@ -24,6 +23,9 @@ export default {
   methods: {
     switchSection(val) {
       this.section = val;
+    },
+    viewArticle(article) {
+      this.$emit("view-article", article);
     }
   }
 };

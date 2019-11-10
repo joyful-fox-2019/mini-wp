@@ -15,11 +15,14 @@
           </div>
         </form>
         <div class="dropdown-divider"></div>
-        <div class="card my-3" v-for="article in filteredArticles" :key="article.id">
+        <div class="card my-3" v-for="article in filteredArticles" :key="article._id">
           <div class="card-body">
             <div class="card-title d-flex justify-content-between my-0">
               <h3>
-                <a href>{{ article.title }}</a>
+                <a
+                  href
+                  @click.prevent="viewArticle(article._id, article.status)"
+                >{{ article.title }}</a>
               </h3>
               <small class="text-right">{{ article.status }}</small>
             </div>
@@ -49,6 +52,14 @@ export default {
       searchQuery: "",
       siteName: "aliftaufik"
     };
+  },
+  methods: {
+    viewArticle(id, status) {
+      const selectedArticle = this.articles.find(article => {
+        return article._id === id;
+      });
+      this.$emit("view-article", selectedArticle);
+    }
   },
   computed: {
     filteredArticles() {

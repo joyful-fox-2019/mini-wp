@@ -1,5 +1,6 @@
 const { decode } = require('../helpers/tokenHandler');
 const { Article } = require('../models');
+const { Types } = require('mongoose');
 
 module.exports = {
 	authenticate(req, res, next) {
@@ -12,7 +13,7 @@ module.exports = {
 		}
 	},
 	authorize(req, res, next) {
-		Article.findOne({ id: req.params.id, author: req.payload.id })
+		Article.findOne({ _id: req.params.id, author: req.payload.id }) // Why must use _id tho???
 			.then(article => {
 				if (article) next();
 				else throw { status: 403, message: 'Unauthorized access' };

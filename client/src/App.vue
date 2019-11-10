@@ -7,8 +7,12 @@
         @switch-page="switchPage"
         @signed-out="signedIn = false; page = 'dashboard'"
       ></Navbar>
-      <DashboardPage v-if="page === 'dashboard'"></DashboardPage>
-      <WritePage v-if="page === 'write'" @switch-page="switchPage"></WritePage>
+      <DashboardPage v-if="page === 'dashboard'" @view-article="viewArticle"></DashboardPage>
+      <WritePage
+        :selectedArticle="selectedArticle"
+        v-if="page === 'write'"
+        @switch-page="switchPage"
+      ></WritePage>
     </main>
   </div>
 </template>
@@ -34,12 +38,18 @@ export default {
   data() {
     return {
       signedIn: false,
-      page: "dashboard"
+      page: "dashboard",
+      selectedArticle: {}
     };
   },
   methods: {
     switchPage(val) {
+      if (this.page === "write") this.selectedArticle = {};
       this.page = val;
+    },
+    viewArticle(article) {
+      this.selectedArticle = article;
+      this.page = "write";
     }
   },
   created() {

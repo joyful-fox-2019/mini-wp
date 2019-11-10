@@ -14,40 +14,64 @@
           <span class="d-block w-75" :class="{underline: !titleFocused, hardline: titleFocused}"></span>
         </h1>
       </div>
-      <div class="d-flex flex-row flex-lg-column justify-content-lg-between w-lg-25" id="control">
-        <button class="btn btn-success btn-lg-block" @click="post">Post</button>
-        <button class="btn btn-primary btn-lg-block mx-3 mx-lg-0" @click="save">Save</button>
-        <button class="btn btn-danger btn-lg-block" @click="cancel">Cancel</button>
+      <div class="d-flex flex-row flex-lg-column justify-content-lg-around w-lg-25" id="control">
+        <button
+          class="btn btn-success btn-lg-block"
+          @click="post"
+        >{{selectedArticle.status === 'posted' ? 'Update' : 'Post'}}</button>
+        <button
+          class="btn btn-primary btn-lg-block mx-3 mx-lg-0"
+          v-if="selectedArticle.status !== 'posted'"
+          @click="save"
+        >Save</button>
+        <button class="btn btn-danger btn-lg-block" @click="cancel('dashboard')">Cancel</button>
       </div>
     </div>
     <div id="quill-container"></div>
-    <!-- <QuillEditor v-model="content" id="quill-container"></QuillEditor> -->
   </section>
 </template>
 
 <script>
-// import QuillEditor from "./QuillEditor";
 import Quill from "quill";
 import axios from "axios";
-// import FormData from "form-data";
 
 const http = axios.create({
   baseURL: "http://localhost:3000"
 });
 
 export default {
+  props: ["selectedArticle"],
   data() {
     return {
       titleFocused: false,
       title: "",
       content: "",
-      editor: null
+      editor: null,
+      modified: false
     };
   },
   methods: {
     post() {
       if (!this.title) {
         swal.fire("Warning", "Article title cannot empty!", "warning");
+      } else if (this.selectedArticle.status) {
+        http({
+          method: "put",
+          url: `articles/${this.selectedArticle._id}`,
+          data: {
+            title: this.title,
+            content: this.content,
+            status: "posted"
+          },
+          headers: {
+            access_token: localStorage.getItem("access_token")
+          }
+        })
+          .then(({ data }) => {
+            console.log(data.message);
+            this.$emit("switch-page", "dashboard");
+          })
+          .catch(err => console.log(err));
       } else {
         http({
           method: "post",
@@ -60,15 +84,35 @@ export default {
           headers: {
             access_token: localStorage.getItem("access_token")
           }
-        }).then(({ data }) => {
-          console.log(data.message);
-          this.$emit("switch-page", "dashboard");
-        });
+        })
+          .then(({ data }) => {
+            console.log(data.message);
+            this.$emit("switch-page", "dashboard");
+          })
+          .catch(err => console.log(err));
       }
     },
     save() {
       if (!this.title) {
         swal.fire("Warning", "Article title cannot empty!", "warning");
+      } else if (this.selectedArticle.status) {
+        http({
+          method: "put",
+          url: `articles/${this.selectedArticle._id}`,
+          data: {
+            title: this.title,
+            content: this.content,
+            status: "draft"
+          },
+          headers: {
+            access_token: localStorage.getItem("access_token")
+          }
+        })
+          .then(({ data }) => {
+            console.log(data.message);
+            this.$emit("switch-page", "dashboard");
+          })
+          .catch(err => console.log(err));
       } else {
         http({
           method: "post",
@@ -87,10 +131,31 @@ export default {
         });
       }
     },
-    cancel() {
-      swal.fire("are you sure?");
+    cancel(page) {
+      if (this.modified) {
+        swal
+          .fire({
+            title: "Leaving editor?",
+            text: "All unsaved changes will be lost.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Leave"
+          })
+          .then(result => {
+            if (result.value) {
+              this.$emit("switch-page", page);
+            }
+          });
+      } else {
+        this.$emit("switch-page", page);
+      }
     },
     update() {
+      if (this.content) {
+        this.modified = true;
+      }
       this.content = this.editor.getText() ? this.editor.root.innerHTML : "";
     },
     imgHandler() {
@@ -115,22 +180,9 @@ export default {
             this.editor.insertEmbed(range.index, "image", link);
           })
           .catch(err => console.log(err));
-
-        // this part the image is inserted
-        // by 'image' option below, you just have to put src(link) of img here.
       };
     }
   },
-  // computed: {
-  //   computedContent: {
-  //     get() {
-  //       return this.content;
-  //     },
-  //     set(val) {
-  //       this.content = val;
-  //     }
-  //   }
-  // },
   mounted() {
     this.editor = new Quill("#quill-container", {
       modules: {
@@ -149,6 +201,9 @@ export default {
       placeholder: "Start your writing journey...",
       theme: "snow"
     });
+    this.title = this.selectedArticle.title || "";
+    this.editor.root.innerHTML = this.selectedArticle.content || "";
+
     this.editor.on("text-change", () => this.update());
   }
 };

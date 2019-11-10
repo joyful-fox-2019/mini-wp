@@ -1,7 +1,6 @@
 module.exports = (err, req, res, next) => {
 	let status,
 		messages = [];
-
 	switch (err.name) {
 		case 'ValidationError':
 			status = 401;

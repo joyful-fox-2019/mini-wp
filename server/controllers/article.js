@@ -1,4 +1,5 @@
 const { Article } = require('../models');
+const moment = require('moment');
 
 class ArticleController {
 	static getUserArticles(req, res, next) {
@@ -23,6 +24,21 @@ class ArticleController {
 				res.status(200).json({
 					message: 'Article created',
 					article
+				});
+			})
+			.catch(next);
+	}
+
+	static updateArticle(req, res, next) {
+		Article.findByIdAndUpdate(req.params.id, {
+			title: req.body.title,
+			content: req.body.content,
+			status: req.body.status,
+			updated_at: moment()
+		})
+			.then(() => {
+				res.status(200).json({
+					message: 'Update article success'
 				});
 			})
 			.catch(next);
