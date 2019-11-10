@@ -10,13 +10,15 @@
                     :mainpage="mainpage" 
                     :modified="modified" 
                     @change-main-page="changeMainPage"
-                    @modify-page="modifyPage">
+                    @modify-page="modifyPage"
+                    @show-detail="showDetail">
                 </NewsFeed>
                 <UserFeed v-if="mainpage === 'user'" 
                     :mainpage="mainpage" 
                     :modified="modified" 
                     @change-main-page="changeMainPage"
-                    @modify-page="modifyPage">
+                    @modify-page="modifyPage"
+                    @show-detail="showDetail">
                 </UserFeed>
                 <AddArticle v-if="mainpage === 'add'" 
                     :mainpage="mainpage" 
@@ -31,8 +33,14 @@
                     :mainpage="mainpage" 
                     :modified="modified" 
                     @change-main-page="changeMainPage"
-                    @modify-page="modifyPage">
+                    @modify-page="modifyPage"
+                    @show-detail="showDetail">
                 </SearchTag>
+                <DetailArticle v-if="mainpage === 'detail'" 
+                    :mainpage="mainpage" 
+                    :modified="modified" 
+                    @change-main-page="changeMainPage">
+                </DetailArticle>
             </div>
         </div>
     </div>
@@ -47,6 +55,7 @@ import UserFeed from "../components/UserFeed.vue";
 import AddArticle from "../components/AddArticle.vue";
 import EditArticle from "../components/EditArticle.vue";
 import SearchTag from "../components/SearchTag.vue";
+import DetailArticle from "../components/DetailArticle.vue";
 
 export default {
     name: "MainPage",
@@ -72,12 +81,31 @@ export default {
                 this.danger(err.response.data.message);
             });
         },
+        getDetailArticle(page) {
+            axios({
+                method: "GET",
+                url: `/articles/detail/${this.modified}`,
+                headers: {
+                    "jwt_token": localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                this.mainpage = page;
+            })
+            .catch((err) => {
+                this.danger(err.response.data.message);
+            });
+        },
         changeMainPage(mainpage){
             this.mainpage = mainpage;
         },
         modifyPage(page, param){
             this.modified = param;
             this.getArticle(page);
+        },
+        showDetail(page, param){
+            this.modified = param;
+            this.getDetailArticle(page);
         },
         logout(){
             this.$emit("logout");
@@ -106,7 +134,8 @@ export default {
         UserFeed,
         AddArticle,
         EditArticle,
-        SearchTag
+        SearchTag,
+        DetailArticle
     }
 }
 </script>

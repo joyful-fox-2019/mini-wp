@@ -18,7 +18,7 @@
                         </figure>
                     </div>
                     <div class="media-content">
-                        <p class="title is-4">{{ article.title }}</p>
+                        <p @click="showDetail('detail',article._id)" class="title is-4" style="cursor:pointer;">{{ article.title }}</p>
                         <p class="subtitle is-6"><small>Author : {{ article.author }}</small></p>
                     </div>
                     <div class="media-right">
@@ -106,6 +106,9 @@
             },
             modifyPage(page, params) {
                 this.$emit("modify-page", page, params);
+            },
+            showDetail(page, params) {
+                this.$emit("show-detail", page, params);
             },
             delArticle (articleId) {
                 Swal.fire({
