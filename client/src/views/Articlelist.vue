@@ -32,7 +32,7 @@
         v-for="(data,index) in articleData"
         :key='index'
         :title="data.title"
-        :date="data.createdAt"
+        :date="moment(data.createdAt).format('dddd, MMMM Do YYYY')"
         :tags="data.tags"
         :articleId="data._id"
         :no="index+1"

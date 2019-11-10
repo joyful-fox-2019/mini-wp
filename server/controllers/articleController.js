@@ -62,6 +62,17 @@ class ArticleController {
     }
   }
 
+  static async findArticleId (req,res,next) {
+    const { _id } = req.params //ArticleId
+    try{
+      const articleData = await Article.findOne({ _id }).populate('UserId')
+      res.status(200).json(articleData)
+    }
+    catch(err){
+      next(err)
+    }
+  }
+
   static async createArticle (req,res,next) {
     const { imgUrl,title,description,tags } = req.body
     let finalTags = []

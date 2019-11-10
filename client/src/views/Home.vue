@@ -3,18 +3,13 @@
     <b-container style="margin-top: 3vh;">
       <b-row class="no-gutters">
         <Bigimage
-          :imglink="'https://picsum.photos/400/400/?image=1'"
-          :title="'For more information visit website'"
-          :author="'Dipadana'"
-          :date="'20 Januari 2019'"
-          v-on:click.native="toArticle()"
-        ></Bigimage>
-        <Bigimage
-          :imglink="'https://picsum.photos/400/400/?image=2'"
-          :title="'For more information visit website'"
-          :author="'Dipadana'"
-          :date="'20 Januari 2019'"
-          v-on:click.native="toArticle()"
+          v-for="(data,index) in items.slice(0, 2)" 
+          :key="index"
+          :imglink="data.imgUrl"
+          :title="data.title"
+          :author="data.UserId.name"
+          :date="moment(data.createdAt).format('dddd, MMMM Do YYYY')"
+          v-on:click.native="toArticle(data.slug)"
         ></Bigimage>
       </b-row>
       <b-row class="mt-4">
@@ -33,7 +28,7 @@
             :imglink="data.imgUrl"
             :author="data.UserId.name"
             :description="data.description"
-            :date="data.createdAt"
+            :date="moment(data.createdAt).format('dddd, MMMM Do YYYY')"
             :title="data.title"
             :id="data._id"
             v-on:click.native="toArticle(data.slug)"
@@ -47,13 +42,14 @@
         </b-col>
       </b-row>
       <b-row>
-      <b-col md="6" class="my-1">
+      <b-col md="6" class="my-1 mb-4">
         <b-pagination
           @change="onPageChanged"
           :total-rows="totalRows"
           :per-page="perPage"
           v-model="currentPage"
           class="my-0"
+          variant="info"
         />
       </b-col>
     </b-row>

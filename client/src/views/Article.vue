@@ -2,7 +2,7 @@
   <div>
   <b-container class="px-4 pl-md-0 pr-md-0">
     <img :src="imgUrl" loading="lazy">
-    <p class="ml-1 mt-4 mb-0 text-secondary"><small>By <span class="text-info">{{ author }}</span> - {{ date }}</small></p>
+    <p class="ml-1 mt-4 mb-0 text-secondary"><small>By <span class="text-info">{{ author }}</span> - {{ moment(date).format('dddd, MMMM Do YYYY') }}</small></p>
     <h1 class="mt-1">{{ title }}</h1>
     <div>
       <b-badge v-for="(tag,index) in tags" :key="index" class="ml-1" variant="info">{{ tag }}</b-badge>

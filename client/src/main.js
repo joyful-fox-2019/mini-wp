@@ -4,10 +4,11 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import moment from 'moment'
 import Swal from 'sweetalert2'
 
 Vue.use(BootstrapVue)
-
+Vue.prototype.moment = moment
 Vue.mixin({
   methods: {
     next(err) {
@@ -53,7 +54,6 @@ var filter = function(text, length, clamp){
   return content.length > length ? content.slice(0, length) + clamp : content;
 };
 Vue.filter('truncate', filter);
-
 
 new Vue ({
   router,

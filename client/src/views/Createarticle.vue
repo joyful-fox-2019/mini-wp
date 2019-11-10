@@ -32,6 +32,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
 import axios from '../config/getdata'
+import Swal from 'sweetalert2'
 
 export default {
   data(){
@@ -61,7 +62,7 @@ export default {
         this.content = html
       },
       postArticle(){
-
+        Swal.showLoading()
         const formData = new FormData()
         formData.append('imgUrl', this.file)
         formData.append('title', this.title)
@@ -80,7 +81,7 @@ export default {
           console.log(data)
           this.successToast('Article Successfuly published!')
           console.log("masuk")
-          this.$router.push({ path: `/admin/list-article/${localStorage.getItem('userid')}` })          
+          this.$router.push({ path: `/admin/list-article/${localStorage.getItem('userid')}` })
         })
         .catch(err => {
           console.log(err.response.data)

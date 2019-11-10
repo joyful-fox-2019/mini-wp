@@ -21,11 +21,10 @@
         placeholder="Choose a image or drop for edit article here..."
         drop-placeholder="Drop image here..."
       ></b-form-file>
-      <img :src="imgUrl" class="mt-3" width="50%">
-      
       <b-button @click="goBack" variant="secondary" class="mt-3">Back</b-button>
       <b-button variant="info" type="submit" class="mt-3">Edit Article</b-button>
       <b-button @click="deleteArticle()" variant="danger" class="mt-3">Delete Article</b-button>
+      <img :src="imgUrl" class="mt-3" width="50%">
     </form>
   </div>
 </template>
@@ -36,6 +35,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
 import axios from '../config/getdata'
+import Swal from 'sweetalert2'
 
 export default {
   data(){
@@ -69,23 +69,24 @@ export default {
     window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     fetchDetailArticle(){
+      Swal.showLoading()
       axios({
         method: 'get',
-        url: `/articles/findArticle/${this.$route.params.id}`
+        url: `/articles/findArticleId/${this.$route.params.id}`
       })
       .then(({ data }) => {
         this.imgUrl = data.imgUrl
         this.title = data.title
         this.content = data.description
         this.tags = data.tags.join(', ')
-        console.log(this.tags)
+        Swal.close()
       })
       .catch(err => {
-        this.next(err.respponse.data)
+        this.next(err.response.data)
       })
     },
     updateData(){
-
+      Swal.showLoading()
       const formData = new FormData()
       if(this.file == null){
         formData.append('imgUrl', this.imgUrl)
@@ -107,13 +108,16 @@ export default {
       })
       .then(({ data }) => {
         console.log(data)
+        this.fetchDetailArticle()
+        this.successToast("Data successfuly updated!")
       })
       .catch(err => {
-        console.log(this.err.response)
-        this.next(err)
+        console.log(this.err.response.data)
+        this.next(err.response.data)
       })
     },
     deleteArticle(){
+      Swal.showLoading()
       axios({
         url: `/articles/${this.$route.params.id}`,
         method: `delete`,
