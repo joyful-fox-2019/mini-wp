@@ -25961,6 +25961,8 @@ var _default = {
       });
     },
     register: function register() {
+      var _this2 = this;
+
       var user = this.createUser();
       user.post('/register', {
         username: this.username_register,
@@ -25969,13 +25971,15 @@ var _default = {
       }).then(function (_ref2) {
         var data = _ref2.data;
         Swal.fire('New User Created!', 'Your account has been registered', 'success');
+
+        _this2.toLoginPage();
       }).catch(function (err) {
         Swal.fire('Opps ....!', "".concat(err), 'error');
       });
     },
     createUser: function createUser() {
       return _axios.default.create({
-        baseURL: 'http://localhost:3000'
+        baseURL: 'http://35.240.160.184'
       });
     }
   }
@@ -26901,7 +26905,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41515" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36379" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

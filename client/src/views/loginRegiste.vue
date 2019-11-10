@@ -139,6 +139,7 @@ export default {
                         'Your account has been registered',
                         'success'
                     )
+                    this.toLoginPage()
                 })
                 .catch(err => {
                     Swal.fire(
@@ -150,7 +151,7 @@ export default {
         },
         createUser() {
             return axios.create({
-                baseURL : 'http://localhost:3000'
+                baseURL : 'http://35.240.160.184'
             })
         }
     }
