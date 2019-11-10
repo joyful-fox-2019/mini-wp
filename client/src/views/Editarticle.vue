@@ -25,7 +25,7 @@
       
       <b-button @click="goBack" variant="secondary" class="mt-3">Back</b-button>
       <b-button variant="info" type="submit" class="mt-3">Edit Article</b-button>
-      <b-button variant="danger" class="mt-3">Delete Article</b-button>
+      <b-button @click="deleteArticle()" variant="danger" class="mt-3">Delete Article</b-button>
     </form>
   </div>
 </template>
@@ -87,7 +87,6 @@ export default {
     updateData(){
 
       const formData = new FormData()
-      console.log(this.file, "<<<<<<<<<<<<<<<<<<<<")
       if(this.file == null){
         formData.append('imgUrl', this.imgUrl)
       }
@@ -112,6 +111,25 @@ export default {
       .catch(err => {
         console.log(this.err.response)
         this.next(err)
+      })
+    },
+    deleteArticle(){
+      axios({
+        url: `/articles/${this.$route.params.id}`,
+        method: `delete`,
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      })
+      .then(({ data }) => {
+        console.log((data))
+        this.$routes
+        this.$router.push({ path: `/admin/list-article/${localStorage.getItem('userid')}` })
+        this.successToast('Article Successfuly deleted!')
+      })
+      .catch(err => {
+        console.log(err.response.data)
+        this.next(err.response.data)
       })
     }
   },

@@ -2,7 +2,7 @@
   <div>
     <h2 class="mt-2 mb-4"> <b></b> Create Article </h2>
     <form>
-      <b-form-input required v-model="text" placeholder="Article Title"></b-form-input>
+      <b-form-input required v-model="title" placeholder="Article Title"></b-form-input>
       <b-form-file
         class="mt-3"
         v-model="file"
@@ -21,7 +21,7 @@
         >
     </quill-editor>
     <b-form-input required v-model="tags" class="mt-3" placeholder="Tags"></b-form-input>
-    <b-button variant="info" class="mt-3">Post Article</b-button>
+    <b-button @click="postArticle()" variant="info" class="mt-3">Post Article</b-button>
     </form>
   </div>
 </template>
@@ -31,17 +31,16 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
+import axios from '../config/getdata'
 
 export default {
   data(){
     return{
-      text:'',
+      title:'',
       content: '',
-      tags: '',
-      editorOption: {
-        // some quill options
-      },
-      file:null
+      tags: null,
+      editorOption: {},
+      file: null
     }
   },
   components: {
@@ -60,13 +59,36 @@ export default {
       onEditorChange({ quill, html, text }) {
         console.log('editor change!', quill, html, text)
         this.content = html
+      },
+      postArticle(){
+
+        const formData = new FormData()
+        formData.append('imgUrl', this.file)
+        formData.append('title', this.title)
+        formData.append('description', this.content)
+        formData.append('tags', this.tags === null ? '' : this.tags)
+
+        axios({
+          url: '/articles',
+          method: 'post',
+          data: formData,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        .then(({ data }) => {
+          console.log(data)
+          this.successToast('Article Successfuly published!')
+          console.log("masuk")
+          this.$router.push({ path: `/admin/list-article/${localStorage.getItem('userid')}` })          
+        })
+        .catch(err => {
+          console.log(err.response.data)
+          this.next(err.response.data)
+        })
       }
     },
-    computed: {
-      editor() {
-        // return this.$refs.myQuillEditor.quill
-      }
-    },
+    computed: {},
     mounted() {
       console.log('this is current quill instance object', this.editor)
     }

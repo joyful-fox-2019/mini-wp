@@ -7,6 +7,7 @@ module.exports = {
     console.log(req.headers)
     if(req.headers.access_token){
       req.loggedUser = decodeToken(req.headers.access_token)
+      console.log(req.loggedUser)
       next()
     }
     else{
@@ -22,7 +23,7 @@ module.exports = {
           next()
         }
         else{
-          throw { message:"Invalid Authentication",status:401 }
+          throw { message:"Invalid Authorization",status:401 }
         }
       }
       else{
