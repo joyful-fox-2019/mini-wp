@@ -15,7 +15,7 @@ const app = express()
 const port = process.env.port || 3000
 
 // connect to mongoose
-mongoose.connect(process.env.MONGO_DB, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify : false, useCreateIndex: true })
+mongoose.connect('mongodb://localhost/mini_wp', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify : false, useCreateIndex: true })
     .then(resolve => {
         console.log(`server is connected !!`)
     })

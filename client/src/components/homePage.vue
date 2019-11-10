@@ -219,7 +219,7 @@ export default {
         },
         createArticleInstance() {
             return axios.create({
-                baseURL: 'http://localhost:3000/articles',
+                baseURL: 'http://35.240.160.184/articles',
                 headers : {
                     token : localStorage.getItem('token')
                 }    

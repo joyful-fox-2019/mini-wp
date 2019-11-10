@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs')
 module.exports = {
     hashPassword : (password) => {
         // this function will hash the password before being saved in server
-        const salt = bcrypt.genSalt(10)
+        const salt = bcrypt.genSaltSync(10)
+        console.log(typeof password, salt, '---> disini errornya')
         const hash = bcrypt.hashSync(password, salt)
         return hash
     },

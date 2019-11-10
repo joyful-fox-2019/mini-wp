@@ -27,19 +27,19 @@
                 <form id="register" v-if='toRegister' class="border p-3 bg-white">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input v-model="email_register" id="email" type="email" class="form-control" required aria-describedby="emailHelp" placeholder="Enter email">
+                        <input v-model="email_register" id="email" type="email" class="form-control" placeholder="Enter email">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input v-model="username_register" id="email" type="email" class="form-control" required aria-describedby="emailHelp" placeholder="Enter email">
+                        <label for="username">Username</label>
+                        <input v-model="username_register" id="username" type="text" class="form-control"  placeholder="Enter username">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
                         <input v-model="password_register" id="password" type="password" class="form-control" required placeholder="Password">
                     </div>       
                     <div class="form-inline" style="margin: 5px auto;">
-                        <button  type="submit" class="btn btn-secondary btn-sm btn-block mt-2">Register</button> 
+                        <button @click.prevent='register' type="submit" class="btn btn-secondary btn-sm btn-block mt-2">Register</button> 
                     </div>                      
                 </form>
 
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     props : ['loginStatus'],
     data() {
@@ -123,6 +124,29 @@ export default {
                         'error'
                     )
                 })                
+        },
+        register() {
+            const user = this.createUser()
+            user.
+                post('/register',{
+                    username : this.username_register,
+                    email : this.email_register,
+                    password : this.password_register
+                })
+                .then(({data}) => {
+                    Swal.fire(
+                        'New User Created!',
+                        'Your account has been registered',
+                        'success'
+                    )
+                })
+                .catch(err => {
+                    Swal.fire(
+                        'Opps ....!',
+                        `${err}`,
+                        'error'
+                    )
+                })
         },
         createUser() {
             return axios.create({

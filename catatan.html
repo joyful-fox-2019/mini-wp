@@ -3,4 +3,23 @@ database mongo atlas
     simpan alamat databes di env
     ganti database menjadi process.env
 server google vm instance
+    pastikan semua data server sudah di push ke github
+    1. bikin vm instance di compute engine
+    2. setting name --> region --> machine type --> boot disk --> firewall --> create
+    3. connect ssh terminal di server --> intall node js gunakan sudo -- node -v periksa nodejs
+        --> git clone repo --> masuk ke server --> npm install -- sudo npm install -g pm2
+    --> setting env di server --> nano ~/.bashrc --> masukan semua env : export data env --> simpan --> source ~/.bashrc
+    check dengan nano port --> jalanin pm2 start app.js --> pm2 status
+    cara memperbaiki server : 
+    pm2 delete index -- periksa index dengan --> pm2 list
+    pm2 start lagi
+    gunakan pm2 log
+    jalanin dengan external IP kasih http cek sub domain
+
+    cara bikin subdomain  : domain --> addon --> manage 
+    bikin bucket di google cloud --- nama sama dengan subdomain --> edit permission di bucket -->  add allUser role --> storage object viwer
+    --> storage object admin untuk image 
+
+    
+    
 client di google storage bucket
