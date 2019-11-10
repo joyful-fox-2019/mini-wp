@@ -45,10 +45,10 @@ export default {
 
       axios({
         method: "post",
-        url: "http://localhost:3000/articles/",
+        url: "http://venus.sufrendo.com:3000/articles/",
         data: formData,
         headers: {
-          token: "eyJhbGciOiJIUzI1NiJ9.NWRjODQ5MWQzNGU1MzY0ODkyMjU5NjNk.R8hqubB28oteALL0ygCAEJsT2PG47or0cr-p0OzlpIs"
+          token: localStorage.getItem('token')
         },
         config: { headers: { "Content-Type": "multipart/form-data" } }
       })

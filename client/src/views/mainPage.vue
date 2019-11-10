@@ -47,7 +47,7 @@ export default {
     editArticle(id) {
       axios({
         method: "get",
-        url: `http://localhost:3000/articles/${id}`
+        url: `http://venus.sufrendo.com:3000/articles/${id}`
       })
         .then(({ data }) => {
           this.articleData = data
