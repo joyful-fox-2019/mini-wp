@@ -1,27 +1,11 @@
 <template>
   <div>
     <b-container style="margin-top: 3vh;">
-      <b-row class="no-gutters">
-        <Bigimage
-          :imglink="'https://picsum.photos/400/400/?image=1'"
-          :title="'For more information visit website'"
-          :author="'Dipadana'"
-          :date="'20 Januari 2019'"
-          v-on:click.native="toArticle()"
-        ></Bigimage>
-        <Bigimage
-          :imglink="'https://picsum.photos/400/400/?image=2'"
-          :title="'For more information visit website'"
-          :author="'Dipadana'"
-          :date="'20 Januari 2019'"
-          v-on:click.native="toArticle()"
-        ></Bigimage>
-      </b-row>
       <b-row class="mt-4">
         <b-col cols="12" md="8" >
           <div class="border-bottom border-info mt-2 mb-4">
             <div class=" card-body pb-1 pl-0">
-              <span class="m-0 bg-info p-2 text-white" style="font-size:18px">Article this day</span>
+              <span class="m-0 bg-info p-2 text-white" style="font-size:18px">Search result: {{ searchTag }}</span>
             </div>
           </div>
           <div>
@@ -46,16 +30,14 @@
         </b-col>
       </b-row>
     </b-container>
-    <b-container fluid class="p-0 mt-1 mt-md-4">
-      <Footeritem
-      ></Footeritem>
+    <b-container fluid class="footerX p-0 mt-1 mt-md-4">
+      <Footeritem class=""></Footeritem>
     </b-container>
   </div>
 </template>
 
 <script>
 import Footeritem from '../components/Footeritem'
-import Bigimage from '../components/Bigimage'
 import Articleitem from '../components/Articleitem'
 import Taglist from '../components/Taglist'
 import axios from '../config/getdata'
@@ -63,14 +45,14 @@ import axios from '../config/getdata'
 export default {
   components:{
     Footeritem,
-    Bigimage,
     Articleitem,
     Taglist
   },
   data(){
     return{
       articleData: [],
-      tagData: []
+      tagData: [],
+      searchTag: this.$route.params.tag
     }
   },
   methods:{
@@ -78,9 +60,9 @@ export default {
       console.log("masuk")
       this.$router.push({path:`/article/${id}`})
     },
-    fetchDataArticle(){
+    searchArticleByTag(tag){
       axios({
-        url: '/articles',
+        url: `/articles/tagSearch/${tag}`,
         method: 'get'
       })
       .then(({ data }) => {
@@ -108,8 +90,15 @@ export default {
     }
   },
   created(){
-    this.fetchDataArticle()
+    this.searchArticleByTag(this.searchTag)
     this.fetchTags()
+  },
+  watch:{
+    '$route.params.tag': function () {
+      console.log('masuk')
+      this.searchTag = this.$route.params.tag
+      this.searchArticleByTag(this.searchTag)
+    }
   }
 }
 </script>
@@ -117,5 +106,9 @@ export default {
 <style>
   .card-title{
     margin:0 !important;
+  }
+  .footerX {
+    position:fixed;
+    bottom:0;
   }
 </style>

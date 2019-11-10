@@ -12,7 +12,7 @@
           <b-col cols="3">{{ date }}</b-col>
           <b-col class="text-center" cols="3">
             <p class="m-0">
-              <span v-for="(tag, index) in tags" :key="index">{{tag}}</span>
+              <span v-for="(tag, index) in tags" :key="index"> {{tag}}</span>
             </p>
           </b-col>
         </b-row>

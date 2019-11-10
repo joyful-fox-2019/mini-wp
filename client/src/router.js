@@ -7,6 +7,7 @@ import Createarticle from './views/Createarticle'
 import Editarticle from './views/Editarticle'
 import Article from './views/Article'
 import Login from './views/Login'
+import Searcharticle from './views/Searcharticle.vue'
 import Swal from 'sweetalert2'
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ export default new Router({
       path:'/article/:id',
       name: 'article',
       component: Article
+    },
+    {
+      path: '/searcbytag/:tag',
+      name: 'searchbytag',
+      component: Searcharticle
     },
     {
       path:'/login',
