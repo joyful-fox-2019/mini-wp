@@ -9,7 +9,8 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        required: [true, 'Email can not be empty']
+        required: [true, 'Email can not be empty'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     password: String
 },{

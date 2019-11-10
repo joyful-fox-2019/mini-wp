@@ -1,10 +1,10 @@
 <template>
     <b-row>
-        <b-col>
+        <b-col class="no-col">
             <MainSidebar></MainSidebar>
         </b-col>
-        <b-col cols="9">
-            <Dashboard></Dashboard>
+        <b-col cols="9" class="no-col">
+            <Dashboard @update-article="updateArticle"></Dashboard>
         </b-col>
     </b-row>
 </template>
@@ -20,10 +20,17 @@ export default {
     components: {
         MainSidebar,
         Dashboard
+    },
+    methods: {
+        updateArticle(value) {
+            this.$emit('update-article', value)
+        }
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+    .no-col {
+        padding: 0;
+    }
 </style>

@@ -1,13 +1,13 @@
 <template>
     <div>
         <ArticleNavbar v-if="page == 'article'" @change-page="changePage"></ArticleNavbar>
-        <Navbar v-else @change-page="changePage" @change-login="changeLogin"></Navbar>
+        <Navbar v-else @change-page="changePage" @change-login="changeLogin" :is-login="isLogin"></Navbar>
 
         <Login v-if="!isLogin && page == 'login'" @change-login="changeLogin" @change-page="changePage"></Login>
         <Register v-if="page == 'register'" @change-page="changePage"></Register>
 
-        <HomePage v-if="page === 'home' && isLogin" key="home"></HomePage>
-        <ArticlePage v-if="page === 'article' && isLogin" key="article"></ArticlePage>
+        <HomePage v-if="page === 'home' && isLogin" key="home" @update-article="updateArticle"></HomePage>
+        <ArticlePage v-if="page === 'article' && isLogin" key="article" :articleId="articleId"></ArticlePage>
     </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
     data() {
         return {
             isLogin: false,
-            page: "login"
+            page: "login",
+            articleId: null
         }
     },
     methods: {
@@ -41,10 +42,14 @@ export default {
         },
         changeLogin(value) {
             this.isLogin = value;
+        },
+        updateArticle(value) {
+            this.articleId = value;
+            this.page = 'article';
         }
     },
     created() {
-        if (localStorage.getItem('token')) {
+        if (localStorage.getItem('jwt_token')) {
             this.isLogin = true
             this.page = 'home'
         }

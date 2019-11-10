@@ -9,7 +9,9 @@ const articleShema = new Schema({
     content: {
         type: String,
         required: [true, 'Article content can not be empty.']
-    }
+    },
+    imageUrl: String,
+    UserId: { type: Schema.Types.ObjectId, ref: 'User' }
 },{
     timestamps: true
 });

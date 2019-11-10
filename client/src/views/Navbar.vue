@@ -8,7 +8,7 @@
         <b-collapse id="nav-collapse" is-nav>
 
         <!-- Right aligned nav items -->
-            <b-navbar-nav class="ml-auto">
+            <b-navbar-nav class="ml-auto" v-if="isLogin">
                 <b-button @click="changePage('article')" size="sm" class="my-2 my-sm-0" type="button">
                     Write
                 </b-button>
@@ -18,7 +18,9 @@
                         <em>User</em>
                     </template>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <b-dropdown-item @click="signOut">Sign Out</b-dropdown-item>
+                    <b-dropdown-item @click="signOut">
+                        <GoogleLogin :params="params" :logoutButton=true>Logout</GoogleLogin>
+                    </b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
         </b-collapse>
@@ -27,9 +29,18 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login';
 export default {
+    props: ['isLogin'],
     data() {
-        return {}
+        return {
+            params: {
+                client_id: "415938799508-oh4a2roef8rj6slbbvtlj8j40ebnothl.apps.googleusercontent.com"
+            }
+        }
+    },
+    components: {
+        GoogleLogin
     },
     methods: {
         changePage: function(value){

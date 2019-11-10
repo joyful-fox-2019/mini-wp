@@ -28,20 +28,36 @@
 
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
-    <p @click="changePage('register')">or Register</p>
+    <p>OR</p>
+    <b-button variant="primary" @click="changePage('register')">Register</b-button>
+    <p>
+      <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure">Login</GoogleLogin>
+    </p>
   </div>
 </template>
 
 <script>
 import axios from '../../config/axios'
+import GoogleLogin from 'vue-google-login';
 export default {
   data() {
     return {
       form: {
         email: '',
         password: ''
+      },
+      params: {
+        client_id: "415938799508-oh4a2roef8rj6slbbvtlj8j40ebnothl.apps.googleusercontent.com"
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true
       }
     }
+  },
+  components: {
+    GoogleLogin
   },
   methods: {
     onSubmit(evt) {
@@ -72,7 +88,26 @@ export default {
     },
     changePage(value) {
       this.$emit('change-page', value);
-    }
+    },
+    onSuccess(googleUser){
+      let gProfile = googleUser.getBasicProfile();
+      axios({
+          method: 'post',
+          url: `/gsign`,
+          data: {
+            gProfile
+          }
+      })
+      .then( ({data}) => {
+        localStorage.setItem('jwt_token', data)
+        this.$emit('change-login', true);
+        this.changePage('home');
+      })
+      .catch(err => {
+          console.log(err)
+      })
+    },
+    onFailure(){}
   }
 }
 </script>

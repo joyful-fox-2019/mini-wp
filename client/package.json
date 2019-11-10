@@ -15,7 +15,9 @@
     "bootstrap-vue": "^2.0.4",
     "font-awesome": "^4.7.0",
     "vue": "^2.6.10",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-google-login": "^2.0.2",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-quill": "^1.5.1"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.2",

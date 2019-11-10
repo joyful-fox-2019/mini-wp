@@ -12,13 +12,17 @@
             </b-col>
         </b-row>
         <b-row v-for="article in filteredArticles" :key="article._id" class="p-3 mb-4" >
-            <b-col vertical-align="center" cols="11">
+            <b-col vertical-align="center" cols="10">
                 <p class="m-0">{{ article.title }}</p>
                 <p class="m-0" style="font-size: 12px;">{{ article.createdAt }}</p>
             </b-col>
             <b-col class="float-right">
-                ...
+                <b-dropdown id="dropdown-dropleft" dropleft text="..." class="m-2">
+                    <b-dropdown-item @click="updateArticle(article._id)">Update</b-dropdown-item>
+                    <b-dropdown-item @click.prevent="deleteArticle(article._id)">Delete</b-dropdown-item>
+                </b-dropdown>
             </b-col>
+             
         </b-row>
     </b-container>
 </template>
@@ -37,7 +41,10 @@ export default {
         getData() {
             axios({
                 method: 'get',
-                url: `/articles`
+                url: `/articles`,
+                headers: {
+                    authorization: localStorage.getItem('jwt_token')
+                }
             })
             .then( ({data}) => {
                 this.articles = data;
@@ -46,6 +53,24 @@ export default {
                 console.log(error);
             })
         },
+        deleteArticle(id) {
+             axios({
+                method: 'delete',
+                url: `articles/${id}`,
+                headers: {
+                    authorization: localStorage.getItem('jwt_token')
+                }
+            })
+            .then(_ => {
+                alert('deleted')
+            })
+            .catch( error => {
+                console.log(error)
+            })
+        },
+        updateArticle(value) {
+            this.$emit('update-article', value);
+        }
     },
     created() {
         this.getData();

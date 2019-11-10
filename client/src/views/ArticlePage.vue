@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-col>
-        <ArticleEditor></ArticleEditor>
+        <ArticleEditor :article-id="articleId"></ArticleEditor>
       </b-col>
       <b-col cols="3">
         <ArticleSidebar></ArticleSidebar>
@@ -16,16 +16,17 @@ import ArticleEditor from '../components/ArticleEditor'
 import ArticleSidebar from '../components/ArticleSidebar'
 
 export default {
+    props: ['articleId'],
     data() {
-        return {}
+        return {
+        }
     },
     components: {
       ArticleEditor,
       ArticleSidebar
-    }
+    },
 }
 </script>
 
 <style>
-
 </style>
