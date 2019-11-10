@@ -1,0 +1,102 @@
+<template>
+  <div>
+    <Navbar :userLogin="userLogin"></Navbar>
+    <div id="mainContent">
+      <Sidebar :userLogin="userLogin"></Sidebar>
+      <div id="content">
+        <h1 id="titlePage">Bookmarks</h1>
+        <div v-if="empty">
+          You haven't bookmarked any articles
+        </div>
+        <div id="myArticles" v-for="(article,i) in articles" :key="i">
+          <card :article="article" :bookmark=true @fetchBookmark="getBookmark"></card> 
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
+import axios from "../../config/axios";
+import Card from '../components/Card'
+
+export default {
+  components: {
+    Navbar,
+    Sidebar,
+    Card
+  },
+  data() {
+    return {
+      userLogin: false,
+      articles: [],
+      creator: false,
+      empty : true
+    };
+  },
+  methods: {
+    getToken() {
+      if (localStorage.getItem("token")) {
+        this.userLogin = true;
+      } else {
+        this.userLogin = false;
+      }
+    },
+    getBookmark() {
+      let token = localStorage.getItem("token");
+      axios({
+        url: `/users/mybookmark`,
+        methods: "get",
+        headers: {
+          token
+        }
+      })
+        .then(({ data }) => {
+          if(data.bookmarks.length >= 1){
+            this.empty = false
+            this.articles = data.bookmarks;
+          } else {
+            this.empty = true
+            this.articles = []
+          }
+          console.log(data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+  created() {
+    this.getToken();
+    this.getBookmark();
+  }
+};
+</script>
+
+<style>
+#mainContent {
+  width: 100%;
+  /* display: flex;
+  flex-direction: row; */
+}
+#myArticles {
+  width: 100%;
+  margin: 10px;
+  /* display: flex;
+  flex-direction: column;
+  word-wrap: break-word; */
+}
+#content{
+  padding : 0px 20px !important;
+  width: 100% !important
+}
+#eachCard{
+  width: 100% !important
+}
+#titlePage{
+  font-size: 30px;
+  color: black
+}
+</style>

@@ -1,0 +1,113 @@
+<template>
+  <b-menu id="sidebar">
+    <b-menu-list label="Menu">
+      <b-menu-list>
+        <div v-if="userLogin">
+          <b-icon icon="account" size="is-small"></b-icon>Profile
+          <!-- <b-menu-item label="My Profile"></b-menu-item> -->
+          <b-menu-item label="My Profile" @click="myProfile"></b-menu-item>
+          <b-menu-item label="Drafts" @click="myDrafts"></b-menu-item>
+          <b-menu-item label="Bookmarks " @click="myBookmark"></b-menu-item>
+        </div>
+      </b-menu-list>
+      <b-menu-list>
+        Tags
+        <b-taglist id="taglist" v-for="(tag,i) in tags" :key="i">
+          <b-tag type="is-info" style="cursor:pointer">
+            <div @click="findByTag(tag)">{{tag}}</div>
+          </b-tag>
+        </b-taglist>
+      </b-menu-list>
+    </b-menu-list>
+    <b-menu-list label="Actions">
+      <b-menu-item label="Logout" v-if="userLogin" @click="userLeave"></b-menu-item>
+    </b-menu-list>
+  </b-menu>
+</template>
+
+<script>
+import axios from "../../config/axios";
+
+export default {
+  name: "sidebar",
+  props: ["userLogin"],
+  data() {
+    return {
+      isActive: true,
+      tags: []
+    };
+  },
+  methods: {
+    userLeave() {
+      console.log("masuk");
+      this.$gAuth
+        .signOut()
+        .then(() => {
+          this.$emit("logout");
+          if (this.$router.currentRoute.name !== "home") {
+              localStorage.clear()
+            this.$router.push({ path: "/" });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getTags() {
+      axios({
+        url: "/articles/tags",
+        methods: "get"
+      })
+        .then(({ data }) => {
+          let allTags = [];
+          data.forEach(element => {
+            allTags.push(element.name);
+          });
+          this.tags = allTags;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    findByTag(tag) {
+      console.log("masuk");
+      //   console.log(tag)
+      this.$emit("tag", tag);
+    },
+    myProfile() {
+      if (this.$router.currentRoute.name !== "myProfile") {
+        this.$router.push({ path: "/myProfile" });
+      }
+    },
+    myDrafts() {
+      if (this.$router.currentRoute.name !== "draft") {
+        this.$router.push({ path: "/draft" });
+      }
+    },
+    myBookmark() {
+      if (this.$router.currentRoute.name !== "bookmark") {
+        this.$router.push({ path: "/bookmark" });
+      }
+    }
+  },
+  created() {
+    this.getTags();
+  }
+};
+</script>
+
+<style scoped>
+#sidebar {
+  /* border: 1px solid black; */
+  /* position: fixed */
+  height: 92vh;
+  overflow: hidden;
+}
+.menu {
+  width: 15%;
+  font-size: 14px;
+}
+#taglist {
+  margin: 3px 3px;
+}
+</style>
