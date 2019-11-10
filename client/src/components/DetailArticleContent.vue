@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title t-standard font-article">
+    <div class="title t-standard font-article" style="font-size: 30px !important;">
       {{ article.title }}
     </div>
     <div class="subtitle t-lighten has-margin-t">
@@ -39,8 +39,7 @@
         <img :src="article.image">
       </figure>
     </div>
-    <div class="has-margin-t t-standard">
-      {{ article.description }}
+    <div v-html="description" class="has-margin-t font-article t-darkest">
     </div>
   </div>
 </template>
@@ -51,7 +50,8 @@ import axios from '../../helpers/axios'
 export default {
   name: 'DetailArticleContent',
   props: {
-    article: Object
+    article: Object,
+    isDark: Boolean
   },
   data () {
     return {
@@ -93,6 +93,13 @@ export default {
     },
     fullName () {
       return `${this.article.user.firstName} ${this.article.user.lastName}`
+    },
+    description () {
+      if(this.isDark) {
+        return this.article.description.split('color: rgb(0, 0, 0)').join('color: rgb(255, 255, 255)')
+      } else {
+        return this.article.description
+      }
     }
   }
 }

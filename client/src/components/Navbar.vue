@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       isDark: false,
-      initial: localStorage.getItem('email').substring(0, 1).toUpperCase()
+      initial: ''
     }
   },
   props: {
@@ -71,6 +71,16 @@ export default {
   watch: {
     isDark() {
       this.$emit('setDark', this.isDark)
+    },
+    isLogin () {
+      if(this.isLogin) {
+        this.initial = localStorage.getItem('email').substring(0, 1).toUpperCase()
+      }
+    }
+  },
+  created () {
+    if(this.isLogin) {
+      this.initial = localStorage.getItem('email').substring(0, 1).toUpperCase()
     }
   }
 }

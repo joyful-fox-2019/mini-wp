@@ -54,11 +54,7 @@ export default {
       return `${this.article.user.firstName} ${this.article.user.lastName}`
     },
     topics () {
-      let result = ''
-      this.article.tags.forEach(tag => {
-        result += tag + ' '
-      })
-      return result.toUpperCase()
+      return this.article.tags[0].split(',').join(', ').toUpperCase()
     },
     slug () {
       const slug = this.article.title.replace(/\s+/g, '-').toLowerCase()

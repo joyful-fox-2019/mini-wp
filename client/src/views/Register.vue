@@ -3,7 +3,7 @@
     <div class="columns is-centered">
       <div class="column is-half">
         <div class="centered-item">
-          <!-- <img src="../../assets/register.png"> -->
+          <img :src='image' :title='title' />
         </div>
         <form @submit.prevent="register">
           <b-field>
@@ -52,8 +52,13 @@ export default {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      image: 'https://svgshare.com/i/G2E.svg',
+      title: ''
     }
+  },
+  props: {
+    isDark: Boolean
   },
   methods: {
     register() {
@@ -78,6 +83,26 @@ export default {
     gLogin() {
       this.$emit('login')
     }
+  },
+  watch: {
+    isDark () {
+      if(this.isDark) {
+        this.image = 'https://svgshare.com/i/G32.svg'
+        this.title = ''
+      } else {
+        this.image = 'https://svgshare.com/i/G3v.svg'
+        this.title = ''
+      }
+    }
+  },
+  created () {
+    if(this.isDark) {
+      this.image = 'https://svgshare.com/i/G32.svg'
+      this.title = ''
+    } else {
+      this.image = 'https://svgshare.com/i/G3v.svg'
+      this.title = ''
+    }
   }
 }
 </script>
@@ -91,7 +116,8 @@ export default {
     font-weight: bold;
   }
   img {
-    max-height: 300px;
+    max-height: 270px;
+    margin: 30px
   }
   .g-sign-container {
     margin: auto;

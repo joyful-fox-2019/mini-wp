@@ -81,6 +81,7 @@ export default {
         document.documentElement.style.setProperty('--text-color-lighten', '#A5A5A5');
         document.documentElement.style.setProperty('--text-color-primary', '#C390FF');
         document.documentElement.style.setProperty('--text-color-on-primary', '#000000');
+        document.documentElement.style.setProperty('--text-color-darkest', '#FFFFFF');
       } else {
         document.documentElement.style.setProperty('--background-color', '#FFFFFF');
         document.documentElement.style.setProperty('--surface-color', '#F5F5F5');
@@ -90,6 +91,7 @@ export default {
         document.documentElement.style.setProperty('--text-color-lighten', '#B5B5B5');
         document.documentElement.style.setProperty('--text-color-primary', '#D4B848');
         document.documentElement.style.setProperty('--text-color-on-primary', '#363636');
+        document.documentElement.style.setProperty('--text-color-darkest', '#000000');
       }
     }
   }
@@ -106,6 +108,7 @@ export default {
   --text-color-lighten: #B5B5B5;
   --text-color-primary: #D4B848;
   --text-color-on-primary: #363636;
+  --text-color-darkest: #000000;
 }
 html, body {
   background: var(--background-color) !important;
@@ -120,6 +123,9 @@ html, body {
 }
 .t-primary {
   color: var(--text-color-primary) !important;
+}
+.t-darkest {
+  color: var(--text-color-darkest) !important;
 }
 .bg-standard {
   background: var(--background-color) !important;
@@ -188,5 +194,8 @@ img {
 .align-right-container {
   width: 100%;
   text-align: right;
+}
+.title {
+  font-size: 20px !important;
 }
 </style>

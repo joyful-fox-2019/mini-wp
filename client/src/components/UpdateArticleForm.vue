@@ -19,7 +19,7 @@
           </span>
       </b-field>
       <div>
-      <wysiwyg v-model="description" />
+      <wysiwyg class="font-article t-darkest" v-model="description" />
       </div>
       <div class="has-margin-t">
         <b-field>
@@ -94,6 +94,8 @@ export default {
         .then(({ data }) => {
           console.log(data)
           loadingComponent.close()
+          this.$router.push('/my-articles')
+          this.$buefy.toast.open('Article updated!')
         })
         .catch(err => {
           loadingComponent.close()

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="container article-container">
-      <router-view v-if="article" :article="article" @alert="alert"></router-view>
+      <router-view v-if="article" :article="article" @alert="alert" :is-dark="isDark"></router-view>
     </div>
   </div>
 </template>
@@ -14,6 +14,9 @@ export default {
   name: 'DetailArticle',
   components: {
     DetailArticleContent
+  },
+  props: {
+    isDark: Boolean
   },
   data () {
     return {

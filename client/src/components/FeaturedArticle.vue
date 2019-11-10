@@ -11,7 +11,7 @@
             <small><i>{{ topics(0) }}</i></small>
           </div>
         </router-link>
-        {{ articles[0].description }}
+        {{ articles[0].subtitle }}
         <div class="row t-lighten">
           <small>
             {{ fullName(0) }}
@@ -83,11 +83,7 @@ export default {
       return `${this.articles[i].user.firstName} ${this.articles[i].user.lastName}`
     },
     topics (i) {
-      let result = ''
-      this.articles[i].tags.forEach(tag => {
-        result += tag + ' '
-      })
-      return result.toUpperCase()
+      return this.articles[i].tags[0].split(',').join(', ').toUpperCase()
     },
     slug (i) {
       const slug = this.articles[i].title.replace(/\s+/g, '-').toLowerCase()

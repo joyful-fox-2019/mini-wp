@@ -19,7 +19,7 @@
           </span>
       </b-field>
       <div>
-      <wysiwyg class="font-article" v-model="description" />
+      <wysiwyg class="font-article t-darkest" v-model="description" />
       </div>
       <div class="has-margin-t">
         <b-field>
@@ -66,6 +66,9 @@ export default {
       filteredTags: []
     }
   },
+  props: {
+    isDark: Boolean
+  },
   methods: {
     getFilteredTags(text) {
       this.filteredTags = tagOptions.filter((option) => {
@@ -89,8 +92,9 @@ export default {
         }
       })
         .then(({ data }) => {
-          console.log(data)
           loadingComponent.close()
+          this.$router.push('/my-articles')
+          this.$buefy.toast.open('Article posted!')
         })
         .catch(err => {
           loadingComponent.close()
