@@ -121,7 +121,8 @@ export default {
           element.createdAt = this.date(element.createdAt)
           this.allArticles.unshift(element)
         })
-        this.maxPage = Math.floor((data.length-1)/4)
+        this.maxPage += Math.floor(((data.length)/5)-0.1)
+        console.log(this.maxPage)
       })
       .catch(err=>{
         console.log(err.response.data.message)
