@@ -49,6 +49,7 @@ export default {
     },
     getBookmark() {
       let token = localStorage.getItem("token");
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         url: `/users/mybookmark`,
         methods: "get",
@@ -57,6 +58,7 @@ export default {
         }
       })
         .then(({ data }) => {
+          loadingComponent.close()
           if(data.bookmarks.length >= 1){
             this.empty = false
             this.articles = data.bookmarks;
@@ -66,6 +68,7 @@ export default {
           }
         })
         .catch(err => {
+          loadingComponent.close()
           this.$buefy.toast.open({
                     duration: 4000,
                     message: `${err.response.data}`,

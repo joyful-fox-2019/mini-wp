@@ -50,6 +50,13 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    this.$emit("logout");
+      if (this.$router.currentRoute.name !== "home") {
+          localStorage.clear()
+        this.$router.push({ path: "/" });
+      } else {
+        localStorage.clear()
+      }
     },
     getTags() {
       axios({

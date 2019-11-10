@@ -50,6 +50,7 @@ export default {
     },
     getDraft() {
       let token = localStorage.getItem("token");
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         url: `/articles/draft`,
         methods: "get",
@@ -58,6 +59,7 @@ export default {
         }
       })
         .then(({ data }) => {
+          loadingComponent.close()
            if(data.articles.length >= 1){
             this.empty = false
             this.articles = data.articles;
@@ -67,6 +69,7 @@ export default {
           }
         })
         .catch(err => {
+          loadingComponent.close()
           this.$buefy.toast.open({
                     duration: 4000,
                     message: `${err.response.data.message}`,
