@@ -1,6 +1,6 @@
-(function($){
-  $(function(){
-    $('.sidenav').sidenav();
+import Vue from 'vue'
+import App from '../src/App.vue'
 
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
+new Vue({
+  render: h => h(App)  
+}).$mount('#app')

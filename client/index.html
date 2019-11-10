@@ -4,210 +4,28 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <meta name="google-signin-client_id"
+    content="1089954317756-4ljc3adqvhgg635s1dv0at3camnp1io2.apps.googleusercontent.com">
+
   <title>Mini Wordpress</title>
 
-  <!-- CSS  -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 
 <body>
-  <div class="navbar-fixed">
-    <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container">
 
-        <ul class="left">
-          <li>
-            <a href="#">
-              <img class="nav-logo" src="https://s.w.org/style/images/about/WordPress-logotype-simplified.png"
-                alt="logo">
-                <p class="nav-link-title">My Sites</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img class="nav-logo" src="https://icons-for-free.com/iconfiles/png/512/news+newspaper+paper+press+icon-1320085812194058032.png" alt="logo">
-              <p class="nav-link-title">Reader</p>
-            </a>
-          </li>
-        </ul>
-
-        <ul class="right">
-          <li>
-            <a href="#" id="nav-button-write" class="nav-button waves-effect waves btn white">
-              <img class="nav-logo-write" src="https://static.thenounproject.com/png/204040-200.png" alt="logo">
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img class="nav-logo-right profile"
-                src="https://img.pngio.com/profile-icon-png-image-free-download-searchpngcom-profile-icon-png-673_673.png"
-                alt="logo">
-            </a>
-          </li>
-
-          <li>
-            <a href="#">
-              <img class="nav-logo-right"
-                src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png" alt="logo">
-            </a>
-          </li>
-        </ul>
-
-        <!-- <ul id="nav-mobile" class="sidenav">
-          <li><a href="#">Navbar Link</a></li>
-        </ul> -->
-
-        <!-- <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
-      </div>
-    </nav>
-  </div>
-
-  <!-- Side nav -->
-
-  <ul id="slide-out" class="sidenav sidenav-fixed nav-wrapper">
-    <li>
-      <a href="#!">
-        <img class="nav-logo" src="https://image.flaticon.com/icons/png/512/14/14946.png" alt="logo">
-        Followed Sites
-      </a>
-    </li>
-    <li>
-      <!-- dari sini -->
-      <a href="#!">
-        <img class="nav-logo" src="http://www.dacoromania.org/upload/o/60/609252_conversation-icon-png.png" alt="logo">
-        Conversations
-      </a>
-    </li>
-    <li>
-      <a href="#!">
-        <img class="nav-logo" src="https://s.w.org/style/images/about/WordPress-logotype-simplified.png" alt="logo">
-        Discover
-      </a>
-    </li>
-    <li>
-      <a href="#!">
-        <img class="nav-logo" src="https://static.thenounproject.com/png/105498-200.png" alt="logo">
-        Search
-      </a>
-    </li>
-    <li>
-      <a href="#!">
-        <img class="nav-logo" src="https://icons-for-free.com/iconfiles/png/512/favorite+favourite+premium+rate+rating+star+icon-1320166547676710135.png" alt="logo">
-        My Likes
-      </a>
-    </li>
-    <li>
-      <a href="#!">
-        <img class="nav-logo" src="https://s3.amazonaws.com/iconbros/icons/icon_pngs/000/000/535/original/tag.png?1511807102" alt="logo">
-        Tags
-      </a>
-    </li>
-  </ul>
-  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-
-  <!-- Main content -->
-
-  <main class="main-container">
-    <div class="row">
-
-      <div class="search-bar row">
-        <div class="nav-wrapper">
-
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" required>
-              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-
-        </div>
-      </div>
-
-      <div class="suggestions row">
-        Suggestions: Sharks, Elasticsearch, Funny.
-      </div>
-
-      <div class="followed-sites row valign-wrapper">
-        <div class="col s8">
-          <p>Followed Sites</p>
-        </div>
-        <div class="col">
-          <a class="waves-effect waves-light btn-small #e57373 red lighten-2">Manage</a>
-        </div>
-      </div>
-
-      <!-- Readers -->
-      <div class="readers row">
-        <div class="col">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://straydogstrut7.files.wordpress.com/2019/10/img_5649.jpg?quality=80&strip=info&w=800">
-              <span class="card-title">
-                <a class="" href="https://wordpress.com/read/blogs/97533072/posts/10505">
-                  Limbo
-                </a>
-              </span>
-            </div>
-            <div class="card-content">
-              <p>(Content Warning)
-                I said to my therapist last week that I wanted capture the ‘lightning in a bottle’ after feeling proud
-                of myself for doing something outside my comfort zone on Wednesday. I think I naively thought that I
-                could hold on to that feeling.
-              </p>
-            </div>
-            <div class="card-action valign-wrapper">
-              <img class="gravatar" src="https://0.gravatar.com/avatar/fb586dd070c64ad49fc03a767c38f1c0?d=mm&r=G&s=96"
-                alt="Dan">
-
-              <div class="blog-link">
-                <a class="" href="https://wordpress.com/read/feeds/38987354">Dan</a>
-                <a class="" href="https://wordpress.com/read/feeds/38987354">Stray Dog Strut</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="readers row">
-        <div class="col">
-          <div class="card">
-            <div class="card-image">
-              <img
-                src="https://catsandchocolate.files.wordpress.com/2019/10/alex-geerts-nuo6itbkhxe-unsplash.jpg?w=1024&h=682">
-              <span class="card-title">
-                <a href="https://wordpress.com/read/blogs/2043592/posts/6173">
-                  The Winds of Change
-                </a>
-              </span>
-            </div>
-            <div class="card-content">
-              <p>When autumn comes and the trees change their leaves to red, brown, and gold, the winds of change
-                arrive. Everything has more weight to it, a poignancy that you can’t resist. At least in the UK, where
-                the pavements are littered with those crunchy and soggy dead leaves, you can see winter coming with the
-                arrival of shorter days.
-              </p>
-            </div>
-            <div class="card-action valign-wrapper">
-              <img class="gravatar" src="https://0.gravatar.com/avatar/656c1590bb76672f48add314bb3e1043?d=mm&r=PG&s=96"
-                alt="Dan">
-
-              <div class="blog-link">
-                <a class="" href="https://wordpress.com/read/feeds/4158310">Liz Ward</a>
-                <a class="" href="https://wordpress.com/read/feeds/4158310">Cats and Chocolate</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </main>
+  <div id="app"></div>
 
   <!--  Scripts-->
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
 </body>
