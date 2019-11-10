@@ -3,6 +3,7 @@
     <b-container style="margin-top: 3vh;">
       <b-row class="no-gutters">
         <Bigimage
+          style="cursor:pointer;"
           v-for="(data,index) in items.slice(0, 2)" 
           :key="index"
           :imglink="data.imgUrl"
@@ -23,6 +24,7 @@
             
           </div>
           <Articleitem
+            style="cursor:pointer;"
             v-for="(data,index) in articleData"
             :key="index"
             :imglink="data.imgUrl"
@@ -36,6 +38,7 @@
         </b-col>
         <b-col class="d-none d-sm-block" md="4">
           <Taglist
+            style="cursor:pointer;"
             class="mt-5 pl-3"
             :tags="tagData"
           ></Taglist>

@@ -4,7 +4,7 @@
       <b-row>
         <!-- Place for nested vue route -->
         <b-col cols="3">
-          <Menu></Menu>
+          <Menu style="cursor:pointer;"></Menu>
         </b-col>
         <b-col cols="9">
           <!-- Place for router view -->

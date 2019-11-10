@@ -29,6 +29,7 @@
 
       <!-- Article List -->
       <Articlelistbar
+        style="cursor:pointer;"
         v-for="(data,index) in articleData"
         :key='index'
         :title="data.title"

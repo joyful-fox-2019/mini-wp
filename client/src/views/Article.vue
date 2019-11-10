@@ -17,6 +17,7 @@
         <Taglist
           class="pl-0 mt-3 mb-2 pl-md-5"
           :tags="tagListData"
+          style="cursor:pointer;"
         ></Taglist>
       </b-col>
     </b-row>

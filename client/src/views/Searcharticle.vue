@@ -12,6 +12,7 @@
             
           </div>
           <Articleitem
+            style="cursor:pointer;"
             v-for="(data,index) in articleData"
             :key="index"
             :imglink="data.imgUrl"
@@ -26,6 +27,7 @@
           <Taglist
             class="mt-5 pl-3"
             :tags="tagData"
+            style="cursor:pointer;"
           ></Taglist>
         </b-col>
       </b-row>
