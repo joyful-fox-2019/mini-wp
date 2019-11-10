@@ -4,6 +4,7 @@ const upload = require('../middlewares/upload')
 const { authentication } = require('../middlewares/auth')
 
 router.get('/', ArticleController.find)
+router.get('/:id', ArticleController.findOne)
 router.use(authentication)
 router.post('/', upload.single('file'), ArticleController.add)
 

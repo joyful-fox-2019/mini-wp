@@ -2,7 +2,7 @@
   <div class="tile is-ancestor">
     <div class="tile is-parent">
       <div class="tile is-child">
-        <figure class="image is-3by1 has-margin-b">
+        <figure class="image is-3by2 has-margin-b">
           <img src="https://bulma.io/images/placeholders/128x128.png">
         </figure>
         <p class="title t-standard">{{ articles[0].title }}</p>

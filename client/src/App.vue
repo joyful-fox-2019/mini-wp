@@ -2,8 +2,9 @@
   <div id="main">
     <!-- <AddArticle></AddArticle> -->
     <Navbar :isLogin="isLogin" @logout="logout" @setDark="setDark"></Navbar>
-    <Articles v-if="$router.history.current.path === '/'"></Articles>
+    <Articles @alert="alert" v-if="$router.history.current.path === '/'"></Articles>
     <router-view @alert="alert" @login="login" :is-dark="isDark"></router-view>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -11,13 +12,15 @@
 import Navbar from './components/Navbar'
 import Articles from './views/Articles'
 import AddArticle from './views/AddArticle'
+import Footer from './components/Footer'
 
 export default {
   name: 'App',
   components: {
     Navbar,
     Articles,
-    AddArticle
+    AddArticle,
+    Footer
   },
   data() {
     return {
@@ -27,6 +30,7 @@ export default {
   },
   methods: {
     alert (err) {
+      console.log('masuk')
       if(err.response) {
         let strMessages = ''
         err.response.data.messages.forEach(message => {
@@ -126,6 +130,15 @@ html, body {
   background: var(--primary-color) !important;
   background: var(--primary-color-gradient) !important;
 }
+.font-article {
+  font-family: 'Jomolhari', serif;
+}
+.font-fancy {
+  font-family: 'Yeseva One', cursive;
+}
+.font-content {
+  font-family: 'Signika', sans-serif;
+}
 #main {
   font-family: 'Signika', sans-serif;
 }
@@ -153,7 +166,10 @@ a {
   cursor: pointer;
 }
 .has-margin-t {
-  margin-top: 10px;
+  margin-top: 10px !important;
+}
+.has-margin-t-2 {
+  margin-top: 20px !important;
 }
 .has-margin-b {
   margin-bottom: 10px;

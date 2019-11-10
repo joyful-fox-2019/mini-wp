@@ -27,6 +27,11 @@ const routes = [
     path: '/write-article',
     name: 'write-article',
     component: () => import('./views/AddArticle.vue')
+  },
+  {
+    path: '/article/:slug',
+    name: 'article',
+    component: () => import('./views/DetailArticle.vue')
   }
 ]
 

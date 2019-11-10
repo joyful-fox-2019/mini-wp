@@ -8,6 +8,13 @@ module.exports = {
       })
       .catch(next)
   },
+  findOne: (req, res, next) => {
+    Article.findById(req.params.id).populate('user')
+      .then(articles => {
+        res.status(200).json(articles)
+      })
+      .catch(next)
+  },
   add: (req, res, next) => {
     console.log(req.body)
     const { title, subtitle, description, tags, file } = req.body
