@@ -4,3 +4,4 @@ node_modules
 credentials.json
 dist
 .cache
+keyfile.json
