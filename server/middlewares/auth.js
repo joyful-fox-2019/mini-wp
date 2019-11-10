@@ -25,7 +25,7 @@ function authorization(req, res, next) {
     let { id } = req.params
     Article.findById(id)
         .then(article => {
-            if(article && article.user_id === req.loggedUser.id) {
+            if(article && article.author == req.loggedUser.id) {
                 next()
             } else if(!article) {
                 next({ status: 404, message: "Data not found" })

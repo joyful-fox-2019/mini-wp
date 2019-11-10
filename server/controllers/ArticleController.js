@@ -2,10 +2,12 @@ const Article = require('../models/article')
 
 class ArticleController {
     static create(req, res, next) {
-        let { title, content} = req.body
+        let { title, content } = req.body
         let created_at = new Date
         let author = req.loggedUser.id
-        Article.create({ title, content, created_at, author })
+        let featured_image = req.file.cloudStoragePublicUrl
+        console.log(featured_image)
+        Article.create({ title, content, created_at, author, featured_image })
             .then(result => {
                 res.status(201).json(result)
             })
@@ -53,6 +55,7 @@ class ArticleController {
     }
 
     // static search(req, res, next) {
+    //     console.log('it could be fair in a couple of hourssssss');
     //     let { title } = req.query
     //     // console.log(keyword);
     //     Article.find({title: { $regex: title }})
