@@ -4,3 +4,11 @@
     justify-content: flex-start;
 }
 
+.styleNone {
+    display: none;
+}
+
+.styleRegister {
+    display: contents;
+}
+

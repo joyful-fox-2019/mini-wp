@@ -1,15 +1,15 @@
 `use strict`
 const User = require('../models/user')
-const comparePassword = require('../helpers/comparePassword')
-const generateToken = require('../helpers/generateToken')
-
+const { comparePassword } = require('../helpers/bcrypt')
+const { generateToken } = require('../helpers/jwt')
 
 class userController{
     
     static register(req, res, next) {
         User.create({
             email : req.body.email,
-            password : req.body.password
+            password : req.body.password,
+            username :  req.body.username
         })
         .then( user => {
             res.json({
@@ -18,24 +18,24 @@ class userController{
         })
         .catch(next)
     }
-
+    
     static login(req, res, next) {
-        console.log(req.body)
-        User.findOne({
+        User.findOne({ // cari user dengan email yang masuk
             email : req.body.email
         })
         .then(user => {            
-            if (user) {
+            if (user) { 
                 let valid = comparePassword(req.body.password, user.password) // input dicompare server
-                if ( valid ) {                    
+                if ( valid ) { // kalo user ditemukan di data base maka langsung di buatin tokenya                    
                     let token = generateToken(user)  
                     res.json({
                         msg : 'login succes',
                         token : token                        
                     })
-                } else {
+                } else {                    
                     next({
-                        name : 'WrongPassword'
+                        status: 404,
+                        message: 'Wrong Password'
                     })
                 }
             } else {

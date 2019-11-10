@@ -2,29 +2,20 @@
 if (process.env.NODE_ENV === 'development') {
     require('dotenv').config()
 }
+//list of modules used
+const express = require('express') // untuk express
+const mongoose = require('mongoose') // untuk mongoose
+const morgan = require('morgan') // untuk morgan
+const cors = require('cors') // untuk cors
 
-const errorHandler = require('./middlewares/errorHandler')
-// untuk express
-const express = require('express')
+// list of used const
+const errorHandler = require('./middlewares/errorHandler') // router untuk user
+const router = require('./routes')
 const app = express()
 const port = process.env.port || 3000
-// router untuk user
-const router = require('./routes')
 
-// untuk mongoose
-const mongoose = require('mongoose')
-const morgan = require('morgan')
-
-// untuk cors
-const cors = require('cors')
-
-// connect to express
-app.use(express.json())
-app.use(express.urlencoded({ extended : false }))
-app.use(cors())
-app.use(morgan('dev'))
 // connect to mongoose
-mongoose.connect('mongodb://localhost/mini_wp', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify : false, useCreateIndex: true })
+mongoose.connect(process.env.MONGO_DB, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify : false, useCreateIndex: true })
     .then(resolve => {
         console.log(`server is connected !!`)
     })
@@ -32,7 +23,11 @@ mongoose.connect('mongodb://localhost/mini_wp', {useNewUrlParser: true, useUnifi
         console.log(err)
     })
 
-
+// connect to express
+app.use(express.json())
+app.use(express.urlencoded({ extended : false }))
+app.use(cors())
+app.use(morgan('dev'))
 
 app.use('/', router)
 app.use(errorHandler)

@@ -1,14 +1,16 @@
 'use strict'
-const verifyJwt = require('../helpers/verifyJwt') // ini dugunaka buat men-decoded token
+const { verifyToken } = require('../helpers/jwt') // ini dugunaka buat men-decoded token
 const User = require('../models/user')
+const Article = require('../models/article')
 
 module.exports = {
     authenticate : (req, res, next) => {
-        const user = verifyJwt(req.headers.token)
         try {    
             // masukkan data yang telah diencoded
+            const user = verifyToken(req.headers.token)
+            console.log('masuk authenticate')
             User.findOne({
-                _id : user._id // cari apakah data dia ada di server
+                _id : user.id // cari apakah data dia ada di server
             })
             .then (user => {
                 if (user) {
@@ -27,20 +29,29 @@ module.exports = {
         }
     },
     authorize : (req, res, next) => {
-        try {
-            User
-                .findById(req.user._id)
-                .then(user => {
-                    if (user.articleList.includes(req.params.id)) {
+        Article
+            .findById(req.params.id)
+            .then(article => {
+                if (article) {   
+                    console.log(article )     
+                    console.log(req.user._id)            
+                    if (String(article.user) == req.user._id) {
+                        console.log(article)
                         next()
                     } else {
                         next({
-                            name : 'NotAuthorized'
+                            status : 401,
+                            msg : 'Not Authorized'
                         })
                     }
-                })     
-        } catch (err) {
-            next(err)
-        }
-    }
+                } else {
+                    next({
+                        status : 404,
+                        msg : 'data not found'
+                    })
+                }
+            })
+            .catch(next)
+    }        
+        
 } 

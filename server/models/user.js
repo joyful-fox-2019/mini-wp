@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose')
-const hashPassword = require('../helpers/hashPassword')
+const { hashPassword } = require('../helpers/bcrypt')
 
 const userSchema = new Schema({
     email: {
@@ -25,18 +25,12 @@ const userSchema = new Schema({
         type : String,
         required : [true, 'must fill the password'],
     },
-    name : {
+    username : {
         type : String
     },
     photo : {
-        type : String
-    },
-    articleList : [
-        {
-            type : Schema.Types.ObjectId,
-            ref : 'Article'
-        }
-    ]
+        type : Buffer
+    }   
 })
 
 userSchema.pre('save', function (next){ // disini tidak boleh pake arrow

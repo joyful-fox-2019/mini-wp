@@ -1,0 +1,17 @@
+.tab {
+    display : flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.styleNone {
+    display: none;
+}
+
+.styleRegister {
+    display: contents;
+}
+
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

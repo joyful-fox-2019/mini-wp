@@ -3,42 +3,60 @@ const Article = require('../models/article')
 const User = require('../models/user')
 
 class articleController {
-
     static findAll(req, res, next) {
-        User.
-            findOne({
-                _id : req.user._id,            
-            }).populate('articleList')
-            .then (user => {
-                res.json(user.articleList)
+        console.log(req.user,'dsfsdafasf')
+        Article.
+            find({
+                user : req.user.id,            
+            })
+            .then (articles => {
+                res.json(articles)
+            })
+            .catch(next)
+    }
+    
+    static findOne(req, res, next) {
+        console.log('masuk findone', req.params.id)
+        Article.
+            findById(req.params.id)
+            .then((article) => {
+                if (article) {
+                    res.send(article)
+                } else {
+                    next({
+                        status : 404,
+                        msg : 'Article Not Found'
+                    })
+                }
+                
             })
             .catch(next)
     }
 
     static add(req, res, next) {
-        const {title, content, createdAt} = req.body
-        let articleTemp = {}
+        const {title, content, featured_image} = req.body
         Article.
             create({
                 title,
                 content,
-                createdAt
+                user : req.user._id,
+                featured_image
             })
-            .then(article => {
-                articleTemp = article      
-                return User.
-                            findOneAndUpdate({
-                                _id : req.user._id
-                            },
-                            {
-                                $push : {articleList : article.id}
-                            },
-                            {
-                                new : true
-                            })                
-            })
-            .then(user => {                
-                res.status(201).send(articleTemp)
+            // .then(article => {
+            //     articleTemp = article      
+            //     return User.
+            //                 findOneAndUpdate({
+            //                     _id : req.user._id
+            //                 },
+            //                 {
+            //                     $push : {articleList : article.id}
+            //                 },
+            //                 {
+            //                     new : true
+            //                 })                
+            // })
+            .then(article => {                
+                res.status(201).send(article)
             })
             .catch(next)
     }
@@ -63,14 +81,18 @@ class articleController {
     }
 
     static update(req, res, next) {
-        let {title, content, createdAt} = req.body
+        console.log('masuk update')
+        let {title, content, createdAt, featured_image, user, updatedAt} = req.body
         Article.
             findOneAndUpdate({
                 _id : req.params.id
             }, {
                 title,
                 content,
-                createdAt
+                createdAt,
+                featured_image,
+                user,
+                updatedAt
             },{
                 new : true
             }).
@@ -84,6 +106,7 @@ class articleController {
                         name : 'ArticleError'
                     })
                 }
+                
             })
             .catch(next)
     }

@@ -13,8 +13,20 @@ const articleScheme = new Schema({
     },
     createdAt : {
         type : Date,
-        require : [true, 'you must fill this field']
+        require : [true, 'you must fill this field'],
+        default : new Date
 
+    },
+    user : {
+        type : Schema.Types.ObjectId,
+        ref : 'user'
+    },
+    updatedAt : {
+        type : Date,
+        default : new Date
+    },
+    featured_image : {
+        type : Buffer
     }
 })
 
