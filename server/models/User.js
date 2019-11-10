@@ -31,7 +31,8 @@ const userSchema = new Schema({
         type: String
     },
     profilePic: {
-        type: String
+        type: String,
+        default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyVHexbv_-LbY91HUcXs1Sje0Lf2KYkTOsFKdHhNYoSF9u7w6g'
     }
 })
 

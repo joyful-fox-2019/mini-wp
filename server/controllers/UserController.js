@@ -83,6 +83,15 @@ class UserController {
             .catch(next)
     }
 
+    static getProfile(req, res, next){
+        const { id } = req.decode
+        User.findById(id)
+            .then(user =>{
+                res.status(200).json(user)
+            })
+            .catch(next)
+    }
+
     
 }
 

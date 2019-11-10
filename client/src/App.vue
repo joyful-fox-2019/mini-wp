@@ -1,8 +1,10 @@
 <template>
     <div>
+        <public v-if="page === 'public'" :islogin="islogin"  @articleId="getArticleId" @changePage="changePage"></public>
+        <readArticle v-if="page === 'read'" :islogin="islogin" :articleId="articleId" @changePage="changePage"></readArticle>
         <loginpage v-if="page === 'login' && !islogin" @changePage="changePage"></loginpage>
         <registerpage v-if="page === 'register' && !islogin" @changePage="changePage"></registerpage>
-         <div v-if="islogin" class="home-container d-flex">
+         <div v-if="islogin && page !== 'public' && page !== 'read'" class="home-container d-flex">
             <sidebarComponent @changePage="changePage"></sidebarComponent>
             <div class="page-container">
                 <navbar :page="page" @searchResult="searchResult" @changePage="changePage"></navbar>
@@ -25,6 +27,8 @@ import navbar from './components/navbar'
 import sidebarComponent from './components/sidebar'
 import Swal from 'sweetalert2'
 import profile from './views/profile'
+import public from './views/public'
+import readArticle from'./views/read-article'
 
 export default {
     name: 'App',
@@ -35,7 +39,9 @@ export default {
         createArticle,
         navbar,
         sidebarComponent,
-        profile
+        profile,
+        public,
+        readArticle
     },
     data(){
         return {
@@ -106,11 +112,11 @@ export default {
     },
     created(){
         if(localStorage.getItem('token')){
-            this.page = 'home'
+            this.page = 'public'
             this.fetchArticles()
             this.islogin = true
         } else {
-            this.page = 'login'
+            this.page = 'public'
             this.islogin = false
         }
     }

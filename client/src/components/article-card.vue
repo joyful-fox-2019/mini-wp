@@ -1,11 +1,11 @@
 <template>
-    <div class="article-card p-3">
+    <div class="article-card p-2">
         <div class="m-2 text-white" @click="changePage" style="position: absolute; cursor: pointer;"><i class="far fa-edit"></i></div>
         <img :src="articleItem.file" alt="">
         <articleTime :article="articleItem"></articleTime>
         <h5 v-html="articleItem.title"></h5>
         <div v-html="articleItem.content" style="height: 50px; overflow: hidden; font-size: 12px; color: grey;"></div>
-        <div class="article-card-tag">
+        <div class="article-card-tag" style="width: 300px">
             <span v-for="(tag, i) in articleItem.tags" @click="searchByTag(tag)" :key="i">#{{ tag }}</span>
         </div>
     </div>
@@ -36,4 +36,5 @@ export default {
 </script>
 
 <style>
+
 </style>

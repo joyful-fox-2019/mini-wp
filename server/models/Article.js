@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const articleSchema = new Schema({
     title: {
@@ -19,7 +20,23 @@ const articleSchema = new Schema({
     },
     file: {
         type: String
-    }
+    },
+    reader: {
+        type: Number,
+        default: 0
+    },
+    upvotes: [
+        {
+          type: ObjectId,
+          ref: 'User'
+        }
+      ],
+    downvotes: [
+        {
+          type: ObjectId,
+          ref: 'User'
+        }
+    ]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Article', articleSchema);

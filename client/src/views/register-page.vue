@@ -1,5 +1,6 @@
 <template>
   <div id="register-page">
+        <publicNavbar @changePage="$emit('changePage', $event)" ></publicNavbar>
         <div class="login-container d-flex flex-column justify-content-center align-items-center">
             <h1>NotWordPress</h1>
             <form @submit.prevent="register" class="d-flex flex-column justify-content-center align-items-center">
@@ -22,9 +23,12 @@
 
 <script>
 import axios from '../config/axios'
-
+import publicNavbar from '../components/public-navbar'
 export default {
     name: 'register-page',
+    components: {
+        publicNavbar
+    },
     data(){
         return {
             email: '',

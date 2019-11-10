@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 import axios from '../config/axios'
 import articleCard from '../components/article-card'
 
@@ -72,7 +73,6 @@ export default {
     width: 100%;
     height: 12vh;
     background-color: white;
-    box-shadow: 2px 20px 10px -18px rgba(0, 0, 0, 0.123);
 }
 
 .search input:first-child{
@@ -112,12 +112,12 @@ export default {
 }
 
 .article-card{
+    position: relative;
     min-height: 300px;
     min-width: 320px;
     background-color: white;
     border-radius: 5px;
     margin: 10px;
-    box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.27);
 }
 
 .article-card img{
