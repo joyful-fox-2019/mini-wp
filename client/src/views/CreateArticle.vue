@@ -93,16 +93,11 @@ export default {
   methods : {
     createArticle(){
       let token = localStorage.getItem('token')
-      console.log(this.title)
-      console.log(this.content)
-      console.log(this.tags)
-      console.log(this.dropFiles[0])
        let formData = new FormData();
       formData.append('image',this.dropFiles[0])
       formData.append('title',this.title)
       formData.append('content',this.content)
       formData.append('tags',this.tags)
-      console.log(formData);
       const loadingComponent = this.$buefy.loading.open()
       axios({
         method : 'post',
@@ -114,7 +109,6 @@ export default {
         }
       })
         .then(({data})=>{
-          console.log(data);
           loadingComponent.close()
           this.$buefy.toast.open({
                     message: 'Article Created!, redirecting back to home',
@@ -128,7 +122,6 @@ export default {
           console.log(err.response.data);
           loadingComponent.close()
           let msg = err.response.data.arr.join('  -  ')
-          console.log(msg)
            this.$buefy.toast.open({
                     duration: 4000,
                     message: `${msg}`,
@@ -154,16 +147,11 @@ export default {
     },
     saveToDraft(){
       let token = localStorage.getItem('token')
-      console.log(this.title)
-      console.log(this.content)
-      console.log(this.tags)
-      console.log(this.dropFiles[0])
        let formData = new FormData();
       formData.append('image',this.dropFiles[0])
       formData.append('title',this.title)
       formData.append('content',this.content)
       formData.append('tags',this.tags)
-      console.log(formData);
       const loadingComponent = this.$buefy.loading.open()
       axios({
         method : 'post',
@@ -175,7 +163,6 @@ export default {
         }
       })
         .then(({data})=>{
-          console.log(data);
           loadingComponent.close()
            this.$buefy.toast.open({
                     message: 'Article saved, redirecting back to home',
@@ -186,10 +173,8 @@ export default {
           },2000)
         })
         .catch((err)=>{
-            console.log(err.response.data);
             loadingComponent.close()
           let msg = err.response.data.arr.join('  -  ')
-          console.log(msg)
            this.$buefy.toast.open({
                     duration: 4000,
                     message: `${msg}`,

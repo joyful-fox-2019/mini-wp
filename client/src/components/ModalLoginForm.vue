@@ -90,9 +90,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import axios from '../../config/axios'
-// const axios = require('axios')
 
 export default {
   name : "ModalLoginForm",
@@ -187,7 +185,6 @@ export default {
           }
         })
         .then(({ data })=>{
-          console.log(data.token);
           localStorage.setItem('token',data.token)
            this.$emit('gotuser')
           this.$parent.close()
@@ -223,9 +220,7 @@ export default {
   },
   watch : {
     tab(val){
-      console.log(val)
       if(val === 'login'){
-        console.log(val)
         this.loginForm = true
       } else {
         this.loginForm = false

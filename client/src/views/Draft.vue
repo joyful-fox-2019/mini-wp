@@ -58,7 +58,6 @@ export default {
         }
       })
         .then(({ data }) => {
-          // this.profile = data;
            if(data.articles.length >= 1){
             this.empty = false
             this.articles = data.articles;
@@ -66,10 +65,14 @@ export default {
             this.empty = true
             this.articles = []
           }
-          console.log(data);
         })
         .catch(err => {
-          console.log(err);
+          this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response.data.message}`,
+                    type: 'is-danger'
+                })
+          console.log(err.response.data.message);
         });
     },
     userLogout(){
@@ -87,15 +90,10 @@ export default {
 <style>
 #mainContent {
   width: 100%;
-  /* display: flex;
-  flex-direction: row; */
 }
 #myArticles {
   width: 100%;
   margin: 10px;
-  /* display: flex;
-  flex-direction: column;
-  word-wrap: break-word; */
 }
 #content{
   padding : 0px 20px !important;
@@ -109,7 +107,6 @@ export default {
   color: black
 }
 #content{
-  /* border: 1px solid black; */
   width: 100%;
   height: 92vh;
   overflow: scroll;

@@ -100,7 +100,6 @@ export default {
     getArticleDetail(){
       let {articleId} = this.$route.params
       const loadingComponent = this.$buefy.loading.open()
-      console.log(articleId)
       axios({
         url : `/articles/${articleId}`,
         method : 'get'
@@ -111,26 +110,25 @@ export default {
           this.content = data.content
           this.tags = data.tags
           this.currentImage = data.image
-          console.log(data.image)
         })
         .catch((err)=>{
           loadingComponent.close()
-          console.log(err)
+          this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response.data.message}`,
+                    type: 'is-danger'
+                })
+          console.log(err.response.data)
         })
     },
     updateArticle(){
       let token = localStorage.getItem('token')
       let {articleId} = this.$route.params
-      console.log(this.title)
-      console.log(this.content)
-      console.log(this.tags)
-      console.log(this.dropFiles[0])
        let formData = new FormData();
       formData.append('image',this.dropFiles[0])
       formData.append('title',this.title)
       formData.append('content',this.content)
       formData.append('tags',this.tags)
-      console.log(formData);
       const loadingComponent = this.$buefy.loading.open()
       axios({
         method : 'patch',
@@ -143,7 +141,6 @@ export default {
       })
         .then(({data})=>{
           loadingComponent.close()
-          console.log(data);
           this.$buefy.toast.open({
                     message: 'Article Created!, redirecting back to home',
                     type: 'is-success'
@@ -156,10 +153,10 @@ export default {
           loadingComponent.close()
           this.$buefy.toast.open({
                     duration: 4000,
-                    message: `${msg}`,
+                    message: `${err.response.data.message}`,
                     type: 'is-danger'
                 })
-          console.log(err);
+          console.log(err.response.data);
         })
     }
   },

@@ -67,16 +67,12 @@ export default {
   props : ['article','creator','bookmark'],
   methods : {
     goToArticle(){
-      console.log('trigerred' + ' ' + this.article.slug)
       this.$router.push({path : `/${this.article.slug}`})
     },
     editArticle(){
-      console.log(this.article._id)
       this.$router.push({path : `/edit/${this.article._id}`})
-      console.log('masuk edit')
     },
     deleteArticle(){
-      console.log(this.article._id)
       let articleId = this.article._id
       const loadingComponent = this.$buefy.loading.open()
       axios({
@@ -87,16 +83,19 @@ export default {
         }
       })
         .then(({data})=>{
-          console.log(data);
           loadingComponent.close()
           this.$buefy.toast.open('Article deleted!')
           this.$emit('fetchDraft')
         })
         .catch((err)=>{
           loadingComponent.close()
-          console.log(err)
+          this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response.data.message}`,
+                    type: 'is-danger'
+                })
+          console.log(err.response.data)
         })
-      console.log('masuk delete')
     },
     addBookmark(){
       let articleId = this.article._id
@@ -108,7 +107,6 @@ export default {
         }
       })
         .then(({data})=>{
-          console.log(data)
           this.$buefy.toast.open({
                     message: 'Bookmarked!',
                     type: 'is-success'

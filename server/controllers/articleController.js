@@ -93,7 +93,6 @@ class ArticleController {
       let userId = req.loggedUser._id
       let updated = await User.updateOne({_id : userId},{$pull:{articles : articleId }})
       let image = await Article.findOne({_id:articleId})
-      console.log(image)
       if(image.image !== "https://hacktiv8.com/img/ogdefault.jpg"){
         let test = await removeFromGCS(image.image)
       }

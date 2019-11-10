@@ -40,15 +40,23 @@ export default {
   },
   methods : {
     getArticles(){
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         methods : 'get',
         url: '/articles/posted'
       })
         .then(({data})=>{
+          loadingComponent.close()
           this.articles = data
         })
         .catch((err)=>{
-          console.log(err)
+          loadingComponent.close()
+          console.log(err.response.data.message)
+            this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response.data.message}`,
+                    type: 'is-danger'
+                })
         })
     },
     close(tag){

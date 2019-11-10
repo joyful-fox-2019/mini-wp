@@ -25,23 +25,28 @@ export default {
   },
   methods : {
     getThisArticle(){
-      console.log(this.$route.params)
+      const loadingComponent = this.$buefy.loading.open()
       axios({
         methods : 'get',
         url : `/articles/slug/${this.$route.params.slug}`
       })
         .then(({data})=>{
+          loadingComponent.close()
           this.details = data
-          console.log(data.userId);
         })
         .catch((err)=>{
-          console.log(err)
+          loadingComponent.close()
+          this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response.data.message}`,
+                    type: 'is-danger'
+                })
+          console.log(err.response.data)
         })
     }
   },
   computed: {
     username(){
-      // console.log(this.details.userId)
       return this.details.userId.username
     }
   },

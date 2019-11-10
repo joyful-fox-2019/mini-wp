@@ -4,7 +4,6 @@
       <b-menu-list>
         <div v-if="userLogin">
           <b-icon icon="account" size="is-small"></b-icon>Profile
-          <!-- <b-menu-item label="My Profile"></b-menu-item> -->
           <b-menu-item label="My Articles" @click="myProfile"></b-menu-item>
           <b-menu-item label="Drafts" @click="myDrafts"></b-menu-item>
           <b-menu-item label="Bookmarks " @click="myBookmark"></b-menu-item>
@@ -39,7 +38,6 @@ export default {
   },
   methods: {
     userLeave() {
-      console.log("masuk");
       this.$gAuth
         .signOut()
         .then(() => {
@@ -66,12 +64,10 @@ export default {
           this.tags = allTags;
         })
         .catch(err => {
-          console.log(err);
+          console.log(err.response.data);
         });
     },
     findByTag(tag) {
-      console.log("masuk");
-      //   console.log(tag)
       this.$emit("tag", tag);
     },
     myProfile() {

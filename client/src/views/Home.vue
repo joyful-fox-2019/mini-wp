@@ -5,7 +5,6 @@
       </b-message>
       <Navbar :userLogin="userLogin" @loggedIn="isLogin" @search="searchQuery">
     <h3>{{ myName }}</h3>
-    <!-- <h3>tetasd</h3> -->
   </Navbar>
   <div id="mainContent">
     <Sidebar id="test" :userLogin="userLogin" @logout="userLogout" @tag="articleByTag"></Sidebar>
@@ -59,14 +58,14 @@ components:{
         if (position === -1){
           const token = query.split('token=')[1].split('&')[0]
           localStorage.setItem('token',token)
-          window.location = 'http://localhost:1234'
+          window.location = 'https://myminiwp.nadhiljanitra.xyz'
           this.$buefy.toast.open({
                     message: 'Welcome!',
                     type: 'is-success'
                 })
         } else {
           const msg = query.split('msg=')[1].split('%27')[1].split('%20').join(' ')
-          window.location = 'http://localhost:1234'
+          window.location = 'https://myminiwp.nadhiljanitra.xyz'
           localStorage.setItem('msg',msg)
         }
       }
@@ -81,7 +80,6 @@ components:{
         if(flag){
           this.tags.push(tag)
         }
-      console.log(tag,'ini di parents');
     },
     showErr(){
       let message = localStorage.getItem('msg')
@@ -94,13 +92,11 @@ components:{
       }
     },
     removeTag(tag){
-      console.log(tag,'tag to be removed');
       let index = this.tags.indexOf(tag)
       this.tags.splice(index,1)
     },
     searchQuery(search){
       this.query = search
-      console.log(search)
     }
   },
   created(){

@@ -64,13 +64,11 @@ export default {
           if(data.articles.length < 1){
             this.empty = true
           }
-          console.log(data);
         })
         .catch(err => {
           loadingComponent.close()
-          console.log(err);
+          console.log(err.response);
           // let msg = err.response.data.arr.join('  -  ')
-          console.log(msg)
            this.$buefy.toast.open({
                     duration: 4000,
                     message: `${err.response}`,
@@ -89,15 +87,10 @@ export default {
 <style>
 #mainContent {
   width: 100%;
-  /* display: flex;
-  flex-direction: row; */
 }
 #myArticles {
   width: 100%;
   margin: 10px;
-  /* display: flex;
-  flex-direction: column;
-  word-wrap: break-word; */
 }
 #content{
   padding : 0px 20px !important;
@@ -110,7 +103,6 @@ export default {
   font-size: 30px
 }
 #content{
-  /* border: 1px solid black; */
   width: 100%;
   height: 92vh;
   overflow: scroll;

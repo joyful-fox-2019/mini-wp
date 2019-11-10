@@ -29,7 +29,6 @@
       <b-message type="is-danger" size="is-small" has-icon :auto-close="isActive" :duration="err.duration" :active.sync="isActive">
           {{ err.message }}
       </b-message>
-    <!-- <button class="button" type="button" @click="$parent.close()">Close</button> -->
     <button class="button is-primary" type="submit">Sign Up</button>
   </form>
 </div>

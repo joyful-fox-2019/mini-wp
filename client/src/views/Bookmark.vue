@@ -64,10 +64,14 @@ export default {
             this.empty = true
             this.articles = []
           }
-          console.log(data);
         })
         .catch(err => {
-          console.log(err);
+          this.$buefy.toast.open({
+                    duration: 4000,
+                    message: `${err.response.data}`,
+                    type: 'is-danger'
+                })
+          console.log(err.response.data);
         });
     }
   },
@@ -81,15 +85,10 @@ export default {
 <style>
 #mainContent {
   width: 100%;
-  /* display: flex;
-  flex-direction: row; */
 }
 #myArticles {
   width: 100%;
   margin: 10px;
-  /* display: flex;
-  flex-direction: column;
-  word-wrap: break-word; */
 }
 #content{
   padding : 0px 20px !important;

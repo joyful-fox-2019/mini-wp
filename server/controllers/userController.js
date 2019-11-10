@@ -146,18 +146,18 @@ class UserController {
       if(emailFind){
         if (emailFind.loginBy === 'web'){
           res.redirect(
-            `http://localhost:1234?msg='You have been sign in using email, please login using email'`
+            `https://myminiwp.nadhiljanitra.xyz?msg='You have been sign in using email, please login using email'`
           )
         } else if (emailFind.loginBy === 'google') {
           res.redirect(
-            `http://localhost:1234?msg='You have been sign in using google, please login using google'`
+            `https://myminiwp.nadhiljanitra.xyz?msg='You have been sign in using google, please login using google'`
           )
         } else if (emailFind.loginBy === 'github'){
           let { _id } = emailFind._id
           let payloadJWT = { _id }
           let token = getToken(payloadJWT)
           res.redirect(
-            `http://localhost:1234?token=${token}`
+            `https://myminiwp.nadhiljanitra.xyz?token=${token}`
           )
         }
       } else {
@@ -169,7 +169,7 @@ class UserController {
          }
          let token = getToken(payload)
          res.redirect(
-           `http://localhost:1234?token=${token}`
+           `https://myminiwp.nadhiljanitra.xyz?token=${token}`
          )
       }
 

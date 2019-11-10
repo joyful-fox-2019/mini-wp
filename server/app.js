@@ -14,9 +14,17 @@ const PORT = process.env.PORT || 300
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 
-mongoose.connect('mongodb://localhost:27017/miniWPLocal', {useNewUrlParser: true,useUnifiedTopology : true,useCreateIndex: true})
+// mongoose.connect('mongodb://localhost:27017/miniWPLocal', {useNewUrlParser: true,useUnifiedTopology : true,useCreateIndex: true})
+//   .then((sucess)=>{
+//     console.log(`Connected on miniWPLocal`)
+//   })
+//   .catch((err)=>{
+//     console.log(err)
+//   })
+
+  mongoose.connect(process.env.MONGO_ATLAS, {useNewUrlParser: true,useUnifiedTopology : true,useCreateIndex: true})
   .then((sucess)=>{
-    console.log(`Connected on miniWPLocal`)
+    console.log(`Connected on ATLAS`)
   })
   .catch((err)=>{
     console.log(err)

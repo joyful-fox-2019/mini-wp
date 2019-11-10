@@ -4,7 +4,6 @@
   >
     <template slot="brand">
       <b-navbar-item v-on:click="backHome()">
-        <!-- <slot></slot> -->
         <b-icon
             icon="home"
             >
@@ -69,7 +68,6 @@ export default {
   },
   methods : {
     isLoggedIn(){
-      // this.tokenFind = true
       this.$emit('loggedIn')
     },
     loginActive(){
@@ -81,13 +79,11 @@ export default {
       this.tab = 'register'
     },
     createArticle(){
-      console.log('change routes')
       if (this.$router.currentRoute.path !== '/addarticle'){
           this.$router.push({path: '/addarticle'})
       }
     },
     backHome(){
-      console.log('masuk');
       if (this.$router.currentRoute.name !== 'home'){
           this.$router.push({path: '/'})
       }
@@ -104,7 +100,6 @@ export default {
     errGithub : function(errMessage){
       this.loginRegisterActive = true
       this.msgGithub = errMessage
-      console.log(errMessage,'ini errMassge dari navbar')
     },
     search(){
       this.$emit('search',this.search)
