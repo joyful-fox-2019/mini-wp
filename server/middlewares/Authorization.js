@@ -5,6 +5,7 @@ function authorization(req, res, next) {
         .then((found) => {
             if (found) {
                 if (found.author == req.user.id) {
+                    console.log('Berhasil masuk authorisasi')
                     next();
                 } else {
                     let err = {

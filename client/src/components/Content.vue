@@ -15,32 +15,45 @@
         </div>
         <div class="w-100 container main-content d-flex flex-column align-items-center">
             <!-- Card For Article -->
-            <div class="card m-3">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="../img/homepage.jpg" class="card-img" alt="article">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div v-if="!article">
+                <div class="card m-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="../img/homepage.jpg" class="card-img" alt="article">
                         </div>
-                        <div class="container">
-                            <button class="btn btn-primary">Read</button>
-                            <button class="btn btn-success">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                            <div class="container">
+                                <button class="btn btn-primary">Read</button>
+                                <button class="btn btn-success">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="container-fluid form-article" v-if="article">
+                <createarticle></createarticle>
             </div>
         </div>
     </div>
 </template>
 <script>
+
+import createarticle from './CreateArticle'
+
 export default {
+    components:{
+        createarticle
+    },
     data(){
-        return {}
+        return {
+            article: true
+        }
     }
 }
 </script>
@@ -54,5 +67,8 @@ export default {
     background-color: white;
     margin-top: 2%;
     height: calc(100vh - 200px);
+}
+.form-article{
+    margin-top: 2%;
 }
 </style>

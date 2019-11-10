@@ -10,6 +10,7 @@ function authenticate(req,res,next){
         .then(user => {
             if(user){
                 req.user = decoded
+                console.log('Berhasil masuk authentikasi')
                 next()
             }
         })

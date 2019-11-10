@@ -1,11 +1,23 @@
 const Article = require('../models/article')
 
 class ArticleController {
+    static async uploadGCS(req,res,next){
+        try {
+          let _id = req.user.id
+          let name = req.file.originalname
+          let location = req.file.cloudStoragePublicUrl
+          let data = {name,location}
+          res.status(201).json({data})
+        } catch (error) {
+          next(error)
+        }
+      }
+
     static createArticle(req,res,next){
         Article.create({
             title: req.body.title,
             content: req.body.content,
-            // created_at: req.body.created,
+            created_at: req.body.created,
             author: req.user.id,
             featured_image: req.body.imageUrl
         })

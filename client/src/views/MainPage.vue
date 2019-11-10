@@ -5,7 +5,6 @@
         </div>
         <div class="content-page">
             <contentpage></contentpage>
-            <createarticle></createarticle>
         </div>
     </div>
 </template>
@@ -18,11 +17,11 @@ import createarticle from '../components/CreateArticle'
 export default {
     components:{
         sidebar,
-        contentpage,
-        createarticle
+        contentpage
     },
     data(){
-        return {}
+        return {
+        }
     }
 }
 </script>
