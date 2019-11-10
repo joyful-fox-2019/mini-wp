@@ -1,11 +1,17 @@
 module.exports = (err, req, res, next) => {
   console.log(err.name, "=====================", err);
+  console.log(err.errors.email.message, "aaaaaa");
+  
   
   if (err.status) {
     res.status(err.status).json({ message : err.message})
   } else {
     if (err.name === `ValidationError`) {
-      res.status(400).json({ message : `Please insert the content`})
+      let message = []
+      for(let field in err.errors) {
+        message.push(field.message)
+      }
+      res.status(400).json({ message })
     } 
 
     else {

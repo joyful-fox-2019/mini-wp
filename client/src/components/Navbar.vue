@@ -9,7 +9,7 @@
                 <span class="panel-icon">
                     <i class="fab fa-wordpress-simple"></i>
                 </span>
-               <p style="font-size: 20px;">My Sites</p>
+               <p style="font-size: 20px;">Fémme</p>
             </a>
         
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -59,7 +59,7 @@
                       <span class="panel-icon">
                           <i class="fas fa-edit"></i>
                       </span>
-                      <p style="font-size: 18px;">Write</p>
+                      <p @click="addArticle" style="font-size: 18px;">Write</p>
                     </a>
                   <a class="navbar-item">
                       <span class="panel-icon">
@@ -77,7 +77,7 @@
                       <span class="panel-icon">
                           <i class="fas fa-sign-out-alt"></i>
                       </span>
-                      <p style="font-size: 18px;">Sign Out</p>
+                      <p @click="signOut" style="font-size: 18px;">Sign Out</p>
                     </a>
               </div>
             </div>
@@ -91,8 +91,50 @@
 </template>
 
 <script>
-export default {
 
+export default {
+  
+  methods : {
+    switchToAuthPage() {
+      console.log(`masuk switch auth page`);
+      this.$emit('setPage', 'auth')
+      
+    },
+     switchToMainPage() {
+      console.log(`masuk switch main page`);
+      this.$emit('setPage', 'main')
+    },
+    addArticle() {
+      console.log(`add article iniiiiiiiiiiiiiiiiiii`);
+      
+      this.$emit('setSection', 'addArticle')
+    },
+    onSignIn(googleUser) {
+    let id_token = googleUser.getAuthResponse().id_token
+
+    axios({
+      method : 'post',
+      url : 'http://localhost:3000/users/google-signin',
+      data : {
+        idToken : id_token
+      }
+    })
+    .then(({data}) => {
+      localStorage.setItem('token', data.token)
+    })
+    .catch(err => {
+      console.log(err.response);
+    }) 
+
+    },
+    signOut() {
+        
+        localStorage.removeItem('token')
+            this.switchToAuthPage()
+
+      }
+
+  }
 }
 </script>
 

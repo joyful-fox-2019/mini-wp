@@ -1,7 +1,7 @@
 <template>
   <div>
    <!-- one storyline -->
-                  <!-- <div v-for="article in filteredArticles" :key="article._id" class="columns story-list">  -->
+                  <div class="columns story-list"> 
                       <div class="column is-10">
                         <p style="font-size: 22px;">  
                             <br>
@@ -27,14 +27,16 @@
                             <img class="is-rounded" :src="article.imgSrc">
                           </figure>
                     </div>
-                  <!-- </div> -->
+                  </div>
                   <!-- end one story line  -->
   </div>
 </template>
 
 <script>
 export default {
-
+  props : {
+    article: Object
+  }
 }
 </script>
 

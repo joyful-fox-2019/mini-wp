@@ -1,22 +1,16 @@
 <template>
   <div>
 
-    <Navbar></Navbar>
+    <Navbar @setSection='setSection' @setPage='setPage'></Navbar>
  
      <!-- BODY SECTION -->
     <section class="section">
 
-
-
       <div class="columns is-gapless is-multiline is-mobile">
-
 
                 <Panel class="column is-2"></Panel>
           
           
-
-      
-
           <!-- body right col 10 -->
             <div class="column is-10">
               <!-- right container  inside body right -->
@@ -30,39 +24,12 @@
                 <section>
                   <div class="container">
 
-                    <!-- <Article></Article> -->
-                      <!-- one storyline -->
-                  <div v-for="article in filteredArticles" :key="article._id" class="columns story-list"> 
-                      <div class="column is-10">
-                        <p style="font-size: 22px;">  
-                            <br>
-                          <B><i> {{article.title}} </i></B>
-                        </p>
-                        <p>
-                          {{article.content}}
-                          </p>
-                          <br>
-                                  <!-- group tags -->
-                        <div  class="field is-grouped is-grouped-multiline">
-                            <div v-for="tag in article.tags" :key="tag._id" class="control">
-                              <div class="tags has-addons">
-                                <span class="tag">on</span>
-                                <span class="tag is-primary" style="background-color: rgba(9, 87, 90, 0.514);">{{tag}}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- end goup tags -->
-                      </div>
-                    <div class="column is-2">
-                        <figure class="image is-square"> 
-                            <img class="is-rounded" :src="article.imgSrc">
-                          </figure>
+                    <div v-if="section === `article`">
+                    <Article v-for="article in filteredArticles" :key="article._id" :article="article" ></Article>
                     </div>
-                  </div>
-                  <!-- end one story line  -->
- 
-                    
+                    <AddArticle v-if=" section === `addArticle`" @setSection="setSection"></AddArticle>
 
+                    
                  
               
                   </div>
@@ -98,7 +65,7 @@ import Navbar from "../components/Navbar"
 import Panel from "../components/Panel"
 import Tabs from "../components/Tabs"
 import Article from "../components/Article"
-import WriteArticle from "../components/WriteArticle"
+import AddArticle from "../components/AddArticle"
 
 export default {
   name : 'MainPage',
@@ -107,12 +74,13 @@ export default {
     message : 'Hello Vue!',
     articles : [],
     searchTitle : '',
+    section : 'article',
     baseUrl : `http://localhost:3000`
     }
   },
   methods : {
     changeMessage : function() {
-      this.message = "Welcome to Womanizer Mini-WP"
+      this.message = "Welcome to Femme Mini-WP"
     },
     selectedArticle() {
       axios({
@@ -134,6 +102,12 @@ export default {
       .then(({ data }) => {
         this.articles = data
       })
+    },
+    setSection(section) {
+      this.section = section
+    },
+    setPage(page) {
+      this.$emit('setPage', page)
     }
   },
   components : {
@@ -141,10 +115,20 @@ export default {
     Panel,
     Tabs,
     Article,
-    WriteArticle
+    AddArticle
   },
     created() {
     this.fetchArticle() 
+  },
+  watch : {
+    
+    section() {
+      if (this.section === `article`) {
+        this.fetchArticle() 
+
+      }
+
+    }
   },
   computed: {
     filteredArticles: function () {

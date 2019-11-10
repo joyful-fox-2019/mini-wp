@@ -6,32 +6,88 @@ const { OAuth2Client } = require('google-auth-library')
 
 class UserController {
 
+  static googleSignIn(req, res, next) {
+    console.log(req.body, "googleeeeeeeeeeee");
+    
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+    let payload = null
+    client.verifyIdToken({
+    
+      idToken : req.body.idToken,
+      audience : process.env.GOOGLE_CLIENT_ID
+    })
+    .then(ticket => {
+      console.log(ticket, "tickeeeeeeet");
+      
+      payload = ticket.getPayload()
+      let email = payload.email
+      // console.log(payload);
+      return User.findOne({ email })
+    })
+    .then(user => {
+      console.log(user, "user google sign in");
+      
+      if (user) {
+        return user
+      } else {
+          return User.create({
+            email: payload.email,
+            password : process.env.DEFAULT_PASSWORD
+          })
+      }
+    })
+    .then(user => {
+      const token = generateToken({
+        id : user._id,
+        email : user.email
+      })
+      console.log(token, "TOKEEEEEEEEEEEEN");
+      res.status(200).json({token})
+    })
+    .catch(next)
+  }
+
+
   static register(req, res, next) {
+
+    const { name, email, password } = req.body
+
     User.create({
-      name : req.body.name,
-      email : req.body.email,
-      password : req.body.password
+      name,
+      email,
+      password
     })
     .then(user => {
       console.log(user);
-      
-      res.status(201).json(user)
+
+      const { _id, email } = user
+
+      let token = generateToken({
+          _id,
+          email
+      })
+      res.status(200).json({ token, _id, email })
+
+
     })
     .catch(next)
   }
 
   static login(req, res, next) {
+    console.log(req.body);
+    
     User.findOne({
+
       email : req.body.email
     })
     .then(user => {
       console.log(user);
-      console.log(user.password, "user.pass");
+      console.log(user.password, "user.password");
       console.log(req.body.password, "req.body");
       console.log(req.body.email, "req.email");
       
       
-      
+    
       
       if(!user) {
         throw {status : 404, message : `you have to register first`}

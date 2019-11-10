@@ -7,9 +7,12 @@ const app = express()
 const routes = require('./routes')
 const cors = require('cors')
 const mongoose = require('mongoose')
-// const errorHandler = require('./middlewares/errorHandler')
+const errorHandler = require('./middlewares/errorHandler')
 
 const PORT = process.env.PORT 
+
+
+
 mongoose.connect('mongodb://localhost:27017/mini-wp', { useNewUrlParser: true,  useUnifiedTopology: true, useCreateIndex: true, useFindAndModify : false })
 .then(() => {
   console.log(`Server connected`);  
@@ -26,6 +29,6 @@ app.use(express.urlencoded({extended : false}))
 
 app.use('/', routes)
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`Listening on PORT`, PORT))

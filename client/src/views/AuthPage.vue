@@ -1,6 +1,6 @@
 <template>
 <div>
-  <RegisterLogin></RegisterLogin>
+  <RegisterLogin @setPage="setPage"></RegisterLogin>
 </div>
 </template>
 
@@ -11,15 +11,11 @@ export default {
   name : 'AuthPage',
   data : function() {
     return {
-      isRegistered : false
     }
   },
   methods : {
-    setIsRegistered(status) {
-      this.isRegistered = status
-    },
-    setIsLogin(status) {
-      this.$emit('setIsLogin', true)
+    setPage(page) {
+      this.$emit('setPage', page)
     }
    },
   components : {

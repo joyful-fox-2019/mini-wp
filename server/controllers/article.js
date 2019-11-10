@@ -20,9 +20,14 @@ class ArticleController {
   }
 
   static create(req, res, next) {
-    let { title, content, tags, imgSrc } = req.body
+    console.log(req.body);
+    
+    let { title, content, tags} = req.body
+    let imgSrc = req.body.file
     Article.create({ title, content, tags, imgSrc})
     .then(article => {
+      console.log(article);
+      
       res.status(201).json(article)
     })
     .catch(next)

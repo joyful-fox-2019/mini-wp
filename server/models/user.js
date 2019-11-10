@@ -7,7 +7,7 @@ const userSchema = new Schema({
   email : {
     type : String, 
     required : [true, `Please enter your email`],
-    unique : true,
+    unique : [true, 'Email is already used'],
     validate : emailValidator
   },
   password : {

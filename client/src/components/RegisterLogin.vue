@@ -5,19 +5,19 @@
   
 <div class="cont">
 
-  <div class="form sign-in">
+  <div class="sign-in">
     <h2>Welcome back,</h2>
     <form @submit.prevent="login()">
     <label>
       <span>Email</span>
-      <input type="email" />
+      <input type="email" v-model="email"  />
     </label>
     <label>
       <span>Password</span>
-      <input type="password" />
+      <input type="password" v-model="password" />
     </label>
     <p class="forgot-pass">Forgot password?</p>
-    <button  type="button" class="submit">Sign In</button>
+    <button type="submit" class="submit">Sign In</button>
   </form>
   </div>
   <div class="sub-cont">
@@ -37,7 +37,7 @@
     </div>
 
 
-    <div class="form sign-up">
+    <div class="sign-up">
       <h2>Time to feel like home,</h2>
       <form @submit.prevent="register()">
       <label>
@@ -52,14 +52,20 @@
         <span>Password</span>
         <input type="password" v-model="password" />
       </label>
-      <button @click="switchToLoginPage()" type="button" class="submit">Sign Up</button>
+      <button type="submit" class="submit">Sign Up</button>
     </form>
     </div>
   </div>
 
 </div>
 
-
+<!-- google signin  -->
+  <g-signin-button
+    :params="googleSignInParams"
+    @success="onSignInSuccess"
+    @error="onSignInError">
+    Sign in with Google
+  </g-signin-button>
 
 
 </div>
@@ -74,10 +80,21 @@ export default {
     return {
       name : '',
       email : '',
-      password : ''
+      password : '',
+      googleSignInParams: {
+        client_id: '239754148921-nlpf58ao2hn3gmba34aoj22s3jvlnjcg.apps.googleusercontent.com'
+      }
     }
   },
   methods : {
+    switchToAuthPage() {
+      console.log(`masuk switch auth page`);
+      this.$emit('setPage', 'auth')
+    },
+    switchToMainPage() {
+      console.log(`masuk switch main page`);
+      this.$emit('setPage', 'main')
+    },
     login() {
       console.log(`loginnnnnnnnnnn`);
       
@@ -91,7 +108,7 @@ export default {
       })
       .then(({data}) => {
         console.log(data);
-        this.$emit('setIsLogin', true)
+        this.switchToMainPage()
         localStorage.setItem('token', data.token)
         
       })
@@ -113,15 +130,43 @@ export default {
       })
       .then(({data}) => {
         console.log(data);
-        this.$emit('setIsRegistered', true)        
+        localStorage.setItem('token', data.token)     
+        this.switchToAuthPage() 
       })
       .catch(err => {
         console.log(err.response);
         
       })
     },
-    switchToLoginPage() {
-      this.$emit('setIsRegistered', true)
+    onSignInSuccess (googleUser) {
+      // `googleUser` is the GoogleUser object that represents the just-signed-in user.
+      // See https://developers.google.com/identity/sign-in/web/reference#users
+      const profile = googleUser.getBasicProfile() // etc etc
+      console.log(profile);
+      let idToken = googleUser.getAuthResponse().id_token;
+      console.log(idToken);
+
+      axios({
+        method : 'post',
+        url : 'http://localhost:3000/users/google-signin',
+        data : {
+          idToken
+        }
+      })
+      .then(({data}) => {
+        console.log(data, "ini on sign in google");
+        localStorage.setItem('token', data.token)
+        this.switchToMainPage()
+      })
+      .catch(err => {
+        console.log(err.response);
+        
+      })
+      
+    },
+    onSignInError (error) {
+      // `error` contains any error occurred.
+      console.log('OH NOES', error)
     }
   }
 }
@@ -368,5 +413,13 @@ input {
   right: 5px;
 }
 
-
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #3c82f7;
+  color: #fff;
+  box-shadow: 0 3px 0 #0f69ff;
+}
 </style>
