@@ -16,6 +16,10 @@ const articleSchema = new Schema({
     },
     featured_image:{
         type: String
+    },
+    updated_at:{
+        type: Date,
+        default: null
     }
 })
 

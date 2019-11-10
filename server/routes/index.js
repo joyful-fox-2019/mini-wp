@@ -4,7 +4,7 @@ const ArticleRouter = require('./article');
 const GoogleRouter = require('./google');
 
 router.use('/users', UserRouter);
-// router.use('/articles', ArticleRouter);
+router.use('/articles', ArticleRouter);
 // router.use('/google-signin', GoogleRouter);
 
 module.exports = router;

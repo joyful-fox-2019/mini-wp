@@ -31,6 +31,10 @@ const userSchema = new Shcema({
             },
             message: "password min 8 digit, include uppercase, lowercase letter and number"
         }
+    },
+    imageUrl:{
+        type: String,
+        default: "https://image.flaticon.com/icons/png/512/125/125765.png"
     }
 },
 {

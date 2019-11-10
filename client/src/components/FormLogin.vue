@@ -49,6 +49,8 @@ export default {
             let data = response.data;
             localStorage.setItem('token', data.token);
             localStorage.setItem('name', data.name);
+            localStorage.setItem('email', data.email);
+            localStorage.setItem('image', data.image)
             this.showMainPage()
             this.emailLog = ""
             this.passwordLog = ""

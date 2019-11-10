@@ -41,7 +41,9 @@ class UserController {
                     let token = jwt.generateToken({id: user._id});
                     res.status(200).json({
                         token,
-                        name: user.username
+                        name: user.username,
+                        email: user.email,
+                        image: user.imageUrl
                     })
                 }else{
                     throw new Error("your password is incorrect")
