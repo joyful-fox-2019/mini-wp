@@ -54,7 +54,7 @@ export default {
     methods: {
         searchTagArticle (tag) {
             axios({
-                url: `http://localhost:3000/article/tags/${tag}`,
+                url: `http://hackpress-server.panji-h8.online/article/tags/${tag}`,
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')
@@ -86,7 +86,7 @@ export default {
         },
         showUserArticles () {
             axios({
-                url: 'http://localhost:3000/article',
+                url: 'http://hackpress-server.panji-h8.online/article',
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')
@@ -108,7 +108,7 @@ export default {
         },
         showPublicArticles () {
             axios({
-                url: 'http://localhost:3000/article/news',
+                url: 'http://hackpress-server.panji-h8.online/article/news',
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')

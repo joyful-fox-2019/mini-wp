@@ -55,7 +55,7 @@ export default {
                 showConfirmButton: false
             })
             axios({
-                url: 'http://localhost:3000/login',
+                url: 'http://hackpress-server.panji-h8.online/login',
                 method: 'post',
                 data: {
                     email: this.email,
@@ -88,7 +88,7 @@ export default {
         onSuccess(googleUser) {
             var id_token = googleUser.getAuthResponse().id_token
             axios({
-                url: 'http://localhost:3000/loginGoogle',
+                url: 'http://hackpress-server.panji-h8.online/loginGoogle',
                 method: 'post',
                 data: {
                     token: id_token

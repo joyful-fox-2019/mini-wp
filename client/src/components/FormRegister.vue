@@ -47,7 +47,7 @@ export default {
                 showConfirmButton: false
             })
             axios({
-                url: 'http://localhost:3000/register',
+                url: 'http://hackpress-server.panji-h8.online/register',
                 method: 'post',
                 data: {
                     email: this.email,

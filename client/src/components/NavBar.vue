@@ -39,7 +39,7 @@ export default {
     methods: {
       showList() {
         axios({
-          url: 'http://localhost:3000/article/news',
+          url: 'http://hackpress-server.panji-h8.online/article/news',
           method: 'get',
           headers: {
             token: localStorage.getItem('token')

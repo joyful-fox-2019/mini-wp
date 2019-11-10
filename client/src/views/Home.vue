@@ -60,7 +60,7 @@ export default {
             // console.log(this.search)
             this.dariNavbar.result = []
             axios({
-                url: `http://localhost:3000/article/search/${this.search}`,
+                url: `http://hackpress-server.panji-h8.online/article/search/${this.search}`,
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')

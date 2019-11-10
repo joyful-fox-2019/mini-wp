@@ -94,7 +94,7 @@ export default {
     methods: {
         updateArticle () {
             axios({
-                url: `http://localhost:3000/article/${this.FormUpdateData._id}`,
+                url: `http://hackpress-server.panji-h8.online/article/${this.FormUpdateData._id}`,
                 method: 'patch',
                 headers: {
                     token: localStorage.getItem('token')

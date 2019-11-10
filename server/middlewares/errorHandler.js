@@ -2,7 +2,15 @@ module.exports = (err, req, res, next) => {
     let status
     let message
 
+    console.log(err)
+    console.log(err.name)
+
     switch (err.name) {
+        case 'TypeError': {
+            status = 400
+            message = 'Email tidak terdaftar'
+            break
+        }
         case 'ValidationError':
             status = 400
             let arrMessage = []

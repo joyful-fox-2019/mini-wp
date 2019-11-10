@@ -5,7 +5,7 @@
           <div class="col-md-8 col-sm-12" id="main-content">
               <div class=" p-2">
                   <div v-if='articleForm'>
-                      <create-article @dariNavbar='DariNavBar' @articleForm='ArticleForm' @UserArticle='userArticle'></create-article>
+                      <create-article @dariNavbar='DariNavBar' @articleForm='ArticleForm' @UserArticle='userArticle' @showPublic='ShowPublic'></create-article>
                   </div>
                   <div v-if="showPublic">
                       <h1 style="margin-bottom: 10px;">What's new article today ? </h1>

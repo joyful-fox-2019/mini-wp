@@ -114,7 +114,7 @@ export default {
             .then((result) => {
                 if (result.value) {
                     return axios({
-                        url: `http://localhost:3000/article/${id}`,
+                        url: `http://hackpress-server.panji-h8.online/article/${id}`,
                         method: 'delete',
                         headers: {
                             token: localStorage.getItem('token')
@@ -150,7 +150,7 @@ export default {
         showUpdate (id) {
             console.log(id)
             axios({
-                url: `http://localhost:3000/article/${id}`,
+                url: `http://hackpress-server.panji-h8.online/article/${id}`,
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')
@@ -183,7 +183,7 @@ export default {
         like (id){
             let msg
             axios({
-                url: `http://localhost:3000/article/like/${id}`,
+                url: `http://hackpress-server.panji-h8.online/article/like/${id}`,
                 method: 'patch',
                 headers: {
                     token: localStorage.getItem('token')
@@ -192,7 +192,7 @@ export default {
             .then (({ data }) => {
                 msg = data.msg
                 return axios({
-                    url: 'http://localhost:3000/article/news',
+                    url: 'http://hackpress-server.panji-h8.online/article/news',
                     method: 'get',
                     headers: {
                         token: localStorage.getItem('token')
@@ -223,7 +223,7 @@ export default {
         },
         goToDetails (id) {
             axios({
-                url: `http://localhost:3000/article/${id}`,
+                url: `http://hackpress-server.panji-h8.online/article/${id}`,
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')
@@ -241,7 +241,7 @@ export default {
         },
         showList () {
             axios({
-                url: 'http://localhost:3000/article',
+                url: 'http://hackpress-server.panji-h8.online/article',
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')

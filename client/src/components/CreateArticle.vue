@@ -142,7 +142,7 @@ export default {
                 var bodyFormData = new FormData()
                 bodyFormData.append('file', image)
                 axios({
-                        url: 'http://localhost:3000/article/upload',
+                        url: 'http://hackpress-server.panji-h8.online/article/upload',
                         method: 'post',
                         data: bodyFormData,
                         headers: {
@@ -152,7 +152,7 @@ export default {
                 .then (({ data }) => {
                     this.url = data.file
                     return axios({
-                        url: 'http://localhost:3000/article',
+                        url: 'http://hackpress-server.panji-h8.online/article',
                         method: 'post',
                         headers: {
                             token: localStorage.getItem('token')
@@ -198,7 +198,7 @@ export default {
         },
         showList () {
             axios({
-                url: 'http://localhost:3000/article/news',
+                url: 'http://hackpress-server.panji-h8.online/article/news',
                 method: 'get',
                 headers: {
                     token: localStorage.getItem('token')
@@ -208,6 +208,7 @@ export default {
                 this.dariNavBar.result = data
                 console.log(this.dariNavbar)
                 this.$emit('dariNavbar', this.dariNavBar)
+                this.$emit('showPublic', true)
                 this.$emit('articleForm', false)
                 this.$emit('UserArticle', false)
                 // console.log(data)
