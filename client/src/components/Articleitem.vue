@@ -27,6 +27,7 @@ export default {
     title: String
   },
   created(){
+    console.log(this.author)
     console.log(this.description)
   }
 }

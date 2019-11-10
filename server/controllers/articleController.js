@@ -230,7 +230,7 @@ class ArticleController {
     const { tag } = req.params
     console.log(tag)
     try{
-      let data = await Article.find({ tags:tag })
+      let data = await Article.find({ tags:tag }).populate('UserId')
       console.log(data)
       res.status(200).json(data)
     }

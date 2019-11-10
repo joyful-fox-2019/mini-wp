@@ -18,7 +18,7 @@
             :imglink="data.imgUrl"
             :author="data.UserId.name"
             :description="data.description"
-            :date="data.createdAt"
+            :date="moment(data.createdAt).format('dddd, MMMM Do YYYY') "
             :title="data.title"
             v-on:click.native="toArticle(data.slug)"
           ></Articleitem>
