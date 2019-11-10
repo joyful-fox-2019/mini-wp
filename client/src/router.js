@@ -28,15 +28,23 @@ export default new Router({
     {
       path:'/login',
       name: 'login',
-      component: Login
+      component: Login,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem('access_token')) next('/admin')
+        else next()
+      },
     },
     {
       path: '/admin',
       name: 'admin',
       component: Admin,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem('access_token')) next()
+        else next('/login')
+      },
       children: [
         {
-          path: 'list-article',
+          path: 'list-article/:id',
           component: Articlelist
         },
         {

@@ -34,6 +34,22 @@ class ArticleController {
     }
   }
 
+  static async userArticles (req,res,next) {
+    const { _id } = req.loggedUser
+    try{
+      let data = await Article.find({ UserId:_id })
+      if(data){
+        res.status(200).json(data)
+      }
+      else{
+        throw { message:"Data not found",status: 404 }
+      }
+    }
+    catch(err){
+      next(err)
+    } 
+  }
+
   static async findArticle (req,res,next) {
     const { _id } = req.params //ArticleId
     try{
@@ -78,26 +94,30 @@ class ArticleController {
 
   static async updateImage (req,res,next) {
     const { _id } = req.params
+    console.log(req.body)
     try{
       // Find old link and get the img name
       const findData = await Article.findOne({ _id })
-      const { imgUrl } = findData
+      const deleteImageData = findData.imgUrl
 
-      if(imgUrl){
-        let myfile = imgUrl.split('/')
+      
+      
+      // if delete img in storange is done, then update the imgUrl in database
+      const { title,description,tags,imgUrl } = req.body
+
+      if(imgUrl && deleteImageData != imgUrl){
+        let myfile = deleteImageData.split('/')
         
         // after have the img name, then peform the delete img in gcs
         const file = myBucket.file(myfile[4])
         const deleteImgDataInGCS = await file.delete()
       }
-      
-      // if delete img in storange is done, then update the imgUrl in database
-      const { title,description,tags } = req.body
+
       let arrayTags = []
       if(tags){
         arrayTags = tags.split(',')
       }
-      const data = await Article.updateOne({ imgUrl:req.body.imgUrl,title,description,tags:arrayTags })
+      const data = await Article.updateOne({ imgUrl,title,description,tags:arrayTags })
       res.status(200).json(data)
     }
     catch(err){

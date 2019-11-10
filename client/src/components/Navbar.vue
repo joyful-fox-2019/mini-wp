@@ -10,8 +10,7 @@
           <b-nav-form class="mt-4 mt-md-0">
             <b-form-input size="sm" class="mr-sm-2 mb-1" placeholder="Search Article"></b-form-input>
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-            <router-link to="/admin/list-article"><b-button size="sm" class="my-2 my-sm-0 ml-2" variant="dark">Admin Panel</b-button></router-link>
-            <b-button size="sm" class="my-2 my-sm-0 ml-2" variant="danger">Logout</b-button>
+            <router-link :to="userid"><b-button size="sm" class="my-2 my-sm-0 ml-2" variant="dark">Admin Panel</b-button></router-link>
           </b-nav-form>
         </b-navbar-nav>
       </b-collapse>
@@ -20,7 +19,12 @@
 
 <script>
 export default {
-
+  name: 'Navbar',
+  data(){
+    return{
+      userid:`/admin/list-article/${localStorage.getItem('userid')}`
+    }
+  }
 }
 </script>
 

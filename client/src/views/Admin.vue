@@ -8,7 +8,9 @@
         </b-col>
         <b-col cols="9">
           <!-- Place for router view -->
-          <router-view></router-view>
+          <!-- <p v-if="welcomeText" class="h2 text-center">Welcome {{ username }} !</p> -->
+          <router-view>
+          </router-view>
         </b-col>
       </b-row>
     </b-container>
@@ -21,12 +23,18 @@ import Menu from '../components/Menu'
 export default {
   data(){
     return{
-      
+      username: localStorage.getItem('name'),
+      welcomeText: true
     }
   },
   components:{
     Menu
-  }
+  },
+  watch:{
+    $route (to, from){
+      this.welcomeText = false
+    }
+  } 
 }
 </script>
 

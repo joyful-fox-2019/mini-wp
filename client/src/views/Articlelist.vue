@@ -28,7 +28,15 @@
       </b-row>
 
       <!-- Article List -->
-      <Articlelistbar></Articlelistbar>
+      <Articlelistbar
+        v-for="(data,index) in articleData"
+        :key='index'
+        :title="data.title"
+        :date="data.createdAt"
+        :tags="data.tags"
+        :articleId="data._id"
+        :no="index+1"
+      ></Articlelistbar>
 
     </div>
   </div>
@@ -36,10 +44,14 @@
 
 <script>
 import Articlelistbar from '../components/Articlelistbar'
+import axios from '../config/getdata'
 
 export default {
+  name: 'Articlelist',
   data() {
-    return {};
+    return {
+      articleData: []
+    };
   },
   components:{
     Articlelistbar
@@ -47,7 +59,28 @@ export default {
   methods: {
     gotoDetail(_id) {
       this.$router.push({ path: `/admin/edit-article/${_id}`});
+    },
+    fetchData(){
+      axios({
+        method: 'get',
+        url: '/articles/userArticle',
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      })
+      .then(({ data }) => {
+        console.log(data)
+        this.articleData = data
+      })
+      .catch(err => {
+        console.log(err)
+        console.log(err.response)
+        this.next(err.response.data)
+      })
     }
+  },
+  created(){
+    this.fetchData()
   }
 }
 </script>

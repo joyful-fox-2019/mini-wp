@@ -47,15 +47,15 @@ class UserController {
         audience: process.env.CLIENT_ID_GOOGLE
       })
       const { email,name } = ticket.getPayload()
-      const userData = await User.findOne({ email, name, password:"123456" })
+      const userData = await User.findOne({ email })
       if(userData){
-        let payload = userData
+        let payload = { name:userData.name, _id:userData._id, email:userData.email }
         let token = generateToken(payload)
         res.status(200).json({ access_token: token, name: userData.name, _id:userData._id })
       }
       else{
-        const userCreateData = await User.create({ email})
-        let payload = userCreateData
+        const userCreateData = await User.create({ email, name, password:"123456" })
+        let payload = { name:userCreateData.name, _id:userCreateData._id, email:userCreateData.email }
         let token = generateToken(payload)
         res.status(200).json({ access_token: token, name: userCreateData.name, _id:userCreateData._id })
       }

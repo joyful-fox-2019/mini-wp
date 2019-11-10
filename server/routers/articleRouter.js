@@ -14,12 +14,13 @@ const upload = gcsUpload({
 })
 
 router.get('/', ArticleController.allArticle)
-router.get('/:_id', ArticleController.findArticle)
+router.get('/findArticle/:_id', ArticleController.findArticle)
 
 router.use(authentication)
 
+router.get('/userArticle', ArticleController.userArticles)
 router.post('/', upload.single('imgUrl'),ArticleController.createArticle)
-router.patch('/:_id', authorization, upload.single('imgUrl'), ArticleController.updateArticle)
+// router.patch('/:_id', authorization, upload.single('imgUrl'), ArticleController.updateArticle)
 router.patch('/:_id/img', authorization, upload.single('imgUrl'), ArticleController.updateImage)
 router.delete('/:_id', authorization, ArticleController.deleteArticleAndImageUrl)
 
