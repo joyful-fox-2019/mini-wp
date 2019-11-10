@@ -10,7 +10,7 @@ const errorHandler = require('./middlewares/errorHandler')
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://new-user_31:screamaimfire@cluster0-96gdk.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://new-user_31:screamaimfire@cluster0-96gdk.gcp.mongodb.net/miniwpproject?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
     useNewUrlParser: true
 });
