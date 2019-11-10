@@ -61,7 +61,7 @@ export default {
       formdata.append("content", this.content);
       formdata.append("status", this.status);
       axios({
-        url: `http://localhost:3000/article/user/${this.id}`,
+        url: `http://mini-wp-server.itsjoel.site/article/user/${this.id}`,
         method: "PUT",
         headers: {
           token: localStorage.getItem("token")

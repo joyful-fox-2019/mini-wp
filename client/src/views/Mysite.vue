@@ -41,7 +41,7 @@ export default {
   methods: {
     getData() {
       axios({
-        url: "http://localhost:3000/article/user",
+        url: "http://mini-wp-server.itsjoel.site/article/user",
         method: "GET",
         headers: {
           token: localStorage.getItem("token")
@@ -58,7 +58,7 @@ export default {
     },
     destroycontent(id) {
       axios({
-        url: `http://localhost:3000/article/user/${id}`,
+        url: `http://mini-wp-server.itsjoel.site/article/user/${id}`,
         method: "DELETE",
         headers: {
           token: localStorage.getItem("token")

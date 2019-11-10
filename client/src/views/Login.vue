@@ -55,7 +55,7 @@ export default {
       password: "",
       params: {
         client_id:
-          process.env.GOOGLE_CLIENT_ID
+          "568567492626-tv41hr3nktr6crevaleq93iarus0402j.apps.googleusercontent.com"
       },
       renderParams: {
         width: 90,
@@ -73,7 +73,7 @@ export default {
       let email = this.email;
       let password = this.password;
       axios({
-        url: "http://localhost:3000/login",
+        url: "http://mini-wp-server.itsjoel.site/login",
         method: "POST",
         data: {
           email,
@@ -99,7 +99,7 @@ export default {
     },
     onSuccess(googleUser) {
       axios({
-        url: "http://localhost:3000/google",
+        url: "http://mini-wp-server.itsjoel.site/google",
         method: "POST",
         data: {
           email: googleUser.getBasicProfile().U3

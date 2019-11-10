@@ -51,7 +51,7 @@ export default {
       formdata.append("title", this.form.title);
       formdata.append("content", this.form.content);
       axios({
-        url: "http://localhost:3000/article/user",
+        url: "http://mini-wp-server.itsjoel.site/article/user",
         method: "POST",
         headers: {
           token: localStorage.getItem("token")

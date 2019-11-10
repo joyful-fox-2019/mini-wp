@@ -34,7 +34,7 @@ export default {
   methods: {
     getAllPublished() {
       axios({
-        url: "http://localhost:3000/article/",
+        url: "http://mini-wp-server.itsjoel.site/article/",
         method: "GET",
         headers: {
           token: localStorage.getItem("token")

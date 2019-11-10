@@ -61,7 +61,7 @@ export default {
       let email = this.regisemail;
       let password = this.regispassword;
       axios({
-        url: "http://localhost:3000/register",
+        url: "http://mini-wp-server.itsjoel.site/register",
         method: "POST",
         data: {
           email,
