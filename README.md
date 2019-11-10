@@ -1,5 +1,5 @@
 # DEPLOY LINK
-
+http://wordpress.arnoldtherigan.site/
 
 ## API-DOCUMENTATION (use apiary)
 https://miniwordpress1.docs.apiary.io/
