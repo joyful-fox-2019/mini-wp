@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>D-Blog Semantic</title>
+    <style>
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 0px; 
+            height: 0px; 
+            background: transparent;  
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-dark d-flex align-items-center" style="height: 10vh;">
+        <nav class="p-0 navbar navbar-expand navbar-dark bg-dark h-100 w-100">
+            <div class="d-flex align-items-center h-100 p-3" style="background-color: rgb(105, 0, 0);">
+                <a class="navbar-brand font-weight-bold mr-1" href="#">D-Blog</a>
+                <img src="https://avatars0.githubusercontent.com/u/53108094?s=460&v=4" alt="logo" width=30>
+            </div>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+             <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link font-weight-bold" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+            
+            <div id="user-name" class="d-flex justify-content-center mx-2">
+                <button class="btn btn-sm btn-light mr-2 font-weight-bold">Write Blog <span><img src="https://image.flaticon.com/icons/svg/1250/1250616.svg" alt="iconWrite" width="25"></span></button>
+                <button class="btn btn-sm btn-light mr-2 font-weight-bold">Profile <span><img src="https://image.flaticon.com/icons/svg/126/126486.svg" alt="iconWrite" width="25"></span></button>
+                <p class="font-weight-bold m-0 text-white align-self-center">Hai! Dadepe</p>
+            </div>
+            <!-- <button class="btn btn-sm btn-info">Login</button> -->
+          </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid" style="height: 85vh; overflow: scroll;">
+          <div class="row">
+            <!-- SIDE NAV -->
+            <div class="col-md-2 px-0 border-right" style="height: 85vh; overflow: scroll;">
+              <div class="d-flex justify-content-center p-2 border-bottom border-dark">
+                  <h6 class="m-0">
+                    <strong>My Blogs <span><img src="https://image.flaticon.com/icons/svg/1508/1508794.svg" alt="logoArt" width="20"> </span></strong>
+                  </h6>
+              </div>
+
+                <ul class="list-group mb-3 text-center">
+                  <li class="list-group-item rounded-0 d-flex justify-content-center">
+                    <div>
+                      <a href="#" style="text-decoration: none; color: black;" class="my-0 stretched-link">Semangat Phase-2</a>
+                      
+                    </div>
+                    
+                  </li>
+                  <li class="list-group-item rounded-0 d-flex justify-content-center">
+                    <div >
+                        <a href="#" style="text-decoration: none; color: black;" class="my-0 stretched-link">Mari Buat Mini-WP</a>
+                      
+                    </div>
+                    
+                  </li>
+                  <li class="list-group-item rounded-0 d-flex justify-content-center">
+                    <div>
+                        <a href="#" style="text-decoration: none; color: black;" class="my-0 stretched-link">Konspirasi Ayam Sabana</a>
+                      
+                    </div>
+                    
+                  </li>
+                </ul>
+            </div>
+
+            <!-- Create Article Here -->
+            <div class="col-md-10 p-3" style="height: 85vh; overflow: scroll; background-color: rgb(226, 226, 226);" >
+                <form>
+                  <div class="form-group">
+                    <label for="articleTitle"><strong>Title</strong></label>
+                    <input type="text" class="form-control" id="articleTitle" placeholder="your article title">
+                  </div>
+                  <div class="form-group">
+                    <label for="articleTag"><strong>Tag</strong></label>
+                    <select class="form-control" id="articleTag">
+                      <option value="" selected disabled hidden>Choose Tag Here</option>
+                      <option>Sports</option>
+                      <option>Daily-Lifes</option>
+                      <option>Politics</option>
+                      <option>Healths</option>
+                      <option>Travels</option>
+                      <option>Automotives</option>
+                      <option>Electronics</option>
+                      <option>Hobbies</option>
+                      <option>Foods</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="addImage"><strong>Add Image</strong></label>
+                    <input type="file" class="form-control-file" id="addImage">
+                  </div>
+                  <div class="form-group">
+                    <label for="articleWrite"><strong>Write your Blog</strong></label>
+                    <textarea class="form-control" id="writeArticle" rows="3"></textarea>
+                  </div>
+                </form>
+            </div>
+                
+          </div>
+      
+
+    </div>
+                
+
+                
+    <footer  style="height: 5vh; background-color: rgb(105, 0, 0);" class="d-flex justify-content-center">
+      <p class="text-white font-weight-bold m-0 align-self-center">&copy; 2019 D-Blog </p>
+    </footer>
+</body>
+</html>
