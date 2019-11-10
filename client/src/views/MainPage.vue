@@ -9,7 +9,7 @@
           <div class="col-md-2 sidebar-div">
             <Sidebar @show-all-articles="showAllArticles"></Sidebar>
           </div>
-          <div class="col-md-10 mt-2 miniwp-content" style="margin-left: 15vw;">
+          <div class="col-md-10 mt-4 miniwp-content" style="margin-left: 15vw;">
             <Dashboard
               @show-published-articles="showPublishedArticles"
               @show-draft-articles="showDraftArticles"
