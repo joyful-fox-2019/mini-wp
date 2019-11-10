@@ -5,6 +5,6 @@ module.exports = {
 		return crypt.hashSync(password, 10);
 	},
 	verify(password, hashedPassword) {
-		return crypt.compare(password, hashedPassword);
+		return crypt.compareSync(password, hashedPassword);
 	}
 };

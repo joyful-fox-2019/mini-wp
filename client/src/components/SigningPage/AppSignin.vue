@@ -72,6 +72,7 @@ export default {
         })
         .catch(({ response }) => {
           console.log(response.data.messages);
+          this.password = "";
           if (response.data.messages.includes("Invalid")) {
             (this.emailUsernameStatus = true), (this.passwordStatus = true);
           }
