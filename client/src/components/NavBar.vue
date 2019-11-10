@@ -1,10 +1,10 @@
 <template>
   <div>
-      <nav class="navbar navbar-expand-lg fixed-top navbar-master">
+      <nav class="navbar navbar-expand-lg fixed-top navbar-master" >
         <div class="logo">
           <a @click.prevent="showList">
             <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <image xlink:href='https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/WordPress-512.png' alt="symbol" height="40" width="40">
+                <image xlink:href='https://image.flaticon.com/icons/png/512/59/59137.png' alt="symbol" height="40" width="40">
             </svg>
             <span>HackPress</span>
           </a>
@@ -39,20 +39,19 @@ export default {
     methods: {
       showList() {
         axios({
-          url: 'http://localhost:3000/news',
+          url: 'http://localhost:3000/article/news',
           method: 'get',
           headers: {
             token: localStorage.getItem('token')
           }
         })
         .then (({ data }) => {
-          console.log(data)
-          this.$emit('ArrData', data)
+          this.$emit('arrTest', {result: data, mainContent: true})
         })
       }
     },
     created () {
-      // this.showList()
+      this.showList()
     }
 }
 </script>

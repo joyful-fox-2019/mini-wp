@@ -41,9 +41,9 @@ export default {
                 client_id: '291856601506-pctu3kf6427nn8527jqa0a9tlv5i1s7f.apps.googleusercontent.com'
             },
             renderParams: {
-                width: 250,
+                width: 150,
                 height: 50,
-                longtitle: true
+                longtitle: false
             }
         }
     },

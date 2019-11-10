@@ -2,9 +2,6 @@ module.exports = (err, req, res, next) => {
     let status
     let message
 
-    console.log(err)
-    console.log(err.name)
-
     switch (err.name) {
         case 'ValidationError':
             status = 400
@@ -22,6 +19,10 @@ module.exports = (err, req, res, next) => {
             status = 400
             message = 'Email already registered'
             break
+        case 'Unauthorized':
+            status = 401
+            message = err.message
+            break
         case 'DataError':
             status = 404
             message = err.message
@@ -35,6 +36,5 @@ module.exports = (err, req, res, next) => {
             message = 'Internal Server Error'
             break
     }
-
     res.status(status).json(message)
 }

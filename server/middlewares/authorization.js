@@ -2,7 +2,6 @@ const Article = require("../models/Article")
 
 module.exports = {
     authorization (req, res, next) {
-        console.log(req.loggedUser)
         let { id } = req.params
         Article.findOne({
             _id : id

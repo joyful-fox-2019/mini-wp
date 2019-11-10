@@ -17,6 +17,11 @@ const ArticleSchema = new Schema ({
         type: Array,
         required: [true, `tags can't be empty`]
     },
+    like: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Users'
+    }],
+    comment: Array
 }, {
     timestamps: true
 })

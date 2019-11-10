@@ -1,275 +1,144 @@
 <template>
   <div class="" style="margin-top: 90px;">
       <div class="row">
-          <div class="col-3 ml-3 d-none d-md-block" id="sideNavBar">
-              <div class="card p-2">
-                  <h1>Masuk Pak eko</h1>
-                  <div class="d-flex justify-content-center">
-                        <button class="btn btn-primary" @click="showArticleForm()">Create Article</button>
-                  </div>
-              </div>
-          </div>
+          <side-nav-bar @dariTest='dariTest' @articleForm='ArticleForm' @UserArticle='userArticle' @detailsPage='DetailsPage' @dariUser='dariUser' @showTag='ShowTag' @dariTag='dariTag' @showPublic='ShowPublic' @showUpdate='ShowUpdate'></side-nav-bar>
           <div class="col-md-8 col-sm-12" id="main-content">
-              <div class="card p-2">
+              <div class=" p-2">
                   <div v-if='articleForm'>
-                      <form id="create article" @submit.prevent="CreateArticle()" enctype="multipart/form-data" class="m-2">
-                          <div class="card-header d-flex justify-content-between">
-                          <h3>What's your story today ?</h3>
-                          <button type="button" class="close" aria-label="Close" @click="closeCreateForm()">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                          </div>
-                          <label>Title:</label>
-                          <br>
-                          <input type="text" class="form-control" v-model='title'>
-                          <br>
-                          <label>Tags</label>
-                          <br>
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="World" v-model="tags">
-                          <label class="form-check-label">World</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="Regional" v-model="tags">
-                          <label class="form-check-label">Regional</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="Megapolitan" v-model="tags">
-                          <label class="form-check-label">Megapolitan</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="Science" v-model="tags">
-                          <label class="form-check-label">Science</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="Technology" v-model="tags">
-                          <label class="form-check-label">Technology</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="Health" v-model="tags">
-                          <label class="form-check-label">Health</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="checkbox" value="Lifestyle" v-model="tags">
-                          <label class="form-check-label">Lifestyle</label>
-                          </div>
-                          <br>
-                          <br>
-                          <label>Description</label>
-                          <br>
-                          <quill v-model="content" :config="config" output="html"></quill>
-                          <br>
-                          <br>
-                          <div class="custom-file">
-                            <input @change="previewImage" id="input-file" class="custom-file-input" type="file" />
-                            <label class="custom-file-label" for="validatedCustomFile"></label>
-                          </div>
-                          <div class="d-flex justify-content-center mt-2">
-                            <div class="image-preview" v-if="imageData.length > 0">
-                                <img class="preview" :src="imageData" style="max-width: 360px; max-height: 240px; ">
-                            </div>
-                          </div>
-                          <br>
-                          <div class="d-flex justify-content-center">
-                            <button class="btn" type="submit" style="background-color: #ffafb0;">Create Article</button>
-                          </div>
-                      </form>
+                      <create-article @dariNavbar='DariNavBar' @articleForm='ArticleForm' @UserArticle='userArticle'></create-article>
                   </div>
-                  <div v-for="(data, index) in arrData" :key="index">
-                      <div class="container">
-                          <div class="row">
-                              <div class="col-md-4 col-sm-6">
-                                  <img :src="data.featured_image" width="100%">
-                              </div>
-                              <div class="col-md-8 col-sm-6">
-                                  <div class="row">
-                                      <h3>{{data.title}}</h3>
-                                  </div>
-                                  <div class="row">
-                                      <div v-for="(el, index) in data.tags" :key="index">
-                                      <p>{{el}} &nbsp;</p>
-                                      </div>
-                                  </div>
-                                  <hr>
-                                  <div class="row">
-                                      <p>Created by: {{data.author}}</p>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                            <p v-html="data.content"></p>
-                          </div>
-                      </div>
-                      
-                      <h1>{{data}}</h1>
+                  <div v-if="showPublic">
+                      <h1 style="margin-bottom: 10px;">What's new article today ? </h1>
+                        <list-article @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag'></list-article>
                   </div>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
-                  <h1>Masuk Pak Budi</h1>
+                  <div v-if="UserArticle">
+                      <h1 style="margin-bottom: 10px;">Your Past Article</h1>
+                        <list-article @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag'></list-article>
+                    </div>
+                    <div v-if="showTag">
+                      <h1 style="margin-bottom: 10px;">Your Search</h1>
+                        <list-article @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag'></list-article>
+                  </div>
+                  </div>
+                  <div v-if="detailsPage">
+                      <detail-page :article='article'></detail-page>
+                  </div>
+                  <div v-if="updateForm">
+                      <update-article :updateData='updateData'></update-article>
+                  </div>
               </div>
           </div>
       </div>
-  </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import VueQuill from 'vue-quill'
-Vue.use(VueQuill)
+import CreateArticle from './CreateArticle'
+import SideNavBar from './SideNavBar'
+import ListArticle from './ListArticle'
+import DetailPage from './DetailPage'
+import UpdateArticle from './UpdateArticle'
 export default {
-    props: ['arrData'],
+    props: ['arrData', 'dariNavbar'],
     name: 'Content',
+    components: {
+        CreateArticle,
+        SideNavBar,
+        ListArticle,
+        DetailPage,
+        UpdateArticle
+    },
     data () {
         return {
             articleForm: false,
-            title: '',
-            content: '',
-            imageData: '',
-            url: '',
-            formUploadImage: {
-                image: ''
-            },
-            tags: [],
-            config: {
-                modules: {
-                    toolbar:  [
-                        ['bold', 'italic', 'underline', 'strike'],  
-                        ['blockquote', 'code-block'],
-                        [{ 'header': 1 }, { 'header': 2 }],              
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'script': 'sub'}, { 'script': 'super' }],      
-                        [{ 'indent': '-1'}, { 'indent': '+1' }],          
-                        [{ 'direction': 'rtl' }],                         
-                        [{ 'size': ['small', false, 'large', 'huge'] }],  
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        [{ 'color': [] }, { 'background': [] }],     
-                        [{ 'font': [] }],
-                        [{ 'align': [] }],
-                        ['clean']                                         
-                    ]
-                }
-            }
+            article: {},
+            detailsPage: false,
+            UserArticle: false,
+            articleData: {},
+            tag: {},
+            showTag: false,
+            showPublic: false,
+            updateForm: false,
+            updateData: {}
         }
     },
     methods: {
-        showArticleForm () {
-            this.articleForm = true
+        DataUpdate (input) {
+            console.log(input)
+            this.updateData = input
         },
-        previewImage (event) {
-            var input = event.target
-            if (input.files && input.files[0]) {
-                var reader = new FileReader()
-                reader.onload = (e) => {
-                    this.imageData = e.target.result
-                }
-            reader.readAsDataURL(input.files[0])
-            }
-            this.formUploadImage.image = event.target.files[0]
+        ShowUpdate (input) {
+            this.updateForm = input
         },
-        closeCreateForm () {
-            this.articleForm = false
+        ShowPublic (input) {
+            this.showPublic = input
         },
-        CreateArticle () {
-            if (!this.formUploadImage.image) {
-                swal.fire({
-                type: 'error',
-                title: 'failed to upload file ',
-                text: 'Cannot be empty',
-                showConfirmButton: false,
-                timer: 2000
-                })
-            } else {
-                swal.fire({
-                    title: 'wait a minute to upload data',
-                    allowOutsideClick: () => this.swal.isLoading(),
-                    showConfirmButton: false
-                })
-                let { image } = this.formUploadImage
-                var bodyFormData = new FormData()
-                bodyFormData.append('file', image)
-                axios({
-                    url: 'http://localhost:3000/upload',
-                    method: 'post',
-                    data: bodyFormData
-                })
-                .then (({ data }) => {
-                    this.url = data.file
-                    return axios({
-                        url: 'http://localhost:3000/article',
-                        method: 'post',
-                        data: {
-                            title: this.title,
-                            content: this.content,
-                            tags: this.tags,
-                            featured_image: this.url
-                        },
-                        headers: {
-                            token: localStorage.getItem('token')
-                        }
-                    })
-                })
-                .then (({ data }) => {
-                    swal.close()
-                    swal.fire({
-                        title: 'Success Creating new article',
-                        type: 'success',
-                        timer: 2000,
-                        showConfirmButton: false
-                    })
-                    this.title = ''
-                    this.imageData = ''
-                    this.formUploadImage.image = ''
-                    this.content = ''
-                    this.url = ''
-                    this.tags = []
+        dariTag (input) {
+            this.articleData = input
+        },
+        ShowTag (input) {
+            this.showTag = input
+        },
+        dariUser (input) {
+            console.log(input)
+            this.articleData = input
+        },
+        dariTest (input) {
+            console.log(input)
+            this.articleData = input
+        },
+        Article (input) {
+            this.article = input
+        },
+        ArticleData (input) {
+            this.articleData = input
+        },
+        DetailsPage (input) {
+            this.detailsPage = input
+        },
+        DariNavBar (input) {
+            console.log(input)
+            this.articleData = input
+        },
+        ArticleForm (input) {
+            this.articleForm = input
+        },
+        userArticle (input) {
+            this.UserArticle = input
+        }
+        
+    },
+    watch: {
+        dariNavbar : {
+            handler(val) {
+                console.log(val)
+                this.articleData = val
+                if (val.mainContent) {
                     this.articleForm = false
-                })
-                .catch (err => {
-                    swal.close()
-                    swal.fire({
-                        title: 'Failed creating new article',
-                        type: 'error',
-                        showConfirmButton: false,
-                        text: err.response.data,
-                        timer: 2000
-                    })
-                })
+                    this.UserArticle = false
+                    this.detailsPage = false
+                } 
+            },
+            deep: true
+        },
+        articleData: {
+            handler(val) {
+                console.log('dari watch', val)
             }
         }
     },
     created () {
-        this.articleForm = false
+        // this.articleForm = false
+        // if (this.dariNavbar.mainContent) {
+        //     this.articleForm = false
+        //     this.UserArticle = false
+        //     this.detailsPage = false
+        // }
+        this.showPublic = true
     }
 }
 </script>
 
-<style>
-
-#sideNavBar {
-    position: fixed;
-}
+<style scoped>
 
 @media screen and (max-width: 767px) {
   #main-content {

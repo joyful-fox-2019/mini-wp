@@ -14,11 +14,12 @@ export default {
 
 <style>
 .footer {
-    position: sticky;
+    /* position: fixed; */
+    margin-top: 20px; 
     bottom: 0;
     width: 100%;
     height: 60px;
     line-height: 60px;
-    background-color: #f5f5f5;
+    background-color: rgb(13, 150, 150);
 }
 </style>
