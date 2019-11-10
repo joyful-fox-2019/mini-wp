@@ -51317,7 +51317,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 // import adminButton from './adminButton'
 var _default = {
   name: 'SideMenu',
@@ -51331,6 +51330,9 @@ var _default = {
     };
   },
   methods: {
+    toHome: function toHome() {
+      this.$emit('changePage', true, false, false, false, false, false, false);
+    },
     toDark: function toDark() {
       this.$emit('changeTheme', true, false);
     },
@@ -51399,9 +51401,18 @@ exports.default = _default;
         "ul",
         { staticClass: "menu-list" },
         [
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
+          _c(
+            "li",
+            {
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.toHome()
+                }
+              }
+            },
+            [_c("a", [_vm._v("Dashboard")])]
+          ),
           _vm._v(" "),
           _c(
             "b-dropdown",
@@ -51540,18 +51551,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "menu-logo" }, [
       _c("i", { staticClass: "fas fa-columns" })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", [_vm._v("Dashboard")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", [_vm._v("Profile")])])
   }
 ]
 render._withStripped = true
@@ -51637,8 +51636,23 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   name: 'ProjectContent',
+  props: ['myData'],
   data: function data() {
     return {
       time: '',
@@ -51651,19 +51665,19 @@ var _default = {
       var day = date.getDay();
 
       if (day === 0) {
-        day = 'Minggu';
+        day = 'Sunday';
       } else if (day === 1) {
-        day = 'Senin';
+        day = 'Monday';
       } else if (day === 2) {
-        day = 'Selasa';
+        day = 'Tuesday';
       } else if (day === 3) {
-        day = 'Rabu';
+        day = 'Wednesday';
       } else if (day === 4) {
-        day = 'Kamis';
+        day = 'Thursday';
       } else if (day === 5) {
-        day = 'Jumat';
+        day = 'Friday';
       } else if (day === 6) {
-        day = 'Sabtu';
+        day = 'Saturday';
       }
 
       var month = date.getMonth() + 1;
@@ -51674,29 +51688,29 @@ var _default = {
       }
 
       if (month === 1) {
-        month = 'Januari';
+        month = 'January';
       } else if (month === 2) {
-        month = 'Februari';
+        month = 'February';
       } else if (month === 3) {
-        month = 'Maret';
+        month = 'March';
       } else if (month === 4) {
         month = 'April';
       } else if (month === 5) {
-        month = 'Mei';
+        month = 'May';
       } else if (month === 6) {
-        month = 'Juni';
+        month = 'June';
       } else if (month === 7) {
-        month = 'Juli';
+        month = 'July';
       } else if (month === 8) {
-        month = 'Agustus';
+        month = 'August';
       } else if (month === 9) {
         month = 'September';
       } else if (month === 10) {
-        month = 'Oktober';
+        month = 'October';
       } else if (month === 11) {
         month = 'November';
       } else if (month === 12) {
-        month = 'Desember';
+        month = 'December';
       }
 
       this.date = "".concat(day, " ").concat(dateNumber, " ").concat(month);
@@ -51719,28 +51733,90 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tabs is-centered is-boxed" }, [
-    _c("div", { staticClass: "datepicker" }, [
-      _c("div", { staticClass: "datepicker-header" }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "clock" } }, [
-        _c("p", { staticClass: "date" }, [_vm._v(_vm._s(_vm.date))]),
+  return _c("div", { staticClass: "tabs" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticStyle: { margin: "0 20px" } }, [
+      _c("div", { staticClass: "datepicker" }, [
+        _c("div", { staticClass: "datepicker-header" }),
         _vm._v(" "),
-        _c("p", { staticClass: "time" }, [_vm._v(_vm._s(_vm.time))])
+        _c("div", { attrs: { id: "clock" } }, [
+          _c("p", { staticClass: "date" }, [_vm._v(_vm._s(_vm.date))]),
+          _vm._v(" "),
+          _c("p", { staticClass: "time" }, [_vm._v(_vm._s(_vm.time))])
+        ])
       ])
     ]),
     _vm._v(" "),
-    _c("div")
+    _c("div", { staticStyle: { margin: "0 20px" } }, [
+      _c("div", { staticClass: "infoArticle" }, [
+        _c("div", { staticClass: "infoArticle-header" }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { id: "info" } },
+          [
+            _c("p", { staticClass: "date" }, [
+              _vm._v(_vm._s(_vm.myData.length) + " Article Post")
+            ]),
+            _vm._v(" "),
+            _c("b-progress")
+          ],
+          1
+        )
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { width: "100%", "margin-bottom": "40px" } },
+      [
+        _c("div", { staticClass: "stage" }, [
+          _c("div", { staticClass: "wrapper" }, [
+            _c("div", { staticClass: "slash" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "sides" }, [
+              _c("div", { staticClass: "side" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "side" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "side" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "side" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text" }, [
+              _c("div", { staticClass: "text--backing" }, [
+                _vm._v("Mini Wordpress")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text--left" }, [
+                _c("div", { staticClass: "inner" }, [_vm._v("Mini Wordpress")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text--right" }, [
+                _c("div", { staticClass: "inner" }, [_vm._v("Mini Wordpress")])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: null,
+            _scopeId: "data-v-0b6f1f",
             functional: undefined
           };
         })());
@@ -59682,8 +59758,6 @@ var _default = {
         }
       }).then(function (_ref) {
         var data = _ref.data;
-        // console.log(data);
-        console.log(data.data, '---------');
         _this.myDataArticle = data.data;
         _this.isLoading = false;
       }).catch(function (err) {
@@ -59693,7 +59767,6 @@ var _default = {
     fetchDataDetail: function fetchDataDetail(id) {
       var _this2 = this;
 
-      console.log('masukkkkkkkkkkkkkkkkkkkkkkkk');
       (0, _server.default)({
         method: 'get',
         url: "/articles/".concat(id),
@@ -59705,9 +59778,7 @@ var _default = {
 
         _this2.$emit('addMyData', data.data[0]);
 
-        _this2.$emit('changePage', false, false, false, false, false, true, false); // console.log(data.data[0],'ininininin');
-        // Swal.fire('success','detaillll','success')
-
+        _this2.$emit('changePage', false, false, false, false, false, true, false);
       }).catch(function (err) {
         Swal.fire('error', 'internal server error', 'error');
       });
@@ -60611,6 +60682,8 @@ var _myArticleDetail = _interopRequireDefault(require("./components/myArticleDet
 
 var _UpdateArticle = _interopRequireDefault(require("./components/UpdateArticle"));
 
+var _server = _interopRequireDefault(require("./apis/server"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //
@@ -60677,10 +60750,28 @@ var _default = {
       theme: {
         isDark: false,
         isWhite: true
-      }
+      },
+      myData: ''
     };
   },
   methods: {
+    getMyData: function getMyData(data) {
+      var _this = this;
+
+      (0, _server.default)({
+        method: 'get',
+        url: '/articles',
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.myData = data.data;
+        console.log(_this.myData, '??????????????');
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
     changeTheme: function changeTheme(dark, white) {
       this.theme.isDark = dark;
       this.theme.isWhite = white;
@@ -60706,11 +60797,13 @@ var _default = {
       this.isMyArticle = myarticle;
       this.isPrivateDetail = privateDetail;
       this.isUpdate = update;
+      this.getMyData();
     }
   },
   created: function created() {
     if (localStorage.getItem('token')) {
       this.isLogin = true;
+      this.getMyData();
     } else {
       this.isLogin = false;
     }
@@ -60799,7 +60892,9 @@ exports.default = _default;
                         "div",
                         { staticClass: "container" },
                         [
-                          _vm.isHome ? _c("Home") : _vm._e(),
+                          _vm.isHome
+                            ? _c("Home", { attrs: { myData: _vm.myData } })
+                            : _vm._e(),
                           _vm._v(" "),
                           _vm.isPublic
                             ? _c("ReadPublic", {
@@ -60894,7 +60989,7 @@ render._withStripped = true
       
       }
     })();
-},{"./components/Navbar":"src/components/Navbar.vue","./components/SideMenu":"src/components/SideMenu.vue","./components/Home":"src/components/Home.vue","./components/Login":"src/components/Login.vue","./components/ReadPublic":"src/components/ReadPublic.vue","./components/PublicDetail":"src/components/PublicDetail.vue","./components/WriteArticle":"src/components/WriteArticle.vue","./components/myArticle":"src/components/myArticle.vue","./components/myArticleDetail":"src/components/myArticleDetail.vue","./components/UpdateArticle":"src/components/UpdateArticle.vue","_css_loader":"../../../../../../../../home/arnoldtherigan/.nvm/versions/node/v12.10.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/buefy/dist/esm/chunk-40949afc.js":[function(require,module,exports) {
+},{"./components/Navbar":"src/components/Navbar.vue","./components/SideMenu":"src/components/SideMenu.vue","./components/Home":"src/components/Home.vue","./components/Login":"src/components/Login.vue","./components/ReadPublic":"src/components/ReadPublic.vue","./components/PublicDetail":"src/components/PublicDetail.vue","./components/WriteArticle":"src/components/WriteArticle.vue","./components/myArticle":"src/components/myArticle.vue","./components/myArticleDetail":"src/components/myArticleDetail.vue","./components/UpdateArticle":"src/components/UpdateArticle.vue","./apis/server":"src/apis/server.js","_css_loader":"../../../../../../../../home/arnoldtherigan/.nvm/versions/node/v12.10.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/buefy/dist/esm/chunk-40949afc.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -77487,7 +77582,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41311" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45005" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

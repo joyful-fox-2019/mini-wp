@@ -72,10 +72,6 @@ export default {
                 }
             })
                 .then(({data})=>{
-                    // console.log(data);
-                    console.log(data.data,'---------');
-                    
-                    
                     this.myDataArticle = data.data
                     this.isLoading = false
                 })
@@ -84,8 +80,6 @@ export default {
                 })
         },
         fetchDataDetail(id) {
-          console.log('masukkkkkkkkkkkkkkkkkkkkkkkk');
-          
             axios({
               method: 'get',
               url: `/articles/${id}`,
@@ -96,8 +90,6 @@ export default {
               .then(({data})=>{
                 this.$emit('addMyData',data.data[0])
                 this.$emit('changePage',false,false,false,false,false,true,false)
-                  // console.log(data.data[0],'ininininin');
-                  // Swal.fire('success','detaillll','success')
               })
               .catch(err=>{
                   Swal.fire('error','internal server error','error')

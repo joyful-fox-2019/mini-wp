@@ -16,8 +16,7 @@
                 Configuration
             </p>
             <ul class="menu-list">
-                <li><a>Dashboard</a></li>
-                <li><a>Profile</a></li>
+                <li @click.prevent="toHome()"><a>Dashboard</a></li>
                 <b-dropdown aria-role="list">
                     <button class="button is-black" type="button" slot="trigger">
                         <template>
@@ -78,6 +77,9 @@ export default {
         }
     },
     methods : {
+        toHome() {
+            this.$emit('changePage',true,false,false,false,false,false,false)
+        },
         toDark() {
             this.$emit('changeTheme',true,false)
         },

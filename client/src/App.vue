@@ -14,7 +14,7 @@
                     </div>
                     <div :class="{'column right-menu': (theme.isWhite), 'column right-menu-dark': (theme.isDark)}">
                         <div class="container">
-                            <Home v-if="isHome"></Home>
+                            <Home v-if="isHome" :myData="myData"></Home>
                             <ReadPublic v-if="isPublic" @changePage="changePage" @addPublicData="addPublicData"></ReadPublic>
                             <PublicDetail v-if="isPublicDetail" @changePage="changePage" :publicDetailData="publicDetailData"></PublicDetail>
                             <WriteArticle v-if="isWrite"  @changePage="changePage"></WriteArticle>
@@ -40,7 +40,7 @@ import WriteArticle from './components/WriteArticle'
 import myArticle from './components/myArticle'
 import myArticleDetail from './components/myArticleDetail'
 import UpdateArticle from './components/UpdateArticle'
-
+import axios from './apis/server'
 export default {
     name: 'App',
     components : {
@@ -65,10 +65,28 @@ export default {
             theme : {
                 isDark: false,
                 isWhite: true
-            }
+            },
+            myData: ''
         } 
     },
     methods : {
+        getMyData(data) {
+            axios({
+                method: 'get',
+                url :  '/articles',
+                headers : {
+                    token : localStorage.getItem('token')
+                }
+            })
+                .then(({data})=>{
+                    this.myData = data.data
+                    console.log(this.myData,'??????????????');
+                    
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+        },
         changeTheme(dark,white) {
             this.theme.isDark = dark
             this.theme.isWhite = white
@@ -94,11 +112,13 @@ export default {
             this.isMyArticle = myarticle
             this.isPrivateDetail = privateDetail
             this.isUpdate = update
+            this.getMyData()
         }
     },
     created () {
         if(localStorage.getItem('token')) {
             this.isLogin = true
+            this.getMyData()
         } else {
             this.isLogin = false
         }
