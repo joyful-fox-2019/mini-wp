@@ -1,8 +1,24 @@
 const Article = require('../models/article')
 
-class articleController {
+
+class ArticleController {
     static getAll(req, res, next) {
-        Article.find()
+        Article.find({
+                status: 'Published'
+            })
+            .populate('author')
+            .then(articles => {
+                res.status(200).json(articles)
+            })
+            .catch(next)
+    }
+
+    static getMine(req, res, next) {
+        let objId = {
+            author: req.decoded._id
+        }
+        Article.find(objId)
+            .populate('author')
             .then(articles => {
                 res.status(200).json(articles)
             })
@@ -10,9 +26,12 @@ class articleController {
     }
 
     static createArticle(req, res, next) {
+        console.log(req.body)
         Article.create({
                 title: req.body.title,
-                content: req.body.content
+                content: req.body.content,
+                featured_image: req.file.cloudStoragePublicUrl,
+                author: req.decoded._id
             })
             .then(article => {
                 res.status(201).json({
@@ -23,10 +42,22 @@ class articleController {
     }
 
     static updateArticle(req, res, next) {
-        Article.findByIdAndUpdate(req.params.id, {
+        let objUpdate = {}
+        if (req.file && req.file.cloudStoragePublicUrl) {
+            objUpdate = {
                 title: req.body.title,
-                content: req.body.content
-            })
+                content: req.body.content,
+                featured_image: req.file.cloudStoragePublicUrl,
+                status: req.body.status
+            }
+        } else {
+            objUpdate = {
+                title: req.body.title,
+                content: req.body.content,
+                status: req.body.status
+            }
+        }
+        Article.findByIdAndUpdate(req.params.id, objUpdate)
             .then(article => {
                 res.status(200).json({
                     article
@@ -46,4 +77,4 @@ class articleController {
     }
 }
 
-module.exports = articleController
+module.exports = ArticleController
