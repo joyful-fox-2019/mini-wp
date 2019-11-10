@@ -84,8 +84,8 @@
 
 <script>
 import axios from "axios";
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-const host = "http://localhost:3000";
+const host = "https://mini-wp-aws.sigitariprasetyo.xyz";
+// const host = "http://localhost:3000";
 
 export default {
   name: "RegisterForm",
@@ -108,6 +108,10 @@ export default {
       this.isRegisterForm = !this.isRegisterForm;
     },
     handleRegister() {
+      const loadingComponent = this.$buefy.loading.open({
+        container: this.isFullPage ? null : this.$refs.element.$el
+      });
+
       axios({
         method: "post",
         url: `${host}/users/register`,
@@ -118,6 +122,7 @@ export default {
         }
       })
         .then(({ data }) => {
+          setTimeout(() => loadingComponent.close(), 1 * 2000);
           localStorage.setItem("token", data.token);
           localStorage.setItem("username", data.username);
           localStorage.setItem("email", data.email);
@@ -144,6 +149,10 @@ export default {
         });
     },
     handleLogin() {
+      const loadingComponent = this.$buefy.loading.open({
+        container: this.isFullPage ? null : this.$refs.element.$el
+      });
+
       axios({
         method: "post",
         url: `${host}/users/login`,
@@ -153,6 +162,7 @@ export default {
         }
       })
         .then(({ data }) => {
+          setTimeout(() => loadingComponent.close(), 1 * 2000);
           localStorage.setItem("token", data.token);
           localStorage.setItem("username", data.username);
           localStorage.setItem("email", data.email);
@@ -165,6 +175,7 @@ export default {
           this.$emit("login", true);
         })
         .catch(err => {
+          setTimeout(() => loadingComponent.close(), 1 * 2000);
           setTimeout(
             () =>
               this.$buefy.toast.open({
@@ -179,6 +190,9 @@ export default {
     },
     onSignInSuccess(googleUser) {
       const id = googleUser.getAuthResponse().id_token;
+      const loadingComponent = this.$buefy.loading.open({
+        container: this.isFullPage ? null : this.$refs.element.$el
+      });
 
       return axios({
         method: "post",

@@ -44,8 +44,8 @@ export default {
         updateArticle(id){
             axios({
                 method: 'patch',
-                // url: `http://mini-wp-api.sigitariprasetyo.xyz/article/${id}/update`,
-                url: `http://localhost:3000/article/${id}/update`,
+                url: `const host = 'https://mini-wp-aws.sigitariprasetyo.xyz'/article/${id}/update`,
+                // url: `http://localhost:3000/article/${id}/update`,
                 data: {
                     title: this.title,
                     tag: this.tag,

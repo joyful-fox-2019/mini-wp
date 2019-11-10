@@ -16,6 +16,9 @@ const UserSchema = new Schema({
         return new Promise((resolve, reject) => {
           User.findOne({ email })
             .then(user => user ? resolve(false) : resolve(true))
+            .catch(err => {
+            reject()
+          })
         })
       },
       message: `Email is alredy taken!`

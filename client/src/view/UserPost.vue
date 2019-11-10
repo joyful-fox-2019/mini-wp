@@ -50,8 +50,8 @@ import NotFound from "../components/NotFound";
 import MyPost from "../components/SlotMyPost";
 import axios from "axios";
 
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-const host = "http://localhost:3000";
+const host = 'https://mini-wp-aws.sigitariprasetyo.xyz'
+// const host = "http://localhost:3000";
 
 export default {
   name: "UserPost",
@@ -69,6 +69,26 @@ export default {
     };
   },
   methods: {
+    handleJwt() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      this.$router.push("/");
+    },
+    next(err) {
+      if (err.response.status == 499) {
+        this.handleJwt();
+      } else {
+        setTimeout(
+          () =>
+            this.$buefy.toast.open({
+              message: err.response.data,
+              type: "is-danger"
+            }),
+          500
+        );
+      }
+    },
     changeDraft() {
       this.isPublish = false;
     },

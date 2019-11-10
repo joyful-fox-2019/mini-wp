@@ -13870,6 +13870,7 @@ var _default = {
       localStorage.removeItem("username");
       localStorage.removeItem("email");
       this.$emit("logout", false);
+      this.$router.push("/");
     },
     write: function write() {
       this.$router.push("/write-post");
@@ -14094,7 +14095,7 @@ var _default = {
       formData.set("content", this.content);
       (0, _axios.default)({
         method: "post",
-        url: "http://localhost:3000/article",
+        url: "https://mini-wp-aws.sigitariprasetyo.xyz/article",
         data: formData,
         headers: {
           token: localStorage.getItem("token"),
@@ -14411,8 +14412,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-var host = "http://localhost:3000";
+var host = "https://mini-wp-aws.sigitariprasetyo.xyz"; // const host = "http://localhost:3000";
+
 var _default = {
   name: "RegisterForm",
   data: function data() {
@@ -14435,6 +14436,9 @@ var _default = {
     handleRegister: function handleRegister() {
       var _this = this;
 
+      var loadingComponent = this.$buefy.loading.open({
+        container: this.isFullPage ? null : this.$refs.element.$el
+      });
       (0, _axios.default)({
         method: "post",
         url: "".concat(host, "/users/register"),
@@ -14445,6 +14449,9 @@ var _default = {
         }
       }).then(function (_ref) {
         var data = _ref.data;
+        setTimeout(function () {
+          return loadingComponent.close();
+        }, 1 * 2000);
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
         localStorage.setItem("email", data.email);
@@ -14470,6 +14477,9 @@ var _default = {
     handleLogin: function handleLogin() {
       var _this2 = this;
 
+      var loadingComponent = this.$buefy.loading.open({
+        container: this.isFullPage ? null : this.$refs.element.$el
+      });
       (0, _axios.default)({
         method: "post",
         url: "".concat(host, "/users/login"),
@@ -14479,6 +14489,9 @@ var _default = {
         }
       }).then(function (_ref2) {
         var data = _ref2.data;
+        setTimeout(function () {
+          return loadingComponent.close();
+        }, 1 * 2000);
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
         localStorage.setItem("email", data.email);
@@ -14490,6 +14503,9 @@ var _default = {
 
         _this2.$emit("login", true);
       }).catch(function (err) {
+        setTimeout(function () {
+          return loadingComponent.close();
+        }, 1 * 2000);
         setTimeout(function () {
           return _this2.$buefy.toast.open({
             message: err.response.data,
@@ -14504,6 +14520,9 @@ var _default = {
       var _this3 = this;
 
       var id = googleUser.getAuthResponse().id_token;
+      var loadingComponent = this.$buefy.loading.open({
+        container: this.isFullPage ? null : this.$refs.element.$el
+      });
       return (0, _axios.default)({
         method: "post",
         url: "".concat(host, "/users/gsignin"),
@@ -15111,8 +15130,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-var host = "http://localhost:3000";
+var host = 'https://mini-wp-aws.sigitariprasetyo.xyz'; // const host = "http://localhost:3000";
+
 var _default = {
   name: "App",
   components: {
@@ -39786,8 +39805,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-var host = "http://localhost:3000";
+var host = 'https://mini-wp-aws.sigitariprasetyo.xyz'; // const host = "http://localhost:3000";
+
 var _default = {
   name: "CardMyPost",
   props: ["article"],
@@ -40150,8 +40169,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-var host = "http://localhost:3000";
+var host = 'https://mini-wp-aws.sigitariprasetyo.xyz'; // const host = "http://localhost:3000";
+
 var _default = {
   name: "App",
   components: {
@@ -40474,8 +40493,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-var host = "http://localhost:3000";
+var host = 'https://mini-wp-aws.sigitariprasetyo.xyz'; // const host = "http://localhost:3000";
+
 var _default = {
   name: "UserPost",
   components: {
@@ -40492,6 +40511,26 @@ var _default = {
     };
   },
   methods: {
+    handleJwt: function handleJwt() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      this.$router.push("/");
+    },
+    next: function next(err) {
+      var _this = this;
+
+      if (err.response.status == 499) {
+        this.handleJwt();
+      } else {
+        setTimeout(function () {
+          return _this.$buefy.toast.open({
+            message: err.response.data,
+            type: "is-danger"
+          });
+        }, 500);
+      }
+    },
     changeDraft: function changeDraft() {
       this.isPublish = false;
     },
@@ -40502,7 +40541,7 @@ var _default = {
       this.$router.push("/write-post");
     },
     getMyPost: function getMyPost() {
-      var _this = this;
+      var _this2 = this;
 
       (0, _axios.default)({
         method: "get",
@@ -40514,17 +40553,17 @@ var _default = {
         var articles = _ref.data;
         articles.forEach(function (el) {
           if (el.publish == true) {
-            _this.publish.push(el);
+            _this2.publish.push(el);
           } else {
-            _this.draft.push(el);
+            _this2.draft.push(el);
           }
         });
       }).catch(function (err) {
-        _this.next(err);
+        _this2.next(err);
       });
     },
     autoPublish: function autoPublish() {
-      var _this2 = this;
+      var _this3 = this;
 
       var id = this.draft[0]._id;
       (0, _axios.default)({
@@ -40537,34 +40576,34 @@ var _default = {
           token: localStorage.getItem("token")
         }
       }).then(function () {
-        var loadingComponent = _this2.$buefy.loading.open({
-          container: _this2.isFullPage ? null : _this2.$refs.element.$el
+        var loadingComponent = _this3.$buefy.loading.open({
+          container: _this3.isFullPage ? null : _this3.$refs.element.$el
         });
 
         setTimeout(function () {
           return loadingComponent.close();
         }, 1 * 2000);
         setTimeout(function () {
-          return _this2.$buefy.toast.open({
+          return _this3.$buefy.toast.open({
             message: "Publish Article Success..",
             type: "is-success"
           });
         }, 2000);
         setTimeout(function () {
-          return _this2.$router.push("/");
+          return _this3.$router.push("/");
         }, 1 * 1900);
       }).catch(function (_ref2) {
         var response = _ref2.response;
 
-        var loadingComponent = _this2.$buefy.loading.open({
-          container: _this2.isFullPage ? null : _this2.$refs.element.$el
+        var loadingComponent = _this3.$buefy.loading.open({
+          container: _this3.isFullPage ? null : _this3.$refs.element.$el
         });
 
         setTimeout(function () {
           return loadingComponent.close();
         }, 1 * 2000);
 
-        _this2.$buefy.toast.open({
+        _this3.$buefy.toast.open({
           message: "Sorry your request is not complete..",
           type: "is-danger"
         });
@@ -40801,7 +40840,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-var host = "http://mini-wp-api.sigitariprasetyo.xyz";
+var host = "https://mini-wp-aws.sigitariprasetyo.xyz";
 var _default = {
   name: "WriteArticle",
   data: function data() {
@@ -40848,7 +40887,7 @@ var _default = {
       formData.set('publish', status);
       (0, _axios.default)({
         method: "post",
-        url: "http://localhost:3000/article",
+        url: "https://mini-wp-aws.sigitariprasetyo.xyz/article",
         data: formData,
         headers: {
           token: localStorage.getItem("token"),
@@ -40865,7 +40904,7 @@ var _default = {
           });
         }, 2000);
 
-        _this2.$router.push("/");
+        _this2.$router.push("/user-post");
       }).catch(function (err) {
         _this2.next(err);
 
@@ -41148,7 +41187,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-var host = "http://localhost:3000";
+var host = "https://mini-wp-aws.sigitariprasetyo.xyz";
 var _default = {
   name: "EditArticle",
   data: function data() {
@@ -41200,8 +41239,8 @@ var _default = {
 
       (0, _axios.default)({
         method: "patch",
-        // url: `http://mini-wp-api.sigitariprasetyo.xyz/article/${id}/update`,
-        url: "http://localhost:3000/article/".concat(id, "/update"),
+        url: "https://mini-wp-aws.sigitariprasetyo.xyz/article/".concat(id, "/update"),
+        // url: `http://localhost:3000/article/${id}/update`,
         data: formData,
         headers: {
           token: localStorage.getItem("token")
@@ -45925,7 +45964,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34639" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34399" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

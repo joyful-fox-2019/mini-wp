@@ -62,8 +62,7 @@ export default {
       formData.set("content", this.content);
       axios({
         method: "post",
-        url: `http://localhost:3000/article`,
-
+        url: `https://mini-wp-aws.sigitariprasetyo.xyz/article`,
         data: formData,
         headers: {
           token: localStorage.getItem("token"),

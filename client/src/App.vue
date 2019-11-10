@@ -49,8 +49,8 @@ import LoginForm from "./components/form/LoginForm";
 import Quote from "./components/Quotes.vue";
 import ListEnd from "./components/ListEnd";
 
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-const host = "http://localhost:3000";
+const host = 'https://mini-wp-aws.sigitariprasetyo.xyz'
+// const host = "http://localhost:3000";
 
 export default {
   name: "App",

@@ -59,6 +59,7 @@ export default {
       localStorage.removeItem("username");
       localStorage.removeItem("email");
       this.$emit("logout", false);
+      this.$router.push("/");
     },
     write() {
       this.$router.push("/write-post");

@@ -98,7 +98,7 @@ export default {
     updatePost(id) {
       axios({
         method: "get",
-        url: `http://localhost:3000/article/${id}`,
+        url: `https://mini-wp-aws.sigitariprasetyo.xyz/article/${id}`,
         headers: {
           token: localStorage.getItem("token")
         }

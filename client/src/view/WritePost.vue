@@ -38,7 +38,7 @@
 <script>
 import "vue-wysiwyg/dist/vueWysiwyg.css";
 import axios from "axios";
-const host = "http://mini-wp-api.sigitariprasetyo.xyz";
+const host = "https://mini-wp-aws.sigitariprasetyo.xyz";
 
 export default {
   name: "WriteArticle",
@@ -84,7 +84,7 @@ export default {
       formData.set('publish', status)
       axios({
         method: "post",
-        url: `http://localhost:3000/article`,
+        url: `https://mini-wp-aws.sigitariprasetyo.xyz/article`,
 
         data: formData,
         headers: {
@@ -102,7 +102,7 @@ export default {
               }),
             2000
           );
-          this.$router.push("/");
+          this.$router.push("/user-post");
         })
         .catch(err => {
           this.next(err)

@@ -19,8 +19,8 @@ import moment from "moment";
 
 import Card from "../components/CardMyPost";
 
-// const host = 'http://mini-wp-api.sigitariprasetyo.xyz'
-const host = "http://localhost:3000";
+const host = 'https://mini-wp-aws.sigitariprasetyo.xyz'
+// const host = "http://localhost:3000";
 
 export default {
   name: "App",

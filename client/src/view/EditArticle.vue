@@ -49,7 +49,7 @@
 import "vue-wysiwyg/dist/vueWysiwyg.css";
 import axios from "axios";
 
-const host = "http://localhost:3000";
+const host = "https://mini-wp-aws.sigitariprasetyo.xyz";
 
 export default {
   name: "EditArticle",
@@ -98,8 +98,8 @@ export default {
       }
       axios({
         method: "patch",
-        // url: `http://mini-wp-api.sigitariprasetyo.xyz/article/${id}/update`,
-        url: `http://localhost:3000/article/${id}/update`,
+        url: `https://mini-wp-aws.sigitariprasetyo.xyz/article/${id}/update`,
+        // url: `http://localhost:3000/article/${id}/update`,
         data: formData,
         headers: {
           token: localStorage.getItem("token")
