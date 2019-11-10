@@ -26,7 +26,7 @@
           </button>
         </div>
         <div class="column is-narrow">
-          <button class="button bg-surface font-content">
+          <button @click="deleteArticle" class="button bg-surface font-content">
             <span class="icon">
               <i class="fas fa-trash"></i>
             </span>
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import axios from '../../helpers/axios'
+
 export default {
   name: 'DetailArticleContent',
   props: {
@@ -54,6 +56,30 @@ export default {
   methods: {
     toUpdate () {
       this.$router.push(`${this.$route.fullPath}/update`)
+    },
+    deleteArticle () {
+      this.$buefy.dialog.confirm({
+        title: 'Deleting article',
+        message: 'Are you sure you want to <b>delete</b> this article? This action cannot be undone.',
+        confirmText: 'Delete Article',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => {
+          axios.delete(`/articles/${this.article._id}`, {
+            headers: {
+              access_token: localStorage.getItem('access_token')
+            }
+          })
+            .then(({ data }) => {
+              console.log(data)
+              this.$buefy.toast.open('Article deleted!')
+              this.$router.push('/')
+            })
+            .catch(err => {
+              this.$emit('alert', err)
+            })
+        }
+      })
     }
   },
   computed: {

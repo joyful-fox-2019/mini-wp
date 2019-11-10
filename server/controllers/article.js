@@ -36,5 +36,12 @@ module.exports = {
         res.status(200).json(article)
       })
       .catch(next)
+  },
+  delete: (req, res, next) => {
+    Article.findByIdAndDelete(req.params.id)
+      .then(article => {
+        res.status(200).json(article)
+      })
+      .catch(next)
   }
 }
