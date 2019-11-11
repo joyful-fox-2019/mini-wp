@@ -12,7 +12,7 @@ const errorHandler = require('./errorHandler')
 const port = process.env.PORT || 3000
 
 const app = express()
-mongoose.connect('mongodb://localhost/mini-wp', 
+mongoose.connect(process.env.URL_MONGOOSE, 
 { useNewUrlParser: true, 
   useUnifiedTopology: true,
   useCreateIndex: true, 

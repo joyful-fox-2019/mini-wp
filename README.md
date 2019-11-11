@@ -174,7 +174,7 @@
 | /articles/upload-single | POST | access_token: string | image: file |
 | /articles    | GET | access_token: string | None |
 | /articles | POST | access_token: string | title: string, content: string, imageUrl: string |
-| /articles/:id | GET | access_token: string | _id: string, title: string, content: string |
+| /articles/:id | GET | access_token: string | None |
 | /articles/:id | PATCH | access_token: string | _id: string, title: string, content: string |
 | /articles/:id | DELETE | access_token: string | None |
 
