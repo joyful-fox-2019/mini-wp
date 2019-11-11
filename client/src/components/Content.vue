@@ -63,7 +63,6 @@ export default {
     },
     methods: {
         DataUpdate (input) {
-            console.log(input)
             this.updateData = input
         },
         ShowUpdate (input) {
@@ -79,11 +78,9 @@ export default {
             this.showTag = input
         },
         dariUser (input) {
-            console.log(input)
             this.articleData = input
         },
         dariTest (input) {
-            console.log(input)
             this.articleData = input
         },
         Article (input) {
@@ -96,7 +93,6 @@ export default {
             this.detailsPage = input
         },
         DariNavBar (input) {
-            console.log(input)
             this.articleData = input
         },
         ArticleForm (input) {
@@ -110,7 +106,6 @@ export default {
     watch: {
         dariNavbar : {
             handler(val) {
-                console.log(val)
                 this.articleData = val
                 if (val.mainContent) {
                     this.articleForm = false
@@ -122,7 +117,6 @@ export default {
         },
         articleData: {
             handler(val) {
-                console.log('dari watch', val)
             }
         }
     },

@@ -57,7 +57,6 @@ export default {
             this.$emit('loggedIn', this.isLogin)
         },
         searchForm () {
-            // console.log(this.search)
             this.dariNavbar.result = []
             axios({
                 url: `http://hackpress-server.panji-h8.online/article/search/${this.search}`,
@@ -67,7 +66,6 @@ export default {
                 }
             })
             .then (({ data }) => {
-                console.log(data)
                 if (data.length > 0) {
                     for (let i = 0; i < data.length; i++) {
                         this.dariNavbar.result.push(data[i])
@@ -86,7 +84,6 @@ export default {
             })
         },  
         arrTest (input) {
-            console.log(input)
             this.dariNavbar.result = input.result
             this.dariNavbar.mainContent = input.mainContent
         },
@@ -94,7 +91,6 @@ export default {
     watch: {
         arrTest : {
             handler(val) {
-                console.log('masuk deep')
                 this.arrData = val.result
             }
         },

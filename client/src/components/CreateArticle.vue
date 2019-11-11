@@ -206,12 +206,10 @@ export default {
             })
             .then (({ data }) => {
                 this.dariNavBar.result = data
-                console.log(this.dariNavbar)
                 this.$emit('dariNavbar', this.dariNavBar)
                 this.$emit('showPublic', true)
                 this.$emit('articleForm', false)
                 this.$emit('UserArticle', false)
-                // console.log(data)
             })
         }
     }

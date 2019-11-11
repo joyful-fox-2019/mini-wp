@@ -43,7 +43,6 @@ export default {
     watch: {
         article: {
             handler(val) {
-                console.log(val)
                 this.detailArticle = val
             }
         },

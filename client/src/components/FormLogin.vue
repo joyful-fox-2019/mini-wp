@@ -63,7 +63,6 @@ export default {
                 }
             })
             .then (({ data }) => {
-                console.log(data)
                 swal.close()
                 swal.fire({
                     title: 'Welcome to HackPress',
@@ -75,7 +74,6 @@ export default {
                 localStorage.setItem('token', data.token)
             })
             .catch ((err) => {
-                console.log(err)
                 swal.close()
                 swal.fire({
                     title: 'Login Failed',

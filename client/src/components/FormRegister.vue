@@ -63,14 +63,12 @@ export default {
                     timer: 2000,
                     showConfirmButton: false
                 })
-                console.log(data)
                 this.$emit('changePage', 'Login')
                 this.email = ''
                 this.password = ''
                 this.name = ''
             })
             .catch ((err) => {
-                console.log(err)
                 swal.close()
                 swal.fire({
                     title: 'Failed registering new User',

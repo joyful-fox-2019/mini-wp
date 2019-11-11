@@ -87,7 +87,6 @@ export default {
         updateData: {
             handler (val) {
                 this.FormUpdateData = val
-                console.log(this.FormUpdateData)
             }
         }
     },

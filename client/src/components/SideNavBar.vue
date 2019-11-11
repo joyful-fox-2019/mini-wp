@@ -63,7 +63,6 @@ export default {
             .then (({data}) => {
                 this.dariTag.mainContent = true
                 this.dariTag.result = data
-                console.log(this.dariTag)
                 this.$emit('showTag', true)
                 this.$emit('articleForm', false)
                 this.$emit('UserArticle', false)
@@ -103,7 +102,6 @@ export default {
                 this.$emit('dariUser', this.dariUser)
                 this.$emit('showTag', false)
                 this.$emit('showUpdate', false)
-                console.log(this.dariUser)
             })
         },
         showPublicArticles () {
@@ -117,7 +115,6 @@ export default {
             .then (({ data }) => {
                 this.dariTest.mainContent = true
                 this.dariTest.result = data
-                console.log(this.dariTest)
                 this.$emit('articleForm', false)
                 this.$emit('UserArticle', false)
                 this.$emit('showPublic', true)

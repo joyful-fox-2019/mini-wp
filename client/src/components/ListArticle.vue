@@ -135,7 +135,6 @@ export default {
                     2000
                 )
                 this.showList()
-                console.log(this.dataList)
             })
             .catch (err => {
                 swal.close()
@@ -148,7 +147,6 @@ export default {
             })
         },
         showUpdate (id) {
-            console.log(id)
             axios({
                 url: `http://hackpress-server.panji-h8.online/article/${id}`,
                 method: 'get',
@@ -165,7 +163,6 @@ export default {
                 this.$emit('showTag', false)
             })
             .catch (err => {
-                console.log(err)
                 swal.fire({
                     type: 'error',
                     title: `You're unauthorized to update this article`,
@@ -210,7 +207,6 @@ export default {
                     })
             })
             .catch (err => {
-                console.log(err)
             })
         },
         getDescription (index) {
@@ -255,7 +251,6 @@ export default {
     watch: {
         articleData: {
             handler(val) {
-                console.log(val)
                 this.dataList = val
             }
         }
