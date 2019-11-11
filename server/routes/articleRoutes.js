@@ -18,7 +18,6 @@ router.use(authentication)
 router.post('/',  upload.array('imgUrl'), ArticleController.create)
 router.get('/', ArticleController.readAll)
 router.get('/personal', ArticleController.readPersonal)
-router.get('/search', ArticleController.search)
 
 router.use('/:id', authorizationArticle)
 

@@ -48,6 +48,10 @@ export default {
 					localStorage.setItem('token', data.token)
 					localStorage.setItem('name', data.username)
 
+					this.usernameReg = ''
+					this.emailReg = ''
+					this.passwordReg = ''
+
 					this.$emit('isLoginStatus', true)
 
 					this.Toast.fire({

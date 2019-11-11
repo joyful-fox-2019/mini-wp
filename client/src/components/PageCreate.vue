@@ -115,9 +115,7 @@ export default {
       this.loadingComponent.close()
     },
     create(){
-
       this.openLoading()
-
       let fd = new FormData()
       this.dropFiles.forEach(image => {
         fd.append('imgUrl', image)
@@ -138,10 +136,15 @@ export default {
       })
         .then(({data}) => {
           this.closeLoading()
+          this.dropFiles = []
+          this.tags = []
+          this.title = ''
+          this.content = ''
           this.$buefy.toast.open({
             message: 'Create correctly!',
             type: 'is-success'
           })
+          this.$emit('changePage', 'personal')
         })
         .catch((err) => {
           this.closeLoading()

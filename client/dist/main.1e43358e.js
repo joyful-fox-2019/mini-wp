@@ -13604,6 +13604,8 @@ var _default = {
         var data = _ref.data;
         localStorage.setItem('token', data.token);
         localStorage.setItem('name', data.username);
+        _this.emailLog = '';
+        _this.passwordLog = '';
 
         _this.$emit('isLoginStatus', true);
 
@@ -13849,6 +13851,9 @@ var _default = {
         var data = _ref.data;
         localStorage.setItem('token', data.token);
         localStorage.setItem('name', data.username);
+        _this.usernameReg = '';
+        _this.emailReg = '';
+        _this.passwordReg = '';
 
         _this.$emit('isLoginStatus', true);
 
@@ -14806,10 +14811,17 @@ var _default = {
 
         _this.closeLoading();
 
+        _this.dropFiles = [];
+        _this.tags = [];
+        _this.title = '';
+        _this.content = '';
+
         _this.$buefy.toast.open({
           message: 'Create correctly!',
           type: 'is-success'
         });
+
+        _this.$emit('changePage', 'personal');
       }).catch(function (err) {
         _this.closeLoading();
 
@@ -15086,12 +15098,84 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   name: "pageReader",
   data: function data() {
     return {
       articles: [],
-      loadingComponent: ''
+      index: 0,
+      title: '',
+      tag: '',
+      loadingComponent: '',
+      isCardModalActive: false
     };
   },
   methods: {
@@ -15109,13 +15193,15 @@ var _default = {
       this.openLoading();
       (0, _server.default)({
         method: 'get',
-        url: '/article',
+        url: "/article?title=".concat(this.title, "&tag=").concat(this.tag),
         headers: {
           token: localStorage.getItem('token')
         }
       }).then(function (_ref) {
         var data = _ref.data;
         _this.articles = data;
+        _this.title = '';
+        _this.tag = '';
 
         _this.closeLoading();
       }).catch(function (err) {
@@ -15127,6 +15213,9 @@ var _default = {
           position: 'is-top',
           type: 'is-danger'
         });
+      }).always(function () {
+        _this.title = '';
+        _this.tag = '';
       });
     }
   },
@@ -15147,53 +15236,291 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "container", attrs: { id: "image-container" } },
-      _vm._l(_vm.articles, function(article, i) {
-        return _c(
-          "div",
-          { key: i, staticClass: "container", attrs: { id: "detail-image" } },
-          [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-image" }, [
-                _c("figure", { staticClass: "image is-4by3" }, [
-                  _c("img", {
-                    attrs: {
-                      src: article.featured_image[0],
-                      alt: "Placeholder image"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "contents" }, [
-                  _c(
-                    "h2",
-                    {
-                      staticStyle: {
-                        "font-weight": "bold",
-                        "font-size": "22px"
-                      }
-                    },
-                    [_vm._v(_vm._s(article.title))]
-                  ),
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "container", attrs: { id: "image-container" } },
+        [
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "b-field",
+            { attrs: { grouped: "" } },
+            [
+              _c("b-input", {
+                attrs: { placeholder: "Title", expanded: "" },
+                model: {
+                  value: _vm.title,
+                  callback: function($$v) {
+                    _vm.title = $$v
+                  },
+                  expression: "title"
+                }
+              }),
+              _vm._v(" "),
+              _c("b-input", {
+                attrs: { placeholder: "Tag", expanded: "" },
+                model: {
+                  value: _vm.tag,
+                  callback: function($$v) {
+                    _vm.tag = $$v
+                  },
+                  expression: "tag"
+                }
+              }),
+              _vm._v(" "),
+              _c("p", { staticClass: "control" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button is-primary",
+                    on: { click: _vm.fetchReader }
+                  },
+                  [_vm._v("Search")]
+                )
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "columns",
+              staticStyle: { "flex-wrap": "wrap" },
+              attrs: { id: "detail-image" }
+            },
+            _vm._l(_vm.articles, function(article, i) {
+              return _c("div", { key: i, staticClass: "column is-one-third" }, [
+                _c("div", { staticClass: "card-image" }, [
+                  _c("figure", { staticClass: "image is-4by3" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            _vm.isCardModalActive = true
+                            _vm.index = i
+                          }
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: article.featured_image[0],
+                            alt: "Placeholder image"
+                          }
+                        })
+                      ]
+                    )
+                  ]),
                   _vm._v(" "),
-                  _c("hr", {
-                    staticStyle: {
-                      "margin-top": "10px",
-                      "margin-bottom": "10px"
-                    }
-                  })
+                  _c(
+                    "div",
+                    { staticClass: "contents" },
+                    [
+                      _c(
+                        "h2",
+                        {
+                          staticStyle: {
+                            "font-weight": "bold",
+                            "font-size": "22px"
+                          }
+                        },
+                        [_vm._v(_vm._s(article.title))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-taglist",
+                        _vm._l(article.tags, function(tag, i) {
+                          return _c(
+                            "b-tag",
+                            { key: i, attrs: { type: "is-info" } },
+                            [_vm._v(_vm._s(tag))]
+                          )
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("br")
+                    ],
+                    1
+                  )
                 ])
               ])
+            }),
+            0
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: { active: _vm.isCardModalActive, width: 1000, scroll: "keep" },
+          on: {
+            "update:active": function($event) {
+              _vm.isCardModalActive = $event
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-image" }, [
+              _c("figure", { staticClass: "image is-4by3" }, [
+                _c("img", {
+                  attrs: {
+                    src: _vm.articles[_vm.index].featured_image[0],
+                    alt: "Image"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-content" }, [
+              _c("div", { staticClass: "media" }, [
+                _c("div", { staticClass: "media-left" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "media-content",
+                    staticStyle: {
+                      display: "flex",
+                      "justify-content": "center",
+                      "flex-direction": "column"
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "content-text" },
+                      [
+                        _c("h3", { staticStyle: { "font-size": "36px" } }, [
+                          _vm._v(_vm._s(_vm.articles[_vm.index].title))
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("hr"),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("h3", { staticStyle: { "font-style": "italic" } }, [
+                          _vm._v("content :")
+                        ]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("h3", {
+                          domProps: {
+                            innerHTML: _vm._s(_vm.articles[_vm.index].content)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("br"),
+                        _c("hr"),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "fas fa-user-tie" }),
+                        _c("a", { staticStyle: { "margin-right": "25px" } }, [
+                          _vm._v(
+                            "  Owner : " +
+                              _vm._s(_vm.articles[_vm.index].author.username) +
+                              " "
+                          )
+                        ]),
+                        _c("a", { staticStyle: { "margin-right": "25px" } }),
+                        _c("i", { staticClass: "far fa-envelope" }),
+                        _vm._v(
+                          "  " +
+                            _vm._s(_vm.articles[_vm.index].author.email) +
+                            "\n                  "
+                        ),
+                        _c("br"),
+                        _c("hr"),
+                        _c("br"),
+                        _vm._v(" "),
+                        [
+                          _c(
+                            "h3",
+                            { staticStyle: { "font-style": "italic" } },
+                            [_vm._v("tags :")]
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "b-taglist",
+                            _vm._l(_vm.articles[_vm.index].tags, function(
+                              tag,
+                              i
+                            ) {
+                              return _c(
+                                "b-tag",
+                                { key: i, attrs: { type: "is-info" } },
+                                [_vm._v(_vm._s(tag))]
+                              )
+                            }),
+                            1
+                          )
+                        ]
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.articles[_vm.index].featured_image.length > 1
+                      ? _c(
+                          "div",
+                          [
+                            _c("br"),
+                            _c("hr"),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "h3",
+                              { staticStyle: { "font-style": "italic" } },
+                              [_vm._v("galery :")]
+                            ),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.articles[_vm.index].featured_image,
+                              function(foto, i) {
+                                return _c("div", { key: i }, [
+                                  _c("div", { staticClass: "card-image" }, [
+                                    _c(
+                                      "figure",
+                                      { staticClass: "image is-4by3" },
+                                      [
+                                        _c("img", {
+                                          attrs: { src: foto, alt: "Image" }
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              }
+                            )
+                          ],
+                          2
+                        )
+                      : _vm._e()
+                  ]
+                )
+              ])
             ])
-          ]
-        )
-      }),
-      0
-    )
-  ])
+          ])
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15240,6 +15567,11 @@ var _server = _interopRequireDefault(require("../../apis/server"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15383,12 +15715,12 @@ var _default = {
 
         _this2.closeLoading();
 
-        _this2.fetchPersonal();
-
         _this2.$buefy.toast.open({
           message: 'Delete Success!',
           type: 'is-success'
         });
+
+        _this2.fetchPersonal();
       }).catch(function (err) {
         _this2.closeLoading();
 
@@ -15400,8 +15732,8 @@ var _default = {
         });
       });
     },
-    update: function update(id) {
-      this.$emit('updateId', id);
+    update: function update(data) {
+      this.$emit('update', data);
       this.$emit('changePage', 'update');
     }
   },
@@ -15425,15 +15757,21 @@ exports.default = _default;
   return _c(
     "div",
     [
+      _c("br"),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "container", attrs: { id: "image-container" } },
-        _vm._l(_vm.articles, function(article, i) {
-          return _c(
+        [
+          _c(
             "div",
-            { key: i, staticClass: "container", attrs: { id: "detail-image" } },
-            [
-              _c("div", { staticClass: "card" }, [
+            {
+              staticClass: "columns",
+              staticStyle: { "flex-wrap": "wrap" },
+              attrs: { id: "detail-image" }
+            },
+            _vm._l(_vm.articles, function(article, i) {
+              return _c("div", { key: i, staticClass: "column is-one-third" }, [
                 _c("div", { staticClass: "card-image" }, [
                   _c("figure", { staticClass: "image is-4by3" }, [
                     _c(
@@ -15474,6 +15812,18 @@ exports.default = _default;
                       ),
                       _vm._v(" "),
                       _c(
+                        "b-taglist",
+                        _vm._l(article.tags, function(tag, i) {
+                          return _c(
+                            "b-tag",
+                            { key: i, attrs: { type: "is-info" } },
+                            [_vm._v(_vm._s(tag))]
+                          )
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "b-button",
                         {
                           attrs: { type: "is-danger" },
@@ -15492,28 +15842,23 @@ exports.default = _default;
                           attrs: { type: "is-success" },
                           on: {
                             click: function($event) {
-                              return _vm.update(article._id)
+                              return _vm.update(article)
                             }
                           }
                         },
                         [_vm._v("Update")]
                       ),
                       _vm._v(" "),
-                      _c("hr", {
-                        staticStyle: {
-                          "margin-top": "10px",
-                          "margin-bottom": "10px"
-                        }
-                      })
+                      _c("br")
                     ],
                     1
                   )
                 ])
               ])
-            ]
+            }),
+            0
           )
-        }),
-        0
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -15597,11 +15942,19 @@ exports.default = _default;
                             _vm._s(_vm.articles[_vm.index].author.email) +
                             "\n                  "
                         ),
-                        _c("br"),
-                        _c("hr"),
-                        _c("br"),
-                        _vm._v(" "),
                         [
+                          _c("br"),
+                          _c("hr"),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "h3",
+                            { staticStyle: { "font-style": "italic" } },
+                            [_vm._v("tags :")]
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
                           _c(
                             "b-taglist",
                             _vm._l(_vm.articles[_vm.index].tags, function(
@@ -15620,14 +15973,6 @@ exports.default = _default;
                         _vm._v(" "),
                         _c("br"),
                         _c("hr"),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("h3", { staticStyle: { "font-style": "italic" } }, [
-                          _vm._v("galery :")
-                        ]),
-                        _vm._v(" "),
-                        _c("br"),
-                        _c("hr"),
                         _c("br")
                       ],
                       2
@@ -15636,25 +15981,39 @@ exports.default = _default;
                     _vm.articles[_vm.index].featured_image.length > 1
                       ? _c(
                           "div",
-                          _vm._l(
-                            _vm.articles[_vm.index].featured_image,
-                            function(foto, i) {
-                              return _c("div", { key: i }, [
-                                _c("div", { staticClass: "card-image" }, [
-                                  _c(
-                                    "figure",
-                                    { staticClass: "image is-4by3" },
-                                    [
-                                      _c("img", {
-                                        attrs: { src: foto, alt: "Image" }
-                                      })
-                                    ]
-                                  )
+                          [
+                            _c("br"),
+                            _c("hr"),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "h3",
+                              { staticStyle: { "font-style": "italic" } },
+                              [_vm._v("galery :")]
+                            ),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.articles[_vm.index].featured_image,
+                              function(foto, i) {
+                                return _c("div", { key: i }, [
+                                  _c("div", { staticClass: "card-image" }, [
+                                    _c(
+                                      "figure",
+                                      { staticClass: "image is-4by3" },
+                                      [
+                                        _c("img", {
+                                          attrs: { src: foto, alt: "Image" }
+                                        })
+                                      ]
+                                    )
+                                  ])
                                 ])
-                              ])
-                            }
-                          ),
-                          0
+                              }
+                            )
+                          ],
+                          2
                         )
                       : _vm._e()
                   ]
@@ -15775,14 +16134,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   name: "pageUpdate",
   data: function data() {
     return {
-      title: '',
-      content: '',
+      title: this.data.title,
+      content: this.data.content,
       config: {
-        placeholder: 'Content Here ...',
         modules: {
           toolbar: [['bold', 'italic', 'underline', 'strike'], // toggled buttons
           ['blockquote', 'code-block'], [{
@@ -15826,11 +16189,13 @@ var _default = {
         }
       },
       dropFiles: [],
-      tags: [],
+      tags: this.data.tags,
+      oldImg: this.data.featured_image,
+      removed: [],
       loadingComponent: ''
     };
   },
-  props: ['ids'],
+  props: ['data'],
   methods: {
     deleteDropFile: function deleteDropFile(index) {
       this.dropFiles.splice(index, 1);
@@ -15847,6 +16212,9 @@ var _default = {
     closeLoading: function closeLoading() {
       this.loadingComponent.close();
     },
+    remove: function remove(img) {
+      this.removed.push(this.oldImg.splice(this.oldImg.indexOf(img), 1));
+    },
     update: function update() {
       var _this = this;
 
@@ -15855,14 +16223,15 @@ var _default = {
       this.dropFiles.forEach(function (image) {
         fd.append('imgUrl', image);
       });
+      fd.append('remove', this.removed);
       this.tags.forEach(function (tag) {
         fd.append('tags', tag);
       });
       fd.set('title', this.title);
       fd.set('content', this.content);
       (0, _server.default)({
-        method: 'post',
-        url: '/article',
+        method: 'put',
+        url: "/article/".concat(this.data._id),
         headers: {
           token: localStorage.getItem('token')
         },
@@ -15872,10 +16241,18 @@ var _default = {
 
         _this.closeLoading();
 
+        _this.dropFiles = [];
+        _this.remove = [];
+        _this.tags = [];
+        _this.title = '';
+        _this.content = '';
+
         _this.$buefy.toast.open({
-          message: 'Create correctly!',
+          message: 'Update Success!',
           type: 'is-success'
         });
+
+        _this.$emit('changePage', 'personal');
       }).catch(function (err) {
         _this.closeLoading();
 
@@ -15886,41 +16263,6 @@ var _default = {
           type: 'is-danger'
         });
       });
-    },
-    fetch: function fetch() {
-      var _this2 = this;
-
-      this.openLoading();
-      (0, _server.default)({
-        method: 'get',
-        url: "/article/".concat(this.ids),
-        headers: {
-          token: localStorage.getItem('token')
-        }
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        console.log(data);
-        _this2.title = data.title;
-        _this2.content = data.content;
-        _this2.dropFiles = data.featured_image;
-        _this2.tags = data.tags;
-
-        _this2.closeLoading();
-      }).catch(function (err) {
-        _this2.closeLoading();
-
-        _this2.$buefy.toast.open({
-          duration: 5000,
-          message: err.response.data.errors.join(', '),
-          position: 'is-top',
-          type: 'is-danger'
-        });
-      });
-    }
-  },
-  watch: {
-    ids: function ids() {
-      this.fetch();
     }
   }
 };
@@ -16020,6 +16362,33 @@ exports.default = _default;
             _c("label", { staticClass: "label", attrs: { for: "" } }, [
               _vm._v("Featured Image :")
             ]),
+            _vm._v(" "),
+            _vm._l(_vm.data.featured_image, function(img, index) {
+              return _c(
+                "div",
+                { key: index },
+                [
+                  _c("img", {
+                    staticStyle: { width: "100px" },
+                    attrs: { src: img, alt: "image" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { type: "is-danger" },
+                      on: {
+                        click: function($event) {
+                          return _vm.remove(img)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
+                ],
+                1
+              )
+            }),
             _vm._v(" "),
             _c(
               "b-field",
@@ -16178,13 +16547,13 @@ var _default = {
   name: 'RightBar',
   data: function data() {
     return {
-      id: ''
+      data: {}
     };
   },
   props: ['page'],
   methods: {
-    updateId: function updateId(id) {
-      this.id = id;
+    update: function update(data) {
+      this.data = data;
     },
     changePage: function changePage(page) {
       this.$emit('changePage', page);
@@ -16213,27 +16582,24 @@ exports.default = _default;
   return _c(
     "div",
     [
-      _vm.page == "create" ? _c("pageCreate") : _vm._e(),
+      _vm.page == "create"
+        ? _c("pageCreate", { on: { changePage: _vm.changePage } })
+        : _vm._e(),
       _vm._v(" "),
       _vm.page == "reader" ? _c("pageReader") : _vm._e(),
       _vm._v(" "),
       _vm.page == "personal"
         ? _c("pagePersonal", {
-            on: { updateId: _vm.updateId, changePage: _vm.changePage }
+            on: { update: _vm.update, changePage: _vm.changePage }
           })
         : _vm._e(),
       _vm._v(" "),
-      _c("pageUpdate", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.page == "update",
-            expression: "page == 'update'"
-          }
-        ],
-        attrs: { ids: _vm.id }
-      })
+      _vm.page == "update"
+        ? _c("pageUpdate", {
+            attrs: { data: _vm.data },
+            on: { changePage: _vm.changePage }
+          })
+        : _vm._e()
     ],
     1
   )
@@ -16348,8 +16714,6 @@ exports.default = _default;
       }),
       _vm._v(" "),
       _c("div", { staticClass: "columns full" }, [
-        _c("div", { staticClass: "left column is-one-fifth" }),
-        _vm._v(" "),
         _c(
           "div",
           { staticClass: "right column is-four-fifth" },
@@ -71710,7 +72074,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38529" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43309" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

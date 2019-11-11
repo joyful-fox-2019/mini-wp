@@ -27,7 +27,12 @@
           </section>
         </template>
 
+
         <label for="" class="label">Featured Image :</label>
+        <div v-for="(img, index) in data.featured_image" :key=index>
+          <img :src="img" alt="image" style="width: 100px;">
+          <b-button type="is-danger" @click="remove(img)">Delete</b-button>
+        </div>
         <b-field>
           <b-upload v-model="dropFiles" multiple drag-drop>
             <section class="section" style="background-color: white;">
@@ -67,10 +72,9 @@ export default {
   name: "pageUpdate",
   data () {
     return {
-      title: '',
-      content: '',
+      title: this.data.title,
+      content:this. data.content,
       config: {
-        placeholder: 'Content Here ...',
         modules: {
           toolbar: [
             ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -94,12 +98,14 @@ export default {
         }
       },
       dropFiles:[],
-      tags:[],
+      tags: this.data.tags,
+      oldImg: this.data.featured_image,
+      removed: [],
       loadingComponent: ''
     }
   },
   props: [
-    'ids'
+    'data'
   ],
   methods: {
     deleteDropFile(index) {
@@ -117,6 +123,9 @@ export default {
     closeLoading(){
       this.loadingComponent.close()
     },
+    remove(img){ 
+      this.removed.push(this.oldImg.splice(this.oldImg.indexOf(img), 1))
+    },
     update(){
 
       this.openLoading()
@@ -125,6 +134,7 @@ export default {
       this.dropFiles.forEach(image => {
         fd.append('imgUrl', image)
       });
+      fd.append('remove', this.removed)
       this.tags.forEach(tag => {
         fd.append('tags', tag)
       })
@@ -132,8 +142,8 @@ export default {
       fd.set('content', this.content)
 
       axios({
-        method: 'post',
-        url: '/article',
+        method: 'put',
+        url: `/article/${this.data._id}`,
         headers: {
           token: localStorage.getItem('token')
         },
@@ -141,10 +151,16 @@ export default {
       })
         .then(({data}) => {
           this.closeLoading()
+          this.dropFiles = []
+          this.remove = []
+          this.tags = []
+          this.title = ''
+          this.content = ''
           this.$buefy.toast.open({
-            message: 'Create correctly!',
+            message: 'Update Success!',
             type: 'is-success'
           })
+          this.$emit('changePage', 'personal')
         })
         .catch((err) => {
           this.closeLoading()
@@ -155,40 +171,6 @@ export default {
             type: 'is-danger'
           })
         })
-    },
-    fetch(){
-      this.openLoading()
-
-      axios({
-        method: 'get',
-        url: `/article/${this.ids}`,
-        headers: {
-          token: localStorage.getItem('token')
-        }
-      })
-        .then(({data}) => {
-          console.log(data);
-          
-          this.title = data.title
-          this.content = data.content
-          this.dropFiles = data.featured_image
-          this.tags = data.tags
-          this.closeLoading()
-        })
-        .catch((err) => {
-          this.closeLoading()
-          this.$buefy.toast.open({
-            duration: 5000,
-            message: err.response.data.errors.join(', '),
-            position: 'is-top',
-            type: 'is-danger'
-          })
-        })
-    }
-  },
-  watch: {
-    ids(){
-      this.fetch()
     }
   }
 }

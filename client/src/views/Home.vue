@@ -2,11 +2,11 @@
   <div>
     <Navbar class="nav" @isLoginStatus="isLoginStatus" @changePage="changePage"></Navbar>
       <div class="columns full">
-        <div class="left column is-one-fifth">
+        <!-- <div class="left column is-one-fifth">
 
-          <!-- <LeftBar></LeftBar> -->
+          <LeftBar></LeftBar>
           
-        </div>
+        </div> -->
         <div class="right column is-four-fifth">
 
           <RightBar :page="page" @changePage="changePage"></RightBar>

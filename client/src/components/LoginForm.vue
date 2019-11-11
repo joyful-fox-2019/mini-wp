@@ -63,6 +63,9 @@ export default {
 					localStorage.setItem('token', data.token)
 					localStorage.setItem('name', data.username)
 
+					this.emailLog = ''
+					this.passwordLog = ''
+
 					this.$emit('isLoginStatus', true)
 
 					this.Toast.fire({

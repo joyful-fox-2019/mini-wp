@@ -1,10 +1,10 @@
 <template>
   <div>
-
+    <br>
     <div class="container" id="image-container" >
-      <div class="container" id="detail-image" v-for="(article, i) in articles" :key="i">
+      <div class="columns" style="flex-wrap:wrap;" id="detail-image">
 
-        <div class="card">
+        <div class="column is-one-third" v-for="(article, i) in articles" :key="i">
           <div class="card-image">
             <figure class="image is-4by3">
               <a @click="isCardModalActive = true; index = i" href="#">
@@ -15,11 +15,13 @@
               </a>
             </figure>
             <div class="contents">
-
               <h2 style="font-weight:bold; font-size:22px">{{article.title}}</h2>
+              <b-taglist>
+                <b-tag v-for="(tag, i) in article.tags" :key="i" type="is-info">{{tag}}</b-tag>
+              </b-taglist>
               <b-button type="is-danger" @click="remove(article._id)">Delete</b-button>
-              <b-button type="is-success" @click="update(article._id)">Update</b-button>
-              <hr style="margin-top:10px; margin-bottom:10px">
+              <b-button type="is-success" @click="update(article)">Update</b-button>
+              <br>
             </div>
           </div>
         </div>
@@ -49,18 +51,21 @@
                     <h3 v-html="articles[index].content"></h3>
                     <br><hr><br>
                     <i class="fas fa-user-tie"></i><a style="margin-right:25px">  Owner : {{ articles[index].author.username }} </a><a style="margin-right:25px"> </a><i class="far fa-envelope"></i>  {{ articles[index].author.email }}
-                    <br><hr><br>
                     <template>
+                      <br><hr><br>
+                      <h3 style="font-style:italic">tags :</h3>
+                      <br>
                       <b-taglist>
                         <b-tag v-for="(tag, i) in articles[index].tags" :key="i" type="is-info">{{tag}}</b-tag>
                       </b-taglist>
                     </template>
                     <br><hr><br>
-                    <h3 style="font-style:italic">galery :</h3>
-                    <br><hr><br>
                   </div>
 
                   <div v-if="articles[index].featured_image.length > 1">
+                    <br><hr><br>
+                    <h3 style="font-style:italic">galery :</h3>
+                    <br>
                     <div v-for="(foto, i) in articles[index].featured_image" :key="i">
                       <div class="card-image">
                         <figure class="image is-4by3" >
@@ -137,11 +142,11 @@ export default {
       })
         .then(({data}) => {
           this.closeLoading()
-          this.fetchPersonal()
           this.$buefy.toast.open({
             message: 'Delete Success!',
             type: 'is-success'
           })
+          this.fetchPersonal()
         })
         .catch(err => {
           this.closeLoading()
@@ -153,8 +158,8 @@ export default {
           })
         })
     },
-    update(id){
-      this.$emit('updateId', id)
+    update(data){
+      this.$emit('update', data)
       this.$emit('changePage', 'update')
     }
   },

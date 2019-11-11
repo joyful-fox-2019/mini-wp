@@ -1,9 +1,9 @@
 <template>
   <div>
-    <pageCreate v-if="page == 'create'"></pageCreate>
+    <pageCreate v-if="page == 'create'" @changePage="changePage"></pageCreate>
     <pageReader v-if="page == 'reader'"></pageReader>
-    <pagePersonal v-if="page == 'personal'" @updateId="updateId" @changePage="changePage"></pagePersonal>
-    <pageUpdate v-show="page == 'update'" :ids="id"></pageUpdate>
+    <pagePersonal v-if="page == 'personal'" @update="update" @changePage="changePage"></pagePersonal>
+    <pageUpdate v-if="page == 'update'" :data="data" @changePage="changePage"></pageUpdate>
   </div>
 </template>
 
@@ -17,15 +17,15 @@ export default {
   name: 'RightBar',
   data(){
     return {
-      id: '' 
+      data: {}
     }
   },
   props: [
     'page'
   ],
   methods: {
-    updateId(id){
-      this.id = id
+    update(data){
+      this.data = data
     },
     changePage(page){
       this.$emit('changePage', page)

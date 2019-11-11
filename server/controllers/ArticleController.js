@@ -20,9 +20,21 @@ class ArticleController {
     }
 
     static readAll (req, res, next) {
-        Article.find()
+        let condition = {}
+        if(req.query.title || req.query.tag){
+            condition = {
+                $or:[]
+            }
+            if(req.query.title){
+                condition.$or.push({'title': new RegExp(`${req.query.title}`, 'gi')})
+            }
+            if(req.query.tag){
+                condition.$or.push({'tags': new RegExp(`${req.query.tag}`, 'gi')})
+            }
+        }
+        Article.find(condition)
             .populate('author')
-            .then(data => {
+            .then( data => {
                 res.status(200).json(data)
             })
             .catch(next)
@@ -62,9 +74,19 @@ class ArticleController {
                     imgUrl.forEach(img => {
                         featured_image.push(img)
                     })
-                    remove.forEach(foto => {
-                        deletegcs(foto)
-                    });
+
+                    if(remove){
+                        let removeArray = []
+                        if(typeof remove == 'string'){
+                            removeArray.push(remove)
+                        }
+                        else{
+                            removeArray = remove
+                        }
+                        removeArray.forEach(foto => {
+                            deletegcs(foto)
+                        });
+                    }
 
                     return Article.findByIdAndUpdate({_id:req.params.id},
                         {
@@ -105,100 +127,6 @@ class ArticleController {
             })
             .catch(next)
     }
-
-    static search(req, res, next){
-        if(req.query.title){
-            Article.find({
-                title: new RegExp(`${req.query.title}`, 'gi'),
-            })
-                .then( data => {
-                    res.status(200).json(data)
-                })
-                .catch(next)
-        }
-        else if(req.query.tag){
-            Article.find({
-                tags: new RegExp(`${req.query.tag}`, 'gi'),
-            })
-                .then( data => {
-                    res.status(200).json(data)
-                })
-                .catch(next)
-        }
-        
-    }
 }
 
 module.exports = ArticleController
-
-// const Todo = require('../models/todo')
-
-// class TodoController {
-//     static create(req, res, next){
-//         let {title, description, duedate} = req.body
-//         Todo.create({
-//             title,
-//             description,
-//             duedate,
-//             userId: req.loggedUser._id
-//         })
-//             .then(data => {
-//                 res.status(201).json(data)
-//             })
-//             .catch(next)
-//     }
-//     static readAll(req, res, next){
-//         Todo.find({userId:req.loggedUser._id})
-//             .then(data => {
-//                 res.status(200).json(data)
-//             })
-//             .catch(next)
-//     }
-//     static readOne(req, res, next){
-//         Todo.findById(req.params.id)
-//             .then(data => {
-//                 res.status(200).json(data)
-//             })
-//             .catch(next)
-//     }
-//     static updateAll(req, res, next){
-//         let {title, description, duedate} = req.body
-//         Todo.findByIdAndUpdate({_id:req.params.id},
-//             {
-//                 title,
-//                 description,
-//                 duedate
-//             }, { runValidators: true }
-//         )
-//             .then(data => {
-//                 res.status(200).json(data)
-//             })
-//             .catch(next)
-//     }
-//     static updateStatus(req, res, next){
-//         Todo.findById(req.params.id)
-//             .then(data => {
-//                 return Todo.findByIdAndUpdate(
-//                     {
-//                         _id: req.params.id
-//                     },
-//                     {
-//                         status: !data.status
-//                     }
-//                 )
-//             })
-//             .then(data => {
-//                 res.status(200).json(data)
-//             })
-//             .catch(next)
-//     }
-//     static delete(req, res, next){
-//         Todo.findByIdAndDelete({_id:req.params.id})
-//             .then(data => {
-//                 res.status(200).json(data)
-//             })
-//             .catch(next)
-//     }
-// }
-
-// module.exports = TodoController
