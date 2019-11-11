@@ -1,5 +1,7 @@
 # HACKTIV8 MINI WP
 
+website address: http://miniwp.hoandreasm.xyz/
+
 MINI WP is an application inspired by the real Wordpress website. As the name suggested it is the mini version of it.
 
 Features:
