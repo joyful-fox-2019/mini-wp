@@ -557,6 +557,23 @@ html {
   display: flex;
   flex-wrap: wrap;
 } */
+#quill {
+  /* height: 30vh; */
+  /* padding-bottom: 7%; */
+  background-color: white;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+}
 /*! Buefy v0.8.6 | MIT License | github.com/buefy/buefy */
 .is-noscroll {
   position: fixed;

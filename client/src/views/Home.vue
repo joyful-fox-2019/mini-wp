@@ -9,7 +9,7 @@
         </div>
         <div class="right column is-four-fifth">
 
-          <RightBar :page="page"></RightBar>
+          <RightBar :page="page" @changePage="changePage"></RightBar>
           
         </div>
     </div>
@@ -25,7 +25,7 @@ export default {
   name: 'Home',
   data(){
     return {
-      page: 'reader'
+      page: 'personal'
     }
   },
   components: {

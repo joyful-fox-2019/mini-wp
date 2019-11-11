@@ -17,6 +17,8 @@
             <div class="contents">
 
               <h2 style="font-weight:bold; font-size:22px">{{article.title}}</h2>
+              <b-button type="is-danger" @click="remove(article._id)">Delete</b-button>
+              <b-button type="is-success" @click="update(article._id)">Update</b-button>
               <hr style="margin-top:10px; margin-bottom:10px">
             </div>
           </div>
@@ -112,7 +114,7 @@ export default {
       })
         .then(({data}) => {
           this.articles = data
-          closeLoading()
+          this.closeLoading()
         })
         .catch(err => {
           this.closeLoading()
@@ -123,6 +125,37 @@ export default {
             type: 'is-danger'
           })
         })
+    },
+    remove(id){
+      this.openLoading()
+      axios({
+        method: 'delete',
+        url: `/article/${id}`,
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+        .then(({data}) => {
+          this.closeLoading()
+          this.fetchPersonal()
+          this.$buefy.toast.open({
+            message: 'Delete Success!',
+            type: 'is-success'
+          })
+        })
+        .catch(err => {
+          this.closeLoading()
+          this.$buefy.toast.open({
+            duration: 5000,
+            message: err.response.data.errors.join(', '),
+            position: 'is-top',
+            type: 'is-danger'
+          })
+        })
+    },
+    update(id){
+      this.$emit('updateId', id)
+      this.$emit('changePage', 'update')
     }
   },
   mounted(){

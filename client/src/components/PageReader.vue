@@ -57,7 +57,7 @@ export default {
       })
         .then(({data}) => {
           this.articles = data
-          closeLoading()
+          this.closeLoading()
         })
         .catch(err => {
           this.closeLoading()
