@@ -1,0 +1,393 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+ a {
+  color: #4ea6cb
+ }
+
+ * {
+   margin: 0px;
+   padding: 0px;
+ }
+ 
+ .btn {
+   /* background-color: #78dec9; */
+   background-color: #59a79a;
+ }
+
+ .sign-out-button {
+  background-color: #4ea6cb;
+ }
+
+ nav {
+   background-color: #4ea6cb;
+ }
+
+/* BOUNCE ANIMATIONS */
+
+
+/* .bounce-enter-active {
+  animation: bounce-in .5s;
+} */
+
+/* .bounce-leave-active {
+  animation: bounce-in .5s reverse;
+} */
+
+/* @keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+} */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+/* HOME (NO ACCESS TOKEN) */
+
+.main-image {
+  /* border: 5px solid black; */
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -5;
+  position: absolute;
+}
+
+/* REGISTER PAGE */
+
+#register-page {
+  z-index: 10;
+  /* height: 100vh; */
+  width: 100vw;
+  padding: 10% 30%;
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* LOGIN PAGE */
+
+#login-page {
+  z-index: 10;
+  /* height: 100vh; */
+  width: 100vw;
+  padding: 10% 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav {
+  line-height: 25px;
+}
+
+#login-page nav {
+  color: black;
+}
+
+.login-form {
+  padding: 10px 25px;
+}
+
+.sign-in-buttons {
+  padding: 0 10% 10% 10%;
+}
+
+.sign-in-buttons p {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: grey;
+  text-align: center;
+}
+
+.google-input-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+ 
+/* UPPER NAVBAR */
+
+.main-navbar {
+  background-color: #4ea6cb;
+}
+
+nav {
+  z-index: 10;
+}
+
+nav ul a {
+  height: 60px
+}
+
+nav ul a.btn {
+  margin: 0;
+}
+
+.nav-wrapper a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-wrapper .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-wrapper ul {
+  height: 100%;
+}
+
+.nav-logo {
+  height: 25px;
+  width: 25px;
+  margin: auto 10px;
+}
+
+.nav-logo-right {
+  height: 30px;
+  width: 30px;
+}
+
+.profile {
+  margin: 0 10px;
+}
+
+.nav-button {
+  width: 80%;
+  margin:auto
+}
+
+.nav-logo-write {
+  height: 25px;
+  width: 25px;
+}
+
+/* SIDENAV */
+
+/* .sidenav {
+  z-index: 0;
+  top: 65px;
+  width: 250px;
+  padding-top: 20px;
+}
+
+.sidenav-overlay {
+  position: relative;
+} */
+
+/* MAIN CONTAINER */
+
+.main-container {
+  margin: 30px 100px;
+}
+
+.inside-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: column;
+  margin-bottom: 25px;
+}
+
+.search-bar {
+  border: 1px grey solid;
+}
+
+#add-post-form {
+  margin-top: 50px;
+}
+
+#update-post-form {
+  margin-top: 50px;
+}
+
+/* .input-container {
+  display: flex;
+  justify-content: center;
+  align-items: column;
+} */
+
+.feature-image-text > h6 {
+  margin-bottom: 25px;
+}
+
+.post-submit-button {
+  justify-content: flex-end;
+}
+
+/* READERS */
+
+.row .col {
+  float: none;
+}
+
+
+.card {
+  width: 730px;
+}
+
+.main-container .row {
+  max-width: 750px;
+}
+
+
+.suggestions {
+  padding-left: 5px;
+}
+
+.followed-sites {
+  border: 1px grey solid;
+  padding-left: 0px;
+}
+
+.search-bar, .suggestions, .followed-sites {
+  margin: 15px;
+}
+
+/* ARTICLE CARDS */
+
+.readers {
+  margin: 5px;
+}
+
+.article-title {
+  padding-top: 10px;
+  padding-left: 24px;
+}
+
+.gravatar {
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  margin: 10px;
+}
+
+.gravatar-big {
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+}
+
+.blog-link {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 770px) {
+  #search-bar {
+    width: 730px;
+  }
+
+  .card-panel {
+    display: flex;
+    justify-content: center;
+    width: 450px;
+  }
+
+  .login-form{
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 769px) {
+  #login-page {
+    padding: 30% 20%;
+  }
+  #login-page {
+    padding: 10% 40%;
+  }
+
+  #register-page {
+    padding: 10% 40%;
+  }
+  .sidenav {
+    top: 50px;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+  }
+
+  .nav-wrapper {
+    margin: 0;
+  }
+
+  #register-page {
+    z-index: 10;
+    width: 100vw;
+    padding: 30% 10% 10% 10%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #login-page {
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    padding: 30% 10% 10% 10%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-image {
+    display: none;
+  }
+
+  #search-bar {
+    width: 500px;
+  }
+
+
+  .card {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .nav-link-title {
+    display: none;
+  }
+
+  #search-bar {
+    width: 350px;
+  }
+
+  .main-container {
+    margin: 50px 25px;
+  }
+
+  .card {
+    width: 350px;
+  }
+}
