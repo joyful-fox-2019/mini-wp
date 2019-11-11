@@ -10273,7 +10273,7 @@ var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var instance = _axios.default.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://ggwp-server.karlinevans333.site'
 });
 
 var _default = instance;
@@ -72074,7 +72074,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43309" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38787" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
