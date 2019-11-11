@@ -1,7 +1,7 @@
 <template>
   <div class="" style="margin-top: 90px;">
       <div class="row">
-          <side-nav-bar @dariTest='dariTest' @articleForm='ArticleForm' @UserArticle='userArticle' @detailsPage='DetailsPage' @dariUser='dariUser' @showTag='ShowTag' @dariTag='dariTag' @showPublic='ShowPublic' @showUpdate='ShowUpdate'></side-nav-bar>
+          <side-nav-bar @dariTest='dariTest' @articleForm='ArticleForm' @UserArticle='userArticle' @detailsPage='DetailsPage' @dariUser='dariUser' @showTag='ShowTag' @dariTag='dariTag' @showPublic='ShowPublic' @showUpdate='ShowUpdate' @tagData='tagData'></side-nav-bar>
           <div class="col-md-8 col-sm-12" id="main-content">
               <div class=" p-2">
                   <div v-if='articleForm'>
@@ -9,15 +9,18 @@
                   </div>
                   <div v-if="showPublic">
                       <h1 style="margin-bottom: 10px;">What's new article today ? </h1>
-                        <list-article @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag'></list-article>
+                        <list-article 
+                        @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag' :showPublic='showPublic' :showTag='showTag' :UserArticle='UserArticle'></list-article>
                   </div>
                   <div v-if="UserArticle">
                       <h1 style="margin-bottom: 10px;">Your Past Article</h1>
-                        <list-article @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag'></list-article>
+                        <list-article 
+                        @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag' :showPublic='showPublic' :showTag='showTag' :UserArticle='UserArticle'></list-article>
                     </div>
                     <div v-if="showTag">
                       <h1 style="margin-bottom: 10px;">Your Search</h1>
-                        <list-article @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag'></list-article>
+                        <list-article 
+                        @detailsPage='DetailsPage' @articleData='ArticleData' @UserArticle='userArticle' :articleData='articleData' @article='Article' @showUpdate='ShowUpdate' @dataUpdate='DataUpdate' @showPublic='ShowPublic' @showTag='ShowTag' :showPublic='showPublic' :showTag='showTag' :UserArticle='UserArticle' :namaTag='namaTag'></list-article>
                   </div>
                   </div>
                   <div v-if="detailsPage">
@@ -53,15 +56,19 @@ export default {
             article: {},
             detailsPage: false,
             UserArticle: false,
-            articleData: {},
+            articleData: [],
             tag: {},
             showTag: false,
             showPublic: false,
             updateForm: false,
-            updateData: {}
+            updateData: {},
+            namaTag: ''
         }
     },
     methods: {
+        tagData (input) {
+            this.namaTag = input
+        },
         DataUpdate (input) {
             this.updateData = input
         },
@@ -93,7 +100,7 @@ export default {
             this.detailsPage = input
         },
         DariNavBar (input) {
-            this.articleData = input
+            this.articleData = input.result
         },
         ArticleForm (input) {
             this.articleForm = input
@@ -106,7 +113,7 @@ export default {
     watch: {
         dariNavbar : {
             handler(val) {
-                this.articleData = val
+                this.articleData = val.result
                 if (val.mainContent) {
                     this.articleForm = false
                     this.UserArticle = false
@@ -114,19 +121,9 @@ export default {
                 } 
             },
             deep: true
-        },
-        articleData: {
-            handler(val) {
-            }
         }
     },
     created () {
-        // this.articleForm = false
-        // if (this.dariNavbar.mainContent) {
-        //     this.articleForm = false
-        //     this.UserArticle = false
-        //     this.detailsPage = false
-        // }
         this.showPublic = true
     }
 }

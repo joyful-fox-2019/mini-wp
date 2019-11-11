@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(data, index) in dataList.result" :key="index">
+    <div v-for="(data, index) in dataList" :key="data.id">
         <div class="container my-2 card">
             <div :class="{'card-straight': (index % 2 == 0), 'card-reverse': (index % 2 == 1)}" >
                 <div class="col-md-4 col-sm-6 mt-2">
@@ -84,13 +84,12 @@ import axios from 'axios'
 import swal from 'sweetalert2'
 export default {
     name: 'ListArticle',
-    props: ['articleData'],
+    props: ['articleData', 'showPublic', 'showTag', 'UserArticle', 'namaTag'],
     data () {
         return {
             data: {},
             userComment: '',
-            dataList: {
-            }
+            dataList: []
         }
     },
     methods: {
@@ -134,7 +133,34 @@ export default {
                     'success',
                     2000
                 )
-                this.showList()
+                if (this.showPublic){
+                    return axios({
+                        url: 'http://hackpress-server.panji-h8.online/article/news',
+                        method: 'get',
+                        headers: {
+                            token: localStorage.getItem('token')
+                        }
+                    })
+                } else if (this.UserArticle) {
+                    return axios({
+                        url: 'http://hackpress-server.panji-h8.online/article',
+                        method: 'get',
+                        headers: {
+                            token: localStorage.getItem('token')
+                        }
+                    })
+                } else if (this.showTag) {
+                    return axios({
+                        url: `http://hackpress-server.panji-h8.online/article/tags/${this.namaTag}`,
+                        method: 'get',
+                        headers: {
+                            token: localStorage.getItem('token')
+                        }
+                    })
+                }
+            })
+            .then (({ data }) => {
+                this.dataList = data
             })
             .catch (err => {
                 swal.close()
@@ -188,17 +214,34 @@ export default {
             })
             .then (({ data }) => {
                 msg = data.msg
-                return axios({
-                    url: 'http://hackpress-server.panji-h8.online/article/news',
-                    method: 'get',
-                    headers: {
-                        token: localStorage.getItem('token')
-                    }
-                })
+                if (this.showPublic){
+                    return axios({
+                        url: 'http://hackpress-server.panji-h8.online/article/news',
+                        method: 'get',
+                        headers: {
+                            token: localStorage.getItem('token')
+                        }
+                    })
+                } else if (this.UserArticle) {
+                    return axios({
+                        url: 'http://hackpress-server.panji-h8.online/article',
+                        method: 'get',
+                        headers: {
+                            token: localStorage.getItem('token')
+                        }
+                    })
+                } else if (this.showTag) {
+                    return axios({
+                        url: `http://hackpress-server.panji-h8.online/article/tags/${this.namaTag}`,
+                        method: 'get',
+                        headers: {
+                            token: localStorage.getItem('token')
+                        }
+                    })
+                }
             })
             .then (({ data }) => {
-                this.dataList.result = data
-                this.dataList.mainContent = true
+                this.dataList = data
                 swal.fire({
                         title: `Success ${msg} an article`,
                         type: 'success',
@@ -207,10 +250,11 @@ export default {
                     })
             })
             .catch (err => {
+
             })
         },
         getDescription (index) {
-            let text = this.articleData.result[index].content
+            let text = this.articleData[index].content
             if (text.length > 50) {
                 return text.slice(0,50) + '...'
             } else {
@@ -226,7 +270,7 @@ export default {
                 }
             })
             .then (({ data }) => {
-                this.articleData.mainContent = false
+                this.articleData = []
                 this.$emit('detailsPage', true)
                 this.$emit('showPublic', false)
                 this.$emit('articleData', this.articleData)
@@ -244,15 +288,13 @@ export default {
                 }
             })
             .then (({ data }) => {
-                this.dataList.result = data
+                this.dataList = data
             })
         }
     },
     watch: {
-        articleData: {
-            handler(val) {
-                this.dataList = val
-            }
+        articleData: function(val) {
+            this.dataList = val
         }
     },
     created() {

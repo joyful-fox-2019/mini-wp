@@ -43,12 +43,9 @@ export default {
     name: 'SideNavBar',
     data () {
         return {
-            dariTest: {
-            },
-            dariUser: {
-            },
-            dariTag: {
-            }
+            dariTest: [],
+            dariUser: [],
+            dariTag: []
         }
     },
     methods: {
@@ -61,8 +58,8 @@ export default {
                 }
             })
             .then (({data}) => {
-                this.dariTag.mainContent = true
-                this.dariTag.result = data
+                this.dariTag = data
+                this.$emit('tagData', tag)
                 this.$emit('showTag', true)
                 this.$emit('articleForm', false)
                 this.$emit('UserArticle', false)
@@ -73,8 +70,8 @@ export default {
             })
         },
         showArticleForm () {
-            this.dariTest.mainContent = false
-            this.dariTest.data = []
+            this.dariTest = []
+            this.$emit('tagData', null)
             this.$emit('articleForm', true)
             this.$emit('UserArticle', false)
             this.$emit('detailsPage', false)
@@ -93,8 +90,8 @@ export default {
             })
             .then (({ data }) => {
                 data = data.reverse()
-                this.dariUser.mainContent = false
-                this.dariUser.result = data
+                this.dariUser = data
+                this.$emit('tagData', null)
                 this.$emit('showPublic', false)
                 this.$emit('articleForm', false)
                 this.$emit('UserArticle', true)
@@ -113,8 +110,8 @@ export default {
                 }
             })
             .then (({ data }) => {
-                this.dariTest.mainContent = true
-                this.dariTest.result = data
+                this.dariTest = data
+                this.$emit('tagData', null)
                 this.$emit('articleForm', false)
                 this.$emit('UserArticle', false)
                 this.$emit('showPublic', true)
