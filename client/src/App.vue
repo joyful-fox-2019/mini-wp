@@ -37,11 +37,10 @@ export default {
         }
       })
       .then(({ data }) => {
-        console.log(data.message)
-        this.isLogin = true
+        this.loggedIn()
       })
       .catch(({ response }) => {
-        console.log(response.data)
+        this.$noty.error(response.data)
       })
     }
   },

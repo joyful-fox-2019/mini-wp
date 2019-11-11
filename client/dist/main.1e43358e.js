@@ -11747,11 +11747,12 @@ var _default = {
         }
       }).then(function (_ref) {
         var data = _ref.data;
-        console.log(data.message);
-        _this.isLogin = true;
+
+        _this.loggedIn();
       }).catch(function (_ref2) {
         var response = _ref2.response;
-        console.log(response.data);
+
+        _this.$noty.error(response.data);
       });
     }
   },
