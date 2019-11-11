@@ -5,6 +5,7 @@ const Article = require('../models/article')
 
 module.exports = {
     authenticate : (req, res, next) => {
+        console.log(req.body)
         try {    
             // masukkan data yang telah diencoded
             const user = verifyToken(req.headers.token)

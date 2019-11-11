@@ -56,7 +56,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor, Quill } from 'vue-quill-editor'
 import addArticle from './views/addArticle'
-import loginRegister from './views/loginRegiste'
+import loginRegister from './views/loginRegister'
 
 export default {
     components : {

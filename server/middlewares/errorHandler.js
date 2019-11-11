@@ -1,9 +1,5 @@
 module.exports = (err, req, res, next) => {
-    console.log('ini error ---->',err)
-    //const status = err.status || 500
-    //const message = err.message || 'Internal Server Error'
-
-    //res.status(status).json(message)
+    console.log('ini error ---->',err)    
     switch (err.name) {
         case 'ValidationError':
             let messages = []

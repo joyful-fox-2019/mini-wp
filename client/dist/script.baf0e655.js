@@ -9439,7 +9439,7 @@ var _default = {
     },
     createArticleInstance: function createArticleInstance() {
       return axios.create({
-        baseURL: 'http://35.240.160.184/articles',
+        baseURL: 'http://localhost:3000/articles',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -23818,7 +23818,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     e.a = o;
   }]);
 });
-},{"quill":"node_modules/quill/dist/quill.js"}],"src/views/addArticle.vue":[function(require,module,exports) {
+},{"quill":"node_modules/quill/dist/quill.js"}],"node_modules/form-data/lib/browser.js":[function(require,module,exports) {
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function (obj) { return typeof obj; }; } else { _typeof = function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/* eslint-env browser */
+module.exports = (typeof self === "undefined" ? "undefined" : _typeof(self)) == 'object' ? self.FormData : window.FormData;
+},{}],"src/views/addArticle.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23837,6 +23842,8 @@ require("quill/dist/quill.snow.css");
 require("quill/dist/quill.bubble.css");
 
 var _vueQuillEditor = require("vue-quill-editor");
+
+var _formData = _interopRequireDefault(require("form-data"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23891,7 +23898,7 @@ var _default = {
     return {
       articleTitle: '',
       articleContent: '',
-      articleFeaturedImage: ''
+      articleFeaturedImage: {}
     };
   },
   methods: {
@@ -23902,12 +23909,21 @@ var _default = {
     createArticle: function createArticle() {
       var _this = this;
 
-      console.log('masuk create article');
+      var data = new _formData.default();
+      data.append('title', this.articleTitle);
+      data.append('content', this.articleContent);
+      data.append('featuredImage', this.articleFeaturedImage);
+      console.log('masuk create article', data);
       var article = this.createArticleInstance();
-      article.post('', {
-        title: this.articleTitle,
-        content: this.articleContent,
-        featuredImage: this.articleFeaturedImage
+      console.log('ini data', data);
+      console.log(article);
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/articles',
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: data
       }).then(function (_ref) {
         var data = _ref.data;
         console.log(data);
@@ -23920,7 +23936,7 @@ var _default = {
     },
     createArticleInstance: function createArticleInstance() {
       return axios.create({
-        baseURL: 'http://35.240.160.184/articles',
+        baseURL: 'http://localhost:3000/articles',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -23981,7 +23997,7 @@ exports.default = _default;
                       ],
                       staticClass: "form-control",
                       attrs: {
-                        type: "email",
+                        type: "text",
                         id: "exampleInputEmail1",
                         "aria-describedby": "emailHelp",
                         required: ""
@@ -24030,23 +24046,7 @@ exports.default = _default;
             }),
             _vm._v(" "),
             _c("div", { staticClass: "d-flex justify-content-between mt-2" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  attrs: { type: "submit", href: "" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.createArticle()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-floppy-o pr-1" }),
-                  _vm._v("Save")
-                ]
-              ),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "button",
@@ -24084,6 +24084,16 @@ var staticRenderFns = [
         attrs: { src: "/1.556096dc.jpeg", alt: "" }
       })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-success", attrs: { type: "submit", href: "" } },
+      [_c("i", { staticClass: "fa fa-floppy-o pr-1" }), _vm._v("Save")]
+    )
   }
 ]
 render._withStripped = true
@@ -24118,7 +24128,7 @@ render._withStripped = true
       
       }
     })();
-},{"../components/sideBar":"src/components/sideBar.vue","quill":"node_modules/quill/dist/quill.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","./../components/img/1.jpeg":[["1.556096dc.jpeg","src/components/img/1.jpeg"],"src/components/img/1.jpeg"],"_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{"../components/sideBar":"src/components/sideBar.vue","quill":"node_modules/quill/dist/quill.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","form-data":"node_modules/form-data/lib/browser.js","./../components/img/1.jpeg":[["1.556096dc.jpeg","src/components/img/1.jpeg"],"src/components/img/1.jpeg"],"_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -25831,7 +25841,7 @@ module.exports.default = axios;
 
 },{"./utils":"node_modules/axios/lib/utils.js","./helpers/bind":"node_modules/axios/lib/helpers/bind.js","./core/Axios":"node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"node_modules/axios/lib/core/mergeConfig.js","./defaults":"node_modules/axios/lib/defaults.js","./cancel/Cancel":"node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"node_modules/axios/lib/helpers/spread.js"}],"node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"src/views/loginRegiste.vue":[function(require,module,exports) {
+},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"src/views/loginRegister.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25843,6 +25853,7 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -25943,6 +25954,7 @@ var _default = {
     login: function login() {
       var _this = this;
 
+      console.log('masuk login');
       var user = this.createUser();
       user.post('/login', {
         email: this.email_login,
@@ -25979,20 +25991,20 @@ var _default = {
     },
     createUser: function createUser() {
       return _axios.default.create({
-        baseURL: 'http://35.240.160.184'
+        baseURL: 'http://localhost:3000'
       });
     }
   }
 };
 exports.default = _default;
-        var $ded77d = exports.default || module.exports;
+        var $1f4a2b = exports.default || module.exports;
       
-      if (typeof $ded77d === 'function') {
-        $ded77d = $ded77d.options;
+      if (typeof $1f4a2b === 'function') {
+        $1f4a2b = $1f4a2b.options;
       }
     
         /* template */
-        Object.assign($ded77d, (function () {
+        Object.assign($1f4a2b, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -26064,7 +26076,13 @@ exports.default = _default;
                   "form",
                   {
                     staticClass: "border p-3 bg-white",
-                    attrs: { id: "register" }
+                    attrs: { id: "register" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.register($event)
+                      }
+                    }
                   },
                   [
                     _c("div", { staticClass: "form-group" }, [
@@ -26085,6 +26103,7 @@ exports.default = _default;
                         attrs: {
                           id: "email",
                           type: "email",
+                          required: "",
                           placeholder: "Enter email"
                         },
                         domProps: { value: _vm.email_register },
@@ -26130,6 +26149,7 @@ exports.default = _default;
                         attrs: {
                           id: "username",
                           type: "text",
+                          required: "",
                           placeholder: "Enter username"
                         },
                         domProps: { value: _vm.username_register },
@@ -26145,7 +26165,7 @@ exports.default = _default;
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+                      _c("label", { attrs: { for: "password_register" } }, [
                         _vm._v("Password")
                       ]),
                       _vm._v(" "),
@@ -26177,30 +26197,7 @@ exports.default = _default;
                       })
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-inline",
-                        staticStyle: { margin: "5px auto" }
-                      },
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "btn btn-secondary btn-sm btn-block mt-2",
-                            attrs: { type: "submit" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.register($event)
-                              }
-                            }
-                          },
-                          [_vm._v("Register")]
-                        )
-                      ]
-                    )
+                    _vm._m(1)
                   ]
                 )
               : _vm._e(),
@@ -26211,7 +26208,7 @@ exports.default = _default;
                   { staticClass: "border p-3", attrs: { id: "login" } },
                   [
                     _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _c("label", { attrs: { for: "email_login" } }, [
                         _vm._v("Email address")
                       ]),
                       _vm._v(" "),
@@ -26229,7 +26226,6 @@ exports.default = _default;
                           id: "email_login",
                           type: "email",
                           required: "",
-                          "aria-describedby": "emailHelp",
                           placeholder: "Enter email"
                         },
                         domProps: { value: _vm.email_login },
@@ -26344,6 +26340,25 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-inline", staticStyle: { margin: "5px auto" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary btn-sm btn-block mt-2",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Register")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -26365,9 +26380,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$ded77d', $ded77d);
+            api.createRecord('$1f4a2b', $1f4a2b);
           } else {
-            api.reload('$ded77d', $ded77d);
+            api.reload('$1f4a2b', $1f4a2b);
           }
         }
 
@@ -26406,7 +26421,7 @@ var _vueQuillEditor = require("vue-quill-editor");
 
 var _addArticle = _interopRequireDefault(require("./views/addArticle"));
 
-var _loginRegiste = _interopRequireDefault(require("./views/loginRegiste"));
+var _loginRegister = _interopRequireDefault(require("./views/loginRegister"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26464,7 +26479,7 @@ var _default = {
     quillEditor: _vueQuillEditor.quillEditor,
     sideBar: _sideBar.default,
     addArticle: _addArticle.default,
-    loginRegister: _loginRegiste.default
+    loginRegister: _loginRegister.default
   },
   data: function data() {
     return {
@@ -26863,7 +26878,7 @@ render._withStripped = true
       
       }
     })();
-},{"./components/navbarItem":"src/components/navbarItem.vue","./components/homePage":"src/components/homePage.vue","./components/editPage":"src/components/editPage.vue","./components/sideBar":"src/components/sideBar.vue","quill":"node_modules/quill/dist/quill.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","./views/addArticle":"src/views/addArticle.vue","./views/loginRegiste":"src/views/loginRegiste.vue","./../img/1.jpeg":[["1.9296fedd.jpeg","img/1.jpeg"],"img/1.jpeg"],"_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/script.js":[function(require,module,exports) {
+},{"./components/navbarItem":"src/components/navbarItem.vue","./components/homePage":"src/components/homePage.vue","./components/editPage":"src/components/editPage.vue","./components/sideBar":"src/components/sideBar.vue","quill":"node_modules/quill/dist/quill.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","./views/addArticle":"src/views/addArticle.vue","./views/loginRegister":"src/views/loginRegister.vue","./../img/1.jpeg":[["1.9296fedd.jpeg","img/1.jpeg"],"img/1.jpeg"],"_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/script.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -26905,7 +26920,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36379" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42193" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -3,6 +3,7 @@ const Article = require('../models/article')
 const User = require('../models/user')
 
 class articleController {
+    
     static findAll(req, res, next) {
         console.log(req.user,'dsfsdafasf')
         Article.
@@ -34,6 +35,7 @@ class articleController {
     }
 
     static add(req, res, next) {
+        console.log('masuk add')
         const {title, content, featured_image} = req.body
         Article.
             create({

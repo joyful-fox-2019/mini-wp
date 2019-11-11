@@ -14,7 +14,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Title</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="articleTitle" required>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="articleTitle" required>
                                     </div> 
                                     <p class="pb-0">Add picture</p>
                                      <div class="input-group"> 
@@ -29,7 +29,7 @@
                         <h4 class="text-center my-3">Content</h4>
                         <quillEditor v-model="articleContent" ref="myQuillEditor"></quillEditor>
                         <div class="d-flex justify-content-between mt-2">
-                            <button type="submit" class="btn btn-success" @click.prevent="createArticle()" href=""><i class="fa fa-floppy-o pr-1"></i>Save</button>
+                            <button type="submit" class="btn btn-success" href=""><i class="fa fa-floppy-o pr-1"></i>Save</button>
                             <button class="btn btn-danger" @click.prevent="cancel()" href=""><i class="fa fa-times-circle-o pr-1"></i>Cencel</button> 
                         </div>  
                     </form>
@@ -48,6 +48,8 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor, Quill } from 'vue-quill-editor'
+import FormData from 'form-data'
+
 
 export default {
     components : {
@@ -58,7 +60,7 @@ export default {
         return {
             articleTitle : '',
             articleContent : '',
-            articleFeaturedImage : ''
+            articleFeaturedImage : {}
         }
     },    
     methods : {
@@ -66,14 +68,26 @@ export default {
             console.log('masuk cancel')
             this.$emit('cancel-Add')
         },
+        
         createArticle() {
-            console.log('masuk create article')
-            const article = this.createArticleInstance()
-            article
-                .post('', {
-                    title : this.articleTitle,
-                    content : this.articleContent,
-                    featuredImage : this.articleFeaturedImage
+            let data = new FormData();
+            
+            data.append('title', this.articleTitle)
+            data.append('content', this.articleContent)
+            data.append('featuredImage', this.articleFeaturedImage)
+
+            console.log('masuk create article', data)
+            const article = this.createArticleInstance()           
+            
+            console.log('ini data', data)
+            console.log(article)
+            axios
+                ({  method: 'post',
+                    url: 'http://localhost:3000/articles',
+                    headers : {
+                        token : localStorage.getItem('token')
+                    }, 
+                    data 
                 })
                 .then( ({data}) => {
                     console.log(data)
@@ -90,7 +104,7 @@ export default {
         },
         createArticleInstance() {
             return axios.create({
-                baseURL: 'http://35.240.160.184/articles',
+                baseURL: 'http://localhost:3000/articles',
                 headers : {
                     token : localStorage.getItem('token')
                 }    

@@ -24,29 +24,30 @@
         <div style="width: 90%; margin:10px auto; ">
             <div style="width: 40%; margin: 10px auto;" >
                 <h4 class="display-4 text-center" style="padding-bottom: 10px;" >Get Start For Free</h4>
-                <form id="register" v-if='toRegister' class="border p-3 bg-white">
+
+                <form id="register" v-if='toRegister' @submit.prevent='register' class="border p-3 bg-white">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input v-model="email_register" id="email" type="email" class="form-control" placeholder="Enter email">
+                        <input v-model="email_register" id="email" type="email" class="form-control" required  placeholder="Enter email">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input v-model="username_register" id="username" type="text" class="form-control"  placeholder="Enter username">
+                        <input v-model="username_register" id="username" type="text" class="form-control" required placeholder="Enter username">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
+                        <label for="password_register">Password</label>
                         <input v-model="password_register" id="password" type="password" class="form-control" required placeholder="Password">
                     </div>       
                     <div class="form-inline" style="margin: 5px auto;">
-                        <button @click.prevent='register' type="submit" class="btn btn-secondary btn-sm btn-block mt-2">Register</button> 
+                        <button type="submit" class="btn btn-secondary btn-sm btn-block mt-2">Register</button> 
                     </div>                      
                 </form>
 
                 <form id="login" v-if='toLogin' class="border p-3">
                     <div class="form-group">
-                        <label for="exampleInputEmail1" >Email address</label>
-                        <input id="email_login" v-model='email_login' type="email" class="form-control" required aria-describedby="emailHelp" placeholder="Enter email">                        
+                        <label for="email_login" >Email address</label>
+                        <input id="email_login" v-model='email_login' type="email" class="form-control" required  placeholder="Enter email">                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1" >Password</label>
@@ -72,6 +73,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
     props : ['loginStatus'],
     data() {
@@ -99,6 +101,7 @@ export default {
             this.frontPage = false
         },
         login(){
+            console.log('masuk login')
             const user = this.createUser()
             user.
                 post('/login', 
@@ -151,7 +154,7 @@ export default {
         },
         createUser() {
             return axios.create({
-                baseURL : 'http://35.240.160.184'
+                baseURL : 'http://localhost:3000'
             })
         }
     }
