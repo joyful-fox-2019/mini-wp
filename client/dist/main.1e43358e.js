@@ -10268,8 +10268,9 @@ var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // DEVELOPMENT
-var server = 'http://localhost:3000'; // DEPLOYED
-// const server = 'http://wordride.mardii.site'
+// const server = 'http://localhost:3000'
+// DEPLOYED
+var server = 'http://api.wordride.mardii.site';
 
 var instance = _axios.default.create({
   baseURL: server
@@ -10647,7 +10648,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 var _default = {
   data: function data() {
     return {
@@ -10702,6 +10702,10 @@ var _default = {
           localStorage.setItem('token', data.token);
 
           _this2.$emit('loggedIn');
+        }).catch(function (_ref4) {
+          var response = _ref4.response;
+
+          _this2.$noty.error(response.data.message);
         })
       });
     }
@@ -10797,7 +10801,36 @@ exports.default = _default;
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _vm._m(2)
+      _c("div", { staticClass: "flex flex-wrap justify-center w-3/4 m-4" }, [
+        _c(
+          "h4",
+          {
+            staticStyle: {
+              display: "block",
+              width: "100%",
+              "text-align": "center",
+              "margin-bottom": "20px"
+            }
+          },
+          [_vm._v("Or continue with")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2",
+            attrs: { type: "button", "data-onsuccess": "onSignIn" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.onSignin($event)
+              }
+            }
+          },
+          [_vm._v("Google")]
+        )
+      ])
     ]
   )
 }
@@ -10823,45 +10856,6 @@ var staticRenderFns = [
         attrs: { id: "login-btn", type: "submit", value: "Login" }
       })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "flex flex-wrap justify-center w-3/4 m-4" },
-      [
-        _c(
-          "h4",
-          {
-            staticStyle: {
-              display: "block",
-              width: "100%",
-              "text-align": "center",
-              "margin-bottom": "20px"
-            }
-          },
-          [_vm._v("Or continue with")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2",
-            attrs: { type: "button", "data-onsuccess": "onSignIn" }
-          },
-          [_vm._v("Google")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "bg-gray-200 rounded cursor-pointer p-2 mx-2" },
-          [_vm._v("Github")]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -10956,7 +10950,7 @@ var _default = {
       }).catch(function (_ref2) {
         var response = _ref2.response;
 
-        _this.$noty.error(response.data);
+        _this.$noty.error(response.data.message);
 
         if (response.data.errors) _this.$noty.error(response.data.errors.join('/n'));
       });
@@ -11283,7 +11277,6 @@ var _default = {
       });
     },
     emptyInput: function emptyInput() {
-      console.log('ngosongin input');
       this.keyword = '';
     }
   }
@@ -14695,7 +14688,6 @@ var _default = {
 
       if (this.sort) url += "".concat(this.sort);
       if (this.mine) url += '&whose=mine';
-      console.log(url);
       (0, _axios.default)({
         method: 'GET',
         url: "".concat(url),
@@ -14707,8 +14699,9 @@ var _default = {
         _this.articles = data;
       }).catch(function (_ref2) {
         var response = _ref2.response;
+
         // error alert
-        console.log(response.data);
+        _this.$noty.error(response.data.message);
       });
     },
     showArticle: function showArticle(id) {
@@ -28959,7 +28952,7 @@ var _default = {
         }).catch(function (_ref2) {
           var response = _ref2.response;
 
-          _this.$noty.error(response.data);
+          _this.$noty.error(response.data.message);
         });
         dialog.close();
       }).catch(function (dialog) {
@@ -28998,9 +28991,8 @@ var _default = {
           _this2.$router.push('/articles/' + _this2.$route.params.id);
         }).catch(function (_ref4) {
           var response = _ref4.response;
-          console.log(response.data);
 
-          _this2.$noty.error(response.data);
+          _this2.$noty.error(response.data.message);
         });
         dialog.close();
       }).catch(function (dialog) {
@@ -29020,6 +29012,12 @@ var _default = {
     }).then(function (_ref5) {
       var data = _ref5.data;
       _this3.article = data;
+    }).catch(function (_ref6) {
+      var response = _ref6.response;
+
+      _this3.$noty.error(response.data.message);
+
+      _this3.$router.push('/articles');
     });
   }
 };
@@ -29323,11 +29321,11 @@ var _default = {
       }
     }).then(function (_ref) {
       var data = _ref.data;
-      console.log(data);
       _this.article = data;
     }).catch(function (_ref2) {
       var response = _ref2.response;
-      console.log(response.data);
+
+      _this.$noty.error(response.data.message);
     });
   }
 };
@@ -29603,15 +29601,16 @@ var _default = {
         data: fd
       }).then(function (_ref) {
         var data = _ref.data;
-        console.log(data.article);
-        console.log(data.message);
+
+        _this.$noty.success(data.message);
 
         _this.emptyEditor();
 
         _this.$router.push('/articles');
       }).catch(function (_ref2) {
         var response = _ref2.response;
-        console.log(response.data);
+
+        _this.$noty.error(response.data);
       });
     }
   },
@@ -29915,14 +29914,10 @@ var _default = {
       }).catch(function (_ref2) {
         var response = _ref2.response;
 
-        // error alert
-        _this.$noty.error(response.data);
-
-        console.log(response.data);
+        _this.$noty.error(response.data.message);
       });
     },
     showArticle: function showArticle(id) {
-      console.log(id);
       this.$router.push("articles/".concat(id));
     },
     summary: function summary(content) {
@@ -29964,7 +29959,7 @@ exports.default = _default;
           staticClass: "article-card flex w-4/5 md:w-3/4 m-8 rounded shadow-2xl"
         },
         [
-          _c("div", { staticClass: "flex border border-gray-500 w-1/2" }, [
+          _c("div", { staticClass: "flex  w-1/2" }, [
             _c("img", {
               staticStyle: { "object-fit": "cover" },
               attrs: {
@@ -29978,8 +29973,7 @@ exports.default = _default;
             _c(
               "div",
               {
-                staticClass:
-                  "card-info flex flex-wrap p-1 border border-red-200 w-full",
+                staticClass: "card-info flex flex-wrap p-1 w-full",
                 staticStyle: { height: "20%" }
               },
               [
@@ -30012,13 +30006,12 @@ exports.default = _default;
             _c(
               "div",
               {
-                staticClass:
-                  "flex p-1 flex-wrap items-end border border-blue-500 w-full",
+                staticClass: "flex p-1 flex-wrap items-end w-full",
                 staticStyle: { height: "80%" }
               },
               [
                 _c("div", {
-                  staticClass: "my-2 w-full border border-black",
+                  staticClass: "my-2 w-full ",
                   staticStyle: { height: "50%", overflow: "auto" },
                   domProps: { innerHTML: _vm._s(_vm.summary(article.content)) }
                 }),
@@ -31867,7 +31860,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41293" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45401" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

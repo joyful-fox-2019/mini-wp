@@ -82,7 +82,7 @@ export default {
           this.$router.push('/articles')
         })
         .catch(({ response }) => {
-          this.$noty.error(response.data)
+          this.$noty.error(response.data.message)
         })
         dialog.close()
       })
@@ -116,8 +116,7 @@ export default {
           this.$router.push('/articles/' + this.$route.params.id)
         })
         .catch(({ response })=>{
-          console.log(response.data);
-          this.$noty.error(response.data)
+          this.$noty.error(response.data.message)
         })
         dialog.close()
       })
@@ -137,6 +136,10 @@ export default {
     })
     .then(({ data }) => {
       this.article = data
+    })
+    .catch(({ response }) => {
+      this.$noty.error(response.data.message)
+      this.$router.push('/articles')
     })
   },
 }

@@ -72,7 +72,6 @@ export default {
 
       if(this.sort) url += `${this.sort}`
       if(this.mine) url += '&whose=mine'
-      console.log(url);
       axios({
         method: 'GET',
         url: `${url}`,
@@ -85,7 +84,8 @@ export default {
       })
       .catch(({ response }) => {
         // error alert
-        console.log(response.data)
+        this.$noty.error(response.data.message)
+
       })
     },
     showArticle (id) {

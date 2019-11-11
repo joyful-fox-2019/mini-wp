@@ -43,7 +43,7 @@ export default {
         
       })
       .catch(({ response }) => {
-        this.$noty.error(response.data)
+        this.$noty.error(response.data.message)
         if(response.data.errors) this.$noty.error(response.data.errors.join('/n'))
       })
     }  

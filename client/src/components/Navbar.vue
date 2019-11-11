@@ -27,7 +27,6 @@ export default {
       if(this.keyword.length>0) this.$emit('search', { keyword: this.keyword })
     },
     emptyInput () {
-      console.log('ngosongin input');
       this.keyword = ''
     }
   }

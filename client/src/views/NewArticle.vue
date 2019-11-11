@@ -104,13 +104,12 @@ export default {
         data : fd
       })
       .then(({ data }) => {
-        console.log(data.article);
-        console.log(data.message);
+        this.$noty.success(data.message)
         this.emptyEditor()
         this.$router.push('/articles')
       })
       .catch(({ response })=>{
-        console.log(response.data);
+        this.$noty.error(response.data);
       })
     }
   },

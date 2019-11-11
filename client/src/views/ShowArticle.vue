@@ -53,11 +53,10 @@ export default {
       }
     })
     .then(({ data }) => {
-      console.log(data);
       this.article = data
     })
     .catch(({ response }) => {
-      console.log(response.data)
+      this.$noty.error(response.data.message)
     })
   },
 }
