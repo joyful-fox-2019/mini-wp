@@ -1,3 +1,16 @@
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #dfe3e9;
+  color: rgb(56, 55, 55);
+  cursor: pointer;
+  /* box-shadow: 0 3px 0 #0f69ff; */
+}
+.g-signin-button:hover{
+  background-color: rgb(255, 148, 148)
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 

@@ -10268,9 +10268,8 @@ var _axios = _interopRequireDefault(require("axios"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // DEVELOPMENT
-// const server = 'http://localhost:3000'
-// DEPLOYED
-var server = 'http://api.wordride.mardii.site';
+var server = 'http://localhost:3000'; // DEPLOYED
+// const server = 'http://api.wordride.mardii.site'
 
 var instance = _axios.default.create({
   baseURL: server
@@ -10648,11 +10647,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      googleSignInParams: {
+        client_id: '787337526653-vfj255cc58soapb885s5ug7rqeb6aboh.apps.googleusercontent.com'
+      }
     };
   },
   methods: {
@@ -10688,26 +10696,31 @@ var _default = {
     onSignIn: function onSignIn(googleUser) {
       var _this2 = this;
 
-      var id_token = googleUser.getAuthResponse().id_token;
+      var id_token = googleUser.getAuthResponse().id_token; // console.log(id_token, 'MASUK');
+
       (0, _axios.default)({
         method: 'POST',
         url: "/users/glogin",
         data: {
           id_token: id_token
-        }.then(function (_ref3) {
-          var data = _ref3.data;
+        }
+      }).then(function (_ref3) {
+        var data = _ref3.data;
 
-          _this2.$noty.success(data.message);
+        // console.log('masuk ');
+        _this2.$noty.success(data.message);
 
-          localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.token);
 
-          _this2.$emit('loggedIn');
-        }).catch(function (_ref4) {
-          var response = _ref4.response;
+        _this2.$emit('loggedIn');
+      }).catch(function (_ref4) {
+        var response = _ref4.response;
 
-          _this2.$noty.error(response.data.message);
-        })
+        _this2.$noty.error(response.data.message);
       });
+    },
+    onSignInError: function onSignInError() {
+      console.log('Error');
     }
   }
 };
@@ -10801,36 +10814,34 @@ exports.default = _default;
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "flex flex-wrap justify-center w-3/4 m-4" }, [
-        _c(
-          "h4",
-          {
-            staticStyle: {
-              display: "block",
-              width: "100%",
-              "text-align": "center",
-              "margin-bottom": "20px"
-            }
-          },
-          [_vm._v("Or continue with")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2",
-            attrs: { type: "button", "data-onsuccess": "onSignIn" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.onSignin($event)
+      _c(
+        "div",
+        { staticClass: "flex flex-wrap justify-center w-3/4 m-4" },
+        [
+          _c(
+            "h4",
+            {
+              staticStyle: {
+                display: "block",
+                width: "100%",
+                "text-align": "center",
+                "margin-bottom": "20px"
               }
-            }
-          },
-          [_vm._v("Google")]
-        )
-      ])
+            },
+            [_vm._v("Or continue with")]
+          ),
+          _vm._v(" "),
+          _c(
+            "g-signin-button",
+            {
+              attrs: { params: _vm.googleSignInParams },
+              on: { success: _vm.onSignIn, error: _vm.onSignInError }
+            },
+            [_vm._v("\n  Sign in with Google\n")]
+          )
+        ],
+        1
+      )
     ]
   )
 }
@@ -31757,6 +31768,10 @@ var define;
     e.default = i.exports;
   }]);
 });
+},{}],"node_modules/vue-google-signin-button/dist/vue-google-signin-button.min.js":[function(require,module,exports) {
+var define;
+'use strict';var _typeof='function'==typeof Symbol&&'symbol'==typeof Symbol.iterator?function(obj){return typeof obj}:function(obj){return obj&&'function'==typeof Symbol&&obj.constructor===Symbol&&obj!==Symbol.prototype?'symbol':typeof obj};(function(){function a(c){'undefined'!=typeof console&&console.error('[g-signin-button] '+c)}function b(c){c.component('g-signin-button',{name:'g-signin-button',render:function render(d){return d('div',{attrs:{class:'g-signin-button'},ref:'signinBtn'},this.$slots.default)},props:{params:{type:Object,required:!0,default:function _default(){return{}}}},mounted:function mounted(){var _this=this;return window.gapi?this.params.client_id?void window.gapi.load('auth2',function(){var d=window.gapi.auth2.init(_this.params);d.attachClickHandler(_this.$refs.signinBtn,{},function(e){_this.$emit('success',e)},function(e){_this.$emit('error',e),_this.$emit('failure',e)})}):void a('params.client_id must be specified.'):void a('"https://apis.google.com/js/api:client.js" needs to be included as a <script>.')}})}'object'==('undefined'==typeof exports?'undefined':_typeof(exports))?module.exports=b:'function'==typeof define&&define.amd?define([],function(){return b}):window.Vue&&window.Vue.use(b)})();
+
 },{}],"node_modules/quill/dist/quill.core.css":[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
@@ -31805,6 +31820,8 @@ var _vuejsNoty = _interopRequireDefault(require("vuejs-noty"));
 
 var _vuejsDialog = _interopRequireDefault(require("vuejs-dialog"));
 
+var _vueGoogleSigninButton = _interopRequireDefault(require("vue-google-signin-button"));
+
 require("quill/dist/quill.core.css");
 
 require("quill/dist/quill.snow.css");
@@ -31827,13 +31844,15 @@ _vue.default.use(_vuejsNoty.default, {
 
 _vue.default.use(_vuejsDialog.default);
 
+_vue.default.use(_vueGoogleSigninButton.default);
+
 new _vue.default({
   router: _router.default,
   render: function render(h) {
     return h(_App.default);
   }
 }).$mount('#app');
-},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue","../tailwind.css":"tailwind.css","../style.css":"style.css","./router":"src/router.js","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","vuejs-noty":"node_modules/vuejs-noty/dist/vuejs-noty.js","vuejs-dialog":"node_modules/vuejs-dialog/dist/vuejs-dialog.min.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vuejs-noty/dist/vuejs-noty.css":"node_modules/vuejs-noty/dist/vuejs-noty.css","vuejs-dialog/dist/vuejs-dialog.min.css":"node_modules/vuejs-dialog/dist/vuejs-dialog.min.css"}],"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue","../tailwind.css":"tailwind.css","../style.css":"style.css","./router":"src/router.js","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","vuejs-noty":"node_modules/vuejs-noty/dist/vuejs-noty.js","vuejs-dialog":"node_modules/vuejs-dialog/dist/vuejs-dialog.min.js","vue-google-signin-button":"node_modules/vue-google-signin-button/dist/vue-google-signin-button.min.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vuejs-noty/dist/vuejs-noty.css":"node_modules/vuejs-noty/dist/vuejs-noty.css","vuejs-dialog/dist/vuejs-dialog.min.css":"node_modules/vuejs-dialog/dist/vuejs-dialog.min.css"}],"../../../../../../.nvm/versions/node/v10.16.3/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -31861,7 +31880,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32795" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36513" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

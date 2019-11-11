@@ -9,7 +9,13 @@
     </div>
     <div class="flex flex-wrap justify-center w-3/4 m-4">
       <h4 style="display: block; width: 100%; text-align: center; margin-bottom: 20px;">Or continue with</h4>
-      <button type="button" class="bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2" @click.prevent="onSignin" data-onsuccess="onSignIn">Google</button>
+      <!-- <button type="button" class="bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2" @click.prevent="onSignin" data-onsuccess="onSignIn">Google</button> -->
+      <g-signin-button
+    :params="googleSignInParams"
+    @success="onSignIn"
+    @error="onSignInError">
+    Sign in with Google
+  </g-signin-button>
     </div>
   </form>
 </template>
@@ -20,7 +26,10 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      googleSignInParams: {
+        client_id: '787337526653-vfj255cc58soapb885s5ug7rqeb6aboh.apps.googleusercontent.com'
+      }
     }
   },
   methods: {
@@ -47,13 +56,14 @@ export default {
     },
     onSignIn (googleUser) {
         var id_token = googleUser.getAuthResponse().id_token;
+        // console.log(id_token, 'MASUK');
       axios({
         method: 'POST',
         url: `/users/glogin`,
-        data: {
-          id_token
-      }
+        data: { id_token }
+      })
       .then(({ data }) => {
+        // console.log('masuk ');
         this.$noty.success(data.message)
         localStorage.setItem('token', data.token)
         this.$emit('loggedIn')
@@ -62,12 +72,26 @@ export default {
       .catch(({ response }) => {
         this.$noty.error(response.data.message)
       })
-    })
+    },
+    onSignInError () {
+      console.log('Error');
     }
   },
 }
 </script>
 
 <style>
-
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #dfe3e9;
+  color: rgb(56, 55, 55);
+  cursor: pointer;
+  /* box-shadow: 0 3px 0 #0f69ff; */
+}
+.g-signin-button:hover{
+  background-color: rgb(255, 148, 148)
+}
 </style>

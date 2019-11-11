@@ -6,6 +6,7 @@ import router from './router'
 import VueQuillEditor from 'vue-quill-editor'
 import VueNoty from 'vuejs-noty'
 import VuejsDialog from 'vuejs-dialog';
+import GSignInButton from 'vue-google-signin-button'
 
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
@@ -20,6 +21,7 @@ Vue.use(VueNoty, {
   layout: 'topRight'
 })
 Vue.use(VuejsDialog)
+Vue.use(GSignInButton)
 
 new Vue({
   router,
