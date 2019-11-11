@@ -39,6 +39,7 @@
 import "vue-wysiwyg/dist/vueWysiwyg.css";
 import axios from "axios";
 const host = "https://mini-wp-aws.sigitariprasetyo.xyz";
+// const host = "http://localhost:3000";
 
 export default {
   name: "WriteArticle",
@@ -84,7 +85,7 @@ export default {
       formData.set('publish', status)
       axios({
         method: "post",
-        url: `https://mini-wp-aws.sigitariprasetyo.xyz/article`,
+        url: `${host}/article`,
 
         data: formData,
         headers: {

@@ -14069,7 +14069,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-var host = "http://mini-wp-api.sigitariprasetyo.xyz";
+var host = "https://mini-wp-aws.sigitariprasetyo.xyz"; // const host = "http://localhost:3000";
+
 var _default = {
   name: "WriteArticle",
   data: function data() {
@@ -14095,7 +14096,7 @@ var _default = {
       formData.set("content", this.content);
       (0, _axios.default)({
         method: "post",
-        url: "https://mini-wp-aws.sigitariprasetyo.xyz/article",
+        url: "".concat(host, "/article"),
         data: formData,
         headers: {
           token: localStorage.getItem("token"),
@@ -15126,10 +15127,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
 var host = 'https://mini-wp-aws.sigitariprasetyo.xyz'; // const host = "http://localhost:3000";
 
 var _default = {
@@ -15157,7 +15154,7 @@ var _default = {
   },
   methods: {
     handleJwt: function handleJwt() {
-      this.$router.push('/');
+      this.$router.push("/");
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("email");
@@ -39433,6 +39430,11 @@ exports.default = _default;
               "div",
               { staticStyle: { float: "none" } },
               [
+                _c("div", {
+                  staticClass: "content",
+                  domProps: { innerHTML: _vm._s(_vm.article.content) }
+                }),
+                _vm._v(" "),
                 _c(
                   "truncate",
                   {
@@ -39805,7 +39807,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-var host = 'https://mini-wp-aws.sigitariprasetyo.xyz'; // const host = "http://localhost:3000";
+var host = "https://mini-wp-aws.sigitariprasetyo.xyz"; // const host = "http://localhost:3000";
 
 var _default = {
   name: "CardMyPost",
@@ -40840,7 +40842,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-var host = "https://mini-wp-aws.sigitariprasetyo.xyz";
+var host = "https://mini-wp-aws.sigitariprasetyo.xyz"; // const host = "http://localhost:3000";
+
 var _default = {
   name: "WriteArticle",
   data: function data() {
@@ -40887,7 +40890,7 @@ var _default = {
       formData.set('publish', status);
       (0, _axios.default)({
         method: "post",
-        url: "https://mini-wp-aws.sigitariprasetyo.xyz/article",
+        url: "".concat(host, "/article"),
         data: formData,
         headers: {
           token: localStorage.getItem("token"),
@@ -41187,7 +41190,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-var host = "https://mini-wp-aws.sigitariprasetyo.xyz";
+var host = "https://mini-wp-aws.sigitariprasetyo.xyz"; // const host = "http://localhost:3000";
+
 var _default = {
   name: "EditArticle",
   data: function data() {
@@ -41239,8 +41243,7 @@ var _default = {
 
       (0, _axios.default)({
         method: "patch",
-        url: "https://mini-wp-aws.sigitariprasetyo.xyz/article/".concat(id, "/update"),
-        // url: `http://localhost:3000/article/${id}/update`,
+        url: "".concat(host, "/").concat(id, "/update"),
         data: formData,
         headers: {
           token: localStorage.getItem("token")
@@ -45964,7 +45967,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34399" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35783" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

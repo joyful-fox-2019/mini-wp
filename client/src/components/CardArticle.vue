@@ -27,7 +27,7 @@
             </figure>
           </div>
           <div style="float:none;">
-            <!-- <div class="content" v-html="article.content"></div> -->
+            <div class="content" v-html="article.content"></div>
             <truncate
               clamp="show more..."
               :length="200"

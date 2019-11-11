@@ -57,7 +57,8 @@
 </template>
 <script>
 import axios from "axios";
-const host = "http://mini-wp-api.sigitariprasetyo.xyz";
+const host = "https://mini-wp-aws.sigitariprasetyo.xyz";
+// const host = "http://localhost:3000";
 
 import CardArticle from "./CardArticle.vue";
 import CardMyPost from "./CardMyPost.vue";
@@ -98,7 +99,7 @@ export default {
     updatePost(id) {
       axios({
         method: "get",
-        url: `https://mini-wp-aws.sigitariprasetyo.xyz/article/${id}`,
+        url: `${host}/article/${id}`,
         headers: {
           token: localStorage.getItem("token")
         }

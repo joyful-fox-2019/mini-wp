@@ -73,7 +73,7 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const host = 'https://mini-wp-aws.sigitariprasetyo.xyz'
+const host = "https://mini-wp-aws.sigitariprasetyo.xyz";
 // const host = "http://localhost:3000";
 
 export default {

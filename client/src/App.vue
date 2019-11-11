@@ -18,11 +18,7 @@
           </div>
         </div>
         <div v-if="isHome" class="column main">
-          <routerView
-            :articles="articles"
-            :isPublic="isPublic"
-            @afterUpdate="afterUpdate"
-          ></routerView>
+          <routerView :articles="articles" :isPublic="isPublic" @afterUpdate="afterUpdate"></routerView>
           <ListEnd></ListEnd>
         </div>
         <div v-if="isWrite" class="column">
@@ -77,7 +73,7 @@ export default {
   },
   methods: {
     handleJwt() {
-      this.$router.push('/')
+      this.$router.push("/");
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("email");
