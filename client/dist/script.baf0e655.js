@@ -9379,8 +9379,15 @@ var _default = {
       var _this3 = this;
 
       var article = this.articleInstance();
+      console.log('masuk edit article');
       console.log(article);
-      article.get("/".concat(id)).then(function (article) {
+      return axios({
+        url: "http://localhost:3000/articles/".concat(id),
+        method: "get",
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }).then(function (article) {
         _this3.article = article;
         console.log(article);
       }).catch(function (err) {
@@ -9423,7 +9430,14 @@ var _default = {
         if (confirm.value) {
           var article = _this5.articleInstance();
 
-          return article.delete("/".concat(id)).then(function (_ref3) {
+          console.log('masuk confirm delete', id);
+          return axios({
+            url: "http://localhost:3000/articles/".concat(id),
+            method: "delete",
+            headers: {
+              token: localStorage.getItem('token')
+            }
+          }).then(function (_ref3) {
             var data = _ref3.data;
 
             _this5.getArticles();
@@ -9527,7 +9541,16 @@ exports.default = _default;
                     [
                       _c("div", { staticClass: "card " }, [
                         _c("div", { staticClass: "row row no-gutters" }, [
-                          _vm._m(0, true),
+                          _c("div", { staticClass: "col-sm-4" }, [
+                            _c("img", {
+                              staticClass: "card-img-top p-2",
+                              staticStyle: { width: "100%", height: "100%" },
+                              attrs: {
+                                src: article.featured_image,
+                                alt: "ini gambar article"
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-sm-8" }, [
                             _c("div", { staticClass: "card-body" }, [
@@ -9646,7 +9669,7 @@ exports.default = _default;
           { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("form", [
@@ -9718,7 +9741,7 @@ exports.default = _default;
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(1)
             ])
           ]
         )
@@ -9727,21 +9750,6 @@ exports.default = _default;
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-4" }, [
-      _c("img", {
-        staticClass: "card-img-top p-2",
-        staticStyle: { width: "100%", height: "100%" },
-        attrs: {
-          src: "/1.556096dc.jpeg",
-          alt: "ini gambar article"
-        }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -9821,7 +9829,7 @@ render._withStripped = true
       
       }
     })();
-},{"./sideBar":"src/components/sideBar.vue","./img/1.jpeg":[["1.556096dc.jpeg","src/components/img/1.jpeg"],"src/components/img/1.jpeg"],"_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
+},{"./sideBar":"src/components/sideBar.vue","_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -23926,7 +23934,7 @@ var _default = {
         data: data
       }).then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
+        console.log(data, 'ini data');
 
         _this.$emit('confirm-add');
       }).catch(function (err) {
@@ -26610,7 +26618,7 @@ var _default = {
     },
     createArticleInstance: function createArticleInstance() {
       return axios.create({
-        baseURL: 'http://35.240.160.184/articles',
+        baseURL: 'http://localhost:3000/articles',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -26686,7 +26694,15 @@ exports.default = _default;
                   [
                     _c("div", { staticClass: "container-fluid" }, [
                       _c("div", { staticClass: "row" }, [
-                        _vm._m(0),
+                        _c("div", { staticClass: "col-sm-4" }, [
+                          _c("img", {
+                            staticClass: "img-thumbnail",
+                            attrs: {
+                              src: _vm.articleEdit.featured_image,
+                              alt: ""
+                            }
+                          })
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-sm-8" }, [
                           _c("div", { staticClass: "form-group" }, [
@@ -26731,7 +26747,7 @@ exports.default = _default;
                             _vm._v("Change picture")
                           ]),
                           _vm._v(" "),
-                          _vm._m(1)
+                          _vm._m(0)
                         ])
                       ])
                     ]),
@@ -26818,17 +26834,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-4" }, [
-      _c("img", {
-        staticClass: "img-thumbnail",
-        attrs: { src: "/1.9296fedd.jpeg", alt: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "custom-file" }, [
       _c("input", {
         staticClass: "custom-file-input",
@@ -26878,7 +26883,7 @@ render._withStripped = true
       
       }
     })();
-},{"./components/navbarItem":"src/components/navbarItem.vue","./components/homePage":"src/components/homePage.vue","./components/editPage":"src/components/editPage.vue","./components/sideBar":"src/components/sideBar.vue","quill":"node_modules/quill/dist/quill.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","./views/addArticle":"src/views/addArticle.vue","./views/loginRegister":"src/views/loginRegister.vue","./../img/1.jpeg":[["1.9296fedd.jpeg","img/1.jpeg"],"img/1.jpeg"],"_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/script.js":[function(require,module,exports) {
+},{"./components/navbarItem":"src/components/navbarItem.vue","./components/homePage":"src/components/homePage.vue","./components/editPage":"src/components/editPage.vue","./components/sideBar":"src/components/sideBar.vue","quill":"node_modules/quill/dist/quill.js","quill/dist/quill.core.css":"node_modules/quill/dist/quill.core.css","quill/dist/quill.snow.css":"node_modules/quill/dist/quill.snow.css","quill/dist/quill.bubble.css":"node_modules/quill/dist/quill.bubble.css","vue-quill-editor":"node_modules/vue-quill-editor/dist/vue-quill-editor.js","./views/addArticle":"src/views/addArticle.vue","./views/loginRegister":"src/views/loginRegister.vue","_css_loader":"../../../.nvm/versions/node/v13.0.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/script.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -26920,7 +26925,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42193" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33971" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

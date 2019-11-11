@@ -15,6 +15,7 @@ module.exports = {
             })
             .then (user => {
                 if (user) {
+                    console.log(user, 'user find')
                     req.user = user // kalo ada maka simpan user di req.user
                     next()
                 } else {
@@ -30,6 +31,7 @@ module.exports = {
         }
     },
     authorize : (req, res, next) => {
+        console.log('masuk authorize')
         Article
             .findById(req.params.id)
             .then(article => {

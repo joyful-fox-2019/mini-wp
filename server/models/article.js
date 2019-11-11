@@ -26,7 +26,7 @@ const articleScheme = new Schema({
         default : new Date
     },
     featured_image : {
-        type : Buffer
+        type : String
     }
 })
 

@@ -90,7 +90,7 @@ export default {
                     data 
                 })
                 .then( ({data}) => {
-                    console.log(data)
+                    console.log(data, 'ini data')
                     this.$emit('confirm-add')
                 })
                 .catch(err => {

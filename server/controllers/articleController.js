@@ -36,13 +36,14 @@ class articleController {
 
     static add(req, res, next) {
         console.log('masuk add')
-        const {title, content, featured_image} = req.body
+        console.log(req.body)
+        const {title, content, featuredImage} = req.body
         Article.
             create({
                 title,
                 content,
                 user : req.user._id,
-                featured_image
+                featured_image : featuredImage
             })
             // .then(article => {
             //     articleTemp = article      
@@ -64,6 +65,7 @@ class articleController {
     }
 
     static delete(req, res, next) {
+        console.log('masuk delete')
         Article
             .findOneAndDelete({
                 _id : req.params.id

@@ -22,7 +22,7 @@
                                     <div class="card " >
                                         <div class="row row no-gutters">
                                             <div class="col-sm-4">                                        
-                                                <img src="./img/1.jpeg" style="width:100%; height:100%;" class="card-img-top p-2" alt="ini gambar article" >
+                                                <img :src="article.featured_image" style="width:100%; height:100%;" class="card-img-top p-2" alt="ini gambar article" >
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="card-body">
@@ -141,21 +141,27 @@ export default {
         },
         updateArticle(id) {
             const article = this.articleInstance()
+            console.log('masuk edit article')
             console.log(article)
-            article.
-                get(`/${id}`)
-                .then(article => {
-                    this.article = article
-                    console.log(article)
-                })
-                .catch(err => {
-                    console.log(err)
-                    Swal.fire(
-                        'Opps ....!',
-                        `${err}`,
-                        'error'
-                        )
-                })
+            return axios({
+                            url : `http://localhost:3000/articles/${id}`,
+                            method : "get",
+                            headers : {
+                                token : localStorage.getItem('token')
+                            } 
+                        })
+                        .then(article => {
+                            this.article = article
+                            console.log(article)
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            Swal.fire(
+                                'Opps ....!',
+                                `${err}`,
+                                'error'
+                                )
+                        })
             
         },
         showUpdate(articleId) {
@@ -182,8 +188,7 @@ export default {
                 })                
         },
         deleteArticle(id) {
-            console.log('masuk delete article')
-            
+            console.log('masuk delete article')            
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -195,26 +200,32 @@ export default {
                 }).then(confirm => {
                     if (confirm.value) {
                         const article = this.articleInstance()
-                        return article
-                                .delete(`/${id}`)
-                                .then(({data}) => {
-                                    this.getArticles()
-                                    Swal.fire(
-                                        'Delete Article Success!',
-                                        `congrats article has been deleted`,
-                                        'success'
-                                    )
-                                    console.log('data deleted', data)                    
-                                })
-                                .catch(err => {
-                                    Swal.fire(
-                                        'Opps ....!',
-                                        `${err}`,
-                                        'error'
-                                        )
-                                    console.log(err)
-                                })
-                    }                  
+                        console.log('masuk confirm delete',id)
+                        return axios({
+                            url : `http://localhost:3000/articles/${id}`,
+                            method : "delete",
+                            headers : {
+                                token : localStorage.getItem('token')
+                            } 
+                        })                                
+                        .then(({data}) => {
+                            this.getArticles()
+                            Swal.fire(
+                                'Delete Article Success!',
+                                `congrats article has been deleted`,
+                                'success'
+                            )
+                            console.log('data deleted', data)                    
+                        })
+                        .catch(err => {
+                            Swal.fire(
+                                'Opps ....!',
+                                `${err}`,
+                                'error'
+                                )
+                            console.log(err)
+                        })
+                    }                   
                 })            
         },
         createArticleInstance() {
@@ -224,7 +235,7 @@ export default {
                     token : localStorage.getItem('token')
                 }    
             });
-        }         
+        }        
     }
 }
 </script>

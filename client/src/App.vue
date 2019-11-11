@@ -14,7 +14,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <img class="img-thumbnail" src="../img/1.jpeg" alt="">
+                                    <img class="img-thumbnail" :src="articleEdit.featured_image" alt="">
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="form-group">
@@ -223,7 +223,7 @@ export default {
         },        
         createArticleInstance() {
             return axios.create({
-                baseURL: 'http://35.240.160.184/articles',
+                baseURL: 'http://localhost:3000/articles',
                 headers : {
                     token : localStorage.getItem('token')
                 }    
