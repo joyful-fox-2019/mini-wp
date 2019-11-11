@@ -2,7 +2,10 @@
   <div id="main">
     <!-- <AddArticle></AddArticle> -->
     <Navbar :isLogin="isLogin" @logout="logout" @setDark="setDark"></Navbar>
-    <Articles @alert="alert" v-if="$router.history.current.path === '/'"></Articles>
+    <div class="container">
+    <Topics :is-dark="isDark"></Topics>
+    </div>
+    <Articles @alert="alert" v-if="$router.history.current.path === '/'" :is-dark="isDark"></Articles>
     <router-view @alert="alert" @login="login" :is-dark="isDark"></router-view>
     <!-- <Footer></Footer> -->
   </div>
@@ -12,6 +15,7 @@
 import Navbar from './components/Navbar'
 import Articles from './views/Articles'
 import AddArticle from './views/AddArticle'
+import Topics from './components/Topics'
 import Footer from './components/Footer'
 
 export default {
@@ -20,6 +24,7 @@ export default {
     Navbar,
     Articles,
     AddArticle,
+    Topics,
     Footer
   },
   data() {

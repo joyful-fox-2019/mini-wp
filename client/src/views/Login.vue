@@ -10,7 +10,7 @@
             <b-input v-model="email" placeholder="Email">
           </b-field>
           <b-field>
-            <b-input v-model="password" placeholder="Password">
+            <b-input v-model="password" type="password" placeholder="Password">
           </b-field>
           <span>Don't have an account?</span>
           <router-link to="/register">

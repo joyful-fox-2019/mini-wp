@@ -95,7 +95,7 @@ button {
   font-weight: bold;
 }
 .logo {
-  margin-top: 3px;
+  margin-top: 10px;
   font-size: 25px;
 }
 .avatar-circle {

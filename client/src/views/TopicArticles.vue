@@ -1,11 +1,17 @@
 <template>
   <div class="container">
+    <FeaturedArticle v-if="articles.length >= 3" :articles="articles.slice(0, 3)"></FeaturedArticle>
     <div class="container">
       <div v-if="articles.length === 0" class="centered-item">
         <img style="border: none; max-width: 400px" class="has-margin-t-2" :src='image' title='' />
         <div class="t-standard has-margin-t-2">No articles.</div>
       </div>
-      <Article v-for="article in articles" :key="article._id" class="columns" :article="article"></Article>
+      <div v-if="articles.length >= 3">
+        <Article v-for="article in articles.slice(3)" :key="article._id" class="columns" :article="article"></Article>
+      </div>
+      <div v-else>
+        <Article v-for="article in articles" :key="article._id" class="columns" :article="article"></Article>
+      </div>
     </div>
   </div>
 </template>
@@ -34,7 +40,7 @@ export default {
     getArticles () {
       console.log('get articles')
       const loadingComponent = this.$buefy.loading.open()
-      axios.get(`/articles?user=${localStorage.getItem('_id')}`, {
+      axios.get(`/articles?tag=${this.$route.params.topic}`, {
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -59,6 +65,10 @@ export default {
     }
   },
   watch: {
+    '$route.params.topic'() {
+      console.log('gas')
+      this.getArticles()
+    },
     isDark () {
       if(this.isDark) {
         this.image = 'https://svgshare.com/i/G4Q.svg'

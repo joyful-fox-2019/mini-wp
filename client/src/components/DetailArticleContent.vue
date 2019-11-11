@@ -70,6 +70,7 @@ export default {
         type: 'is-danger',
         hasIcon: true,
         onConfirm: () => {
+          const loadingComponent = this.$buefy.loading.open()
           axios.delete(`/articles/${this.article._id}`, {
             headers: {
               access_token: localStorage.getItem('access_token')
@@ -77,6 +78,7 @@ export default {
           })
             .then(({ data }) => {
               console.log(data)
+              loadingComponent.close()
               this.$buefy.toast.open('Article deleted!')
               this.$router.push('/')
             })

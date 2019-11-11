@@ -51,7 +51,7 @@
 </template>
 
 <script>
-const tagOptions = ['Art', 'Beauty', 'Books', 'Comics', 'Culture', 'Fiction', 'Film', 'Food', 'Gaming', 'Humor', 'Music', 'Photography', 'Sports', 'Style', 'Business', 'Economy', 'Work', 'Technology', 'Science', 'Religion']
+const tagOptions = ['Art', 'Business', 'Fiction', 'Photography', 'Religion', 'Sports', 'Science', 'Technology']
 import axios from '../../helpers/axios'
 
 export default {

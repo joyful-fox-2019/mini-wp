@@ -6,9 +6,10 @@ module.exports = {
     if(req.query.user) {
       filter.user = req.query.user
     }
-    if(req.query.keyword) {
-      filter.keyword = req.query.keyword
+    if(req.query.tag) {
+      filter.tags = req.query.tag.substring(0, 1).toUpperCase() + req.query.tag.substring(1)
     }
+    console.log(filter)
     Article.find(filter).populate('user').sort({ createdAt: 'desc' })
       .then(articles => {
         res.status(200).json(articles)
@@ -24,7 +25,9 @@ module.exports = {
   },
   add: (req, res, next) => {
     console.log(req.body)
-    const { title, subtitle, description, tags, file } = req.body
+    const { title, subtitle, description, file } = req.body
+    let tags = req.body.tags.split(',')
+    console.log(tags)
     Article.create({ title, subtitle, description, tags, image: file, user: req.loggedUser._id })
       .then(article => {
         res.status(201).json(article)
@@ -34,7 +37,7 @@ module.exports = {
   update: (req, res, next) => {
     console.log(req.body)
     const { title, subtitle, description, file } = req.body
-    let tags = req.body.tags.split(', ')
+    let tags = req.body.tags.split(',')
     console.log(tags)
     Article.findByIdAndUpdate(req.params.id,
       { title, subtitle, description, tags, image: file },

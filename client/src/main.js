@@ -50,6 +50,11 @@ const routes = [
     name: 'my-articles',
     component: () => import('./views/MyArticles.vue')
   },
+  {
+    path: '/topics/:topic',
+    name: 'topics',
+    component: () => import('./views/TopicArticles.vue')
+  },
 ]
 
 const router = new VueRouter({

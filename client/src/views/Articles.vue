@@ -2,6 +2,10 @@
   <div class="container">
     <FeaturedArticle v-if="articles.length >= 3" :articles="articles.slice(0, 3)"></FeaturedArticle>
     <div class="container">
+      <div v-if="articles.length === 0" class="centered-item">
+        <img style="border: none; max-width: 400px" class="has-margin-t-2" :src='image' title='' />
+        <div class="t-standard has-margin-t-2">No articles.</div>
+      </div>
       <div v-if="articles.length >= 3">
         <Article v-for="article in articles.slice(3)" :key="article._id" class="columns" :article="article"></Article>
       </div>
@@ -23,9 +27,13 @@ export default {
     Article,
     FeaturedArticle
   },
+  props: {
+    isDark: Boolean
+  },
   data () {
     return {
-      articles: []
+      articles: [],
+      image: ''
     }
   },
   methods: {
@@ -50,6 +58,20 @@ export default {
   },
   created () {
     this.getArticles()
+    if(this.isDark) {
+      this.image = 'https://svgshare.com/i/G4Q.svg'
+    } else {
+      this.image = 'https://svgshare.com/i/G4a.svg'
+    }
+  },
+  watch: {
+    isDark () {
+      if(this.isDark) {
+        this.image = 'https://svgshare.com/i/G4Q.svg'
+      } else {
+        this.image = 'https://svgshare.com/i/G4a.svg'
+      }
+    }
   }
 }
 </script>
