@@ -8,7 +8,7 @@ const routes = require('./routes')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || 3000
-const urlMongoose = 'mongodb://localhost/mini-wordpress'
+const urlMongoose = process.env.URLMONGOOSE
 const errorHandler = require('./middlewares/errorHandler')
 
 app.use(express.json())
