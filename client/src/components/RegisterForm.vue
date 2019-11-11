@@ -35,7 +35,7 @@ export default {
     register() {
       axios({
         method: "POST",
-        url: "http://localhost:3000/users/register",
+        url: "http://miniwpserver.hoandreasm.xyz/users/register",
         data: {
           email: this.email,
           password: this.password

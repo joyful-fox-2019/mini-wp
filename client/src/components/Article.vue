@@ -32,7 +32,7 @@ export default {
         deleteArticle(id) {
             axios({
                 method: "DELETE",
-                url: `http://localhost:3000/articles/${id}`,
+                url: `http://miniwpserver.hoandreasm.xyz/articles/${id}`,
                 headers: {
                     token: localStorage.getItem('token')
                 }

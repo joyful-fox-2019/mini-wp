@@ -63,7 +63,7 @@ export default {
 
             axios({
                 method: "POST",
-                url: "http://localhost:3000/articles/",
+                url: "http://miniwpserver.hoandreasm.xyz/articles/",
                 data: formData,
                 headers: {
                     token: localStorage.getItem('token')

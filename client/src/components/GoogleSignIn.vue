@@ -21,7 +21,7 @@ export default {
        * @type {Object} 
        */
       googleSignInParams: {
-        client_id: '268889458312-kbk0br8l633kctie8utt8rto0kfkqg3n.apps.googleusercontent.com'
+        client_id: '236286067260-r6fhp5u4cjekbhqtg5pnlq8e2s329lq8.apps.googleusercontent.com'
       }
     }
   },
@@ -34,7 +34,7 @@ export default {
 
       axios({
           method: "POST",
-          url: "http://localhost:3000/users/googleSignIn",
+          url: "http://miniwpserver.hoandreasm.xyz/users/googleSignIn",
           data: {
               token: id_token
           }

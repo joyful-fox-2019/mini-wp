@@ -75,7 +75,7 @@ export default {
         getArticles() {
             axios({
                 method: "GET",
-                url: "http://localhost:3000/articles",
+                url: "http://miniwpserver.hoandreasm.xyz/articles",
                 headers: {
                     token: localStorage.getItem('token')
                 }

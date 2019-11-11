@@ -21,7 +21,7 @@ export default {
             console.log(this.searchKeyword);
             axios({
                 method: "GET",
-                url: `http://localhost:3000/articles/?title=${this.searchKeyword}`,
+                url: `http://miniwpserver.hoandreasm.xyz/articles/?title=${this.searchKeyword}`,
                 headers: {
                     token: localStorage.getItem('token')
                 }

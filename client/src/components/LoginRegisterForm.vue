@@ -52,7 +52,7 @@ export default {
         login() {
             axios({
                 method: "POST",
-                url: "http://localhost:3000/users/login",
+                url: "http://miniwpserver.hoandreasm.xyz/users/login",
                 data: {
                     email: this.emailLogin,
                     password: this.passwordLogin
@@ -82,7 +82,7 @@ export default {
         register() {
             axios({
                 method: "POST",
-                url: "http://localhost:3000/users/register",
+                url: "http://miniwpserver.hoandreasm.xyz/users/register",
                 data: {
                     email: this.emailSignup,
                     password: this.passwordSignup

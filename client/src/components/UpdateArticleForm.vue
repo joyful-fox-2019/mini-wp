@@ -45,7 +45,7 @@ export default {
         updateArticle(id) {
             axios({
                 method: "PUT",
-                url: `http://localhost:3000/articles/${this.id}`,
+                url: `http://miniwpserver.hoandreasm.xyz/articles/${this.id}`,
                 headers: {
                     token: localStorage.getItem('token')
                 },
