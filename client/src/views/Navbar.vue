@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="primary">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div v-if="afterLogin" class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="d-flex">
-          <b-button type="button" variant="primary">
+          <b-button @click="showDashboard" type="button" variant="primary">
             <i class="fab fa-wordpress-simple fa-1x mr-2"></i>My
             Sites
           </b-button>
@@ -22,7 +22,7 @@
         <b-navbar-nav class="ml-auto" v-show="afterLogin">
           <div class="d-flex mr-3">
             <b-button
-              @click="inputArticle"
+              @click="showCreateArticle"
               type="button"
               size="sm"
               class="my-2 my-sm-0"
@@ -43,7 +43,7 @@
             <template v-slot:button-content>
               <em>User</em>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item href="#">{{user}}</b-dropdown-item>
             <b-dropdown-item href="#" @click="signOut">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
           <!--buttonSignIn/out-->
@@ -160,6 +160,7 @@ export default {
   name: "Navbar",
   data() {
     return {
+      user: null,
       form: {
         email: "",
         password: ""
@@ -172,7 +173,7 @@ export default {
       afterLogin: false,
       formShow: true,
       registerShow: true,
-      createArticleNow: false
+      showCreate: false
     };
   },
   methods: {
@@ -262,11 +263,13 @@ export default {
       // console.log(this.afterLogin);
     },
     signOut() {
+      console.log("keluar");
       var auth2 = gapi.auth2.getAuthInstance();
       auth2.signOut().then(function() {
         console.log("User signed out.");
       });
-      localStorage.clear();
+      localStorage.removeItem("token");
+      localStorage.removeItem("name");
       this.afterLogin = false;
       this.$emit("statusLogin", this.afterLogin);
     },
@@ -286,15 +289,23 @@ export default {
       this.$refs["my-modal-register"].hide();
       this.$refs["my-modal-login"].show();
     },
-    inputArticle() {
-      this.createArticleNow = true;
-      this.$emit("createArticle", this.createArticleNow);
+    showCreateArticle() {
+      this.$emit("createNow", true);
+    },
+    showDashboard() {
+      this.$emit("createNow", false);
     }
   },
   mounted() {
     gapi.signin2.render("google-signin-button", {
       onsuccess: this.onSignIn
     });
+  },
+  created() {
+    if (localStorage.getItem("token")) {
+      this.afterLogin = true;
+      this.user = localStorage.getItem("name");
+    }
   }
 };
 </script>

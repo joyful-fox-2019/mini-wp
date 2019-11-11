@@ -3,7 +3,8 @@ const Article = require('../models/article');
 class ArticleController {
     static findAll(req, res, next) {
         let id = req.decoded.id
-        Article.findOne({
+        console.log('id---', id)
+        Article.find({
                 author: id
             })
             .then(articles => {
@@ -12,14 +13,10 @@ class ArticleController {
                     articles
                 )
             })
-            .catch(err => {
-                console.log(err)
-            })
+            .catch(next)
     }
 
     static create(req, res, next) {
-        console.log("createe => ", req.body)
-        console.log("decoded ==>", req.decoded._id)
         let {
             title,
             content,
@@ -36,9 +33,7 @@ class ArticleController {
                     message: "success add new article"
                 })
             })
-            .catch(err => {
-                console.log(err);
-            })
+            .catch(next)
     }
 
     static delete(req, res, next) {
@@ -48,9 +43,7 @@ class ArticleController {
             .then(data => {
                 res.status(200).json(data)
             })
-            .catch(err => {
-                console.log(err);
-            })
+            .catch(next)
     }
 
     static update(req, res, next) {

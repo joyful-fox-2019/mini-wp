@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Article = require('../controllers/articleController');
 const {
     authentication,
-    authorizationVancancy
+    authorization
 } = require('../middleware/auth')
 const gcsUpload = require('gcs-upload');
 
@@ -18,7 +18,7 @@ const gcsUpload = require('gcs-upload');
 router.use(authentication)
 router.get('/', Article.findAll);
 router.post('/', Article.create);
-router.delete('/:id', Article.delete);
-router.put('/:id', Article.update);
+router.delete('/:id', authorization, Article.delete);
+router.put('/:id', authorization, Article.update);
 
 module.exports = router;

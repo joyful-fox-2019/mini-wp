@@ -5,10 +5,7 @@ function authentication(req, res, next) {
     console.log(req.headers)
     try {
         let decoded = jwt.verifyToken(req.headers.token);
-        //
         req.decoded = decoded;
-        console.log('decoded==>>',
-            req.decoded)
         next()
     } catch (err) {
         next(err);
@@ -16,10 +13,12 @@ function authentication(req, res, next) {
 };
 
 function authorization(req, res, next) {
+    console.log(req.params.id)
+    console.log('decoded =>>>>', req.decoded.id)
     Article.findById(req.params.id)
         .then(article => {
             if (article) {
-                if (article.user == req.decoded.id) {
+                if (article.author == req.decoded.id) {
                     next()
                 } else {
                     res.status(401).json({

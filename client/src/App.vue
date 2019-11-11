@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <app-navbar @statusLogin="statusLogin" @createArticle="createArticle"></app-navbar>
-    <app-homepage :statusLogin="status" :createArticle="article"></app-homepage>
+    <app-navbar @statusLogin="statusLogin" @createNow="createNow"></app-navbar>
+    <app-homepage :statusLogin="status" :createNow="createArticle"></app-homepage>
   </div>
 </template>
 
@@ -14,21 +14,23 @@ export default {
   data() {
     return {
       status: false,
-      article: false
+      createArticle: false
     };
   },
   methods: {
     statusLogin(status) {
       this.status = status;
-      console.log(this.status);
     },
-    createArticle(status) {
-      this.article = status;
+    createNow(value) {
+      this.createArticle = value;
     }
   },
   components: {
     "app-navbar": Navbar,
     "app-homepage": Homepage
+  },
+  created() {
+    if (localStorage.getItem("token")) this.status = true;
   }
 };
 </script>

@@ -1,20 +1,27 @@
 <template>
   <div class="home">
     <slideshow-component id="slideshow" :statusLogin="statusLogin"></slideshow-component>
-    <content-component :statusLogin="statusLogin" :createArticle="createArticle"></content-component>
+    <div v-if="statusLogin" class="container-fluid">
+      <div class="row">
+        <menucontent-component v-if="!createNow"></menucontent-component>
+        <article-component :createNow="createNow"></article-component>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Slideshow from "../components/landingComponent/SlideShow.vue";
-import Content from "../components/landingComponent/Content.vue";
+import MenuContent from "../components/landingComponent/MenuContent.vue";
+import Article from "../components/landingComponent/Article.vue";
 
 export default {
   name: "Homepage",
-  props: ["statusLogin", "createArticle"],
+  props: ["statusLogin", "createNow"],
   components: {
     "slideshow-component": Slideshow,
-    "content-component": Content
+    "menucontent-component": MenuContent,
+    "article-component": Article
   },
   data() {
     return {};
