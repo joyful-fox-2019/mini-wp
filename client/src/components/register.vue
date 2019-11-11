@@ -60,6 +60,8 @@ export default {
             })
                 .then((result) => {
                     console.log(result)
+                    this.$swal('success','registration succes, continue to sign in!','success')
+
                 })
                 .catch((err) => {
                     console.log(err)

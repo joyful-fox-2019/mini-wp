@@ -10669,6 +10669,8 @@ var _default = {
         }
       }).then(function (result) {
         console.log(result);
+
+        _this.$swal('success', 'registration succes, continue to sign in!', 'success');
       }).catch(function (err) {
         console.log(err);
 
@@ -10976,7 +10978,6 @@ var _default = {
     onSuccess: function onSuccess(googleUser) {
       var _this2 = this;
 
-      alert('masuk');
       var profile = googleUser.getBasicProfile();
       console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
 
@@ -56804,7 +56805,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45317" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41489" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

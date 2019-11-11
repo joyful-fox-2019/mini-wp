@@ -17,24 +17,24 @@ app.use('/wp', router)
 app.use(errorHandler)
 
 mongoose.connect(
-    'mongodb://localhost:27017/mini-wp',
-    // process.env.ATLAS_URL,
-    {useNewUrlParser: true, useUnifiedTopology: true }
-     
-    )
-
+    // 'mongodb://localhost:27017/mini-wp',
+   process.env.ATLAS_URL,
+    {
+        useNewUrlParser: true, 
+        useUnifiedTopology: false,
+        useCreateIndex: true,
+        useFindAndModify: false,
+    }
+)
     .then(() => {
         console.log('db connected')
+        app.listen(port, () => {
+            console.log('listening port ', port);
+        })
     })
     .catch((err) => {
         console.log(err)
         console.log('db disconnected'); 
     })
-mongoose.set('useCreateIndex', true)
-mongoose.set('useFindAndModify', false)
 
-app.listen(port, () => {
-    console.log('listening port ', port);
-    
-})
 
