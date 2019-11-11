@@ -16,13 +16,22 @@ class ArticleController {
 
     static readAll(req, res, next) {
         const { id } = req.loggedUser
-        // console.log(req.loggedUser.id);
-        Article.find({ author: id })
-            .populate('author')
-            .then(articles => {
-                res.status(200).json(articles)
-            })
-            .catch(next)
+        let { title } = req.query
+        if(title) {
+            Article.find({ author: id , title: title })
+                .populate('author')
+                .then(articles => {
+                    res.status(200).json(articles)
+                })
+                .catch(next)
+        } else {
+            Article.find({ author: id })
+                .populate('author')
+                .then(articles => {
+                    res.status(200).json(articles)
+                })
+                .catch(next)
+        }
     }
 
     static readOne(req, res, next) {

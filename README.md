@@ -6,6 +6,7 @@ Features:
 1. Write, Read, Edit and Delete on all of your article posts.
 2. Upload featured image of your post to Google Cloud Storage.
 3. Third-party sign in in this case you can use Goosle Sign In.
+4. Search your own article by its title.
 
 # USER
 ### **Register**

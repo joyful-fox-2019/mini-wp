@@ -96,7 +96,8 @@ export default {
             this.getArticles()
         },
         reloadHomepageFromUpdate() {
-            console.log('lmao msk lol ugh');
+            this.writeArticle = false
+            this.updateArticle = false
             this.getArticles()
         },
         setIsFound(data) {
