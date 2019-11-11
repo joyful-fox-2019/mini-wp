@@ -1,84 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="google-signin-client_id" content="209474360923-ji703tcddmfcqmo2cti452cip3ek7jqo.apps.googleusercontent.com">
+      <title>Mini-WP</title>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+      
+      
+      <link rel="stylesheet" href="css/vueWysiwyg.css">
+      <link rel="stylesheet" href="./css/index.css">
+    </head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <link rel="stylesheet" type="text/css" href="./index.css">
-
-    <title>Mini WP</title>
-    <style>
-        #top-navbar {
-            background-color: #006088
-        }
-    </style>
-  </head>
-  <body>
-
-    <div id="app">
-        <nav class="navbar navbar-expand-lg" id="top-navbar" style="height: 50px">
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link text-white" href="#">hengki01@wordpress.com</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="nav-item list-unstyled" style="margin-top: 15px">
-                        <a class="nav-link" href="#" tabindex="-1"><button type="button" class="btn btn-outline-primary bg-light">Write</button></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    
-        <div class="d-flex">
-            <div class="sidenav">
-            <ul class="list-unstyled">
-                <li>
-                    <a href="" class="text-dark" style="font-size: 20px">Home</a>
-                </li>
-                <li>
-                    <a href="" class="text-dark" style="font-size: 20px">Publish Article</a>
-                </li>
-                <li>
-                    <a href="" class="text-dark" style="font-size: 20px">Media</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="card m-5 border-0" style="width: 100%; background-color: #dcdcde">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item mb-3">Published Article</li>
-                <li class="list-group-item">Article 1: The Journey Begins</li>
-                <li class="list-group-item">Article 2: My Past Stories</li>
-                <li class="list-group-item">Article 3: Future Plans</li>
-            </ul>
-        </div>
-    </div>
-    
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <!-- Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-    <!-- Axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script src="./index.js"></script>
-    <script src="./components/register.js"></script>
-    <script src="./components/login.js"></script>
-    <script src="./components/articles.js"></script>
-
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
-  </body>
+    <body>
+      <div id="app"></div>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+      <script src="/src/main.js"></script>
+    </body>
 </html>
