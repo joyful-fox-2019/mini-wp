@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-navbar @statusLogin="statusLogin" @createNow="createNow"></app-navbar>
-    <app-homepage :statusLogin="status" :createNow="createArticle"></app-homepage>
+    <app-homepage :statusLogin="status" :createNow="createArticle" @successCreate="successCreate"></app-homepage>
   </div>
 </template>
 
@@ -22,6 +22,9 @@ export default {
       this.status = status;
     },
     createNow(value) {
+      this.createArticle = value;
+    },
+    successCreate(value) {
       this.createArticle = value;
     }
   },

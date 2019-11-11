@@ -109,7 +109,7 @@
     </div>
     <!--end modal update-->
     <!--quil-->
-    <createarticle-component v-if="createNow"></createarticle-component>
+    <createarticle-component v-if="createNow" @successCreate="successCreate"></createarticle-component>
     <!--end quil-->
   </div>
 </template>
@@ -239,12 +239,24 @@ export default {
           updateContent
         }
       }).then(response => {
+        Swal.fire({
+          icon: "success",
+          title: "Create Article Successfully"
+        });
         this.update.updateTitle = "";
         this.update.updateContent = "";
         this.modalUpdate = false;
         $("#updateModal").modal("hide");
         this.showArticles();
       });
+    },
+    successCreate(value) {
+      this.$emit("successCreate", value);
+      Swal.fire({
+        icon: "success",
+        title: "Create Article Successfully"
+      });
+      this.showArticles();
     }
   }
 };

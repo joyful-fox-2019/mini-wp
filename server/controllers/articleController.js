@@ -20,12 +20,12 @@ class ArticleController {
         let {
             title,
             content,
-            imgUrl
+            image
         } = req.body
         Article.create({
                 title,
                 content,
-                image: imgUrl,
+                image,
                 author: req.decoded.id
             })
             .then(() => {

@@ -4,7 +4,7 @@
     <div v-if="statusLogin" class="container-fluid">
       <div class="row">
         <menucontent-component v-if="!createNow"></menucontent-component>
-        <article-component :createNow="createNow"></article-component>
+        <article-component :createNow="createNow" @successCreate="successCreate"></article-component>
       </div>
     </div>
   </div>
@@ -25,6 +25,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    successCreate(value) {
+      this.$emit("successCreate", value);
+    }
   }
 };
 </script>

@@ -16,7 +16,7 @@ const articleSchema = new Schema({
         type: Date
     },
     image: {
-        type: String
+        type: Array
     },
     author: {
         type: ObjectId,
