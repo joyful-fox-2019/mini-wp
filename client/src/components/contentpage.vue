@@ -1,9 +1,13 @@
 <template>
   <div class="container column is-10" style="overflow:scroll;">
-
+      
     <div class="section-content">
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+
+        
+
+    <div v-if="editorPage === false" class="main-content-cards">
 
       <div class="card" style="margin-bottom:50px" v-for="(project, i) in projects" :key="i">
           
@@ -25,7 +29,7 @@
                 <p style="color:grey; font-weigth:100; font-style:italic"></p>
                 <div class="buttons-content">
                     <h6 style="font-size:12px; margin-bottom:20px;" > <strong>published at :</strong>  {{project.publishedAt.slice(0,10)}}</h6>
-                    <b-button type="is-primary" style="height:50px ; margin-right:20px" @click="isModalEdit = true; index = i"
+                    <b-button type="is-primary" style="height:50px ; margin-right:20px" @click.prevent="updateProject(project._id); index = i ; "
                         icon-left="update">
                         Update
                     </b-button>
@@ -39,8 +43,10 @@
             </div>
         </div>
       </div>
-      
 
+    </div>
+
+    
 <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
 
     <section>
@@ -79,10 +85,6 @@
                 </div>
                 <hr>
             </div>
-
-
-
-
         </b-modal>
 
     </section>
@@ -90,37 +92,45 @@
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->     
 
-
-<section>
-         <b-modal :active.sync="isModalEdit" :width="600" scroll="keep">
+<div class="container column is-10" style="overflow:scroll;">
+        <form v-if="editorPage === true">
              
-           
                <template style="display:flex;align-items:center">
-                    <section style="padding:50px">
+                    <section>
                         
                         <p class="card-header-title" style="font-size: 36px; padding-left:-10px">Editor page</p> 
                         
                         <hr>
-                        <b-field label="Title">
-                            <b-input v-model="title"></b-input>
-                        </b-field>
-                            
 
-                        <b-field label="Description">
-                            <quill v-model="description" :config="config"></quill>
-                        </b-field>
+                        <div class="field">
+                            <label for="" class="label">Title</label>
+                            <div class="control has-icons-left">
+                                <input v-model="title" type="text" placeholder="" class="input">
+                                <span class="icon is-small is-left">
+                                </span>
+                        </div>
 
-                         <section>
-                            <b-field label="Tags">
-                                <b-taginput
-                                    placeholder="Add a tag"
-                                    v-model="tags"
-                                    >
-                                </b-taginput>
-                            </b-field>
-                        </section>
+                         <div class="field">
+                            <label for="" class="label">Description</label>
+                            <div class="control has-icons-left">
+                                 <quill v-model="description" output="html"></quill>
+                                <span class="icon is-small is-left">
+                                </span>
+                        </div>
 
-                        <template>
+                         <div class="field">
+                            <section>
+                                <b-field label="Tags">
+                                    <b-taginput
+                                        placeholder="Add a tag"
+                                        v-model="tags"
+                                        >
+                                    </b-taginput>
+                                </b-field>
+                            </section>
+                        </div>
+
+                         <div class="field">
                             <section style="margin-top:50px;justify-contents:center">
                                 <b-field label="Upload file">
                                     <b-upload v-model="dropFiles"
@@ -152,21 +162,20 @@
                                     </span>
                                 </div>
                             </section>
-                        </template>
+                        </div>
+                        
 
-                         <button class="button" type="is-primary" @click="isModalEdit = false">Submit</button>
-                         <button class="button" type="is-danger" @click="isModalEdit = false">Cancel</button>
+                         <button class="button" type="is-primary" @submit="createProject">Submit</button>
+                         <button class="button" type="is-danger" @click="editorPage = false">Cancel</button>
 
-                       
-
+                    
                     </section>
                 </template>
 
 
+        </form>
 
-        </b-modal>
-
-    </section>
+   </div> 
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->   
@@ -181,22 +190,35 @@
 
 import axios from '../apis/server'
 
+
     export default {
         name: 'content-page',
         data() {
             return {
+                projects : [],
                 title:'',
-                description: '',
                 dropFiles : [],
                 tags : [],
+                editorPage: false,
                 isModalActive: false,
-                isModalEdit: false,
-                projects : [],
-                index : 0
-                
+                index : 0,
+                description: {
+                        ops: [],
+                    },
+                    config: {
+                        placeholder: 'Compose an epic...',
+                    },   
             }
         },
         methods : {
+
+            updateProject(id){
+                this.editorPage = true
+            },
+
+            showCreateForm(status){
+                this.editorPage = status
+            },
             getProjects(){
                 axios({
                     method: 'get',
@@ -227,11 +249,19 @@ import axios from '../apis/server'
                 .catch(err => {
                     console.log(err)
                 })
-
             },
-            config(){
-                
-             }
+            createProject(){
+                console.log(
+                    this.title,
+                    this.description,
+                    this.tags,
+                    this.dropFiles
+                )
+            }
+            
+        },
+        components : {
+            
         },
         created(){
             this.getProjects()

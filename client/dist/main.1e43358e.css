@@ -26028,7 +26028,8 @@ label.panel-block:hover {
 }
 
 li{
-    height:50px;
+    height:75px;
+    margin-top: -10px;
 }
 .section-content {
     padding: 3rem 1.5rem;

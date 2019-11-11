@@ -8,7 +8,6 @@ import VueQuill from 'vue-quill'
  
 
 
-
 Vue.use(VueQuill)
 Vue.use(Buefy)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
