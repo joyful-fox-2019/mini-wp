@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 const router = require('./routes')
 const errorHandler = require('./middleware/errorHandler')
 const PORT = process.env.PORT || 3000
-const URI = 'mongodb://localhost:27017/miniwp2' || process.env.URI
+const URI = process.env.URI
 
 const app = express()
 
