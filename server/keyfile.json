@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mini-wp-258620",
+  "private_key_id": "06d07d65dfc1fc887971ca2d1c66406725d6a8c6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC95b7aTIPzNfwR\n5TUL3+4L8IkCd5F3p8oj7fK0f6Qz3M/XZx0HPrM6bG9HhE0fryWA+ToabPN5yc3X\nxoiAB/VPaZpCdA8waEQXTAJbdLGGmo0Oqi16TW9dJ9H/AkZNl/jCZ2RL1JMxMlTw\nlqTDnvEngVmSyS+ofEE/9iVOgsoXySIKnLrwfAdv6SH7QlGJfgg4ADEAoeg/Z8XH\ny/M6UMfZGkJ+paeTVDGUyQc+Tz7iMsNwi5bXWBVcMljlanjPvO+bsJ8ZT6IFQVeX\n+wteMRcQ9MHzbSnULyYT0SBL0iJ3ddx/nLRAugulCDK6bcYWEznkOBQqfbgLC7Jf\nXaJftYmTAgMBAAECggEAGg3MdVJW2ZFIPVhPl9/TCZZTO0sWYplbIDovDi65DliM\nYkcGcjkFtCKufdxxYcMmXR9UpnguS5ZcL0T7nhKkHeTPl7B+vlXVNHERnbn7+rYi\nW6cOSEpu2L7JjrhMLFczzSW3BWRsBthF/nWyCMOPiKu0Phxrn9ffHUcd7+X9PkKg\ndy+ZKWNcbeguf3zLMcyZ3thb0O8qhe25wweXndYxaoz6mLgXuTELbez3N2dvXxXS\nhUpkBe0jTRcaqr56fBd7MwUo95qmyCsyHZY3aZY0K+7LOtXf82OV9cl0bzGgM9hG\nb5lZn/0JB5FsPGXzX8JKxd16lma345vkwCof5O1EMQKBgQDzzbJVeHri3fu9VABy\nkxCAGoQGiCeh1Q8Y6uH4PaBajklYkiisr4Zkgoo08vBMfsEuriTfYhpgNXc1XEOQ\nGEwqtwWwDcfAgRf/NCINodDBhFaJKArgfaSk+k3oI/IlPV2FEPk18TYlMP04qUrz\n6XXFNSyzwdd8xPwibY/eXTELywKBgQDHZbGHv31AllA7dyvaY/EfqX0KBkgf/JMp\nwJqauXwIj3Kr0/vS6KQcknUJCvEfUc4kM5qLJfu0sHOlYsw0O77Mn34N/XLW6Ufs\nn+44jXoRtX5eLX3JLvX4vgsE0F0M1aLwXKkiPGIOsZ8xInNQf35cKnopn/gJ8/Kb\nUlx/ZMtQWQKBgQC2tGq1hKFKzKIwAviG5FEUP0q7fmN88qbqvHL1TnGSC1lJ59ZV\newCS6ATco0aTfNYWvmhhgypS+R5Jvcff/2VtCVVY1yrfx56NIKt4XdCMhTk4deqY\ny2+MNwwVMILxh2hDJTItS4ORIYJSaQQDf+xDCpNibpynIxP0VPjg4iO0OwKBgA9R\nrcj7GjlbEwDuj+zwXrcLA3NAtkvW0MuVY4tdkrzpoGq5F5DFlM4pJlqyf4HjfA3l\n9QqZuXPRVqEvLPcaW/dGjZ2viiIevAre4qNvoyA3LGU5438QX49jsl8FTxDMXP9Q\nbyIVN4dfeBaDSg62LNQR417NTnYdStdKBZc3/DLJAoGBALkwBcd6OslRzCxpSCSQ\nXotDqBD/u+NOT8zgsLlvoscjpPtb9u7LwFqvmaOvdR9ZpE7OEzGmIhjplr7jlYCX\nkAdM84nyQWhXh7hF9EX2y53SuGzlJpLl/3fgdUtZgRDhiyjt4MKDKorG/NoxjWeP\najWZm7PBSvlZzaH4rsTVRSbp\n-----END PRIVATE KEY-----\n",
+  "client_email": "mini-wp@mini-wp-258620.iam.gserviceaccount.com",
+  "client_id": "106540309188754727059",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mini-wp%40mini-wp-258620.iam.gserviceaccount.com"
+}
