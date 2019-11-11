@@ -84,7 +84,7 @@ export default {
 		onSignInSuccess (googleUser) {
 			var id_token = googleUser.getAuthResponse().id_token;   
 			axios({
-					url: 'http://localhost:3000/signGoogle',
+					url: '/signGoogle',
 					method: 'post',
 					data:{
 							id_token

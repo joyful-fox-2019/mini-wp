@@ -13626,7 +13626,7 @@ var _default = {
 
       var id_token = googleUser.getAuthResponse().id_token;
       (0, _server.default)({
-        url: 'http://localhost:3000/signGoogle',
+        url: '/signGoogle',
         method: 'post',
         data: {
           id_token: id_token
@@ -72074,7 +72074,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38787" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39161" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
