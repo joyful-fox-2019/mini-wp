@@ -1,34 +1,32 @@
 <template>
-  <div class="wrapper">
-        <div class="containerLogin">
-            <div class="overlay" :style="overlay">
-                <div class="form form__login" :style="formLogin">
-                    <form v-on:submit.prevent="login">
-                        <label>E-MAIL</label>
-                        <input v-model="emailLogin" type="text">
-                        <label>PASSWORD</label>
-                        <input v-model="passwordLogin" type="password"><br />
-                        <input type="submit" value="LOG IN">
-                    </form>
-                </div>
-                <div class="form form__signup" :style="formSignup">
-                    <form v-on:submit.prevent="register">
-                        <label for="email">E-MAIL</label>
-                        <input v-model="emailSignup" type="email">
-                        <label for="password">PASSWORD</label>
-                        <input v-model="passwordSignup" type="password"><br />
-                        <input type="submit" value="REGISTER">
-                    </form>
-                </div>
+    <div class="containerLogin">
+        <div class="overlay" :style="overlay">
+            <div class="form form__login" :style="formLogin">
+                <form v-on:submit.prevent="login">
+                    <label>E-MAIL</label>
+                    <input v-model="emailLogin" type="text">
+                    <label>PASSWORD</label>
+                    <input v-model="passwordLogin" type="password"><br />
+                    <input type="submit" value="LOG IN">
+                </form>
             </div>
-            <div class="box left">
-                <h4>Start working!</h4>
-                <button class="btn btn__login" v-on:click="removeOverlay">LOG IN</button>
+            <div class="form form__signup" :style="formSignup">
+                <form v-on:submit.prevent="register">
+                    <label for="email">E-MAIL</label>
+                    <input v-model="emailSignup" type="email">
+                    <label for="password">PASSWORD</label>
+                    <input v-model="passwordSignup" type="password"><br />
+                    <input type="submit" value="REGISTER">
+                </form>
             </div>
-            <div class="box right">
-                <h4>Need an account?</h4>
-                <button class="btn btn__signup" v-on:click="moveOverlay">REGISTER</button>
-            </div>
+        </div>
+        <div class="box left">
+            <h4>Start working!</h4>
+            <button class="btn btn__login" v-on:click="removeOverlay">LOG IN</button>
+        </div>
+        <div class="box right">
+            <h4>Need an account?</h4>
+            <button class="btn btn__signup" v-on:click="moveOverlay">REGISTER</button>
         </div>
     </div>
 </template>

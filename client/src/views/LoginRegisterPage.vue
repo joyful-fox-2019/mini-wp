@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="wrapper">
     <LoginRegisterForm @set-login="setLogin"></LoginRegisterForm>
-    <GoogleSignInButton @set-login="setLogin"></GoogleSignInButton>
+    <div class="googleButton">
+      <GoogleSignInButton @set-login="setLogin"></GoogleSignInButton>
+    </div>
   </div>
 </template>
 
@@ -29,6 +31,11 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+.googleButton {
+  position: absolute;
+  top: 615px;
+  left: 600px;
 }
 .wrapper {
   height: 100vh;

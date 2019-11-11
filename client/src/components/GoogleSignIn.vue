@@ -3,7 +3,7 @@
     :params="googleSignInParams"
     @success="onSignInSuccess"
     @error="onSignInError">
-    Sign in with Google
+    <button type="button" class="btn btn-gplus"><i class="fab fa-google-plus-g pr-1"></i> Sign in with Google </button>
   </g-signin-button>
 </template>
 
@@ -76,13 +76,11 @@ export default {
 <style>
 .g-signin-button {
   /* This is where you control how the button looks. Be creative! */
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  width: 150px;
   padding: 4px 8px;
-  border-radius: 3px;
-  background-color: #3c82f7;
+  border-radius: 20px;
+  background-image: linear-gradient(to bottom, #d67c7c, #7199f0, #92db9c);
   color: #fff;
-  box-shadow: 0 3px 0 #0f69ff;
+  box-shadow: 0 2px 0 #86a3d6;
 }
 </style>
