@@ -1,0 +1,87 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Mini Wordpress</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><img src="images/wordpress.png" width="30" height="30" alt=""> Wordpress</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Reader</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-pencil-square-o"></i>Write</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-user-circle"></i></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-bell"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="sidebar-item"><a href=""><i class="fa fa-search"></i> View Site</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-line-chart"></i> Stats</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-clock-o"></i> Activity</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-refresh"></i> Plan</a></li>
+            </ul>
+            <ul class="nav flex-column mb-2">
+              <h6>Manage</h6>
+              <li class="sidebar-item"><a href=""><i class="fa fa-newspaper-o"></i> Site Pages</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-th-list"></i> Blog Posts</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-picture-o"></i> Media</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-comments"></i> Comments</a></li>
+              <li class="sidebar-item"><a href="">Feedback</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-plug"></i> Plugins</a></li>
+              <li class="sidebar-item"><a href=""><i class="fa fa-cloud-download"></i> Import</a></li>
+            </ul>
+            <ul class="nav flex-column mb-2">
+              <h6>Personalize</h6>
+              <li class="sidebar-item"><a href=""><i class="fa fa-cog"></i> Customize</a></li>
+            </ul>
+          </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10px-4">
+          <div class="search-wrapper">
+            <label>Search Title:</label>
+            <input type="text" v-model="keyword" placeholder="Search Title...">
+          </div>
+          <div class="wrapper">
+            <div v-for="post in filteredList" class="card mb-3" >
+              <img src="images/bali.jpg" class="card-img-top" height="300px">
+              <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content}}</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
