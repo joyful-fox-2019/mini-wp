@@ -12,10 +12,10 @@
 
 | **Route**    | **HTTP** | **Description**                       |
 | ------------ | -------- | ------------------------------------- |
-| /articles | POST      | Create new todo (login required)           |
-| /articles  | GET      | Get todos of current user (login required)           |
+| /articles | POST      | Create new article (login required)           |
+| /articles  | GET      | Get articles of current user (login required)           |
 | /articles/:id  | PUT      |  Edit article(login required)|
-| /articles/:id  | DELETE      | Delete todo (login required)|
+| /articles/:id  | DELETE      | Delete article (login required)|
 
 **Errors:**
 
