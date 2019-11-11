@@ -88404,7 +88404,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var token = localStorage.getItem('token');
 
 var axiosNpm = _axios.default.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://35.247.184.111/',
   headers: {
     access_token: token
   }
@@ -92245,6 +92245,8 @@ var _default = {
   },
   methods: {
     onSuccess: function onSuccess(googleUser) {
+      var _this = this;
+
       var id_token = googleUser.getAuthResponse().id_token;
       (0, _axios.default)({
         url: '/users/goauth',
@@ -92254,11 +92256,17 @@ var _default = {
         }
       }).then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
+        localStorage.setItem('token', data.token);
+
+        _this.$router.push('/');
+
+        _this.$emit('changeLogin', true);
+      }).catch(function (err) {
+        console.log(err);
       });
     },
     login: function login() {
-      var _this = this;
+      var _this2 = this;
 
       (0, _axios.default)({
         url: '/users/login',
@@ -92271,9 +92279,9 @@ var _default = {
         var data = _ref2.data;
         localStorage.setItem('token', data.token);
 
-        _this.$router.push('/');
+        _this2.$router.push('/');
 
-        _this.$emit('changeLogin', true);
+        _this2.$emit('changeLogin', true);
       }).catch(function (err) {
         console.log(err);
       });
@@ -100061,7 +100069,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62702" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50101" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

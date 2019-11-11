@@ -2,7 +2,7 @@ import axios from 'axios'
 const token = localStorage.getItem('token')
 
 const axiosNpm = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://35.247.184.111/',
   headers: {
     access_token: token
   }

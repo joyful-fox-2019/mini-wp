@@ -52,7 +52,13 @@ export default {
         }
       })
         .then(({ data })=>{
-          console.log(data)
+          localStorage.setItem('token', data.token)
+          this.$router.push('/')
+          this.$emit('changeLogin', true)
+        })
+        .catch(err=>{
+          console.log(err)
+          
         })
     },
     login(){
