@@ -16,6 +16,7 @@
           <a class="nav-link" href="#">Draft</a>
           <form class="form-inline ml-auto">
             <input
+              v-model="searchArticle"
               class="form-control ml-sm-2"
               type="search"
               placeholder="Search"
@@ -29,7 +30,7 @@
         </nav>
       </div>
       <div
-        v-for="(article, i) in articles"
+        v-for="(article, i) in searchingArticle"
         :key="i"
         class="container border mt-3 d-flex"
         style="width: 70%; background-color: white;"
@@ -129,6 +130,7 @@ export default {
   props: ["createNow"],
   data() {
     return {
+      searchArticle: "",
       articles: [],
       update: {
         updateId: null,
@@ -260,6 +262,19 @@ export default {
         title: "Create Article Successfully"
       });
       this.showArticles();
+    }
+  },
+  computed: {
+    searchingArticle() {
+      if (this.searchArticle) {
+        return this.articles.filter(item => {
+          return item.title
+            .toLowerCase()
+            .includes(this.searchArticle.toLowerCase());
+        });
+      } else {
+        return this.articles;
+      }
     }
   }
 };
