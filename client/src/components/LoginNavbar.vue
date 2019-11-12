@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-between align-items-center">
         <button type="button" class=" btn-sm d-flex writeButton align-items-center p-2 px-4"
-            v-on:click="buttonWrite" v-if="isLogin">
+            v-if="isLogin" @click="writeOption">
             <i class="fa fa-pencil-square-o fa-2x mr-1" aria-hidden="true" style="color: #2C6286;"></i>
             Write
         </button>
@@ -12,7 +12,7 @@
                 style="color: white;"></i>
         </button>
         <button v-if="!isLogin" type="button" data-toggle="modal" data-target="#exampleModal4"
-            class="btn rounded-circle ml-3 px-0 py-0" v-on:click="selectLogin()"
+            class="btn rounded-circle ml-3 px-0 py-0"
             style=" height: 40px; width: 40px; background-size: 45px;">
             <i class="fas fa-user-circle fa-2x" style="color: white"></i>
         </button>
@@ -88,7 +88,9 @@
                                             </div>
                                             <div class="hr-sect">or signin with</div>
                                             <div class="d-flex justify-content-center">
-                                                    <div class="g-signin2 ml-3" @click="google" data-onsuccess="onSignIn"></div>                   
+                                                <g-signin-button :params="googleSignInParams" @success="onSignInSuccess" @error="onSignInError" data-toggle="modal" data-dismiss="modal">
+                                                    Sign in with Google
+                                                </g-signin-button>
                                             </div>
                                         </form>
                                     </div>
@@ -147,7 +149,7 @@
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1"
                                                     class="text-uppercase">Name</label>
-                                                <input type="text" v-model="formRegister.name" id="email" class="form-control"
+                                                <input type="text" v-model="formRegister.name" id="name" class="form-control"
                                                     placeholder="Email">
                                             </div>
                                             <div class="form-group">
@@ -164,8 +166,7 @@
                                             </div>
                                             <div class="d-flex">
                                                 <input class="btn btn-primary px-5" type="button" value="SignUp" @click="register" data-dismiss="modal">
-                                                <input class="btn btn-secondary ml-2 d-flex align-item-center" type="button" value="SignIn" data-target="#modelLogin"
-                                data-toggle="modal" data-dismiss="modal">
+                                                <input class="btn btn-secondary ml-2 d-flex align-item-center" type="button" value="SignIn" data-target="#modelLogin" data-toggle="modal" data-dismiss="modal">
                                             </div>
                                         </form>
                                     </div>
@@ -209,6 +210,7 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login'
 import axios from '../../apis/server'
 import Swal from 'sweetalert2'
 
@@ -216,6 +218,9 @@ export default {
     name: "LoginNavbar",
     data() {
         return {
+            googleSignInParams: {
+                client_id: '888490755857-qkd1fb6enlckk5vtoptpeha30kkou15e.apps.googleusercontent.com'
+            },
             Toast : Swal.mixin({
                 toast: true,
                 position: 'bottom-end',
@@ -232,21 +237,28 @@ export default {
             formLogin : {
                 email : '',
                 password : '',
-            }
+            },
         };
     },
     methods: {
-        google(){
+        writeOption(){
+            if (!this.writeArticle) {
+                this.writeArticle = true
+                this.$emit('writeArticle', this.writeArticle)
+            } else {
+                this.writeArticle = false
+                this.$emit('writeArticle', this.writeArticle)
+            }
+        },
+        onSignInSuccess (googleUser){
             Swal.showLoading()
             const { id_token } = googleUser.getAuthResponse();
-            console.log(id_token)
             axios({
                 url : '/user/google',
                 method : 'post',
                 data : { id_token }
             })
             .then(({data})=>{
-                console.log(data)
                 Swal.close()
                 this.isLogin = true
                 localStorage.setItem('token',data.token)
@@ -264,6 +276,14 @@ export default {
 				})
             })
         },
+        onSignInError(error){
+			Swal.fire({
+				icon: 'error',
+				title: 'Sorry,',
+				text: "Login Google Failed"
+			})
+		},
+        google(){},
         login(){
             Swal.showLoading()
             axios({
@@ -276,7 +296,7 @@ export default {
                 Swal.close()
                 this.isLogin = true
                 localStorage.setItem('token',data.token)
-                this.$emit('isLogin', true)
+                this.$emit('isLogin', this.isLogin)
                 this.Toast.fire({
 					icon: 'success',
 					title: 'Login successfully'
@@ -318,13 +338,13 @@ export default {
         },
         logout(){
             Swal.showLoading()
+            this.isLogin = false
+            this.$emit('isLogin', false)
+            localStorage.removeItem('token')
             let auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function () {
                 console.log('User signed out.');
             });
-            this.isLogin = false
-            localStorage.removeItem('token')
-                this.$emit('isLogin', false)
             Swal.close()
             this.Toast.fire({
 				icon: 'success',
@@ -332,10 +352,33 @@ export default {
 			})
         }
     },
+    created() {
+        if(localStorage.getItem('token')){
+            this.isLogin = true
+        }
+    },
+    mounted() {
+        gapi.signin2.render('google-signin-button', {
+            onsuccess: this.onSignIn
+        })
+    },
 };
 </script>
 
 <style>
+
+.g-signin-button {
+    display: inline-block;
+    padding: 12px 12px;
+    border-radius: 3px;
+	margin: 0px;
+    background-color: #3c82f7;
+    color: #fff;
+	height: 100%;
+	cursor: pointer;
+}
+
+
 .modal-dialog-slideout {min-height: 0; margin: 0.3% 0 0 auto;background: #fff;}
 .modal.fade.show .modal-dialog.modal-dialog-slideout .modal-body{overflow-y: auto;overflow-x: hidden;}
 .modal-dialog-slideout .modal-content{border: 0;}

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <nav-bar @isLogin="key"></nav-bar>
-    <main-menu :isLogin="isLogin"></main-menu>  
+    <nav-bar @isLogin="isLogin" @writeArticle="writeArticle"></nav-bar>
+    <main-menu :loginStatus="loginStatus" @isLogin="isLogin" :articleOption="articleOption" @writeArticle="writeArticle"></main-menu>  
   </div>
 </template>
 
@@ -13,17 +13,29 @@ export default {
   name: 'app',
   data(){
     return {
-      isLogin : ''
+      loginStatus : '',
+      articleOption : ''
     }
   },
   methods: {
-    key(value){
-      this.isLogin = value
+    writeArticle(value){
+      this.articleOption = value
+    },
+    isLogin(value){
+      console.log('dwdwdw', value);
+      
+      this.loginStatus = value
     }
   },
   components: {
     'main-menu': MainMenu,
     'nav-bar': Navbar
+  },
+  created(){
+    if(localStorage.getItem("token")){
+      this.loginStatus = true
+      this.isLogin(this.loginStatus)
+    }
   }
 }
 </script>

@@ -13,7 +13,7 @@
                 Reader 
             </button>
         </div>
-        <login-navbar @isLogin="isLogin"></login-navbar>
+        <login-navbar @isLogin="isLogin" @writeArticle="writeArticle"></login-navbar>
     </nav>
     </div>
 </template>
@@ -29,12 +29,21 @@ export default {
     },
     methods: {
         isLogin(value){
+            console.log(value,'dwdadaw');
+            
             this.$emit('isLogin',value)
+        },
+        writeArticle(value){
+            console.log('dari navbar');
+            this.$emit('writeArticle',value)
         }
     },
     components : {
         'login-navbar' : loginNavbar
-    }
+    },
+    created() {
+        // console.log('dari navbar');
+    },
 };
 </script>
 
