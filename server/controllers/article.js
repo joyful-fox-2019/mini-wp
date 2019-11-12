@@ -1,34 +1,21 @@
 const Article = require('../models/Article');
-const multiparty = require('multiparty');
-const { upload } = require('../middlewares/gcsUpload')
 
 class ArticleController {
     static create(req, res, next) {
-        let form = new multiparty.Form();
-        form.parse(req, function(err, fields, files) {
-            Article
-                .create({
-                    title: fields.title[0],
-                    content: fields.content[0],
-                    UserId: req.decoded.id
-                })
-                .then(data => {
-                    res.status(201).json(data)
-                    // console.log(files.featuredImage)
-                    // console.log('ipload yeee')
-                    // upload.single(files.featuredImage[0].path)
-                    // console.log(req.body)
-                })
-                .catch( err => {
-                    next(err);
-                })
-            // console.log(res.locals)
-            // console.log()
-            // req.body = fields;
-            // req.files = files;
-        });
-        
-        // res.status(200).json({});
+        const { title, content, featuredImage } = req.body;
+       
+        Article
+            .create({
+                title,
+                content,
+                featuredImage
+            })
+            .then(data => {
+                res.status(201).json(data)
+            })
+            .catch( err => {
+                next(err);
+            })
     }
 
     static getAll(req, res, next) {
