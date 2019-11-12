@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="mt-2 mb-4"> <b></b> Create Article </h2>
+    <h2 class="mt-5 mt-md-2 mb-4"> <b></b> Create Article </h2>
     <form>
       <b-form-input required v-model="title" placeholder="Article Title"></b-form-input>
       <b-form-file

@@ -9,7 +9,7 @@ class ArticleController {
 
   static async allArticle (req,res,next) {
     try{
-      const article = await Article.find().populate('UserId')
+      const article = await Article.find().populate('UserId').sort({createdAt: -1})
 
       // let pageData = 1
       // const { page } = req.query
@@ -38,7 +38,7 @@ class ArticleController {
   static async userArticles (req,res,next) {
     const { _id } = req.loggedUser
     try{
-      let data = await Article.find({ UserId:_id })
+      let data = await Article.find({ UserId:_id }).sort({createdAt: -1})
       if(data){
         res.status(200).json(data)
       }
@@ -99,7 +99,6 @@ class ArticleController {
 
   static async updateArticle (req,res,next) {
     const { title,description,tags } = req.body
-    console.log(req.body)
     if(tags){
       var arrayTags = tags.split(',')
     }
@@ -115,7 +114,6 @@ class ArticleController {
 
   static async updateImage (req,res,next) {
     const { _id } = req.params
-    console.log(req.body)
     try{
       // Find old link and get the img name
       const findData = await Article.findOne({ _id })
@@ -166,7 +164,6 @@ class ArticleController {
         // after have the img name, then peform the delete img in gcs
         const file = myBucket.file(myfile[4])
         const deleteImgDataInGCS = await file.delete()
-        console.log(myfile[4])
   
         const deleteArticleData = await Article.deleteOne({ _id })
         res.status(200).json({ deleteArticleData,deleteImgDataInGCS })
@@ -195,7 +192,6 @@ class ArticleController {
             })
           }
           else{
-            console.log(data[i].tags[j], tagsData)
             for(let k = 0; k < tagsData.length; k++){
               if(tagsData[k].name === data[i].tags[j]){
                 tagsData[k].count += 1
@@ -218,7 +214,6 @@ class ArticleController {
           }
         }
       }
-      console.log(tagsData)
       res.status(200).json(tagsData)
     }
     catch(err){
@@ -228,10 +223,8 @@ class ArticleController {
 
   static async searchByTag (req,res,next) {
     const { tag } = req.params
-    console.log(tag)
     try{
-      let data = await Article.find({ tags:tag }).populate('UserId')
-      console.log(data)
+      let data = await Article.find({ tags:tag }).populate('UserId').sort({createdAt: -1})
       res.status(200).json(data)
     }
     catch(err){

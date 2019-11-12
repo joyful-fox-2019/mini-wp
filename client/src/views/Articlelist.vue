@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="mt-2 mb-4">
+    <h2 class="mt-5 mt-md-2 mb-4">
       <b></b> Post List ( Article List )
     </h2>
     <div>
@@ -10,7 +10,7 @@
         <b-col>
           <b-card class="mb-2 border-info" style="font-size:17px;">
             <b-row class="text-dark align-items-center">
-              <b-col class="border-right text-center" cols="1">
+              <b-col class="border-right text-center d-none d-sm-block" cols="1">
                 <b>No.</b>
               </b-col>
               <b-col class="border-right text-center" cols="5">
