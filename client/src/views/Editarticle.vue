@@ -68,7 +68,7 @@ export default {
     goBack() {
     window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    fetchDetailArticle(){
+    fetchDetailArticle(updated){
       Swal.showLoading()
       axios({
         method: 'get',
@@ -79,7 +79,12 @@ export default {
         this.title = data.title
         this.content = data.description
         this.tags = data.tags.join(', ')
-        Swal.close()
+        if(updated){
+          this.successToast("Data successfuly updated!")
+        }
+        else{
+          Swal.close()
+        }
       })
       .catch(err => {
         this.next(err.response.data)
@@ -108,8 +113,7 @@ export default {
       })
       .then(({ data }) => {
         console.log(data)
-        this.fetchDetailArticle()
-        this.successToast("Data successfuly updated!")
+        this.fetchDetailArticle('updated')
       })
       .catch(err => {
         console.log(this.err.response.data)

@@ -31,7 +31,7 @@
               name="password"
               autocomplete="current-password"
             ></b-form-input>
-          <small class="text-secondary">Don't have account? <span class="text-info" @click="toRegister()">Register here.</span></small>
+          <small class="text-secondary">Don't have account? <span class="text-info" style="cursor: pointer;" @click="toRegister()">Register here.</span></small>
           </b-form-group>
 
           <b-button type="submit" variant="info">Login</b-button>
@@ -82,7 +82,7 @@
               name="password"
               autocomplete="new-password"
             ></b-form-input>
-          <small class="text-secondary">Have account? <span class="text-info" @click="toLogin()">Login here.</span></small>
+          <small class="text-secondary">Have account? <span class="text-info" style="cursor: pointer;" @click="toLogin()">Login here.</span></small>
           </b-form-group>
 
           <b-button type="submit" variant="info">Register</b-button>

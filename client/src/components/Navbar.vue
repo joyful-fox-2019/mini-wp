@@ -8,7 +8,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto mr-2">
           <b-nav-form @submit.prevent="searchArticleByTag()" class="mt-4 mt-md-0">
-            <b-form-input v-model='tag' size="sm" class="mr-sm-2 mb-1" placeholder="Search Article"></b-form-input>
+            <b-form-input v-model='tag' size="sm" class="mr-sm-2 mb-1 mb-md-0" placeholder="Search Article by Tag"></b-form-input>
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
             <router-link :to="userid"><b-button size="sm" class="my-2 my-sm-0 ml-2" variant="dark">Admin Panel</b-button></router-link>
           </b-nav-form>

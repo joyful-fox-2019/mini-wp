@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 
 Vue.use(BootstrapVue)
 Vue.prototype.moment = moment
+
 Vue.mixin({
   methods: {
     next(err) {
