@@ -8,17 +8,16 @@ const upload = gcsUpload({
         fileSize: 1e6 // in bytes
     },
     gcsConfig: {
-        keyFilename: "",
-        bucketName: ""
+        keyFilename: "keyfile.json",
+        bucketName: "mini-wp-image-anggabanny"
     }
 })
 
 routes.use(authentication)
 routes.get('/', ArticleController.findAll)
-routes.post('/', ArticleController.create)
-routes.use(authorization)
-routes.patch('/:id', ArticleController.updatePatch)
-routes.put('/:id', ArticleController.updatePut)
-routes.delete('/:id', ArticleController.delete)
+routes.post('/', upload.single('imageUrl'), ArticleController.create)
+routes.patch('/:id', authorization, ArticleController.updatePatch)
+routes.put('/:id', authorization, ArticleController.updatePut)
+routes.delete('/:id', authorization, ArticleController.delete)
 
 module.exports = routes

@@ -11,10 +11,8 @@ module.exports = {
     },
     create(req,res,next){
         const author = req.loggedUser.id
-        console.log(author);
-        
-        const { title, content ,image } = req.body
-        const article = { title, content, author, image}
+        const { title, content ,imageUrl } = req.body
+        const article = { title, content, author, imageUrl}
         ArticleModel.create(article)
             .then(article=>{
                 res.status(200).json(article)
@@ -23,11 +21,11 @@ module.exports = {
     },
     updatePatch(req,res,next){
         const { id } = req.params
-        const { title, content, image } = req.body
+        const { title, content, imageUrl } = req.body
         const article = {}
         title ? article.title = title : ''
         content ? article.content = content : ''
-        content ? article.content = image : ''
+        content ? article.content = imageUrl : ''
         ArticleModel.findOneAndUpdate({
             _id : id
         },article,{
@@ -40,8 +38,8 @@ module.exports = {
     },
     updatePut(req,res,next){
         const { id } = req.params
-        const { title, content, image } = req.body
-        const article = { title, content, image }
+        const { title, content, imageUrl } = req.body
+        const article = { title, content, imageUrl }
         ArticleModel.findOneAndUpdate({
             _id : id
         },article,{

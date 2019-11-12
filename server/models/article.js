@@ -13,14 +13,8 @@ const ArticleSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'User'
     },
-    image : {
-        type : Array,
-        validate : {
-            validator : function(value){
-                return value.length > 0 ? true : false
-            },
-            message: props => `image is required`
-        }
+    imageUrl : {
+        type : String,
     }
 },{
     timestamps: true,

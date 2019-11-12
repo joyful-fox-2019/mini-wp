@@ -5,7 +5,7 @@ const { Schema, model  } = mongoose
 const UserSchema = new Schema({
     name : {
         type : String,
-        required: [true, 'username is required']
+        required: [true, 'name is required']
     },
     email : {
         type : String,
@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         required: [true, 'password is required'],
         minlength: [4, 'Password Minimum Contain 4 Character']  
     },
-    image : {
+    imageUrl : {
         type : Array,
         validate : {
             validator : function(value){

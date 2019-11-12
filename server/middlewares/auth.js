@@ -28,7 +28,8 @@ function authentication(req, res, next){
     }
 }
 
-function authorization(req, res, next){
+function authorization(req, res, next){    
+    console.log(req.params);
     ArticleModel.findById(req.params.id)
         .then(article => {
             console.log(article);

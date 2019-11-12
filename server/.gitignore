@@ -2,4 +2,3 @@ node_modules
 credentials.json
 db.json
 .env
-keyfile.json

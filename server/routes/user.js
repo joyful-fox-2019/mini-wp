@@ -8,8 +8,8 @@ const upload = gcsUpload({
         fileSize: 1e6 // in bytes
     },
     gcsConfig: {
-        keyFilename: "",
-        bucketName: ""
+        keyFilename: "keyfile.json",
+        bucketName: "mini-wp-image-anggabanny"
     }
 })
 

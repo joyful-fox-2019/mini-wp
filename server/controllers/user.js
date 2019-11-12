@@ -11,17 +11,18 @@ module.exports =  {
             console.log('user',user);
             let { name, email } = req.decoded
             if(user){
-                const token = generate({ id:user._id, email : user.email})
+                const token = generateToken({ id:user._id, email : user.email})
                 res.status(200).json({token})
             } else {
                 return UserModel.create({
+                    name,
                     email,
                     password : process.env.DEFAULT_PASSWORD
                 })
             }
         })
         .then(user=>{
-            const token = generate({_id:user._id, email:user.email})
+            const token = generateToken({_id:user._id, email:user.email})
             res.status(200).json({token})
         })
         .catch(next)
