@@ -14,8 +14,8 @@ class articleController {
             title: title,
             content: content,
             author: UserId,
-            featured_image: featured_image,
-            tags: tags
+            tags: tags,
+            featured_image: featured_image
         })
             .then(article => {
                 res.status(201).json({ article, message: `success created article` })

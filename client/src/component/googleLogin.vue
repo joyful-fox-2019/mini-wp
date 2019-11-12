@@ -55,6 +55,8 @@ export default {
           console.log(data);
           localStorage.setItem("token", data.token);
           localStorage.setItem("email", data.email);
+          localStorage.setItem("name", data.name);
+
           Swal.fire({
             icon: "success",
             title: `Login Successful, Welcome`,

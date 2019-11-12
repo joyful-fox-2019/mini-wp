@@ -17,7 +17,6 @@ import googleLogin from "../component/googleLogin";
 
 export default {
   name: "loginPage",
-  props: ["isLogin"],
   components: {
     loginregisterform,
     googleLogin

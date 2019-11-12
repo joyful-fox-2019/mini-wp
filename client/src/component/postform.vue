@@ -67,20 +67,45 @@ export default {
       formData.append("featured_image", this.featured_image);
       formData.set("title", this.title);
       formData.set("content", this.content);
+      console.log(this.tags);
+
       this.tags.forEach(tag => {
-        formData.append("tag", tag);
+        formData.append("tags", tag);
       });
-      console.log(`masuk`);
+      console.log(this.tags);
       axios({
         method: "post",
         url: "/articles",
         data: formData,
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data",
+          token: localStorage.getItem("token")
         }
       })
         .then(({ data }) => {
           this.$emit("createdpost");
+          Swal({
+            title: "uploading",
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            timer: 2000,
+            onOpen: () => {
+              swal.showLoading();
+            }
+          }).then(
+            () => {},
+            dismiss => {
+              if (dismiss === "timer") {
+                console.log("closed by timer!!!!");
+                swal({
+                  title: "Finished!",
+                  type: "success",
+                  timer: 2000,
+                  showConfirmButton: false
+                });
+              }
+            }
+          );
           Swal.fire({
             icon: "success",
             title: `Success publish a new article`,
@@ -88,8 +113,7 @@ export default {
             timer: 1500
           });
         })
-        .catch(err => {
-          console.log(err);
+        .catch(({ response }) => {
           Swal.fire({
             icon: "error",
             title: "Oops...",

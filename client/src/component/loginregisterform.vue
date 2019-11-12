@@ -1,43 +1,47 @@
 <template>
   <div>
     <div class="signup" :class="{'slide-up': loginSite}">
-      <h2 class="form-title" id="signup" @click="siteSwap">
-        <span>or</span>Create Account
-      </h2>
-      <div class="form-holder">
-        <input type="text" class="input" placeholder="Name" v-model="regname" />
-        <input type="email" class="input" placeholder="Email" v-model="regemail" />
-        <input type="password" class="input" placeholder="Password" v-model="regpassword" />
-      </div>
-      <br />
-      <div v-if="errorsReg.length != 0" class="error">
-        <h5>
-          <strong>We had some issues</strong>
-        </h5>
-        <ul>
-          <li v-for="err in errorsReg" :key="err">{{err}}</li>
-        </ul>
-      </div>
-      <button class="submit-btn" @click="signUp">Sign up</button>
+      <form @submit.prevent="signUp">
+        <h2 class="form-title" id="signup" @click="siteSwap">
+          <span>or</span>Create Account
+        </h2>
+        <div class="form-holder">
+          <input type="text" class="input" placeholder="Name" v-model="regname" />
+          <input type="email" class="input" placeholder="Email" v-model="regemail" />
+          <input type="password" class="input" placeholder="Password" v-model="regpassword" />
+        </div>
+        <br />
+        <div v-if="errorsReg.length != 0" class="error">
+          <h5>
+            <strong>We had some issues</strong>
+          </h5>
+          <ul>
+            <li v-for="err in errorsReg" :key="err">{{err}}</li>
+          </ul>
+        </div>
+        <input class="submit-btn" type="submit" value="Sign up" />
+      </form>
     </div>
     <div class="login" :class="{'slide-up': !loginSite}">
       <div class="center">
-        <h2 class="form-title" id="login" @click="siteSwap">
-          <span>or</span>Log in
-        </h2>
-        <div class="form-holder">
-          <input type="email" class="input" placeholder="Email" v-model="logemail" />
-          <input type="password" class="input" placeholder="Password" v-model="logpassword" />
-        </div>
-        <br />
-        <div v-if="errorsLog.length != 0" class="error">
-          <h5>We had some issues</h5>
-          <ul>
-            <li>{{errorsLog}}</li>
-          </ul>
-        </div>
-        <button class="submit-btn" @click="signIn">Log in</button>
-        <googleLogin @set-login="setLogin"></googleLogin>
+        <form @submit.prevent="signIn">
+          <h2 class="form-title" id="login" @click="siteSwap">
+            <span>or</span>Log in
+          </h2>
+          <div class="form-holder">
+            <input type="email" class="input" placeholder="Email" v-model="logemail" />
+            <input type="password" class="input" placeholder="Password" v-model="logpassword" />
+          </div>
+          <br />
+          <div v-if="errorsLog.length != 0" class="error">
+            <h5>We had some issues</h5>
+            <ul>
+              <li>{{errorsLog}}</li>
+            </ul>
+          </div>
+          <input class="submit-btn" type="submit" value="Log in" />
+          <googleLogin @set-login="setLogin"></googleLogin>
+        </form>
       </div>
     </div>
   </div>
@@ -87,6 +91,7 @@ export default {
           this.regemail = "";
           this.regname = "";
           this.regpassword = "";
+          this.errorsReg = [];
         })
         .catch(({ response }) => {
           console.log(response);
@@ -112,17 +117,17 @@ export default {
           localStorage.setItem("email", data.email);
           this.$emit("set-login");
           this.logemail = "";
+          this.logpassword = "";
+          this.errorsLog = [];
         })
         .catch(({ response }) => {
           console.log(response);
           this.errorsLog = response.data.message;
         })
-        .finally(() => {
-          this.logpassword = "";
-        });
+        .finally(() => {});
     },
     setLogin() {
-      this.$$emit("set-login");
+      this.$emit("set-login");
     }
   },
   created() {

@@ -1,7 +1,8 @@
 const User = require('../models/user'),
     { compare } = require('../helpers/bcrypt'),
     { generateToken } = require('../helpers/jwt'),
-    { OAuth2Client } = require('google-auth-library');
+    { OAuth2Client } = require('google-auth-library'),
+    mailer = require("../helpers/nodemailer")
 
 class UserController {
 
@@ -23,25 +24,23 @@ class UserController {
                 if (!user) {
                     next({ status: 403, message: 'Invalid password or email' })
                 } else {
-                    if (user.isGoogle == true) {
-                        next({ status: 401, message: 'please sign in with your google account' })
-                    } else {
-                        let authPass = compare(password, user.password)
-                        if (authPass) {
-                            let name = user.name,
-                                email = user.email,
-                                _id = user._id;
 
-                            const token = generateToken({
-                                name: name,
-                                email: email,
-                                id: _id
-                            })
-                            res.status(200).json({ token, name, email })
-                        } else {
-                            next({ status: 403, message: 'Invalid password or email' })
-                        }
+                    let authPass = compare(password, user.password)
+                    if (authPass) {
+                        let name = user.name,
+                            email = user.email,
+                            _id = user._id;
+
+                        const token = generateToken({
+                            name: name,
+                            email: email,
+                            id: _id
+                        })
+                        res.status(200).json({ token, name, email })
+                    } else {
+                        next({ status: 403, message: 'Invalid password or email' })
                     }
+
                 }
             })
             .catch(next)
@@ -86,6 +85,12 @@ class UserController {
                 res.status(200).json({ token, name, email })
             })
             .catch(next)
+    }
+
+    static subscribe(req, res, next) {
+        let email = req.loggedUser.email,
+            name = req.loggedUser.name;
+        return mailer(email, name)
     }
 }
 

@@ -28,6 +28,7 @@
                     v-for="(article, index ) in articles"
                     :key="index"
                     :articledata="article"
+                    :name="name"
                     @deletedpost="removed"
                     @articleupdate="updatepost"
                   ></Articles>
@@ -63,7 +64,7 @@ import Swal from "sweetalert2";
 
 export default {
   name: "dashboard",
-  props: ["articledata"],
+  props: ["articledata", "isLogin", "name"],
   components: {
     Navbar,
     Welcome,
@@ -93,7 +94,10 @@ export default {
       console.log(`masuk`);
       axios({
         method: "get",
-        url: `/articles?title=${target}`
+        url: `/articles?title=${target}`,
+        headers: {
+          token: localStorage.getItem("token")
+        }
       })
         .then(({ data }) => {
           console.log(data);
@@ -129,8 +133,17 @@ export default {
       this.showArticles();
     }
   },
+  watch: {
+    isLogin(value) {
+      if (value) {
+        this.showArticles();
+      }
+    }
+  },
   created() {
-    this.showArticles();
+    if (this.isLogin) {
+      this.showArticles();
+    }
   }
 };
 </script>

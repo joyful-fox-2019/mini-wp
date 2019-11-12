@@ -9,7 +9,7 @@
         </div>
         <div class="row" style="display: flex; justify-content: space-between">
           <strong class="title">{{articledata.title}}</strong>
-          <div v-if="user == articledata.author.name">
+          <div v-if="name == articledata.author.name">
             <div class="buttons">
               <b-button
                 type="is-dark"
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="row">
-          <small class="has-text-grey content">{{articledata.content}}</small>
+          <small class="has-text-grey content" v-html="articledata.content"></small>
         </div>
         <br />
         <div class="row" style="display: flex; justify-content: flex-end">
@@ -45,7 +45,6 @@
                   <b-tag class="tagCard" style="background-color: #f1d6ab">{{ tag }}</b-tag>
                   <b-tag class="tagCard" style="background-color: #e3b04b" type="is-dark">{{ }}</b-tag>
                 </b-taglist>
-                <p></p>
               </span>
             </div>
           </div>
@@ -70,18 +69,20 @@ import moment from "moment";
 
 export default {
   name: "Articles",
-  props: ["articledata"],
+  props: ["articledata", "name"],
   data() {
     return {
-      tags: article.tags,
-      user: localStorage.getItem("name")
+      tags: articledata.tags
     };
   },
   methods: {
     remove(id) {
       axios({
         method: "delete",
-        url: `/articles/${id}`
+        url: `/articles/${id}`,
+        headers: {
+          token: localStorage.getItem("token")
+        }
       })
         .then(({ data }) => {
           this.$emit("deletedpost");

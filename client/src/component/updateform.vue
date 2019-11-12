@@ -70,7 +70,7 @@ export default {
       formData.set("title", this.title);
       formData.set("content", this.content);
       this.tags.forEach(tag => {
-        formData.append("tag", tag);
+        formData.append("tags", tag);
       });
       console.log(formData);
       axios({
@@ -78,7 +78,8 @@ export default {
         url: `/articles/${this.toupdate._id}`,
         data: formData,
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data",
+          token: localStorage.getItem("token")
         }
       })
         .then(({ data }) => {
