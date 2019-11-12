@@ -55,19 +55,20 @@ export default {
     return {
       inputTitle: "",
       inputContent: "",
-      image: []
+      image: null
     };
   },
   methods: {
     createArticle() {
+      console.log(this.image);
+      const fd = new FormData();
+      fd.append("title", this.inputTitle);
+      fd.append("content", this.inputContent);
+      fd.append("image", this.image);
       this.axios({
         method: "POST",
-        url: baseUrl + "/articles/",
-        data: {
-          title: this.inputTitle,
-          content: this.inputContent,
-          image: this.image
-        },
+        url: baseUrl + "/articles",
+        data: fd,
         headers: {
           token: localStorage.getItem("token")
         }

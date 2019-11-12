@@ -44,7 +44,9 @@ export default {
   name: "Slideshow",
   props: ["statusLogin"],
   data() {
-    return {};
+    return {
+      slide: ""
+    };
   },
   methods: {
     onSlideStart(slide) {

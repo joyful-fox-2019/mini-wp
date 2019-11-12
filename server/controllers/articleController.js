@@ -22,6 +22,7 @@ class ArticleController {
             content,
             image
         } = req.body
+        console.log(req.body)
         Article.create({
                 title,
                 content,

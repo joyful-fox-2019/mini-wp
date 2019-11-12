@@ -6,7 +6,7 @@ const client = new OAuth2Client(process.env.CLIENT_ID);
 function verify(req, res, next) {
     client.verifyIdToken({
             idToken: req.body.id_token,
-            audience: "435404984094-seh9is2iclqngre45hfjbm0vd4lq7mih.apps.googleusercontent.com"
+            audience: process.env.CLIENT_ID
         })
         .then(ticket => {
             const payload = ticket.getPayload();

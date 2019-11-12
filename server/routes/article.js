@@ -6,18 +6,19 @@ const {
 } = require('../middleware/auth')
 const gcsUpload = require('gcs-upload');
 
-// const upload = gcsUpload({
-//     limits: {
-//         fileSize: 1e6 // in bytes
-//     },
-//     gcsConfig: {
-//         keyFilename: "./keyfile.json",
-//         bucketName: "mini_wp_img"
-//     }
-// })
+const upload = gcsUpload({
+    limits: {
+        fileSize: 1e6 // in bytes
+    },
+    gcsConfig: {
+        keyFilename: "keyfile.json",
+        bucketName: "edwin-bucket-96"
+    }
+})
+
 router.use(authentication)
 router.get('/', Article.findAll);
-router.post('/', Article.create);
+router.post('/', upload.single('image'), Article.create);
 router.delete('/:id', authorization, Article.delete);
 router.put('/:id', authorization, Article.update);
 

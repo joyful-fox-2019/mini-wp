@@ -75,7 +75,7 @@ class UserController {
                     return User.create({
                         name: req.decoded.given_name,
                         email: req.decoded.email,
-                        password: hashPassword('qwerty')
+                        password: hashPassword(process.env.DEFAULT_PASSWORD)
                     })
                 }
             })
