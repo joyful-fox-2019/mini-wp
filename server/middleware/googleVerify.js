@@ -4,6 +4,7 @@ const {
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
 function verify(req, res, next) {
+    console.log('masuk google')
     client.verifyIdToken({
             idToken: req.body.id_token,
             audience: process.env.CLIENT_ID
@@ -11,7 +12,6 @@ function verify(req, res, next) {
         .then(ticket => {
             const payload = ticket.getPayload();
             req.decoded = payload;
-            // console.log(req.decoded)
             next()
         })
         .catch(err => {

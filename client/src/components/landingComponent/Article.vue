@@ -46,6 +46,9 @@
             <!-- <i class="fas fa-ellipsis-h mt-3 ml-auto"></i> -->
           </div>
         </div>
+        <div class="col mt-3 mb-3">
+          <img :src="article.image" alt="image" style="width:150px" height="150px" />
+        </div>
         <div class="col" style="display: flex; flex-direction: column; align-items: center;">
           <button
             @click="formUpdateArticle(article._id)"

@@ -203,8 +203,8 @@ export default {
         });
     },
     onSignIn(googleUser) {
-      console.log(googleUser);
-      var id_token = googleUser.getAuthInstance().id_token;
+      // console.log(googleUser);
+      const id_token = googleUser.getAuthInstance().id_token;
       this.axios({
         method: "POST",
         url: baseUrl + "/users/googleLogin",
