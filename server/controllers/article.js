@@ -15,7 +15,7 @@ module.exports = {
         const article = { title, content, author, imageUrl}
         ArticleModel.create(article)
             .then(article=>{
-                res.status(200).json(article)
+                res.status(201).json(article)
             })
             .catch(next)
     },
