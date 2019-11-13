@@ -219,7 +219,7 @@ export default {
     data() {
         return {
             googleSignInParams: {
-                client_id: '888490755857-qkd1fb6enlckk5vtoptpeha30kkou15e.apps.googleusercontent.com'
+                client_id: '835988076186-0o5h8715je7p6amc2vg6v1qrigubhin4.apps.googleusercontent.com'
             },
             Toast : Swal.mixin({
                 toast: true,

@@ -16,7 +16,7 @@ import GSignInButton from 'vue-google-signin-button'
 Vue.config.productionTip = false
 
 Vue.use(LoaderPlugin, {
-  client_id: '888490755857-qkd1fb6enlckk5vtoptpeha30kkou15e.apps.googleusercontent.com'
+  client_id: '835988076186-0o5h8715je7p6amc2vg6v1qrigubhin4.apps.googleusercontent.com'
 });
 Vue.use(GSignInButton)
 
