@@ -11,8 +11,8 @@ const {
 // routes.use(authenticate);
 routes.use(authenticate)
 routes.get("/", ArticleController.find);
-// routes.post("/", multer.single("image"), sendUploadToGCS, ArticleController.create);
-routes.post("/", ArticleController.create);
+routes.post("/", multer.single("img"), sendUploadToGCS, ArticleController.create);
+// routes.post("/", ArticleController.create);
 routes.delete("/:id", authorization, ArticleController.delete);
 routes.put("/:id", authorization, ArticleController.update);
 

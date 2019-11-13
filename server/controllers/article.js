@@ -11,10 +11,12 @@ class ArticleController {
     }
 
     static create(req, res, next) {
+
         Article.create({
             title: req.body.title,
             content: req.body.content,
-            userId: req.user.id
+            userId: req.user.id,
+            img: req.file.cloudStoragePublicUrl
         }).then((result) => {
             res.status(201).json(result)
         }).catch(next);

@@ -9,7 +9,8 @@ const articleShcema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    img: String
 
 }, {
     timestamps: true
