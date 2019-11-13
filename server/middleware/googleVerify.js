@@ -1,0 +1,24 @@
+const {
+    OAuth2Client
+} = require('google-auth-library');
+const client = new OAuth2Client(process.env.CLIENT_ID);
+
+function verify(req, res, next) {
+    console.log('masuk google')
+    client.verifyIdToken({
+            idToken: req.body.id_token,
+            audience: process.env.CLIENT_ID
+        })
+        .then(ticket => {
+            const payload = ticket.getPayload();
+            req.decoded = payload;
+            next()
+        })
+        .catch(err => {
+            res.status(500).json({
+                err
+            })
+        })
+}
+
+module.exports = verify;
