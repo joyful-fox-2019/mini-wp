@@ -14,7 +14,7 @@
         <div class="container column is-10" style="overflow:scroll; padding:100px;">
 
 
-            <form v-if="createPage === true" @submit="createProject">
+            <form v-if="createPage === true" @submit.prevent="createProject" enctype="multipart/form-data">
                 
                 <template style="display:flex;align-items:center; width:70%">
                         <section style="padding:50px">
@@ -34,7 +34,7 @@
                             <div class="field">
                                 <label for="" class="label">Description</label>
                                 <div class="control has-icons-left">
-                                    <quill v-model="description" output="html"></quill>
+                                    <quill v-model="description" :config='config' output="html"></quill>
                                     <span class="icon is-small is-left">
                                     </span>
                             </div>
@@ -52,9 +52,14 @@
                             </div>
 
                             <div class="field">
+                                
+                                
+                                    
                                 <section style="margin-top:50px;justify-contents:center">
                                     <b-field label="Upload file">
                                         <b-upload v-model="dropFiles"
+                                            type="file"
+                                            name="file"
                                             multiple
                                             drag-drop>
                                             <section class="section">
@@ -72,8 +77,8 @@
                                     </b-field>
 
                                     <div class="tags">
-                                        <span v-for="(file, index) in dropFiles"
-                                            :key="index"
+                                        <span v-for="article in articles"
+                                            :key="article._id"
                                             class="tag is-primary" >
                                             {{file.name}}
                                             <button class="delete is-small"
@@ -83,6 +88,7 @@
                                         </span>
                                     </div>
                                 </section>
+                                
                             </div>
 
 
@@ -125,9 +131,7 @@ export default {
             dropFiles : [],
             tags : [],
             index : 0,
-            description: {
-                    ops: [],
-                },
+            description: '',
                 config: {
                     placeholder: 'Compose an epic...',
                 },   
@@ -146,14 +150,21 @@ export default {
             this.createPage = status
         },
         createProject(){
+
+            let formData = new FormData()
+            this.dropFiles.forEach(image => {
+                formData.append ('files',image)
+            });
+            formData.append ('title',this.title)
+            formData.append ('tags',this.tags)
+            formData.append ('description',this.description)
+
             axios({
                 method : 'post',
-                url : '/projects',
-                data : {
-                    title : this.title,
-                    description : this.description,
-                    tags : this.tags,
-                    images : this.dropFiles
+                url : 'projects',
+                data : formData,
+                headers: {
+                    token: localStorage.getItem('token')
                 }
             })
             .then(({data}) => {

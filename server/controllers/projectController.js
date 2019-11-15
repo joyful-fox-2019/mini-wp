@@ -3,14 +3,16 @@ const User = require('../models/User')
 
 class ProjectController {
     static createProject(req,res,next){
-        console.log('dari controller create')
+        // res.status(200).json({message:'berhasil'})
+        // console.log('dari controller create masuk!')
+        console.log(req.body)
         
         Project.create({
             title : req.body.title,
             description : req.body.description,
             tags : req.body.tags,
             userId : req.loggedUser._id,
-            images: req.body.images
+            images: req.body.files
         })
         .then(projects => {
             res.status(200).json(projects)
@@ -18,7 +20,7 @@ class ProjectController {
         .catch(next)
     }
 
-    static findById(req,res,next){
+    static findByUserId(req,res,next){
         Project.find({
             userId : req.loggedUser._id
         })
@@ -29,6 +31,21 @@ class ProjectController {
             next()
             console.log(err)
         })
+    }
+
+    static findOne(req,res,next){
+        Project.findOne({
+            _id:req.params.id
+        })
+        .then(project => {
+           
+            res.status(200).json(project)
+        })
+        .catch(err =>{
+            next()
+            
+        })
+
     }
 
     static showAlll(req,res,next){ 

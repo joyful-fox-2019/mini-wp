@@ -12,24 +12,26 @@
       <div class="card" style="margin-bottom:50px" v-for="(project, i) in projects" :key="i">
           
           <a href="#">
-           
           
-         <div class="image-header-inside" :style="{'background-position':'center', 'background-size':'cover', 'height':'200px','background-image': 'url(' + projects[i].images[0] + ')' }" @click="isModalActive = true; index = i">
+         <div class="image-header-inside" 
+         :style="'(background-position : center;background-size:cover;height:200px;background-image: url('+projects[i].images[0]+')'" @click="isModalActive = true; index = i">
+          
           </div>
 
           </a>
         <div class="card-header" style="font-size: 24px"><p class="card-header-title">{{project.title}}</p></div>
         <div class="card-content">
           <div class="content">
-                <p style="color:grey; font-weigth:100; margin-bottom:0px;">
-                    {{project.description.slice(0,200) + '...'}}
-                    <a style="font-size:15px; color :blue" @click="isModalActive = true; index = i">show more>></a>
+                <p style="color:grey; font-weigth:100; margin-bottom:0px;" v-html="project.description.slice(0,200) + ' ...'">
+                    <!-- {{project.description.slice(0,200) + '...'}} -->
+                    
                 </p>
+                <a style="font-size:15px; color :blue" @click="isModalActive = true; index = i">show more>></a>
 
                 <p style="color:grey; font-weigth:100; font-style:italic"></p>
                 <div class="buttons-content">
                     <h6 style="font-size:12px; margin-bottom:20px;" > <strong>published at :</strong>  {{project.publishedAt.slice(0,10)}}</h6>
-                    <b-button type="is-primary" style="height:50px ; margin-right:20px" @click.prevent="updateProject(project._id); index = i ; "
+                    <b-button type="is-primary" style="height:50px ; margin-right:20px" @click.prevent="findUpdate(project._id); index = i ; "
                         icon-left="update">
                         Update
                     </b-button>
@@ -59,7 +61,9 @@
             
                 <div class="card-header-inside">
                     <div class="content-right">
+                        
                         <p class="card-header-title" style="font-size: 36px; padding-left:-10px">{{ projects[index].title}}</p>
+                       
 
                          <b-taglist style="margin-left:10px">
                             <b-tag v-for="(tag,i) in projects[index].tags" :key="i" type="is-info">{{tag}}</b-tag>
@@ -78,12 +82,13 @@
                         <br>                                      
                  </div>
                 </div>
-                <div class="image-header-inside" :style="{'background-size': 'cover', 'background-image': 'url(' + projects[index].images[1] + ')' }">
+
+                <div class="image" style="background-size: cover" v-for="(image,i) in projects[index].images" :key="i">
+                    <img :src="image" alt="" v-if="i !== 0">
+                    <hr>
                 </div>
-                <hr>
-                <div class="image-header-inside" :style="{'background-size': 'cover', 'background-image': 'url(' + projects[index].images[2] + ')' }">
-                </div>
-                <hr>
+                
+                
             </div>
         </b-modal>
 
@@ -93,7 +98,7 @@
 <!-- ------------------------------------------------------------------------------------------------------------------------------------ -->     
 
 <div class="container column is-10" style="overflow:scroll;">
-        <form v-if="editorPage === true">
+        <form v-if="editorPage === true" @submit.prevent="updateProject()">
              
                <template style="display:flex;align-items:center">
                     <section>
@@ -165,8 +170,8 @@
                         </div>
                         
 
-                         <button class="button" type="is-primary" @submit="createProject">Submit</button>
-                         <button class="button" type="is-danger" @click="editorPage = false">Cancel</button>
+                         <button class="button" type="is-primary">Submit</button>
+                         <button class="button" type="is-danger" @click.prevent="editorPage = false">Cancel</button>
 
                     
                     </section>
@@ -196,15 +201,14 @@ import axios from '../apis/server'
         data() {
             return {
                 projects : [],
+                projectId:'',
                 title:'',
                 dropFiles : [],
                 tags : [],
                 editorPage: false,
                 isModalActive: false,
                 index : 0,
-                description: {
-                        ops: [],
-                    },
+                description: '',
                     config: {
                         placeholder: 'Compose an epic...',
                     },   
@@ -212,9 +216,57 @@ import axios from '../apis/server'
         },
         methods : {
 
-            updateProject(id){
+            findUpdate(id){
                 this.editorPage = true
+                axios({
+                    method: 'get',
+                    url : `/projects/${id}`,
+                    headers : {
+                        token : localStorage.getItem('token')
+                    }
+                })
+                .then(({data})=>{
+                    console.log(data.images)
+                    this.title = data.title
+                    this.description = data.description
+                    this.dropFiles = data.images
+                    this.tags = data.tags
+                    this.projectId = data._id
+                })
             },
+
+            updateProject(){
+                console.log('halo dari update')
+                console.log(this.projectId)
+                axios({
+                    method:'put',
+                    url:`/projects/${this.projectId}`,
+                    headers :{
+                        token : localStorage.getItem('token')
+                    },
+                    data :{
+                        title : this.title,
+                        description : this.description,
+                        images : this.images,
+                        tags : this.tags
+                    }
+                })
+                .then(({data})=>{
+                    console.log(data)
+                    console.log('SUKSES')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+                // console.log({
+                //     title:this.title,
+                //     description:this.description,
+                //     tags : this.tags,
+                //     images : this.images
+                // })
+
+            },
+            
 
             showCreateForm(status){
                 this.editorPage = status
@@ -241,7 +293,7 @@ import axios from '../apis/server'
                     url : `/projects/${id}`,
                     headers : {
                         token : localStorage.getItem('token')
-                    }
+                    },
                 })
                 .then(({data})=>{
                     this.projects = data

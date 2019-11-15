@@ -27333,34 +27333,83 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   name: 'content-page',
   data: function data() {
     return {
       projects: [],
+      projectId: '',
       title: '',
       dropFiles: [],
       tags: [],
       editorPage: false,
       isModalActive: false,
       index: 0,
-      description: {
-        ops: []
-      },
+      description: '',
       config: {
         placeholder: 'Compose an epic...'
       }
     };
   },
   methods: {
-    updateProject: function updateProject(id) {
+    findUpdate: function findUpdate(id) {
+      var _this = this;
+
       this.editorPage = true;
+      (0, _server.default)({
+        method: 'get',
+        url: "/projects/".concat(id),
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log(data.images);
+        _this.title = data.title;
+        _this.description = data.description;
+        _this.dropFiles = data.images;
+        _this.tags = data.tags;
+        _this.projectId = data._id;
+      });
+    },
+    updateProject: function updateProject() {
+      console.log('halo dari update');
+      console.log(this.projectId);
+      (0, _server.default)({
+        method: 'put',
+        url: "/projects/".concat(this.projectId),
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          title: this.title,
+          description: this.description,
+          images: this.images,
+          tags: this.tags
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        console.log(data);
+        console.log('SUKSES');
+      }).catch(function (err) {
+        console.log(err);
+      }); // console.log({
+      //     title:this.title,
+      //     description:this.description,
+      //     tags : this.tags,
+      //     images : this.images
+      // })
     },
     showCreateForm: function showCreateForm(status) {
       this.editorPage = status;
     },
     getProjects: function getProjects() {
-      var _this = this;
+      var _this2 = this;
 
       (0, _server.default)({
         method: 'get',
@@ -27368,15 +27417,15 @@ var _default = {
         headers: {
           token: localStorage.getItem('token')
         }
-      }).then(function (_ref) {
-        var data = _ref.data;
-        _this.projects = data;
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+        _this2.projects = data;
       }).catch(function (err) {
         console.log(err);
       });
     },
     deleteProject: function deleteProject(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       // console.log(id)
       (0, _server.default)({
@@ -27385,9 +27434,9 @@ var _default = {
         headers: {
           token: localStorage.getItem('token')
         }
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-        _this2.projects = data;
+      }).then(function (_ref4) {
+        var data = _ref4.data;
+        _this3.projects = data;
       }).catch(function (err) {
         console.log(err);
       });
@@ -27438,13 +27487,10 @@ exports.default = _default;
                     _c("a", { attrs: { href: "#" } }, [
                       _c("div", {
                         staticClass: "image-header-inside",
-                        style: {
-                          "background-position": "center",
-                          "background-size": "cover",
-                          height: "200px",
-                          "background-image":
-                            "url(" + _vm.projects[i].images[0] + ")"
-                        },
+                        style:
+                          "(background-position : center;background-size:cover;height:200px;background-image: url(" +
+                          _vm.projects[i].images[0] +
+                          ")",
                         on: {
                           click: function($event) {
                             _vm.isModalActive = true
@@ -27469,40 +27515,31 @@ exports.default = _default;
                     _vm._v(" "),
                     _c("div", { staticClass: "card-content" }, [
                       _c("div", { staticClass: "content" }, [
+                        _c("p", {
+                          staticStyle: {
+                            color: "grey",
+                            "font-weigth": "100",
+                            "margin-bottom": "0px"
+                          },
+                          domProps: {
+                            innerHTML: _vm._s(
+                              project.description.slice(0, 200) + " ..."
+                            )
+                          }
+                        }),
+                        _vm._v(" "),
                         _c(
-                          "p",
+                          "a",
                           {
-                            staticStyle: {
-                              color: "grey",
-                              "font-weigth": "100",
-                              "margin-bottom": "0px"
+                            staticStyle: { "font-size": "15px", color: "blue" },
+                            on: {
+                              click: function($event) {
+                                _vm.isModalActive = true
+                                _vm.index = i
+                              }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                    " +
-                                _vm._s(
-                                  project.description.slice(0, 200) + "..."
-                                ) +
-                                "\n                    "
-                            ),
-                            _c(
-                              "a",
-                              {
-                                staticStyle: {
-                                  "font-size": "15px",
-                                  color: "blue"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.isModalActive = true
-                                    _vm.index = i
-                                  }
-                                }
-                              },
-                              [_vm._v("show more>>")]
-                            )
-                          ]
+                          [_vm._v("show more>>")]
                         ),
                         _vm._v(" "),
                         _c("p", {
@@ -27548,7 +27585,7 @@ exports.default = _default;
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
-                                    _vm.updateProject(project._id)
+                                    _vm.findUpdate(project._id)
                                     _vm.index = i
                                   }
                                 }
@@ -27697,28 +27734,25 @@ exports.default = _default;
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", {
-                      staticClass: "image-header-inside",
-                      style: {
-                        "background-size": "cover",
-                        "background-image":
-                          "url(" + _vm.projects[_vm.index].images[1] + ")"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _c("div", {
-                      staticClass: "image-header-inside",
-                      style: {
-                        "background-size": "cover",
-                        "background-image":
-                          "url(" + _vm.projects[_vm.index].images[2] + ")"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("hr")
-                  ]
+                    _vm._l(_vm.projects[_vm.index].images, function(image, i) {
+                      return _c(
+                        "div",
+                        {
+                          key: i,
+                          staticClass: "image",
+                          staticStyle: { "background-size": "cover" }
+                        },
+                        [
+                          i !== 0
+                            ? _c("img", { attrs: { src: image, alt: "" } })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("hr")
+                        ]
+                      )
+                    })
+                  ],
+                  2
                 )
               ]
             )
@@ -27736,6 +27770,14 @@ exports.default = _default;
             _vm.editorPage === true
               ? _c(
                   "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.updateProject()
+                      }
+                    }
+                  },
                   [
                     [
                       _c("section", [
@@ -27952,8 +27994,7 @@ exports.default = _default;
                               "button",
                               {
                                 staticClass: "button",
-                                attrs: { type: "is-primary" },
-                                on: { submit: _vm.createProject }
+                                attrs: { type: "is-primary" }
                               },
                               [_vm._v("Submit")]
                             ),
@@ -27965,6 +28006,7 @@ exports.default = _default;
                                 attrs: { type: "is-danger" },
                                 on: {
                                   click: function($event) {
+                                    $event.preventDefault()
                                     _vm.editorPage = false
                                   }
                                 }
@@ -41751,6 +41793,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = {
   name: 'main-page',
   data: function data() {
@@ -41760,9 +41808,7 @@ var _default = {
       dropFiles: [],
       tags: [],
       index: 0,
-      description: {
-        ops: []
-      },
+      description: '',
       config: {
         placeholder: 'Compose an epic...'
       },
@@ -41779,14 +41825,19 @@ var _default = {
       this.createPage = status;
     },
     createProject: function createProject() {
+      var formData = new FormData();
+      this.dropFiles.forEach(function (image) {
+        formData.append('files', image);
+      });
+      formData.append('title', this.title);
+      formData.append('tags', this.tags);
+      formData.append('description', this.description);
       (0, _server.default)({
         method: 'post',
-        url: '/projects',
-        data: {
-          title: this.title,
-          description: this.description,
-          tags: this.tags,
-          images: this.dropFiles
+        url: 'projects',
+        data: formData,
+        headers: {
+          token: localStorage.getItem('token')
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -41847,7 +41898,15 @@ exports.default = _default;
               _vm.createPage === true
                 ? _c(
                     "form",
-                    { on: { submit: _vm.createProject } },
+                    {
+                      attrs: { enctype: "multipart/form-data" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.createProject($event)
+                        }
+                      }
+                    },
                     [
                       [
                         _c("section", { staticStyle: { padding: "50px" } }, [
@@ -41916,7 +41975,10 @@ exports.default = _default;
                                 { staticClass: "control has-icons-left" },
                                 [
                                   _c("quill", {
-                                    attrs: { output: "html" },
+                                    attrs: {
+                                      config: _vm.config,
+                                      output: "html"
+                                    },
                                     model: {
                                       value: _vm.description,
                                       callback: function($$v) {
@@ -41977,6 +42039,8 @@ exports.default = _default;
                                           "b-upload",
                                           {
                                             attrs: {
+                                              type: "file",
+                                              name: "file",
                                               multiple: "",
                                               "drag-drop": ""
                                             },
@@ -71435,7 +71499,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57371" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50512" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
