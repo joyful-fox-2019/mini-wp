@@ -8,7 +8,8 @@ class ArticleController {
             .create({
                 title,
                 content,
-                featuredImage
+                featuredImage,
+                UserId: req.decoded.id
             })
             .then(data => {
                 res.status(201).json(data)
@@ -55,7 +56,6 @@ class ArticleController {
         Article
             .findOneAndUpdate({_id: req.params.id}, { title, content })
             .then( data => {
-                console.log(data)
                 res.status(200).json(data)
             })
             .catch( err => {
@@ -64,7 +64,6 @@ class ArticleController {
     }
 
     static show(req, res, next) {
-        console.log(req.params.id)
         Article
             .findById(req.params.id)
             .then( data => {

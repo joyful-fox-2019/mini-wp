@@ -32,5 +32,10 @@ export default {
 <style scoped>
     .no-col {
         padding: 0;
+        margin: 0;
+    }
+
+    .main-area {
+        height: 90vh;
     }
 </style>

@@ -1,20 +1,18 @@
 <template>
     <div>
         <ArticleNavbar v-if="page == 'article'" @change-page="changePage"></ArticleNavbar>
-        <Navbar v-else @change-page="changePage" @change-login="changeLogin" :is-login="isLogin"></Navbar>
+        <Navbar v-else @change-login="changeLogin" @change-page="changePage" :is-login="isLogin" @create-article="createArticle"></Navbar>
 
-        <Login v-if="!isLogin && page == 'login'" @change-login="changeLogin" @change-page="changePage"></Login>
-        <Register v-if="page == 'register'" @change-page="changePage"></Register>
+        <Sign v-if="!isLogin && page == 'sign'" @change-login="changeLogin" @change-page="changePage"></Sign>
 
         <HomePage v-if="page === 'home' && isLogin" key="home" @update-article="updateArticle"></HomePage>
-        <ArticlePage v-if="page === 'article' && isLogin" key="article" :articleId="articleId"></ArticlePage>
+        <ArticlePage v-if="page === 'article' && isLogin" key="article" :articleId="articleId" @change-page="changePage"></ArticlePage>
     </div>
 </template>
 
 <script>
 import Navbar from './views/Navbar'
-import Login from './views/Login'
-import Register from './views/Register'
+import Sign from './views/Sign'
 import HomePage from './views/HomePage'
 import ArticlePage from './views/ArticlePage'
 import ArticleNavbar from './components/ArticleNavbar'
@@ -23,16 +21,15 @@ export default {
     name: 'App',
     components: {
         Navbar,
-        Login,
-        Register,
         HomePage,
         ArticlePage,
-        ArticleNavbar
+        ArticleNavbar,
+        Sign
     },
     data() {
         return {
             isLogin: false,
-            page: "login",
+            page: 'sign',
             articleId: null
         }
     },
@@ -41,11 +38,19 @@ export default {
             this.page = value;
         },
         changeLogin(value) {
-            this.isLogin = value;
+            if (value == "false") {
+                this.isLogin = false
+            } else {
+                this.isLogin = true
+            }
         },
         updateArticle(value) {
             this.articleId = value;
             this.page = 'article';
+        },
+        createArticle(value) {
+            this.articleId = ''
+            this.page = value
         }
     },
     created() {
@@ -60,9 +65,5 @@ export default {
 <style>
     * {
         font-family: 'Montserrat', sans-serif;
-    }
-
-    body {
-        background-color: white;
     }
 </style>

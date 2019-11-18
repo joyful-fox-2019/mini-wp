@@ -39,7 +39,7 @@ class UserController {
         const { email, password } = req.body;
         User
             .findOne({
-                email
+               email 
             })
             .then( user => {
                 if(user) {
@@ -75,7 +75,7 @@ class UserController {
             })
             .then( user => {
                 if (user) {
-                    let token = session.encode({id: user.id, email: user.email});
+                    let token = session.encode({id: user[0].id, email: user[0].email});
                     res.status(200).json(token);
                 } else {
                     User

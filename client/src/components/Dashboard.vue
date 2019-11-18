@@ -12,12 +12,15 @@
             </b-col>
         </b-row>
         <b-row v-for="article in filteredArticles" :key="article._id" class="p-3 mb-4" >
-            <b-col vertical-align="center" cols="10">
+            <b-col vertical-align="center" cols="8">
                 <p class="m-0">{{ article.title }}</p>
                 <p class="m-0" style="font-size: 12px;">{{ article.createdAt }}</p>
             </b-col>
             <b-col class="float-right">
-                <b-dropdown id="dropdown-dropleft" dropleft text="..." class="m-2">
+                <img :src=article.featuredImage class="featured-image">
+            </b-col>
+            <b-col class="float-right">
+                <b-dropdown id="dropdown-dropleft drop-btn" dropleft text="..." class="m-2">
                     <b-dropdown-item @click="updateArticle(article._id)">Update</b-dropdown-item>
                     <b-dropdown-item @click.prevent="deleteArticle(article._id)">Delete</b-dropdown-item>
                 </b-dropdown>
@@ -62,7 +65,7 @@ export default {
                 }
             })
             .then(_ => {
-                alert('deleted')
+                this.getData()
             })
             .catch( error => {
                 console.log(error)
@@ -102,5 +105,10 @@ export default {
     .main-area {
         background-color: #f3f3f3;
         padding: 50px 150px;
+    }
+
+    .featured-image {
+        height: 50px;
+        width: 70px;
     }
 </style>

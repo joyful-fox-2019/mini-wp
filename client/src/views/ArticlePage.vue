@@ -1,19 +1,13 @@
 <template>
-  <b-container>
-    <b-row>
-      <b-col>
-        <ArticleEditor :article-id="articleId"></ArticleEditor>
-      </b-col>
-      <b-col cols="3">
-        <ArticleSidebar></ArticleSidebar>
-      </b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <ArticleEditor :article-id="articleId" @change-page="changePage" class="container"></ArticleEditor>
+  </div>
+       
+     
 </template>
 
 <script>
 import ArticleEditor from '../components/ArticleEditor'
-import ArticleSidebar from '../components/ArticleSidebar'
 
 export default {
     props: ['articleId'],
@@ -22,11 +16,17 @@ export default {
         }
     },
     components: {
-      ArticleEditor,
-      ArticleSidebar
+      ArticleEditor
     },
+    methods: {
+      changePage(value) {
+        this.$emit('update-article', null);
+        this.$emit('change-page', value)
+      }
+    }
 }
 </script>
 
 <style>
+
 </style>
