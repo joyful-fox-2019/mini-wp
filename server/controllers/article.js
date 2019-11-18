@@ -85,8 +85,9 @@ class ArticleController {
   }
 
   static search(req, res, next){
+    const owner = req.user.id
     Article.find({
-      title: new RegExp(`${req.query.q}`, 'gi'),
+      title: new RegExp(`${req.query.q}`, 'gi'), owner
     })
       .then( data => {
         res.status(200).json(data)
@@ -95,8 +96,9 @@ class ArticleController {
   }
 
   static searchTag(req, res, next){
+    const owner = req.user.id
     Article.find({
-      tag: new RegExp(`${req.query.q}`, 'gi'),
+      tag: new RegExp(`${req.query.q}`, 'gi'), owner
     })
       .then( data => {
         res.status(200).json(data)
