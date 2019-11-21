@@ -10838,7 +10838,7 @@ exports.default = _default;
               attrs: { params: _vm.googleSignInParams },
               on: { success: _vm.onSignIn, error: _vm.onSignInError }
             },
-            [_vm._v("\n  Sign in with Google\n")]
+            [_vm._v("\n    Sign in with Google\n    ")]
           )
         ],
         1
@@ -31881,7 +31881,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40087" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38671" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

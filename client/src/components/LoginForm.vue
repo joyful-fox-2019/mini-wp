@@ -11,11 +11,11 @@
       <h4 style="display: block; width: 100%; text-align: center; margin-bottom: 20px;">Or continue with</h4>
       <!-- <button type="button" class="bg-gray-200 rounded cursor-pointer p-2 mx-2 g-signin2" @click.prevent="onSignin" data-onsuccess="onSignIn">Google</button> -->
       <g-signin-button
-    :params="googleSignInParams"
-    @success="onSignIn"
-    @error="onSignInError">
-    Sign in with Google
-  </g-signin-button>
+      :params="googleSignInParams"
+      @success="onSignIn"
+      @error="onSignInError">
+      Sign in with Google
+      </g-signin-button>
     </div>
   </form>
 </template>
