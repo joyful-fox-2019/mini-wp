@@ -170,7 +170,7 @@ export default {
       console.log(formData);
       axios({
         method: "post",
-        url: "http://localhost:3000/article/",
+        url: "http://34.87.110.250/article/",
         data: formData,
         headers: {
           token: localStorage.getItem("token")

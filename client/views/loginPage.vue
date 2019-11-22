@@ -152,7 +152,7 @@ export default {
     login() {
       axios({
         method: "post",
-        url: "http://localhost:3000/user/login",
+        url: "http://34.87.110.250/user/login",
         data: {
           email: this.username,
           password: this.password
@@ -182,7 +182,7 @@ export default {
     register() {
       axios({
         method: "post",
-        url: "http://localhost:3000/user/register",
+        url: "http://34.87.110.250/user/register",
         data: {
           name: this.nameRegister,
           email: this.emailRegister,

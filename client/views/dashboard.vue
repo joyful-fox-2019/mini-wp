@@ -27,7 +27,7 @@ export default {
     getData() {
       axios({
         method: "get",
-        url: "http://localhost:3000/article",
+        url: "http://34.87.110.250/article",
         headers: {
           token: localStorage.getItem("token")
         }

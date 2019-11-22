@@ -217,7 +217,7 @@ export default {
         if (result.value) {
           return axios({
             method: "delete",
-            url: `http://localhost:3000/article/${id}`,
+            url: `http://34.87.110.250/article/${id}`,
             headers: {
               token: localStorage.getItem("token")
             }
@@ -239,7 +239,7 @@ export default {
     updateArticle(id) {
       axios({
         method: "put",
-        url: `http://localhost:3000/article/${id}`,
+        url: `http://34.87.110.250/article/${id}`,
         data: {
           title: this.editTitle,
           content: this.editContent
