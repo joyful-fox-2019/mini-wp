@@ -1,8 +1,8 @@
 <template>
   <div class="mt-2" style="width: 100%">
     <button @click="backMain" type="button" class="btn btn-secondary mb-2">Close</button>
-    <button @click="editArticle" type="button" class="btn btn-primary mb-2">Submit</button>
-    <input type="text" placeholder="title..." class="form-control mb-2" v-model="editTitle" />
+    <button @click="updateArticle" type="button" class="btn btn-primary mb-2">Submit</button>
+    <input type="text" placeholder="title..." class="form-control mb-2" v-model="articleData.title" />
     <b-field class="file">
       <b-upload v-model="articleData.feature_image">
         <a class="button is-warning">
@@ -33,7 +33,7 @@ export default {
       this.myTitle = "";
       this.$emit("backMain");
     },
-    publishArticle() {
+    updateArticle() {
       const title = this.myTitle;
       const content = this.myHTML;
       let formData = new FormData();
@@ -42,7 +42,7 @@ export default {
       formData.append("feature-image", this.myFile);
 
       axios({
-        method: "post",
+        method: "put",
         url: "http://venus.sufrendo.com/articles/",
         data: formData,
         headers: {
@@ -52,7 +52,7 @@ export default {
       })
       .then(({data})=>{
         console.log(data);
-        this.switchMain();
+        this.backMain();
       })
       .catch(err=>{
         console.log(err)

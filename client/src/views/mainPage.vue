@@ -37,21 +37,29 @@ export default {
   methods: {
     createArticle() {
       this.createMode = true;
+      this.editMode = false;
     },
     mainMode() {
       this.createMode = false;
+      this.editMode = false;
     },
     backMode() {
       this.editMode = false;
+      this.createMode = false
     },
     editArticle(id) {
+      console.log(`http://venus.sufrendo.com/articles/${id}`)
+      this.createMode = false;
+      this.editMode = true;
       axios({
         method: "get",
-        url: `http://venus.sufrendo.com/articles/${id}`
+        url: `http://venus.sufrendo.com/articles/${id}`,
+        headers:{
+          token: localStorage.getItem("token")
+        }
       })
         .then(({ data }) => {
           this.articleData = data
-          this.editMode = true;
           console.log(data);
         })
         .catch(err => {

@@ -47,7 +47,8 @@ class ArticleController{
             _id: req.params.id
         },{
             title: req.body.title,
-            content: req.body.content
+            content: req.body.content,
+            featureImage: req.body.file
         })
         .then(article=>{
             res.status(200).json(article);

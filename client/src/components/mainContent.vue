@@ -25,10 +25,10 @@
       </div>
       <!-- ARTICLES -->
       <div class="mt-4" style="width: 980px; overflow: scroll;">
-        <div v-for="(article, i) in articles" :key="i" class="card">
+        <div v-for="(article, i) in filteredArticles" :key="i" class="card">
           <div class="card-body">
             <h5 class="card-title">{{article.title}}</h5>
-            <img :src="article.featureImage" style="width: 300px">
+            <img :src="article.featureImage" style="width: 300px" />
             <span v-html="article.content"></span>
             <div class="d-flex">
               <p class="card-text text-muted mr-auto">{{getReadableTime(article.createdAt)}}</p>
@@ -41,7 +41,7 @@
                 <i class="far fa-trash-alt"></i> Delete
               </a>
               <a
-                @click="updateArticle(article._id)"
+                @click.prevent="updateArticle(article._id)"
                 class="btn btn-primary mx-2"
                 href="#"
                 role="button"
@@ -53,6 +53,17 @@
           </div>
         </div>
       </div>
+      <!-- MODAL -->
+      <b-modal id="bv-modal-example<delete_me>" hide-footer>
+        <template v-slot:modal-title>
+          Using
+          <code>$bvModal</code> Methods
+        </template>
+        <div class="d-block text-center">
+          <h3>Hello From This Modal!</h3>
+        </div>
+        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
+      </b-modal>
     </div>
   </div>
 </template>
@@ -65,7 +76,8 @@ export default {
   component: {},
   data() {
     return {
-      articles: []
+      articles: [],
+      searchTitle: ''
     };
   },
   methods: {
@@ -73,15 +85,14 @@ export default {
       axios({
         method: "get",
         url: `http://venus.sufrendo.com/articles`,
-        headers:{
-          token: localStorage.getItem('token')
+        headers: {
+          token: localStorage.getItem("token")
         }
       })
         .then(({ data }) => {
-          if(!data.length){
+          if (!data.length) {
             this.articles = [];
-          }
-          else{
+          } else {
             this.articles = data;
           }
         })
@@ -89,27 +100,37 @@ export default {
           console.log(err);
         });
     },
-    updateArticle(id){
-      this.$emit('updateArticle', id)
+    updateArticle(id) {
+      this.$emit("updateArticle", id);
     },
-    deleteArticle(id){
+    deleteArticle(id) {
       axios({
-        method:"delete",
-        url:`http://venus.sufrendo.com/articles/${id}`,
-        headers:{
-          token: localStorage.getItem('token')
+        method: "delete",
+        url: `http://venus.sufrendo.com/articles/${id}`,
+        headers: {
+          token: localStorage.getItem("token")
         }
       })
-      .then(({data})=>{
-        this.getArticles();
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+        .then(({ data }) => {
+          this.getArticles();
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
-    getReadableTime(createdDate){
-      let time = Math.floor((new Date().getTime() - new Date(createdDate).getTime()) / 86400);
-      return `${time} days ago`
+    getReadableTime(createdDate) {
+      let time = Math.floor(
+        (new Date().getTime() - new Date(createdDate).getTime()) / 86400000
+      );
+      return `${time} days ago`;
+    }
+  },
+  computed: {
+    filteredArticles: function() {
+      if(!this.searchTitle){
+        return this.articles
+      }
+      return this.articles.filter(article => article.title.includes(this.searchTitle))
     }
   },
   created() {
