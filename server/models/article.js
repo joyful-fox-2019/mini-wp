@@ -22,7 +22,9 @@ const articleSchema = new Schema({
   isActive: {
     type: Boolean
   },
-  tags: []
+  tags: {
+    type: Array
+  }
 }, { timestamps: true })
 
 articleSchema.pre('save', function (next) {

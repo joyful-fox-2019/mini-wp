@@ -5,31 +5,9 @@
 #### **How To**
 
 ```
-Client Site: http://localhost:8080/
-Server Site: http://localhost:3000/
-npm init -y (inside root server folder)
-npm run dev (on terminal inside root server folder)
-live-server --host=localhost (on terminal inside root client folder)
+Client Site: http://project-mini-wp.lukywinata.com/
+Server Site: http://35.197.134.160/
 ```
-
-#### **List of Routes User:**
-
-| **Route**         | **HTTP** | **Description**                             |
-| :---------------- | :------- | :------------------------------------------ |
-| /user/register    | POST     | Sign up with new user info                  |
-| /user/login       | POST     | Sign in and get an access token             |
-| /user/googleLogin | POST     | Sign in with google and get an access token |
-
-#### **List of Routes Article:**
-
-| **Route** | **HTTP** | **Description**                 | **Notes**               |
-| :-------- | :------- | :------------------------------ | :---------------------- |
-| /task     | POST     | Create a task                   | Authenticated user only |
-| /task     | GET      | Get all tasks' info             | Authenticated user only |
-| /task/:id | GET      | Get a single task's detail      | Authorized user only    |
-| /task/:id | PUT      | Update a task with new details  | Authorized user only    |
-| /task/:id | PATCH    | Undo a task from Done to Active | Authorized user only    |
-| /task/:id | DELETE   | Delete a task                   | Authorized user only    |
 
 #### **Errors:**
 

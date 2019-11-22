@@ -40,12 +40,10 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Please input your password']
   },
-  hasLiked : {
+  hasLiked: {
     type: Boolean
   }
-}, {
-  timestamps: true
-});
+}, { timestamps: true });
 
 userSchema.pre('save', function (next) {
   this.email = this.email.toLowerCase()

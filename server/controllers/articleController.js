@@ -3,7 +3,6 @@ const Article = require('../models/article')
 class ArticleController {
 
   static create(req, res, next) {
-    console.log('masuk')
     let { title, content, featuredImage, tags } = req.body
     Article.create({
       UserId: req.payload.id,

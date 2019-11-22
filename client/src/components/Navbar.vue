@@ -16,18 +16,16 @@
           <div v-if="isLogin">
             <a
               @click.prevent="showWritePage"
-              type="button"
               class="navbar-brand navbar-head py-1 px-2 mr-3"
-              style="background-color: white; color: #245a72; border-radius: 5px"
+              style="background-color: white; color: #245a72; border-radius: 5px; cursor: pointer"
             >
               <i class="far fa-edit"></i>
               <span class="text-link">&nbsp; Write</span>
             </a>
             <a
               @click.prevent="userSignout"
-              type="button"
               class="navbar-brand navbar-head py-2 px-3"
-              style="color: white; margin-right: -0.2rem"
+              style="color: white; margin-right: -0.2rem; cursor: pointer"
             >
               <i class="fas fa-sign-out-alt"></i>
               <span class="text-link">&nbsp; Sign Out</span>
@@ -37,10 +35,9 @@
             <a
               href
               @click.prevent="showRegisterForm"
-              type="button"
               v-if="loginForm"
               class="navbar-brand navbar-head py-2 px-3"
-              style="color: white; margin-right: -1rem"
+              style="color: white; margin-right: -1rem; cursor: pointer"
             >
               <i class="fas fa-user-plus"></i>
               <span class="text-link">Sign Up</span>
@@ -48,10 +45,9 @@
             <a
               href
               @click.prevent="showLoginForm"
-              type="button"
               v-if="!loginForm"
               class="navbar-brand navbar-head py-2 px-3"
-              style="color: white; margin-right: -1rem"
+              style="color: white; margin-right: -1rem; cursor: pointer"
             >
               <i class="fas fa-door-open"></i>
               <span class="text-link">Login</span>

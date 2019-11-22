@@ -22,13 +22,16 @@
                     <div class="card-body d-flex justify-content-between py-0">
                       <div class="d-flex justify-content-start">
                         <div class="mt-1">
-                          <img :src="article.featuredImage" alt height="120" width="120" />
+                          <img :src="article.featuredImage" alt height="150" width="150" />
                         </div>
                         <div class="card border-0">
-                          <div class="card-body">
+                          <div class="card-body" style="width: 50vw; overflow: auto">
                             <h5 class="card-title">{{article.title}}</h5>
                             <h6 class="card-subtitle text-muted">
-                              <div v-html="article.content"></div>
+                              <div v-html="`${article.content.slice(0,200)} .......`"></div>
+                            </h6>
+                            <h6>
+                              {{article.tags.join(', ')}}
                             </h6>
                           </div>
                         </div>
@@ -36,6 +39,7 @@
                       <div class="navbar-brand navbar-blog text-right mt-1">
                         <h5
                           class="card-subtitle text-muted"
+                          style="font-size: 1rem; margin-left: -2rem;"
                         >{{new Date(article.createdAt) | moment("from") }}</h5>
                         <div class="mt-3">
                           <div class="container mt-3">
@@ -84,7 +88,6 @@
                             </div>
                           </div>
                         </div>
-                        <h6 class="card-subtitle text-muted mt-3">{{article.tags.join(', ')}}</h6>
                       </div>
                     </div>
                   </div>
@@ -117,7 +120,8 @@ export default {
     Dashboard
   },
   props: {
-    isLogin: Boolean
+    isLogin: Boolean,
+    updated: Boolean
   },
   data() {
     return {
@@ -171,7 +175,6 @@ export default {
       }
     },
     searchArticles(query) {
-      console.log(query);
       let search = "";
       let queries = query.split(" ");
       if (queries[0] === "title=" || queries[0] === "tags=") {
@@ -263,6 +266,11 @@ export default {
       if (!value) {
         this.articles = [];
         this.filteredArticles = [];
+      }
+    },
+    updated(value) {
+      if(value) {
+        this.getArticles()
       }
     }
   }

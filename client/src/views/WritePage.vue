@@ -123,7 +123,7 @@ export default {
       if (this.img) {
         Swal.fire({
           title: "wait a minute to upload data",
-          allowOutsideClick: () => !Swal.isLoading()
+          allowOutsideClick: true
         });
         Swal.showLoading("Please wait..");
       } else {

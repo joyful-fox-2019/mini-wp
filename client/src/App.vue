@@ -4,6 +4,7 @@
     <MainPage
       v-if="page==='mainPage'"
       :isLogin="isLogin"
+      :updated="updated"
       @show-write-page="showWritePage"
       @user-signout="userSignout"
       @edit-article="editArticle"
@@ -37,7 +38,8 @@ export default {
       isLogin: false,
       page: "",
       article: {},
-      isEdit: false
+      isEdit: false,
+      updated: false
     };
   },
   methods: {
@@ -51,7 +53,9 @@ export default {
       this.page = "writePage";
     },
     showAllArticles() {
+      this.updated = true
       this.page = "mainPage";
+      this.updated = false
     },
     userSignout() {
       localStorage.clear();

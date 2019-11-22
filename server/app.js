@@ -8,7 +8,7 @@ const logger = require('morgan')
 const cors = require('cors')
 
 const PORT = process.env.PORT
-const DB_URI = process.env.MONGODB_URL
+const MONGODB = process.env.MONGODB_URL
 
 const routes = require('./routes')
 const errorHandler = require('./middlewares/errorHandler')
@@ -20,7 +20,7 @@ app.use(logger('dev'))
 app.use(cors())
 
 mongoose
-  .connect(DB_URI, {
+  .connect(MONGODB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

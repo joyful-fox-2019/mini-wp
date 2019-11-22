@@ -4,18 +4,16 @@
       <div class="navbar-menu container p-0 mx-0" style="width: 50vw">
         <a
           @click.prevent="showPublishedArticles"
-          type="button"
           class="navbar-brand navbar-blog py-2 px-3"
-          style="color: #245a72;"
+          style="color: #245a72; cursor: pointer"
         >
           <span class="text-link">Published &nbsp;</span>
           <i class="fas fa-blog"></i>
         </a>
         <a
           @click.prevent="showDraftArticles"
-          type="button"
           class="navbar-brand navbar-blog py-2 px-3"
-          style="color: #245a72; margin-left: -1.3rem"
+          style="color: #245a72; margin-left: -1.3rem; cursor: pointer"
         >
           <span class="text-link">Draft &nbsp;</span>
           <i class="fab fa-firstdraft"></i>
