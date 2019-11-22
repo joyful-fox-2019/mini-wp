@@ -1,27 +1,34 @@
 <template>
-  <div class="main-content flex flex-wrap justify-center" style="overflow: auto; height: 90vh;">
-    <div class="w-full flex justify-center" style="height: 50px">
-      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="!sort && !mine? 'bg-green-500' : 'bg-green-300'" @click="newestArticles">Newest</button>      
-      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="sort && !mine? 'bg-green-500' : 'bg-green-300'" @click="topArticles">Top</button>
-      <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="mine? 'bg-green-500' : 'bg-green-300'" @click="myArticles">Mine</button>      
-    </div>
-    <div v-show="articles.length === 0">No data found</div>
-    <div v-for="article in articles" :key="article._id" class="article-card flex-column w-4/5 md:w-1/3 m-8 rounded shadow-2xl" style="max-height: 80vh;">
-      <div class="flex border border-gray-500 pic-frame" style="height: 50%;">
-        <img :src="article.image ? article.image : defaultPic " alt="image" style="object-fit: contain; margin: 0 auto; height: 100%;">
+  <div class="flex-column" style=" height: 90vh; overflow: auto;">
+    <div class="main-content flex flex-wrap justify-center">
+      <div class="w-full flex justify-center" style="height: 50px">
+        <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="!sort && !mine? 'bg-green-500' : 'bg-green-300'" @click="newestArticles">Newest</button>      
+        <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="sort && !mine? 'bg-green-500' : 'bg-green-300'" @click="topArticles">Top</button>
+        <button class="hover:bg-green-400 text-gray-200 rounded p-2 my-2" :class="mine? 'bg-green-500' : 'bg-green-300'" @click="myArticles">Mine</button>      
       </div>
-      <div class="card-body flex flex-wrap p-2" style="height:50%;">
-        <h2 @click="showArticle( article._id )" class="hover:text-blue-800 cursor-pointer w-full font-bold">{{article.title}}</h2>
-        <small>{{ article.owner.name ? article.owner.name : null }}</small>
-        <small class="w-full">{{ dateString(article.createdAt)}}</small>
-          <small class="w-full">viewed: {{article.reads}}</small>
-        <hr>
-        <div class="flex p-1 flex-wrap items-end" style="height:50%;">
-          <div class="my-2 w-full" v-html="summary(article.content)" style="height:50%; overflow:auto;"></div>
-          <div class="w-full"><span style="text-decoration: underline; cursor: pointer;" @click="showArticle(article._id)">See more</span></div>
-          <div class="display flex w-full"><div v-for="(tag, index) in article.tags" :key="index" class=" rounded p-1 m-1 bg-blue-200 text-gray-800 hover:bg-blue-300 cursor-pointer" @click="setTag(tag)">{{tag}}</div></div>
+      <div v-show="articles.length === 0">No data found</div>
+      <div v-for="article in articles" :key="article._id" class="article-card flex-column w-4/5 md:w-1/3 m-8 rounded shadow-2xl" style="max-height: 80vh;">
+        <div class="flex border border-gray-500 pic-frame" style="height: 50%;">
+          <img :src="article.image ? article.image : defaultPic " alt="image" style="object-fit: contain; margin: 0 auto; height: 100%;">
+        </div>
+        <div class="card-body flex flex-wrap p-2" style="height:50%;">
+          <h2 @click="showArticle( article.slug )" class="hover:text-blue-800 cursor-pointer w-full font-bold">{{article.title}}</h2>
+          <small>{{ article.owner.name ? article.owner.name : null }}</small>
+          <small class="w-full">{{ dateString(article.createdAt)}}</small>
+            <small class="w-full">viewed: {{article.reads}}</small>
+          <hr>
+          <div class="flex p-1 flex-wrap items-end" style="height:50%;">
+            <div class="my-2 w-full" v-html="summary(article.content)" style="height:50%; overflow:auto;"></div>
+            <div class="w-full"><span style="text-decoration: underline; cursor: pointer;" @click="showArticle(article.slug)">See more</span></div>
+            <div class="display flex w-full"><div v-for="(tag, index) in article.tags" :key="index" class=" rounded p-1 m-1 bg-blue-200 text-gray-800 hover:bg-blue-300 cursor-pointer" @click="setTag(tag)">{{tag}}</div></div>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="flex justify-center">
+      <button class="p-2 m-1" :class="page > 0 ? 'bg-blue-300 hover:bg-blue-400 cursor-pointer' : 'cursor-not-allowed bg-gray-200'" @click="page > 0 ? page -- : null">Prev</button>
+      <button class="p-2 m-1 bg-white text-gray-900">{{page + 1}}</button>
+      <button class="p-2 m-1" :class="articles.length >= 5 ? 'bg-blue-300 hover:bg-blue-400 cursor-pointer': 'cursor-not-allowed bg-gray-200'" @click="articles.length >=5 ? page++ : null">Next</button>
     </div>
   </div>
 </template>
@@ -35,7 +42,8 @@ export default {
       defaultPic: 'https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png',
       articles : [],
       sort: null,
-      mine: false
+      mine: false,
+      page: 0
     }
   },
   props: ['keyword'],
@@ -62,16 +70,14 @@ export default {
     },
     getArticles (query) {
       let keyword = ''
-      let url = ''
+      let url = `/articles?page=${this.page}&status=published`
       if(query) {
-        keyword = `?keyword=${query}&status=published` 
-        url = `/articles${keyword}`
-      } else {
-        url = '/articles?status=published'
+        url += `&keyword=${query}` 
       }
 
       if(this.sort) url += `${this.sort}`
       if(this.mine) url += '&whose=mine'
+      url += ``
       axios({
         method: 'GET',
         url: `${url}`,
@@ -88,8 +94,8 @@ export default {
 
       })
     },
-    showArticle (id) {
-      this.$router.push(`articles/${id}`)
+    showArticle (slug) {
+      this.$router.push(`articles/${slug}`)
     },
     summary (content) {
       if(content.length > 200) {
@@ -116,6 +122,13 @@ export default {
     },
     sort () {
       if(this.keyword){
+        this.getArticles(this.keyword)
+      } else {
+        this.getArticles()
+      }
+    },
+    page () {
+      if( this.keyword) {
         this.getArticles(this.keyword)
       } else {
         this.getArticles()

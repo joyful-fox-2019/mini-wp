@@ -67,12 +67,12 @@ export default {
       this.article.tags = result
     },
     deleteArticle () {
-      const { id } = this.$route.params
+      const { slug } = this.$route.params
       this.$dialog.confirm('Are you sure?')
       .then(dialog => {
         axios({
           method: 'DELETE',
-          url: `/articles/${id}`,
+          url: `/articles/${slug}`,
           headers: {
             token: localStorage.getItem('token')
           }
@@ -105,7 +105,7 @@ export default {
       .then(dialog => {
         axios({
           method: 'PATCH',
-          url: `/articles/${this.$route.params.id}`,
+          url: `/articles/${this.$route.params.slug}`,
           headers: {
             token: localStorage.getItem('token')
           },
@@ -113,7 +113,7 @@ export default {
         })
         .then(({ data }) => {
           this.$noty.success(data.message)
-          this.$router.push('/articles/' + this.$route.params.id)
+          this.$router.push('/articles/' + this.$route.params.slug)
         })
         .catch(({ response })=>{
           this.$noty.error(response.data.message)
@@ -129,7 +129,7 @@ export default {
   created() {
     axios({
       method: 'GET',
-      url: `/articles/${this.$route.params.id}`,
+      url: `/articles/${this.$route.params.slug}`,
       headers: {
         token: localStorage.getItem('token')
       }

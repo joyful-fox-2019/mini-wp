@@ -18,12 +18,12 @@ export default new Router ({
           component: ArticleList
         },
         {
-          path: '/articles/:id',
+          path: '/articles/:slug',
           name: 'showArticle',
           component: ShowArticle
         },
         {
-          path: '/edit/:id',
+          path: '/edit/:slug',
           name: 'editArticle',
           component: EditArticle
         },

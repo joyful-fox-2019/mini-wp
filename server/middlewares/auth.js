@@ -13,9 +13,9 @@ module.exports = {
     }
   },
   authorize (req, res, next) {
-    const { id } = req.params
+    const { slug } = req.params
     const { mode } = req.query
-    Article.findById(id).populate('owner')
+    Article.findOne({ slug }).populate('owner')
       .then(article => {
         if( mode === 'read') {
           next()

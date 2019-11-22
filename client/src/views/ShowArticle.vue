@@ -39,15 +39,15 @@ export default {
       this.$emit('searchTag', {keyword: tag})
     },
     editArticle () {
-      const id = this.$route.params.id
-      this.$router.push(`/edit/${id}`)
+      const slug = this.$route.params.slug
+      this.$router.push(`/edit/${slug}`)
     }
   },
   created () {
-    const id = this.$route.params.id
+    const { slug } = this.$route.params
     axios({
       method: 'GET',
-      url: `/articles/${id}?mode=read`,
+      url: `/articles/${slug}?mode=read`,
       headers: {
         token: localStorage.getItem('token')
       }

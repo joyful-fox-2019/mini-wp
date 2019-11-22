@@ -3,7 +3,8 @@ const { Storage } = require('@google-cloud/storage')
 
 class ArticleController {
   static find (req, res, next) {
-    const { keyword , whose, status, sort } = req.query
+    const { keyword , whose, status, sort, page } = req.query
+    const limit = 6
     let objParams = { status } //type = draft/public
     let sortParams = { createdAt: -1}
     if(sort === 'popular') sortParams = [['reads', 'desc']]
@@ -15,7 +16,7 @@ class ArticleController {
       {tags: keyword}
     ]
     }
-    Article.find(objParams).populate('owner').sort(sortParams)
+    Article.find(objParams).populate('owner').sort(sortParams).skip(page * limit).limit(limit)
       .then(articles => {
         res.status(200).json(articles)
       })
@@ -31,14 +32,14 @@ class ArticleController {
       .catch(next)
   }
   static findById (req, res, next) {
-    const { id } = req.params
+    const { slug } = req.params
     const { mode } = req.query
-    Article.findById(id).populate('owner')
+    Article.findOne({ slug }).populate('owner')
       .then(article => {
         if(mode === 'read' && article.status === 'published') {
           article.reads ++
         } 
-        return article.save()
+        return article.save({ validateBeforeSave: false})
       })
       .then(article => {
         res.status(200).json(article)
@@ -46,11 +47,11 @@ class ArticleController {
       .catch(next)
   }
   static update (req, res, next) {
-    const { id } = req.params
+    const { slug } = req.params
     const { title, content, image, tags, status } = req.body
-    Article.findById(id)
+    Article.findOne({ slug })
       .then(article => {
-        if(image !== article.image) {
+        if(image !== article.image && article.image) {
           const bucket = process.env.BUCKET_NAME
           const storage = new Storage({
             keyFilename: process.env.KEYFILE_PATH,
@@ -73,8 +74,8 @@ class ArticleController {
       .catch(next)
   }
   static remove ( req, res, next ) {
-    const { id } = req.params
-    Article.findByIdAndRemove(id)
+    const { slug } = req.params
+    Article.findOneAndRemove({ slug })
       .then(article => {
         if(article.image){
           const bucket = process.env.BUCKET_NAME

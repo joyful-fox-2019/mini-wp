@@ -17,8 +17,8 @@ const upload = gcsUpload({
 router.use(authenticate)
 router.get('/', ArticleController.find)
 router.post('/', upload.single('image'), ArticleController.create)
-router.get('/:id', authorize, ArticleController.findById)
-router.patch('/:id', authorize ,upload.single('image'), ArticleController.update)
-router.delete('/:id', authorize, ArticleController.remove)
+router.get('/:slug', authorize, ArticleController.findById)
+router.patch('/:slug', authorize ,upload.single('image'), ArticleController.update)
+router.delete('/:slug', authorize, ArticleController.remove)
 
 module.exports = router
