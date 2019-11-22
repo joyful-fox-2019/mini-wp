@@ -10779,11 +10779,11 @@ var _default = {
         _this.password = "";
 
         _this.$emit("eventLogin");
-      }).catch(function (err) {
+      }).catch(function () {
         Swal.fire({
-          type: "error",
+          icon: "error",
           title: "Oops...",
-          text: err.responseJSON.message
+          text: "Login Failed!"
         });
       });
     },
@@ -10808,7 +10808,7 @@ var _default = {
         _this2.emailRegister = "";
         _this2.passRegister = "";
         _this2.isLoginForm = true;
-      }).catch(function (err) {
+      }).catch(function () {
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -10825,14 +10825,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $bdb7e5 = exports.default || module.exports;
+        var $2eac01 = exports.default || module.exports;
       
-      if (typeof $bdb7e5 === 'function') {
-        $bdb7e5 = $bdb7e5.options;
+      if (typeof $2eac01 === 'function') {
+        $2eac01 = $2eac01.options;
       }
     
         /* template */
-        Object.assign($bdb7e5, (function () {
+        Object.assign($2eac01, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -11153,7 +11153,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-bdb7e5",
+            _scopeId: "data-v-2eac01",
             functional: undefined
           };
         })());
@@ -11166,9 +11166,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$bdb7e5', $bdb7e5);
+            api.createRecord('$2eac01', $2eac01);
           } else {
-            api.reload('$bdb7e5', $bdb7e5);
+            api.reload('$2eac01', $2eac01);
           }
         }
 
@@ -25281,14 +25281,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $7e442b = exports.default || module.exports;
+        var $00387a = exports.default || module.exports;
       
-      if (typeof $7e442b === 'function') {
-        $7e442b = $7e442b.options;
+      if (typeof $00387a === 'function') {
+        $00387a = $00387a.options;
       }
     
         /* template */
-        Object.assign($7e442b, (function () {
+        Object.assign($00387a, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -25604,9 +25604,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$7e442b', $7e442b);
+            api.createRecord('$00387a', $00387a);
           } else {
-            api.reload('$7e442b', $7e442b);
+            api.reload('$00387a', $00387a);
           }
         }
 
@@ -25894,14 +25894,14 @@ var _default = {
   props: ["filteredList", "search"]
 };
 exports.default = _default;
-        var $5447cd = exports.default || module.exports;
+        var $fd2659 = exports.default || module.exports;
       
-      if (typeof $5447cd === 'function') {
-        $5447cd = $5447cd.options;
+      if (typeof $fd2659 === 'function') {
+        $fd2659 = $fd2659.options;
       }
     
         /* template */
-        Object.assign($5447cd, (function () {
+        Object.assign($fd2659, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -26420,7 +26420,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-5447cd",
+            _scopeId: "data-v-fd2659",
             functional: undefined
           };
         })());
@@ -26433,9 +26433,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$5447cd', $5447cd);
+            api.createRecord('$fd2659', $fd2659);
           } else {
-            api.reload('$5447cd', $5447cd);
+            api.reload('$fd2659', $fd2659);
           }
         }
 
@@ -26536,14 +26536,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $3f3dad = exports.default || module.exports;
+        var $7662fc = exports.default || module.exports;
       
-      if (typeof $3f3dad === 'function') {
-        $3f3dad = $3f3dad.options;
+      if (typeof $7662fc === 'function') {
+        $7662fc = $7662fc.options;
       }
     
         /* template */
-        Object.assign($3f3dad, (function () {
+        Object.assign($7662fc, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -26585,9 +26585,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$3f3dad', $3f3dad);
+            api.createRecord('$7662fc', $7662fc);
           } else {
-            api.reload('$3f3dad', $3f3dad);
+            api.reload('$7662fc', $7662fc);
           }
         }
 
@@ -26649,14 +26649,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $9ee34c = exports.default || module.exports;
+        var $0635c5 = exports.default || module.exports;
       
-      if (typeof $9ee34c === 'function') {
-        $9ee34c = $9ee34c.options;
+      if (typeof $0635c5 === 'function') {
+        $0635c5 = $0635c5.options;
       }
     
         /* template */
-        Object.assign($9ee34c, (function () {
+        Object.assign($0635c5, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -26695,9 +26695,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$9ee34c', $9ee34c);
+            api.createRecord('$0635c5', $0635c5);
           } else {
-            api.reload('$9ee34c', $9ee34c);
+            api.reload('$0635c5', $0635c5);
           }
         }
 
@@ -26752,7 +26752,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45887" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37827" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -170,11 +170,11 @@ export default {
           this.password = "";
           this.$emit("eventLogin");
         })
-        .catch(err => {
+        .catch(() => {
           Swal.fire({
-            type: "error",
+            icon: "error",
             title: "Oops...",
-            text: err.responseJSON.message
+            text: "Login Failed!"
           });
         });
     },
@@ -200,7 +200,7 @@ export default {
           this.passRegister = "";
           this.isLoginForm = true;
         })
-        .catch(err => {
+        .catch(() => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
