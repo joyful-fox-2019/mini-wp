@@ -1,0 +1,170 @@
+@use 'base';
+
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+.logo { 
+    width: 50px; 
+    height: 50px; 
+    display: block; 
+    text-indent: -9999px;
+}  
+
+.mainpage {
+    .navbar {
+        color: white;
+        margin: 0;
+        padding: 0;
+    
+        .navbar-logo {
+            background-color: black;
+        }
+    }
+    
+    .sidebar {
+        overflow-y: auto;
+        height: 650px;
+    
+        .list-group-item {
+            display: flex;
+            align-items: center;
+    
+            button {
+                position: absolute;
+                right: 5px;
+            }
+        }
+    
+        .material-icons {
+            padding-right: 10px;
+        }
+    }
+    
+    .main-area {
+        background-color: #f3f3f3;
+        padding: 50px 150px;
+    
+        .mini-nav {
+            a {
+                font-size: 14px;
+            }
+        }
+
+        .row {
+            background-color: white;
+        }
+    
+        img {
+            width: 100%;
+        }
+    
+        .article {
+            p {
+                margin: 0;
+            }
+    
+            .time {
+                font-size: 12px;
+            }
+        }
+    }
+    
+    .list-group-item {
+        border: none;
+    }
+}
+
+.add-blog-page {
+    .navbar {
+        margin: 0;
+        padding: 0;
+
+        form {
+            padding-right: 15px;
+
+            button {
+                margin: 5px;
+            }
+
+            .publish {
+                background-color: hotpink;
+                color: white;
+                padding: 8px 30px;
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+
+            .preview {
+                color: base.$base-color;
+                border: 0.5px solid base.$base-color;
+            }
+
+            .settings {
+                padding: 0;
+            }
+
+            .material-icons {
+                font-size: 50px;
+            }
+        }
+    }
+
+    #editor {
+        height: 375px;
+    }
+
+    .text-editor {
+        padding: 40px 80px;
+    }
+
+    .sidenav {
+        height: 100%;
+        width: 300px;
+        position: fixed;
+        z-index: 1;
+        right: 0;
+        overflow-x: hidden;
+        background-color: #F0F0F0;
+
+        a {
+            height: 60px;
+            display: flex;
+            align-items: center; 
+        }
+        .border {
+            background-color: white
+        };
+
+        #post-setting {
+            background-color: #F0F0F0;
+        }
+        
+        .trash {
+            bottom: 0;
+            position: fixed;
+        }
+    }
+
+    .sidenav a, .dropdown-btn {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: black;
+        border: none;
+        background: none;
+        width:100%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+    }
+    
+    .dropdown-container {
+        display: none;
+        background-color: white;
+        padding-left: 8px;
+      }
+      
+}

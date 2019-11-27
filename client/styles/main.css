@@ -1,0 +1,153 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 100% Helvetica, sans-serif;
+}
+
+.cyan {
+  background-color: #21759b;
+}
+
+.cyan-text {
+  color: #21759b;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  display: block;
+  text-indent: -9999px;
+}
+
+.mainpage .navbar {
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+.mainpage .navbar .navbar-logo {
+  background-color: black;
+}
+.mainpage .sidebar {
+  overflow-y: auto;
+  height: 650px;
+}
+.mainpage .sidebar .list-group-item {
+  display: flex;
+  align-items: center;
+}
+.mainpage .sidebar .list-group-item button {
+  position: absolute;
+  right: 5px;
+}
+.mainpage .sidebar .material-icons {
+  padding-right: 10px;
+}
+.mainpage .main-area {
+  background-color: #f3f3f3;
+  padding: 50px 150px;
+}
+.mainpage .main-area .mini-nav a {
+  font-size: 14px;
+}
+.mainpage .main-area .row {
+  background-color: white;
+}
+.mainpage .main-area img {
+  width: 100%;
+}
+.mainpage .main-area .article p {
+  margin: 0;
+}
+.mainpage .main-area .article .time {
+  font-size: 12px;
+}
+.mainpage .list-group-item {
+  border: none;
+}
+
+.add-blog-page .navbar {
+  margin: 0;
+  padding: 0;
+}
+.add-blog-page .navbar form {
+  padding-right: 15px;
+}
+.add-blog-page .navbar form button {
+  margin: 5px;
+}
+.add-blog-page .navbar form .publish {
+  background-color: hotpink;
+  color: white;
+  padding: 8px 30px;
+}
+.add-blog-page .navbar form .publish:hover {
+  opacity: 0.6;
+}
+.add-blog-page .navbar form .preview {
+  color: #21759b;
+  border: 0.5px solid #21759b;
+}
+.add-blog-page .navbar form .settings {
+  padding: 0;
+}
+.add-blog-page .navbar form .material-icons {
+  font-size: 50px;
+}
+.add-blog-page #editor {
+  height: 375px;
+}
+.add-blog-page .text-editor {
+  padding: 40px 80px;
+}
+.add-blog-page .sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  overflow-x: hidden;
+  background-color: #F0F0F0;
+}
+.add-blog-page .sidenav a {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.add-blog-page .sidenav .border {
+  background-color: white;
+}
+.add-blog-page .sidenav #post-setting {
+  background-color: #F0F0F0;
+}
+.add-blog-page .sidenav .trash {
+  bottom: 0;
+  position: fixed;
+}
+.add-blog-page .sidenav a, .add-blog-page .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+.add-blog-page .dropdown-container {
+  display: none;
+  background-color: white;
+  padding-left: 8px;
+}
+
+/*# sourceMappingURL=main.css.map */
