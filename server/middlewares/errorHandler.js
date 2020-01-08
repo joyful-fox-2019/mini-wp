@@ -1,4 +1,5 @@
 module.exports = (err, req, res, next) => {
+    console.log(err)
     if (err === '422') {
         res.status(422).json({
             message: 'Title or Content can\'t be empty'
